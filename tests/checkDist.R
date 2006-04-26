@@ -66,6 +66,43 @@ hist(rRGE(100,mu=0,sigma=1, nu=1))
 #hist(rBE(100,mu=.1,sigma=.5))
 #----------------------------------------------------------------------------------------
 ## three paramemeter Continuous
+## GG
+plot(function(y) dGG(y, mu=5 ,sigma=.1, nu=.25), 0, 10) # alsmost symmetrical
+plot(function(y) dGG(y, mu=5 ,sigma=.1, nu=-10), 0, 10) # right skew
+plot(function(y) dGG(y, mu=5 ,sigma=.1, nu=10), 0, 10) # left skew
+curve(dGG(y=x, mu=5 ,sigma=.5, nu=0), 0, 10) # log normal
+plot(function(y) pGG(y, mu=5 ,sigma=.1, nu=10), 0, 10)
+plot(function(y) qGG(y, mu=5 ,sigma=.1, nu=10), 0.001, .999)
+plot(function(y) qGG(y, mu=5 ,sigma=.1, nu=10, lower.tail=FALSE), 0.001, .999)
+plot(function(y) qGG(y, mu=5 ,sigma=.1, nu=0, lower.tail=TRUE), 0.001, .999)
+plot(function(y) qGG(y, mu=5 ,sigma=.1, nu=0, lower.tail=FALSE), 0.001, .999)
+pr <- pGG(4 ,mu=5,sigma=.5, nu=1)
+qq <- qGG(pr,mu=5,sigma=.5, nu=1)
+if(abs(qq-4)>0.0001) stop("error in   GG") else cat("GG OK \n") 
+aa<-integrate(function(x) dGG(x), 0, 4 )$value-pGG(4)
+if(abs(aa)>0.0001) stop("error in GG") else cat("GG OK \n") 
+hist(rGG(100,mu=5,sigma=.1, nu=10))
+
+#----------------------------------------------------------------------------------------
+## GIG
+plot(function(y) dGIG(y, mu=5 ,sigma=.1, nu=.25), 0, 10) #
+#plot(function(y) dGIG(y, mu=5 ,sigma=.1, nu=-10), 0, 10) # 
+#plot(function(y) dGIG(y, mu=5 ,sigma=.1, nu=10), 0, 10) # 
+curve(dGIG(y=x, mu=5 ,sigma=1, nu=1), 0, 20)
+
+plot(function(y) pGIG(y, mu=5 ,sigma=1, nu=1), 0, 10)
+plot(function(y) qGIG(y, mu=5 ,sigma=.1, nu=1), 0.001, .999)
+plot(function(y) qGIG(y, mu=5 ,sigma=.1, nu=1, lower.tail=FALSE), 0.001, .999)
+
+
+pr <- pGIG(4 ,mu=5, sigma=.5, nu=1)
+qq <- qGIG(pr,mu=5, sigma=.5, nu=1)
+if(abs(qq-4)>0.0001) stop("error in   GIG") else cat("GIG OK \n") 
+aa<-integrate(function(x) dGIG(x), 0, 4 )$value-pGIG(4)
+if(abs(aa)>0.0001) stop("error in GIG") else cat("GIG OK \n") 
+hist(rGIG(100,mu=5,sigma=.1, nu=1))
+
+
 #----ST3
 plot(function(y) dST3(y, mu=0 ,sigma=1, nu=0, tau=1), -10, 10)
 curve(dST3(y=x, mu=0 ,sigma=1, nu=0, tau=1), -10, 10)
@@ -88,7 +125,7 @@ aa<-integrate(function(x) dST3(x), -Inf, 1 )$value-pST3(1)
 if(abs(aa)>0.0001) stop("error in ST3") else cat("ST3 OK \n") 
 hist(rST3(100,mu=0,sigma=1, nu=.5, tau=1))
 #----------------------------------------------------------------------------------------
-#--- BC Cole and Green
+
 
 #----------------------------------------------------------------------------------------
 # four parameters Continuous

@@ -6,7 +6,7 @@
 \alias{rDEL}
 
 
-\title{The Delaporte dustribution for fitting a GAMLSS model}
+\title{The Delaporte distribution for fitting a GAMLSS model}
 \description{
 The \code{DEL()} function defines the Delaporte distribution, a three parameter discrete distribution, for a \code{gamlss.family} object to be used 
 in GAMLSS fitting using the function \code{gamlss()}.    
@@ -30,7 +30,7 @@ rDEL(n, mu=1, sigma=1, nu=0.5, max.value = 10000)
   \item{nu.link}{ Defines the \code{nu.link}, with "logit" link as the default for the nu parameter }
   \item{y}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive mu}
-  \item{sigma}{vector of positive despersion parameter}
+  \item{sigma}{vector of positive dispersion parameter}
    \item{nu}{vector of nu}
   \item{p}{vector of probabilities}
   \item{q}{vector of quantiles}
@@ -42,13 +42,13 @@ rDEL(n, mu=1, sigma=1, nu=0.5, max.value = 10000)
 }
 \details{
 The probability function of the Delaporte distribution is given by
-\deqn{f(y|\mu,\sigma,\nu)= \frac{e^{\mu \nu}}{\Gamma(1/\sigma)}\left[ 1+\mu \sigma (1-\nu)\right]^{-1/\sigma} S }{f(y|mu,sigma,nu)=(exp(-mu*nu)/Gamma(1/sigma))*[1+mu*sigma*(1-nu)]^(-1/sigma) S} 
+\deqn{f(y|\mu,\sigma,\nu)= \frac{e^{-\mu \nu}}{\Gamma(1/\sigma)}\left[ 1+\mu \sigma (1-\nu)\right]^{-1/\sigma} S }{f(y|mu,sigma,nu)=(exp(-mu*nu)/Gamma(1/sigma))*[1+mu*sigma*(1-nu)]^(-1/sigma) S} 
 where  
-\deqn{S=  \sum_{j=0}^{y} \left(\begin{array}{c} y \\ j \end{array}\right) \frac{\mu^y \nu^{y-j}}{y!}\left[\mu + \frac{1}{\sigma(1-\nu)}\right]^{-j} \Gamma\left(\frac{1}{\sigma}+j\right)}{S=Sum(Per(y,j))*((mu^y)*(nu^{y-j})/y!) *[1+(1/(sigma*(1-nu)))]^j Gamma((1/sigma)*j)}
+\deqn{S=  \sum_{j=0}^{y} \left( \matrix{ y \cr j } \right) \frac{\mu^y \nu^{y-j}}{y!}\left[\mu + \frac{1}{\sigma(1-\nu)}\right]^{-j} \Gamma\left(\frac{1}{\sigma}+j\right)}{S=Sum(Per(y,j))*((mu^y)*(nu^{y-j})/y!) *[1+(1/(sigma*(1-nu)))]^j Gamma((1/sigma)*j)}
 for \eqn{y=0,1,2,...,\infty}{y=0,1,2,...} 
 where  \eqn{\mu>0}{mu>0} , \eqn{\sigma>0}{\sigma>0} and \eqn{0 <
 \nu<1}{0<nu<1}.
- This distribution is a parameterization of the distribution given by Wimmer and Altmann (1999) p 515-516 where 
+ This distribution is a parametrization of the distribution given by Wimmer and Altmann (1999) p 515-516 where 
  \eqn{\alpha=\mu \nu}{a=mu*nu}, \eqn{k=1/\sigma}{1/sigma} and \eqn{\rho=[1+\mu\sigma(1-\nu)]^{-1}}{p=[1+mu*nu*(1-nu)]^(-1)} 
   
 }
@@ -60,7 +60,7 @@ where  \eqn{\mu>0}{mu>0} , \eqn{\sigma>0}{\sigma>0} and \eqn{0 <
 Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
-Rigby, R. A., Stasinopoulos D. M. and Akantziliotou, C. (2006) Modelling the parameters of a family of mixed Poisson distribtions including the Sichel and Delaptorte.
+Rigby, R. A., Stasinopoulos D. M. and Akantziliotou, C. (2006) Modelling the parameters of a family of mixed Poisson distributions including the Sichel and Delaptorte.
 Submitted for publication.
 
 Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2003) Instructions on how to use the GAMLSS package in R.
@@ -70,7 +70,9 @@ Wimmer, G. and Altmann, G (1999). \emph{Thesaurus of univariate discrete probabi
 
 }
 \author{Rigby, R. A. and  Stasinopoulos D. M. }
-\note{  }
+\note{ The
+mean of \eqn{Y} is given by \eqn{E(Y)=\mu}{E(Y)=mu} and the variance by \eqn{V(Y)=\mu+\mu^2 \sigma \left( 1-\nu\right)^2}{V(Y)=mu+mu^2*sigma*(1-nu)^2}.
+ }
  
 
 \seealso{\code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{SI}} , \code{\link[gamlss]{SICHEL}}}

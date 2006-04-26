@@ -55,7 +55,7 @@ The probability density function of the ex-Gaussian distribution, (\code{exGAUS}
 \deqn{f(y|\mu,\sigma,\nu)=\frac{1}{\nu} e^{\frac{\mu-y}{\nu}+\frac{\sigma^2}{2 \nu^2}} \Phi(\frac{y-\mu}{\sigma}-\frac{\sigma}{\nu})}{f(y|mu,sigma,nu)=(1/nu)*exp(((mu-y)/nu)+(sigma^2/(2*nu^2)))*Phi(((y-mu)/sigma)+(sigma/tau))}
 
 where \eqn{\Phi}{Phi} is the cdf of the standard normal distribution, 
-for \eqn{-\infty<y>\infty}{-Inf<y<Inf}, \eqn{-\infty<\mu>\infty}{-Inf<mu<Inf}, \eqn{\sigma>0} and \eqn{\nu>0}.   
+for \eqn{-\infty<y<\infty}{-Inf<y<Inf}, \eqn{-\infty<\mu<\infty}{-Inf<mu<Inf}, \eqn{\sigma>0} and \eqn{\nu>0}.   
 }
 \value{
 \code{exGAUS()}  returns a \code{gamlss.family} object which can be used to fit ex-Gaussian distribution in the \code{gamlss()} function. 

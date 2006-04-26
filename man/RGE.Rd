@@ -5,7 +5,7 @@
 \alias{qRGE}
 \alias{rRGE}
 
-\title{reverse generalized extreme family distribution for fitting a GAMLSS}
+\title{Reverse generalized extreme family distribution for fitting a GAMLSS}
 \description{
 The function \code{RGE} defines the reverse generalized extreme family distribution, a three parameter distribution,
  for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}. 

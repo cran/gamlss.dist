@@ -58,7 +58,7 @@ where
 
 and
 
-\deqn{c=\frac{1}{2} \left \{ \tau \exp\left[ \tau \sinh^{-1}(z) \right] - \nu \exp\left[ -\nu \sinh^{-1}(z)  \right] \right\}}{c=0.5*[tau*exp(tau*sinh^(-1)(z))+ tau * exp(-nu*sinh^(-1)(z))]}
+\deqn{c=\frac{1}{2} \left \{ \tau \exp\left[ \tau \sinh^{-1}(z) \right] + \nu \exp\left[ -\nu \sinh^{-1}(z)  \right] \right\}}{c=0.5*[rho*exp(tau*sinh^(-1)(z))+ nu * exp(-nu*sinh^(-1)(z))]}
 
 and  \eqn{z=(y-\mu)/\sigma}{z=(y-mu)/sigma}
 for \eqn{ -\infty < y < \infty }{0<y<0},

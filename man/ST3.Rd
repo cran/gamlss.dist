@@ -49,13 +49,13 @@ The probability density function of the skew t distribution type 3, (\code{ST3})
   
 \deqn{f(y|\mu,\sigma,\nu, \tau)=\frac{1}{c} \left[ 1+ \frac{z}{(a+b +z^2)^{1/2}} \right]^{a+1/2} \left[ 1- \frac{z}{(a+b+z^2)^{1/2}}\right]^{b+1/2}}{f(y|mu,sigma,nu,tau)=(1/c)*(1+(z/(a+b+z^2)^0.5))^(a+0.5)*(1-(a+b+z^2)^0.5)^(b+0.5)}
 
-where \eqn{c=z^{a +b-1} (a+b)^{1/2} B(a,b)}{c=z^(a+b-1) * (a+b)^0.5 *B(a,b)}, and 
+where \eqn{c=2^{a +b-1} (a+b)^{1/2} B(a,b)}{c=2^(a+b-1)*(a+b)^0.5 *B(a,b)}, and 
 \eqn{B(a,b)=\Gamma(a)\Gamma(b)/ \Gamma(a+b)}{Gamma(a)*Gamma(b)/Gamma(a+b)} and 
 \eqn{z=(y-\mu)/\sigma}{(y-mu)/sigma} and 
 \eqn{\nu=(a-b)/\left[ab(a+b) \right]^{1/2}}{nu=(a-b)/(a*b*(a+b))^0.5}
 and
 \eqn{\tau=2/(a+b)}{tau=2/(a+b)} 
-for \eqn{-\infty<y>\infty}{-Inf<y<Inf}, \eqn{-\infty<\mu>\infty}{-Inf<mu<Inf}, \eqn{\sigma>0}, 
+for \eqn{-\infty<y<\infty}{-Inf<y<Inf}, \eqn{-\infty<\mu<\infty}{-Inf<mu<Inf}, \eqn{\sigma>0}, 
  \eqn{-\infty<\nu>\infty}{-Inf<nu<Inf} and \eqn{\tau>0}{tau>0}.   
 }
 \value{
