@@ -1,0 +1,238 @@
+ DEL <- function (mu.link ="log", sigma.link="log", nu.link="logit") 
+{
+     mstats <- checklink("mu.link", "Sichel", substitute(mu.link), 
+                         c("1/mu^2", "log", "identity"))
+    dstats <- checklink("sigma.link", "Sichel", substitute(sigma.link), #
+                         c("inverse", "log", "identity"))
+    vstats <- checklink("nu.link", "Sichel", substitute(nu.link),
+                        c("logit", "probit", "cloglog", "log"))  
+    structure(
+          list(family = c("DEL", "Delaporte"),
+           parameters = list(mu = TRUE, sigma = TRUE, nu = TRUE), 
+                nopar = 3, 
+                 type = "Discrete",
+              mu.link = as.character(substitute(mu.link)),  
+           sigma.link = as.character(substitute(sigma.link)), 
+              nu.link = as.character(substitute(nu.link)), 
+           mu.linkfun = mstats$linkfun, 
+        sigma.linkfun = dstats$linkfun, 
+           nu.linkfun = vstats$linkfun,
+           mu.linkinv = mstats$linkinv, 
+        sigma.linkinv = dstats$linkinv,
+           nu.linkinv = vstats$linkinv,
+                mu.dr = mstats$mu.eta, 
+             sigma.dr = dstats$mu.eta, 
+                nu.dr = vstats$mu.eta,
+                 dldm = function() {
+                     logty <-log(y+1)+dDEL(y+1, mu=mu, sigma=sigma, nu=nu, log=TRUE)-
+                                      dDEL(y, mu=mu, sigma=sigma, nu=nu, log=TRUE)
+                       ty  <- exp(logty)
+                      dldm <- (y-ty)/mu
+                       dldm}, 
+               d2ldm2 = function() {
+                     logty <-log(y+1)+dDEL(y+1, mu=mu, sigma=sigma, nu=nu, log=TRUE)-
+                                      dDEL(y, mu=mu, sigma=sigma, nu=nu, log=TRUE)
+                       ty  <- exp(logty)
+                      dldm <- (y-ty)/mu
+                    d2ldm2 <- - dldm * dldm
+                    d2ldm2
+                                    },
+                 dldd = function() {
+                     #    S <- calcS(y = y, mu = mu, sigma = sigma, nu = nu)
+                     #    U <- calcU(y = y, mu = mu, sigma = sigma, nu = nu)
+                     # dldd <- digamma(1/sigma)/(sigma*sigma)-(mu*(1-nu))/(sigma*(1+mu*sigma*(1-nu)))
+                     # dldd <- dldd+log(1+mu*sigma*(1-nu))/(sigma^2)+U/S
+                        nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "sigma", delta=0.01)
+                      dldd <- as.vector(attr(nd, "gradient"))
+                                 dldd},
+               d2ldd2 = function(){
+                      #S <- calcS(y = y, mu = mu, sigma = sigma, nu = nu)
+                      #   U <- calcU(y = y, mu = mu, sigma = sigma, nu = nu)
+                      #dldd <- digamma(1/sigma)/(sigma*sigma)-(mu*(1-nu))/(sigma*(1+mu*sigma*(1-nu)))
+                      #dldd <- dldd+log(1+mu*sigma*(1-nu))/(sigma^2)+U/S
+                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "sigma", delta=0.01)
+                   dldd <- as.vector(attr(nd, "gradient"))
+                    d2ldd2 <- -dldd*dldd
+                    d2ldd2
+                                    },
+              #d2ldmdd = function() 0,
+              d2ldmdd = function() {
+                         ty <- tofyDEL(y=y, mu=mu, sigma=sigma, nu=nu, what=1)
+                       dldm <- (y-ty)/mu
+                          c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
+                       dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
+                       dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
+                    d2ldmdd <- -dldm *dldd
+                    d2ldmdd
+                                    }, 
+              d2ldmdv = function() {
+                 #calculates the dldv                 
+                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                 dldv <- as.vector(attr(nd, "gradient"))
+                #calculates the d2ldmdv
+              d2ldmdv <- -dldm *dldv
+              d2ldmdv
+                                    }, 
+              d2ldddv = function() {
+                  # ty <- tofyDEL(y=y, mu=mu, sigma=sigma,nu=nu, what=1)
+                  #  c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
+                 #dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
+                 #dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
+                #calculates the dldv
+                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                 dldv <- as.vector(attr(nd, "gradient"))
+                #calculates the d2ldddv 
+              d2ldddv <- -dldd *dldv
+              d2ldddv
+                                 },               
+                 dldv = function() {                           
+                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                 dldv <- as.vector(attr(nd, "gradient"))
+                 dldv
+                                    },
+               d2ldv2 = function(){
+                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                 dldv <- as.vector(attr(nd, "gradient"))
+               d2ldv2 <- -dldv*dldv
+               d2ldv2
+                                  } ,
+          G.dev.incr  = function(y,mu,sigma,nu, pw=1,..) -2*dDEL(y, mu, sigma, nu, log=TRUE),
+                rqres = expression(
+                 rqres(pfun="pDEL", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma, nu=nu)
+                                   ),  #
+            mu.initial = expression(mu<- y+0.5),
+         sigma.initial = expression( sigma<-rep((var(y)-mean(y))/(mean(y)^2), length(y))),
+            nu.initial = expression({  nu <- rep(0.5,length(y)) }), 
+              mu.valid = function(mu) all(mu > 0) , 
+           sigma.valid = function(sigma)  all(sigma > 0), 
+              nu.valid = function(nu) all(nu > 0) && all(nu < 1),    
+               y.valid = function(y)  all(y >= 0)
+          ),
+            class = c("gamlss.family","family"))
+}
+#----------------------------------------------------------------------------------------
+dDEL<-function(y, mu=1, sigma=1, nu=.5, log=FALSE)
+  {
+  #------
+  calcS <-function (y, mu, sigma, nu)
+  {
+   S <- rep(0,length(y))
+    for (i in 1:length(y))
+    {
+         lyp1 <- y[i]+1 
+        logSi <- rep(0,lyp1)
+            j <- 0:y[i]
+        logSi <- -lgamma(j+1)-lgamma(y[i]+1-j)-
+                 j*log(nu[i]/(sigma[i]*(1-nu[i]))+mu[i]*nu[i])+lgamma((1/sigma[i])+j)+
+                 y[i]*log(mu[i]*nu[i])  
+         S[i] <- sum(exp(logSi))
+       # browser()
+        # S[i] <- ifelse(S[i]==Inf, 0.00001, S[i])        
+    }
+   S
+   } 
+   #------
+   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
+   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
+   if (any(nu <= 0) | any(nu >= 1))  stop(paste("nu must be between 0 and 1", "\n", "")) 
+   if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
+    ly <- length(y)       
+ sigma <- rep(sigma, length = ly)
+    mu <- rep(mu, length = ly)   
+    nu <- rep(nu, length = ly) 
+ logfy <- -mu*nu-lgamma(1/sigma)-log(1+mu*sigma*(1-nu))/sigma
+     S <- calcS(y = y, mu = mu, sigma = sigma, nu = nu)
+ logfy <- logfy+log(S)
+  if(log==FALSE) fy <- exp(logfy) else fy <- logfy
+  fy
+  }
+#----------------------------------------------------------------------------------------
+#calcU<-function (y, mu, sigma, nu)
+# {
+#  U <- rep(0,length(y))
+# for (i in 1:length(y))
+#    {
+#         lyp1 <- y[i]+1 
+#        logUi <- Ui <- rep(0,lyp1)
+#            j <- 0:y[i]
+#        logUi <- -lgamma(j+1)-lgamma(y[i]+1-j)-
+#                 (j+1)*log(nu[i]/(sigma[i]*(1-nu[i]))+mu[i]*nu[i])+lgamma((1/sigma[i])+j)+
+#                 y[i]*log(mu[i]*nu[i])-2*log(sigma)
+#            Ui <- exp(logUi)*   
+#                (((j*nu[i])/(1-nu[i]))-(nu[i]/(sigma[i]*(1-nu[i]))+mu[i]*nu[i])*(digamma((1/sigma[i])+j)))  
+#        U[i] <- sum(Ui)   
+#   }
+#T
+#}
+#----------------------------------------------------------------------------------------
+pDEL <- function(q, mu = 1, sigma = 1, nu = .5, lower.tail = TRUE, log.p = FALSE)
+  {     
+   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
+   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
+   if (any(nu <= 0) | any(nu >= 1))  stop(paste("nu must be between 0 and 1", "\n", "")) 
+   if (any(q < 0) )  stop(paste("q must be >=0", "\n", ""))    
+        ly <- length(q)                                                       
+       FFF <- rep(0,ly)                         
+    nsigma <- rep(sigma, length = ly)
+       nmu <- rep(mu, length = ly) 
+       nnu <- rep(nu, length = ly)                                                        
+         j <- seq(along=q) 
+   for (i in j)                                                          
+      {                                                                 
+        y.y <- q[i]                                                   
+         nn <- nnu[i]                                                  
+         mm <- nmu[i]
+       nsig <- nsigma[i]                                                     
+     allval <- seq(0,y.y)
+     pdfall <- dDEL(allval, mu = mm, sigma = nsig, nu = nn, log = FALSE)
+     FFF[i] <- sum(pdfall)                                             
+      }  
+      cdf <- FFF
+      cdf <- if(lower.tail==TRUE) cdf else 1-cdf
+      cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
+      cdf
+  }
+#----------------------------------------------------------------------------------------
+qDEL <- function(p, mu=1, sigma=1, nu=0.5,  lower.tail = TRUE, log.p = FALSE,  
+                 max.value = 10000)
+  {      
+          if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
+          if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
+          if (any(nu <= 0) | any(nu >= 1))  stop(paste("nu must be between 0 and 1", "\n", "")) 
+          if (any(p < 0) | any(p > 1.0001))  stop(paste("p must be between 0 and 1", "\n", "")) 
+          if (log.p==TRUE) p <- exp(p) else p <- p
+          if (lower.tail==TRUE) p <- p else p <- 1-p    
+           ly <- length(p)                                                       
+          QQQ <- rep(0,ly)                         
+       nsigma <- rep(sigma, length = ly)
+          nmu <- rep(mu, length = ly)                
+          nnu <- rep(nu, length = ly)    
+       for (i in seq(along=p))                                                          
+      {
+       cumpro <- 0                                                                         
+     if (p[i]+0.000000001 >= 1) QQQ[i] <- Inf
+     else  
+        {  
+            for (j in seq(from = 0, to = max.value))
+            {
+            cumpro <-  pDEL(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE) 
+                       # else  cumpro+dSICHEL(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE)# the above is faster 
+           QQQ[i] <- j 
+       if  (p[i] <= cumpro ) break 
+            } 
+        }
+      }          
+          QQQ   
+   } 
+#----------------------------------------------------------------------------------------
+rDEL <- function(n, mu=1, sigma=1, nu=0.5, max.value = 10000)
+  { 
+          if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
+          if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
+          if (any(nu <= 0) | any(nu >= 1))  stop(paste("nu must be between 0 and 1", "\n", "")) 
+          if (any(n <= 0))  stop(paste("n must be a positive integer", "\n", ""))  
+          n <- ceiling(n)
+          p <- runif(n)
+          r <- qSICHEL(p, mu=mu, sigma=sigma, nu=nu, max.value = max.value )
+          r
+  }

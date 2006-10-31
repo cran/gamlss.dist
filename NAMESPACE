@@ -1,0 +1,29 @@
+# distibutions
+export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
+       SICHEL, dSICHEL, pSICHEL, qSICHEL, rSICHEL,
+       SHASH, dSHASH, pSHASH, qSHASH, rSHASH,
+       exGAUS, dexGAUS, pexGAUS, qexGAUS, rexGAUS,
+       ST3, dST3, pST3, qST3, rST3,
+       DEL, dDEL, pDEL, qDEL, rDEL,
+       ZIP2, dZIP2, pZIP2, qZIP2, rZIP2,
+       RGE, dRGE, pRGE, qRGE, rRGE)
+
+# needed for gamlss family
+#export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family)
+
+# documented but unexported methods
+
+
+#importFrom(graphics, pairs, plot)
+#importFrom(stats, AIC, deviance, coef, extractAIC, family, fitted,
+#           formula, logLik, model.frame,  predict, residuals, terms, update,
+#           loess)
+#importFrom(MASS, addterm, dropterm, truehist)
+#importFrom(survival, Surv, is.Surv)
+#importFrom(graphics, plot)
+#importFrom(base, print)
+#importFrom(splines, bs, ns, spline.des)
+#importFrom(gamlss.tr, trun)
+
+
+useDynLib(gamlss.dist)
