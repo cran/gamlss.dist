@@ -14,15 +14,15 @@ generation function, \code{r}, and also the \code{gamlss.family} generating func
 \tabular{ll}{
 Package: \tab gamlss.dist\cr
 Type: \tab Package\cr
-Version: \tab 0.0.4\cr
-Date: \tab 2006-10-30\cr
+Version: \tab 1.5.0\cr
+Date: \tab 2006-12-13\cr
 License: \tab GPL (version 2 or later)\cr
 }
 This package is to be used with the package gamlss.  
 }
 \author{
 Mikis Stasinopoulos <d.stasinopoulos@londonmet.ac.uk>, Bob Rigby <r.rigby@londonmet.ac.uk> with
-        contributions from Calliope Akantziliotou.
+        contributions from Calliope Akantziliotou  and Raydonal Ospina <rospina@ime.usp.br>.
 
 Maintainer: Mikis Stasinopoulos <d.stasinopoulos@londonmet.ac.uk>
 }

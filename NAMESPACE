@@ -6,7 +6,9 @@ export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
        ST3, dST3, pST3, qST3, rST3,
        DEL, dDEL, pDEL, qDEL, rDEL,
        ZIP2, dZIP2, pZIP2, qZIP2, rZIP2,
-       RGE, dRGE, pRGE, qRGE, rRGE)
+       RGE, dRGE, pRGE, qRGE, rRGE,
+       BEOI, dBEOI, pBEOI, qBEOI, rBEOI, plotBEOI, meanBEOI,
+       BEZI, dBEZI, pBEZI, qBEZI, rBEZI, plotBEZI, meanBEZI)
 
 # needed for gamlss family
 #export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family)
