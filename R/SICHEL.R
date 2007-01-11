@@ -10,7 +10,7 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
 {
      mstats <- checklink("mu.link", "Sichel", substitute(mu.link), 
                          c("1/mu^2", "log", "identity"))
-    dstats <- checklink("sigma.link", "Sichel", substitute(sigma.link), #
+    dstats <- checklink("sigma.link", "Sichel", substitute(sigma.link), 
                          c("inverse", "log", "identity"))
     vstats <- checklink("nu.link", "Sichel",substitute(nu.link), 
                          c("1/nu^2", "log", "identity"))    
@@ -105,7 +105,7 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
                 rqres = expression(    
                         rqres(pfun="pSICHEL", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma, nu=nu)
                                   ), 
-            mu.initial = expression(mu<- y+0.5),
+            mu.initial = expression(mu<- (y+mean(y)/2)),
          sigma.initial = expression( sigma<-rep((var(y)-mean(y))/(mean(y)^2), length(y))),
             nu.initial = expression({  nu <- rep(-0.5,length(y)) }), 
               mu.valid = function(mu) all(mu > 0) , 

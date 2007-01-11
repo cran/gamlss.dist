@@ -20,19 +20,15 @@ The functions \code{dexGAUS}, \code{pexGAUS}, \code{qexGAUS} and \code{rexGAUS} 
 exGAUS(mu.link = "identity", sigma.link = "log", nu.link = "log")
 dexGAUS(y, mu = 5, sigma = 1, nu = 1, log = FALSE)
 pexGAUS(q, mu = 5, sigma = 1, nu = 1, lower.tail = TRUE, log.p = FALSE)
-qexGAUS(p, mu = 5, sigma = 1, nu = 1, lower.tail = TRUE, log.p = FALSE, 
-           lower.limit = mu - 10 * sqrt(sigma^2 + nu^2), 
-           upper.limit = mu + 10 * sqrt(sigma^2 + nu^2))
+qexGAUS(p, mu = 5, sigma = 1, nu = 1, lower.tail = TRUE, log.p = FALSE)
 rexGAUS(n, mu = 5, sigma = 1, nu = 1, ...)
 }
 
 \arguments{
- \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the \code{mu} parameter. 
-                  Other links are "\eqn{1/mu^2}" and "log"}
-  \item{sigma.link}{ Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. 
-                      Other links are "inverse" and "identity"}
+ \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the \code{mu} parameter. }
+  \item{sigma.link}{ Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter.}
   \item{nu.link}{Defines the  \code{nu.link}, with "log" link as the default for the \code{nu} parameter. 
-                   Other links are "inverse", "identity" and "logshifted" (shifted from one)}
+                   Other links are "inverse", "identity", "logshifted" (shifted from one) and "own"}
    \item{y,q}{vector of quantiles}
   \item{mu}{vector of \code{mu} parameter values }
   \item{sigma}{vector of scale parameter values}
@@ -44,9 +40,6 @@ rexGAUS(n, mu = 5, sigma = 1, nu = 1, ...)
   \item{n}{ number of observations. If \code{length(n) > 1}, the length is
           taken to be the number required}
   \item{\dots}{for extra arguments}
-  \item{lower.limit}{the q function uses a search for finding quantiles given the probabilities.
-                    \code{lower.limit} is the lowest limmit of the search }
-  \item{upper.limit}{ The upper limit of the search}
 }
 \details{
 
@@ -75,6 +68,8 @@ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for lo
 Stasinopoulos D. M. Rigby R. A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
 Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).
 
+Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
  }
 \author{Mikis Stasinopoulos and Bob Rigby  }
 \note{ The mean of the ex-Gaussian is \eqn{\mu+\nu}{mu+nu} and the variance is \eqn{\sigma^2+\nu^2}{sigma^2+nu^2}.

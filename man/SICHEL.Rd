@@ -72,6 +72,9 @@ Stein, G. Z., Zucchini, W. and Juritz, J. M. (1987). Parameter
 Estimation of the Sichel Distribution and its Multivariate Extension.
 \emph{Journal of American Statistical Association}, \bold{82}, 938-944.
 
+Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
+
 }
 \author{Rigby, R. A.,  Stasinopoulos D. M. and Akantziliotou C. }
 \note{The mean of the above Sichel distribution is \eqn{\mu}{mu} and the variance is 

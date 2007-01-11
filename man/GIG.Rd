@@ -9,7 +9,7 @@
 \description{
   The function GIG defines the generalized inverse gaussian distribution, a three parameter distribution, 
 for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}. 
-The functions \code{dGIG}, \code{pGIG}, \code{qGIG} and \code{rGIG} define the density, 
+The functions \code{DIG}, \code{pGIG}, \code{GIG} and \code{rGIG} define the density, 
 distribution function, quantile function and random generation for the specific parameterization 
 of the generalized inverse gaussian distribution defined by function GIG.
 }
@@ -21,8 +21,7 @@ dGIG(y, mu=1, sigma=1, nu=1,
 pGIG(q, mu=1, sigma=1, nu=1,  lower.tail = TRUE, 
                      log.p = FALSE)
 qGIG(p, mu=1, sigma=1, nu=1,  lower.tail = TRUE, 
-                     log.p = FALSE,lower.limit = 0,
-                upper.limit = mu+10*sqrt(sigma^2*mu^3))
+                     log.p = FALSE)
 rGIG(n, mu=1, sigma=1, nu=1, ...)
 }
 
@@ -41,10 +40,6 @@ rGIG(n, mu=1, sigma=1, nu=1, ...)
   \item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x] }
   \item{p}{vector of probabilities }
   \item{n}{number of observations. If length(n) > 1, the length is taken to be the number required}
-  \item{lower.limit}{a constant, set to the value of 0 for the algorithm to know from where to begin looking for q }
-  \item{upper.limit}{a constant, set to the value of 
-             \code{mu+10*sqrt(sigma\^2*mu\^3)} for how far the algorithm 
-             should look for q}
  \item{\dots}{for extra arguments }
 
 }
@@ -56,7 +51,7 @@ for y>0, \eqn{\mu>0}{mu>0}, \eqn{\sigma>0}{sigma>0} and \eqn{-\infty<\nu<+\infty
 }
 \value{
   GIG() returns a gamlss.family object which can be used to fit a generalized inverse gaussian distribution in 
-the gamlss() function. dGIG() gives the density, pGIG() gives the distribution function, qGIG() gives the quantile function, 
+the gamlss() function. DIG() gives the density, pGIG() gives the distribution function, GIG() gives the quantile function, 
 and rGIG() generates random deviates. 
 }
 \references{Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
@@ -65,7 +60,11 @@ and rGIG() generates random deviates.
 Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
 Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).  
 
+Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
+
 Jorgensen B. (1982) Statistical properties of the generalized inverse Gaussian distribution, Series: Lecture notes in statistics; 9, New York : Springer-Verlag. 
+
 }
 \author{Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}, Bob Rigby 
         \email{r.rigby@londonmet.ac.uk} and Nicoleta Motpan}

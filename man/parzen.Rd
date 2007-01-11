@@ -130,6 +130,9 @@ Saha, K. and Paul, S. (2005) Bias-Corrected Maximum Likelihood Estimator of the 
 Smith R. L. Naylor, J. C. (1987) A comparison of maximum likelihood and Bayesian estimators for the three-parameter
 Weibull distributuion. \emph{Appl. Statist.} \bold{36}, 358-369
 
+Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
+
 Stein, G. Z. and Juritz, J. M. (1988). Linear models with an inverse Gaussian-Poisson
 error distribution. \emph{Communications in Statistics- Theory and Methods}, \bold{17}, 557-571.
 

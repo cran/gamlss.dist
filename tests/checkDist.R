@@ -19,6 +19,7 @@ library(gamlss.dist)
 
 #----------------------------------------------------------------------------------------
 #-----WEI3  Weibull
+integrate(function(x) dWEI3(x), 0, Inf)
 plot(function(y) dWEI3(y, mu=10 ,sigma=2), 0, 30)
 plot(function(y) pWEI3(y, mu=10 ,sigma=2), 0, 30)
 plot(function(y) qWEI3(y, mu=10 ,sigma=2), 0, 1)
@@ -104,26 +105,26 @@ hist(rGIG(100,mu=5,sigma=.1, nu=1))
 
 
 #----ST3
-plot(function(y) dST3(y, mu=0 ,sigma=1, nu=0, tau=1), -10, 10)
-curve(dST3(y=x, mu=0 ,sigma=1, nu=0, tau=1), -10, 10)
-plot(function(y) pST3(y, mu=0 ,sigma=1, nu=0, tau=1), -10, 10)
-plot(function(y) qST3(y, mu=0 ,sigma=1, nu=0, tau=1), 0.001, .999)
-plot(function(y) qST3(y, mu=0 ,sigma=1, nu=0, tau=1, lower.tail=FALSE), 0.001, .999)
-pr <- pST3(2 ,mu=1,sigma=1, nu=0, tau=1)
-qq <- qST3(pr,mu=1,sigma=1, nu=0, tau=1)
-if(abs(qq-2)>0.0001) stop("error in ST3") else cat("ST3 OK \n") 
+plot(function(y) dST5(y, mu=0 ,sigma=1, nu=0, tau=1), -10, 10)
+curve(dST5(y=x, mu=0 ,sigma=1, nu=0, tau=1), -10, 10)
+plot(function(y) pST5(y, mu=0 ,sigma=1, nu=0, tau=1), -10, 10)
+plot(function(y) qST5(y, mu=0 ,sigma=1, nu=0, tau=1), 0.001, .999)
+plot(function(y) qST5(y, mu=0 ,sigma=1, nu=0, tau=1, lower.tail=FALSE), 0.001, .999)
+pr <- pST5(2 ,mu=1,sigma=1, nu=0, tau=1)
+qq <- qST5(pr,mu=1,sigma=1, nu=0, tau=1)
+if(abs(qq-2)>0.0001) stop("error in ST5") else cat("ST5 OK \n") 
 
-pr <- pST3(2 ,mu=1,sigma=1, nu=1, tau=1)
-qq <- qST3(pr,mu=1,sigma=1, nu=1, tau=1)
-if(abs(qq-2)>0.0001) stop("error in ST3") else cat("ST3 OK \n") 
+pr <- pST5(2 ,mu=1,sigma=1, nu=1, tau=1)
+qq <- qST5(pr,mu=1,sigma=1, nu=1, tau=1)
+if(abs(qq-2)>0.0001) stop("error in ST5") else cat("ST5 OK \n") 
 
-pr <- pST3(200 ,mu=1,sigma=1, nu=1, tau=1)
-qq <- qST3(pr,mu=1,sigma=1, nu=1, tau=1)
-if(abs(qq-200)>0.0001) stop("error in ST3") else cat("ST3 OK \n") 
+pr <- pST5(200 ,mu=1,sigma=1, nu=1, tau=1)
+qq <- qST5(pr,mu=1,sigma=1, nu=1, tau=1)
+if(abs(qq-200)>0.0001) stop("error in ST5") else cat("ST5 OK \n") 
 
-aa<-integrate(function(x) dST3(x), -Inf, 1 )$value-pST3(1)
-if(abs(aa)>0.0001) stop("error in ST3") else cat("ST3 OK \n") 
-hist(rST3(100,mu=0,sigma=1, nu=.5, tau=1))
+aa<-integrate(function(x) dST5(x), -Inf, 1 )$value-pST5(1)
+if(abs(aa)>0.0001) stop("error in ST5") else cat("ST5 OK \n") 
+hist(rST5(100,mu=0,sigma=1, nu=.5, tau=1))
 #----------------------------------------------------------------------------------------
 
 

@@ -3,7 +3,11 @@ export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
        SICHEL, dSICHEL, pSICHEL, qSICHEL, rSICHEL,
        SHASH, dSHASH, pSHASH, qSHASH, rSHASH,
        exGAUS, dexGAUS, pexGAUS, qexGAUS, rexGAUS,
+       ST1, dST1, pST1, qST1, rST1,
+       ST2, dST2, pST2, qST2, rST2,
        ST3, dST3, pST3, qST3, rST3,
+       ST4, dST4, pST4, qST4, rST4,
+       ST5, dST5, pST5, qST5, rST5,
        DEL, dDEL, pDEL, qDEL, rDEL,
        ZIP2, dZIP2, pZIP2, qZIP2, rZIP2,
        RGE, dRGE, pRGE, qRGE, rRGE,
@@ -12,7 +16,16 @@ export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
        NOF, dNOF, pNOF, qNOF, rNOF,
        GG, dGG, pGG, qGG, rGG,
        GIG, dGIG, pGIG, qGIG, rGIG,
-       EXP, dEXP, pEXP, qEXP, rEXP)
+       EXP, dEXP, pEXP, qEXP, rEXP,
+       SEP1, dSEP1, pSEP1, qSEP1, rSEP1,
+       SEP2, dSEP2, pSEP2, qSEP2, rSEP2,
+       SEP3, dSEP3, pSEP3, qSEP3, rSEP3,
+       SEP4, dSEP4, pSEP4, qSEP4, rSEP4,
+       GT, dGT, pGT, qGT, rGT,
+       GB1, dGB1, pGB1, qGB1, rGB1,
+       GB2, dGB2, pGB2, qGB2, rGB2,
+       EGB2, dEGB2, pEGB2, qEGB2, rEGB2
+       )
 
 # needed for gamlss family
 #export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family)
@@ -30,6 +43,5 @@ export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
 #importFrom(base, print)
 #importFrom(splines, bs, ns, spline.des)
 #importFrom(gamlss.tr, trun)
-
 
 useDynLib(gamlss.dist)

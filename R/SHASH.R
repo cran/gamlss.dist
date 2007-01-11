@@ -1,16 +1,15 @@
-# Wednesday, January 21, 2004 at 18:25 MS BR
+#  27_11_2007
 # the first derivatives squares have been used here
-#  I need the variance of the function so I can put limits on the q function 
 SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="log")
 {
     mstats <- checklink(   "mu.link", "Sinh-Arcsinh", substitute(mu.link), 
-                           c("1/mu^2", "log", "identity"))
+                           c("inverse", "log", "identity", "own"))
     dstats <- checklink("sigma.link", "Sinh-Arcsinh", substitute(sigma.link), 
-                           c("inverse", "log", "identity"))
+                           c("inverse", "log", "identity", "own"))
     vstats <- checklink(   "nu.link", "Sinh-Arcsinh", substitute(nu.link),    
-                           c("1/nu^2", "log", "identity"))
+                           c("inverse", "log", "identity", "own"))
     tstats <- checklink(  "tau.link", "Sinh-Arcsinh", substitute(tau.link),   
-                           c("1/tau^2", "log", "identity")) 
+                           c("inverse", "log", "identity", "own")) 
     structure(
           list(family = c("SHASH", "Sinh-Arcsinh"),
            parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE, tau=TRUE), 
@@ -60,6 +59,8 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    dldm <- (1/sigma)*((1+(z^2))^(-1/2))*((-h/c)+(r*c)+z*((1+(z^2))^(-1/2)))
    dldm <- (dldr*drdz+dldc*dcdz+dldz)*dzdm
  d2ldm2 <- -dldm*dldm
+ d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15) 
+ d2ldm2
                       },     
    dldd = function() {  
       z <- (y-mu)/sigma 
@@ -87,6 +88,8 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    dzdd <- -z/sigma
    dldd <- (dldr*drdz+dldc*dcdz+dldz)*dzdd-1/sigma    
  d2ldd2 <- -dldd*dldd
+ d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)  
+ d2ldd2
                       },   
      dldv = function() { 
       z <- (y-mu)/sigma 
@@ -106,8 +109,10 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    dldc <- 1/c
    drdv <- (1/2)*asinh(z)*exp(-nu*asinh(z))
    dcdv <- (1/2)*(1-nu*asinh(z))*exp(-nu*asinh(z))
-      dldv <- dldr*drdv+dldc*dcdv
-      d2ldv2 <-  -dldv*dldv             
+   dldv <- dldr*drdv+dldc*dcdv
+   d2ldv2 <-  -dldv*dldv             
+   d2ldv2 <- ifelse(d2ldv2 < -1e-15, d2ldv2,-1e-15)  
+   d2ldv2
                         },
       dldt = function() {
       z <- (y-mu)/sigma 
@@ -127,8 +132,10 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    dldc <- 1/c
    drdt <- (1/2)*asinh(z)*exp(tau*asinh(z))
    dcdt <- (1/2)*(1+tau*asinh(z))*exp(tau*asinh(z))
-      dldt <- dldr*drdt+dldc*dcdt
-      d2ldt2 <-   -dldt*dldt   
+   dldt <- dldr*drdt+dldc*dcdt
+   d2ldt2 <-   -dldt*dldt   
+   d2ldt2 <- ifelse(d2ldt2 < -1e-15, d2ldt2,-1e-15)                                    
+   d2ldt2
                             } ,
        d2ldmdd = function()## ok
                {
@@ -241,7 +248,7 @@ d2ldvdt <- -(dldv*dldt)
          rqres = expression(   
                    rqres(pfun="pSHASH", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)
                            ),
-    mu.initial = expression(mu <- (y+mean(y))/2),# rep(mean(y),length(y)) 
+    mu.initial = expression(mu <- (y+mean(y))/2),   
  sigma.initial = expression(sigma<- rep(sd(y)/5, length(y))),
     nu.initial = expression(nu <- rep(.5, length(y))), 
    tau.initial = expression(tau <-rep(.5, length(y))), 
@@ -254,7 +261,7 @@ d2ldvdt <- -(dldv*dldt)
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------
-dSHASH <- function(y, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)
+dSHASH <- function(y, mu = 0, sigma = 1, nu = .5, tau = .5, log = FALSE)
  {
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
@@ -267,90 +274,70 @@ dSHASH <- function(y, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)
        ft
   }    
 #-----------------------------------------------------------------  
-pSHASH <- function(q, mu = 0, sigma = 1, nu = 1, tau = .5, lower.tail = TRUE, log.p = FALSE)
+pSHASH <- function(q, mu = 0, sigma = 1, nu = .5, tau = .5, lower.tail = TRUE, log.p = FALSE)
  {  
          if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
          if (any(tau < 0))  stop(paste("tau must be positive", "\n", "")) 
          if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))          
       z <- (q-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
-#     c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
       p <- pNO(r)
       if(lower.tail==TRUE) p  <- p else  p <- 1-p 
       if(log.p==FALSE) p  <- p else  p <- log(p) 
       p
  }
 #-----------------------------------------------------------------  
-qSHASH <-  function(p, mu=0, sigma=1, nu=1, tau=.5, lower.tail = TRUE, log.p = FALSE,
-                     lower.limit = mu-10*(sigma/(nu*tau)), # this is completly wrong
-                     upper.limit = mu+10*(sigma/(nu*tau)) )
- {   
-     #---Golded section search--------------------------------------------
-       find.q.from.p <- function(p, mu, sigma, nu, tau,
-                                 lower= lower.limit, 
-                                 upper = upper.limit)
-            {   
-               usemode <- function(q,p)
-                    { 
-                      np <- pSHASH(q , mu = mu, sigma = sigma, nu=nu, tau=tau  )
-                      fun <- (np-p)^2
-                      fun
-                    }      
-            tol <-  0.000001
-              r <- 0.61803399  
-              b <- r*lower + (1-r)*upper 
-             lo <- lower
-             up <- upper 
-             w1 <- TRUE 
-           val1 <- if(up-b > b-lo) b   else b-(1-r)*(b-lo)
-           val2 <- if(up-b > b-lo) b+(1-r)*(up-b) else b 
-             f1 <- usemode(val1,p)
-             f2 <- usemode(val2,p)
-            while(w1) 
-                 { if(f2 < f1) { lo <- val1 
-                               val1 <- val2 
-                               val2 <- r*val1+(1-r)*up
-                                 f1 <- f2 
-                                 f2 <- usemode(val2,p) 
-                               } 
-                   else        { up <- val2 
-                               val2 <- val1
-                               val1 <- r*val2+(1-r)*lo
-                                 f2 <- f1 
-                                 f1 <- usemode(val1,p)
-                               }
-                   w1 <- abs(up-lo) >  tol*(abs(val1)+abs(val2))
-                 }             
-            q <- if(f1<f2) val1 else val2
-            q
-            }
-    #-----
-    if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
-    if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
+qSHASH <-  function(p, mu=0, sigma=1, nu=.5, tau=.5, lower.tail = TRUE, log.p = FALSE)
+  { 
+    #---functions--------------------------------------------   
+       h1 <- function(q)
+       { 
+     pSHASH(q , mu = mu[i], sigma = sigma[i], nu = nu[i], tau = tau[i]) - p[i] 
+       }
+       h <- function(q)
+       { 
+     pSHASH(q , mu = mu[i], sigma = sigma[i], nu = nu[i], tau = tau[i]) 
+       }
+     #-----------------------------------------------------------------
+    #if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
+    if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", ""))      
     if (log.p==TRUE) p <- exp(p) else p <- p
-    if (any(p <= 0)|any(p >= 1))  stop(paste("p must be between 0 and 1", "\n", ""))       
     if (lower.tail==TRUE) p <- p else p <- 1-p
-         lp <-  pmax.int(length(p), length(mu), length(sigma), length(nu), length(tau))
-          p <- rep(p, length = lp)
+    if (any(p < 0)|any(p > 1))  stop(paste("p must be between 0 and 1", "\n", ""))   
+         lp <-  max(length(p),length(mu),length(sigma),length(nu), length(tau))
+          p <- rep(p, length = lp)                                                                   
       sigma <- rep(sigma, length = lp)
          mu <- rep(mu, length = lp)
          nu <- rep(nu, length = lp)
-        tau <- rep(tau, length = lp)
-      upper <- rep(upper.limit, length = lp )
-      lower <- rep(lower.limit, length = lp )
-          q <- rep(0,lp)    
-         for (i in seq(along=p))
-          {
-          q[i] <- find.q.from.p(p[i], mu = mu[i], sigma = sigma[i], nu=nu[i], tau=tau[i], 
-                                upper = upper[i], 
-                                lower = lower[i])
-          if (q[i]>=upper[i]) warning("q is at the upper limit, increase the upper.limit")
-          if (q[i]<=lower[i]) warning("q is at the lower limit, decrease the lower.limit")
-          }                                                                               
+         tau <- rep(tau, length = lp)
+           q <- rep(0,lp)
+         for (i in 1:lp) 
+         {
+         if (h(mu[i])<p[i]) 
+          { 
+           interval <- c(mu[i], mu[i]+sigma[i])
+           j <-2
+           while (h(interval[2]) < p[i]) 
+              {interval[2]<- mu[i]+j*sigma[i]
+              j<-j+1 
+              }
+           } 
+          else  
+           {
+           interval <-  c(mu[i]-sigma[i], mu[i])
+           j <-2
+           while (h(interval[1]) > p[i]) 
+              {interval[1]<- mu[i]-j*sigma[i]
+              j<-j+1 
+              }
+           }
+        q[i] <- uniroot(h1, interval)$root
+        #interval <- c(.Machine$double.xmin, 20)
+         }
     q
- }
+   }
 #-----------------------------------------------------------------  
-rSHASH <- function(n, mu=0, sigma=1, nu=1, tau=.5)
+rSHASH <- function(n, mu=0, sigma=1, nu=.5, tau=.5)
   {
     if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     n <- ceiling(n)

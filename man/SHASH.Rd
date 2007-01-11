@@ -18,21 +18,20 @@ generation for the Sinh-Arcsinh (SHASH) distribution.
 }
 \usage{
 SHASH(mu.link = "identity", sigma.link = "log", nu.link = "log", 
-    tau.link = "log")
-dSHASH(y, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)
-pSHASH(q, mu = 0, sigma = 1, nu = 1, tau = .5, lower.tail = TRUE, 
+      tau.link = "log")
+dSHASH(y, mu = 0, sigma = 1, nu = 0.5, tau = 0.5, log = FALSE)
+pSHASH(q, mu = 0, sigma = 1, nu = 0.5, tau = 0.5, lower.tail = TRUE, 
      log.p = FALSE)
-qSHASH(p, mu = 0, sigma = 1, nu = 1, tau = .5, lower.tail = TRUE, 
-     log.p = FALSE, lower.limit =  mu-10*(sigma/(nu*tau)), 
-     upper.limit =  mu+10*(sigma/(nu*tau)))
-rSHASH(n, mu = 0, sigma = 1, nu = 1, tau = .5)
+qSHASH(p, mu = 0, sigma = 1, nu = 0.5, tau = 0.5, lower.tail = TRUE, 
+     log.p = FALSE)
+rSHASH(n, mu = 0, sigma = 1, nu = 0.5, tau = 0.5)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
- \item{mu.link}{Defines the \code{mu.link}, with "identity" link as the default for the \code{mu} parameter. Other links are "\eqn{1/mu^2}" and "log"}
- \item{sigma.link}{  Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. Other links are "inverse" and "identity"}
- \item{nu.link}{Defines the  \code{nu.link}, with "log" link as the default for the \code{nu} parameter. Other links are "\eqn{1/nu^2}" and "log"}
- \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter. Other links are "\eqn{1/tau^2}", and "identity}
+ \item{mu.link}{Defines the \code{mu.link}, with "identity" link as the default for the \code{mu} parameter. }
+ \item{sigma.link}{  Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. }
+ \item{nu.link}{Defines the  \code{nu.link}, with "log" link as the default for the \code{nu} parameter.}
+ \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter.}
  \item{y,q}{vector of quantiles}
  \item{mu}{vector of location parameter values }
  \item{sigma}{vector of scale parameter values}
@@ -43,9 +42,7 @@ rSHASH(n, mu = 0, sigma = 1, nu = 1, tau = .5)
           otherwise, P[X > x] }
  \item{p}{vector of probabilities. }
  \item{n}{ number of observations. If \code{length(n) > 1}, the length is
-          taken to be the number required} 
- \item{lower.limit}{lower limit for the golden search to find quantiles from probabilities  }
- \item{upper.limit}{upper limit for the golden search to find quantiles from probabilities }                 
+          taken to be the number required}      
 }
 \details{   
  The probability density function of the Sinh-Arcsinh distribution, (\code{SHASH}), Jones(2005), is defined as 
@@ -64,7 +61,7 @@ and  \eqn{z=(y-\mu)/\sigma}{z=(y-mu)/sigma}
 for \eqn{ -\infty < y < \infty }{0<y<0},
 \eqn{\mu=(-\infty,+\infty)}{mu=(-Inf,+Inf)},
 \eqn{\sigma>0}{sigma>0},
-\eqn{\nu>0)}{nu>0)} and
+\eqn{\nu>0}{nu>0} and
 \eqn{\tau>0}{tau>0}. 
 
 
@@ -90,7 +87,12 @@ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for lo
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
 Stasinopoulos D. M. Rigby R. A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).  }
+Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).  
+
+Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
+
+}
 \author{Bob Rigby \email{r.rigby@londonmet.ac.uk} and Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} }
 \note{ }
 

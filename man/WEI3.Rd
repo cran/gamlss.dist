@@ -58,7 +58,12 @@ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for lo
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
 Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).  }
+Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}). 
+
+Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
+
+ }
 
 \author{ Bob Rigby \email{r.rigby@londonmet.ac.uk} and Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}}
 
@@ -66,7 +71,7 @@ Accompanying documentation in the current GAMLSS  help files, (see also  \url{ht
 \eqn{\mu^2 \left\{\Gamma(2/\sigma +1)/ \left[ \Gamma(1/\sigma +1)\right]^2 -1\right\}}{mu^2(Gamma(1/sigma +1)/Gamma(1/sigma+1)^2 -1)}
 }
  \section{Warning }{In \code{WEI3} the estimated parameters \code{mu} and \code{sigma} can be highly correlated so it is advisable to use the 
-\code{CG()} method for fitting  [as the RS() method can be veru slow in this situation.] }
+\code{CG()} method for fitting  [as the RS() method can be very slow in this situation.] }
 \seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{WEI}},  \code{\link[gamlss]{WEI2}}}
 
 \examples{
