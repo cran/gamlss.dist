@@ -64,7 +64,7 @@ Rigby, R. A., Stasinopoulos D. M. and Akantziliotou, C. (2006) Modelling the par
 Submitted for publication.
 
 Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2003) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.londonmet.ac.uk/gamlss/}).
+Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).
 
 Wimmer, G. and Altmann, G (1999). \emph{Thesaurus of univariate discrete probability distributions} . Stamn Verlag, Essen, Germany 
 

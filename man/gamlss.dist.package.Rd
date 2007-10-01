@@ -31,11 +31,11 @@ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for lo
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
 Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2003) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.londonmet.ac.uk/gamlss/}
+Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/})
 }
 \seealso{
 \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}} } 
-}
+
 \examples{
 plot(function(y) dSICHEL(y, mu=10, sigma = 0.1 , nu=1 ), from=0, to=30, n=30+1, type="h") # pdf
 pdf.plot(family=SICHEL, mu=10, sigma=0.1, nu=1,  min=0, max=30, step=1)  

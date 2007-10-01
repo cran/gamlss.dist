@@ -8,7 +8,7 @@ GIG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
                          c("1/nu^2", "log", "identity"))  
     
     structure(
-          list(family = c("GIG", "Lopatatsidis-Green"),
+          list(family = c("GIG", "Generalised Inverse Gaussian"),
            parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE), 
                 nopar = 3, 
                  type = "Continuous",

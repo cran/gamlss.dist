@@ -7,7 +7,7 @@
 \alias{plotBEOI}
 \alias{meanBEOI}
 
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{The one-inflated beta distribution for fitting a GAMLSS}
 \description{
 The function \code{BEOI()} defines the one-inflated beta distribution, a
@@ -20,7 +20,8 @@ The extra parameter models the probability at one.
 The functions \code{dBEOI}, \code{pBEOI}, \code{qBEOI} and \code{rBEOI} define the density,
 distribution function, quantile function and random
 generation for the \code{BEOI} parameterization of the one-inflated beta distribution. 
-\code{plotBEOI} can be used to plot the distribution. \code{meanBEOI} calculates the expected value of the response for a fitted model. 
+\code{plotBEOI} can be used to plot the distribution. \code{meanBEOI} calculates the expected value of 
+the response for a fitted model. 
 }
 \usage{
 BEOI(mu.link = "logit", sigma.link = "log", nu.link = "logit")
@@ -44,7 +45,6 @@ meanBEOI(obj)
   \item{mu.link}{the \code{mu} link function with default \code{logit}}
   \item{sigma.link}{the \code{sigma} link function with default \code{log}}
   \item{nu.link}{the \code{nu} link function with default \code{logit}}
-
   \item{y,q}{vector of quantiles}
   \item{mu}{vector of location parameter values} 
   \item{sigma}{vector of precision parameter values}
@@ -62,7 +62,7 @@ meanBEOI(obj)
 }
 \details{ The one-inflated beta distribution is given as
 \deqn{f(y)=\nu}{f(y)=nu} if \eqn{(y=1)}{(y=1)}
-\deqn{f(y|\mu,\sigma)=(1-\nu)\frac{\Gamma(\sigma)}{\Gamma(\mu\sigma)\Gamma((1-\mu)\sigma)} y^{\mu\sigma}(1-y)^{((1-\mu)\sigma)-1}}{f(y|mu,sigma)=(1-nu)*(Gamma(sigma)/Gamma(mu*sigma)*Gamma((1-mu)*sigma))*y^(mu*sigma-1)*(1-y)^(((1-mu)*sigma)-1)
+\deqn{f(y|\mu,\sigma)=(1-\nu)\frac{\Gamma(\sigma)}{\Gamma(\mu \sigma)\Gamma((1-\mu) \sigma)} y^{\mu \sigma}(1-y)^{((1-\mu)\sigma)-1}}{f(y|mu,sigma)=(1-nu)*(Gamma(sigma)/Gamma(mu*sigma)*Gamma((1-mu)*sigma))*y^(mu*sigma-1)*(1-y)^(((1-mu)*sigma)-1)
 }
 if \eqn{y=(0,1)}{y=(0,1)}. The parameters satisfy \eqn{0<\mu<0}{0<mu<1}, \eqn{\sigma>0}{sigma>0} and \eqn{0<\nu< 1}{0<nu<1}.
  
@@ -72,7 +72,6 @@ Here \eqn{E(y)=\nu+(1-\nu)\mu}{E(y)=nu+(1-nu)*mu} and
 
 \value{
 returns a \code{gamlss.family} object which can be used to fit a one-inflated beta distribution in the \code{gamlss()} function. 
-  ...
 }
 \references{
 
@@ -88,9 +87,9 @@ Generalized additive models for location, scale and shape (with discussion).
 Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006).
 Instructions on how to use the GAMLSS package in R.
 Accompanying documentation in the current GAMLSS  help files
-(see also  \url{http://www.londonmet.ac.uk/gamlss/}).}
+(see also  \url{http://www.gamlss.com/}).}
 
-\author{Raydonal Ospina, Department of Statistics, University of São Paulo, Brazil.
+\author{Raydonal Ospina, Department of Statistics, University of Sao Paulo, Brazil.
 
 \email{rospina@ime.usp.br}
 }
@@ -100,9 +99,6 @@ This work is part of my PhD project at the University of Sao
 Paulo under the supervion of Professor Silvia Ferrari.
 My thesis is concerned with regression modelling of rates and
 proportions with excess of zeros and/or ones}
-
-
-
 
 
 \seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{BEOI}} }

@@ -72,7 +72,6 @@ Here \eqn{E(y)=(1-\nu)\mu}{E(y)=(1-nu)*mu} and
 
 \value{
 returns a \code{gamlss.family} object which can be used to fit a zero-inflated beta distribution in the \code{gamlss()} function. 
-  ...
 }
 \references{
 
@@ -88,9 +87,9 @@ Generalized additive models for location, scale and shape (with discussion).
 Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006).
 Instructions on how to use the GAMLSS package in R.
 Accompanying documentation in the current GAMLSS  help files
-(see also  \url{http://www.londonmet.ac.uk/gamlss/}).}
+(see also  \url{http://www.gamlss.com/}).}
 
-\author{Raydonal Ospina, Department of Statistics, University of São Paulo, Brazil.
+\author{Raydonal Ospina, Department of Statistics, University of Sao Paulo, Brazil.
 
 \email{rospina@ime.usp.br}
 }

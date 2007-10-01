@@ -130,6 +130,113 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
       dldt <- dldr*drdt+dldc*dcdt
       d2ldt2 <-   -dldt*dldt   
                             } ,
+       d2ldmdd = function()## ok
+               {
+      z <- (y-mu)/sigma 
+      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
+      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
+      h <- (1/2)*((tau^2)*exp(tau*asinh(z))-(nu^2)*exp(-nu*asinh(z)))
+   dldz <- -z/(1+(z^2))
+   dldr <- -r
+   dldc <- 1/c
+   dcdz <- h*((1+(z^2))^(-1/2))
+   drdz <- c*((1+(z^2))^(-1/2))
+   dzdm <- -1/sigma
+   dldm <- (1/sigma)*((1+(z^2))^(-1/2))*((-h/c)+(r*c)+z*((1+(z^2))^(-1/2)))
+   dldm <- (dldr*drdz+dldc*dcdz+dldz)*dzdm     
+   dzdd <- -z/sigma
+   dldd <- (dldr*drdz+dldc*dcdz+dldz)*dzdd-1/sigma           
+d2ldmdd <- -(dldm*dldd)
+               },
+       d2ldmdv = function()# OK
+               { 
+      z <- (y-mu)/sigma 
+      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
+      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
+      h <- (1/2)*((tau^2)*exp(tau*asinh(z))-(nu^2)*exp(-nu*asinh(z)))
+   dldz <- -z/(1+(z^2))
+   dldr <- -r
+   dldc <- 1/c
+   dcdz <- h*((1+(z^2))^(-1/2))
+   drdz <- c*((1+(z^2))^(-1/2))
+   dzdm <- -1/sigma
+   dldm <- (1/sigma)*((1+(z^2))^(-1/2))*((-h/c)+(r*c)+z*((1+(z^2))^(-1/2)))
+   dldm <- (dldr*drdz+dldc*dcdz+dldz)*dzdm                   
+   drdv <- (1/2)*asinh(z)*exp(-nu*asinh(z))
+   dcdv <- (1/2)*(1-nu*asinh(z))*exp(-nu*asinh(z))
+   dldv <- dldr*drdv+dldc*dcdv
+d2ldmdv <- -(dldm*dldv)
+               },
+       d2ldmdt = function() #ok
+               {
+          z <- (y-mu)/sigma 
+      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
+      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
+      h <- (1/2)*((tau^2)*exp(tau*asinh(z))-(nu^2)*exp(-nu*asinh(z)))
+   dldz <- -z/(1+(z^2))
+   dldr <- -r
+   dldc <- 1/c
+   dcdz <- h*((1+(z^2))^(-1/2))
+   drdz <- c*((1+(z^2))^(-1/2))
+   dzdm <- -1/sigma
+   dldm <- (1/sigma)*((1+(z^2))^(-1/2))*((-h/c)+(r*c)+z*((1+(z^2))^(-1/2)))
+   dldm <- (dldr*drdz+dldc*dcdz+dldz)*dzdm     
+   drdt <- (1/2)*asinh(z)*exp(tau*asinh(z))
+   dcdt <- (1/2)*(1+tau*asinh(z))*exp(tau*asinh(z))
+   dldt <- dldr*drdt+dldc*dcdt                          
+d2ldmdt <- -(dldm*dldt)
+               },
+       d2ldddv = function() #ok
+               {               
+      z <- (y-mu)/sigma 
+      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
+      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
+      h <- (1/2)*((tau^2)*exp(tau*asinh(z))-(nu^2)*exp(-nu*asinh(z)))
+   dldz <- -z/(1+(z^2))
+   dldr <- -r
+   dldc <- 1/c
+   dcdz <- h*((1+(z^2))^(-1/2))
+   drdz <- c*((1+(z^2))^(-1/2))
+   dzdd <- -z/sigma
+   dldd <- (dldr*drdz+dldc*dcdz+dldz)*dzdd-1/sigma       
+   drdv <- (1/2)*asinh(z)*exp(-nu*asinh(z))
+   dcdv <- (1/2)*(1-nu*asinh(z))*exp(-nu*asinh(z))
+   dldv <- dldr*drdv+dldc*dcdv
+d2ldddv <- -(dldd*dldv)
+               },
+       d2ldddt = function() #ok
+               {
+     z <- (y-mu)/sigma 
+      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
+      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
+      h <- (1/2)*((tau^2)*exp(tau*asinh(z))-(nu^2)*exp(-nu*asinh(z)))
+   dldz <- -z/(1+(z^2))
+   dldr <- -r
+   dldc <- 1/c
+   dcdz <- h*((1+(z^2))^(-1/2))
+   drdz <- c*((1+(z^2))^(-1/2))
+   dzdd <- -z/sigma
+   dldd <- (dldr*drdz+dldc*dcdz+dldz)*dzdd-1/sigma   
+   drdt <- (1/2)*asinh(z)*exp(tau*asinh(z))
+   dcdt <- (1/2)*(1+tau*asinh(z))*exp(tau*asinh(z))
+   dldt <- dldr*drdt+dldc*dcdt   
+d2ldddt <- -(dldd*dldt)  
+               },
+       d2ldvdt = function() #ok
+               { 
+      z <- (y-mu)/sigma 
+      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
+      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
+   dldr <- -r
+   dldc <- 1/c
+   drdv <- (1/2)*asinh(z)*exp(-nu*asinh(z))
+   dcdv <- (1/2)*(1-nu*asinh(z))*exp(-nu*asinh(z))
+   dldv <- dldr*drdv+dldc*dcdv                         
+   drdt <- (1/2)*asinh(z)*exp(tau*asinh(z))
+   dcdt <- (1/2)*(1+tau*asinh(z))*exp(tau*asinh(z))
+   dldt <- dldr*drdt+dldc*dcdt             
+d2ldvdt <- -(dldv*dldt)  
+               },
  G.dev.incr  = function(y,mu,sigma,nu,tau,...) -2*dSHASH(y,mu,sigma,nu,tau,log=TRUE),                 
          rqres = expression(   
                    rqres(pfun="pSHASH", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)
@@ -174,7 +281,6 @@ pSHASH <- function(q, mu = 0, sigma = 1, nu = 1, tau = .5, lower.tail = TRUE, lo
       p
  }
 #-----------------------------------------------------------------  
-
 qSHASH <-  function(p, mu=0, sigma=1, nu=1, tau=.5, lower.tail = TRUE, log.p = FALSE,
                      lower.limit = mu-10*(sigma/(nu*tau)), # this is completly wrong
                      upper.limit = mu+10*(sigma/(nu*tau)) )
@@ -224,7 +330,8 @@ qSHASH <-  function(p, mu=0, sigma=1, nu=1, tau=.5, lower.tail = TRUE, log.p = F
     if (log.p==TRUE) p <- exp(p) else p <- p
     if (any(p <= 0)|any(p >= 1))  stop(paste("p must be between 0 and 1", "\n", ""))       
     if (lower.tail==TRUE) p <- p else p <- 1-p
-           lp <- length(p)                                                                    
+         lp <-  pmax.int(length(p), length(mu), length(sigma), length(nu), length(tau))
+          p <- rep(p, length = lp)
       sigma <- rep(sigma, length = lp)
          mu <- rep(mu, length = lp)
          nu <- rep(nu, length = lp)
@@ -249,7 +356,6 @@ rSHASH <- function(n, mu=0, sigma=1, nu=1, tau=.5)
     n <- ceiling(n)
     p <- runif(n)
     r <- qSHASH(p,mu=mu,sigma=sigma,nu=nu,tau=tau)
-# not available yet 
    r
   }
 #-----------------------------------------------------------------  
