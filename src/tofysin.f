@@ -1,7 +1,7 @@
       subroutine TOFYSIN(y, smu, sig, snu, slbes, sc, n, k )
       integer iy, n, k
-      real y(n), smu(n), sig(n), snu(n), slbes(n), tofyn(k), sumT, 
-     1      salpha, sc(n) 
+      real y(n), smu(n), sig(n), snu(n), slbes(n), 
+     1    tofyn(k), sumT, salpha, sc(n) 
       do 100 i = 1, n
       iy = y(i)+1
       tofyn(1) = (smu(i)/sc(i))*((1+2*sig(i)*(smu(i)/sc(i)))**(-0.5))

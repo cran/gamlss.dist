@@ -25,27 +25,27 @@ RGE <- function (mu.link="identity", sigma.link="log", nu.link ="log")
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
-                 dldm = function() {
+                 dldm = function(y,mu,sigma,nu) {
                                      toto <- nu*(y-mu)/sigma
                                      dldm <-   (nu-1)/((1+toto) *sigma)
                                      dldm <- dldm + (1/sigma)*((1+toto)^((1/nu)-1))
                                      dldm
                                     },
-               d2ldm2 = function() {
+               d2ldm2 = function(y,mu,sigma,nu) {
                                      toto <- nu*(y-mu)/sigma
                                      dldm <-   (nu-1)/((1+toto) *sigma)
                                      dldm <- dldm + (1/sigma)*((1+toto)^((1/nu)-1))
                                  d2ldm2 <-  -dldm*dldm
                                  d2ldm2
                                     },
-               dldd = function() {
+               dldd = function(y,mu,sigma,nu) {
                                      toto <- nu*(y-mu)/sigma
                                      dldd <-  (-1-((1/nu)-1)*(toto)/(1+toto)) 
                                      dldd <- dldd +((1+toto)^((1/nu)-1))*toto/nu
                                      dldd <- dldd/sigma
                                      dldd
                                     },
-               d2ldd2 = function() {
+               d2ldd2 = function(y,mu,sigma,nu) {
                                      toto <- nu*(y-mu)/sigma
                                      dldd <-  (-1-((1/nu)-1)*(toto)/(1+toto)) 
                                      dldd <- dldd +((1+toto)^((1/nu)-1))*toto/nu
@@ -53,7 +53,7 @@ RGE <- function (mu.link="identity", sigma.link="log", nu.link ="log")
                                  d2ldd2 <-  -dldd*dldd
                                  d2ldd2
                                        },
-                 dldv = function() {
+                 dldv = function(y,mu,sigma,nu) {
                                     toto <- nu*(y-mu)/sigma 
                                      dldv <- -(ifelse((1+toto) <= 0,0,log(1+toto)) +(nu-1)*toto/(1+toto))
                                      dldv <- dldv - ((1+toto)^(1/nu))*((toto/(1+toto)) -
@@ -61,7 +61,7 @@ RGE <- function (mu.link="identity", sigma.link="log", nu.link ="log")
                                      dldv <- dldv/(nu*nu)
                                      dldv
                                     },
-               d2ldv2 = function()  {
+               d2ldv2 = function(y,mu,sigma,nu)  {
                                     toto <- nu*(y-mu)/sigma 
                                      dldv <- -(ifelse((1+toto) <= 0,0,log(1+toto)) +(nu-1)*toto/(1+toto))
                                      dldv <- dldv - ((1+toto)^(1/nu))*((toto/(1+toto)) -
@@ -71,12 +71,11 @@ RGE <- function (mu.link="identity", sigma.link="log", nu.link ="log")
                                     d2ldv2
                                       },
 
-              d2ldmdd = function()  rep(0,length(y)),
-              d2ldmdv = function()  rep(0,length(y)),
-              d2ldddv = function()  rep(0,length(y)),
+              d2ldmdd = function(y,mu,sigma,nu)  rep(0,length(y)),
+              d2ldmdv = function(y,mu,sigma,nu)  rep(0,length(y)),
+              d2ldddv = function(y,mu,sigma,nu)  rep(0,length(y)),
           G.dev.incr  = function(y,mu,sigma,nu,...) {
-                                   G.dev.incr <- -2*dRGE(y,mu=mu,sigma=sigma,nu=nu,log=TRUE)
-                                   G.dev.incr
+                                   -2*dRGE(y,mu=mu,sigma=sigma,nu=nu,log=TRUE)
                                                     }, 
                 rqres = expression(rqres(pfun="pRGE", type="Continuous", y=y, mu=mu, 
                                               sigma=sigma, nu=nu) ),

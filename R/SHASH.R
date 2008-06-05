@@ -31,7 +31,7 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
                tau.dr = tstats$mu.eta, 
-    dldm = function() {
+    dldm = function(y,mu,sigma,nu,tau) {
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
       c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
@@ -44,8 +44,9 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    dzdm <- -1/sigma
    dldm <- (1/sigma)*((1+(z^2))^(-1/2))*((-h/c)+(r*c)+z*((1+(z^2))^(-1/2)))
    dldm <- (dldr*drdz+dldc*dcdz+dldz)*dzdm
+   dldm 
                       },
-   d2ldm2 = function(){
+   d2ldm2 = function(y,mu,sigma,nu,tau){
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
       c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
@@ -62,7 +63,7 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
  d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15) 
  d2ldm2
                       },     
-   dldd = function() {  
+   dldd = function(y,mu,sigma,nu,tau) {  
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
       c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
@@ -73,9 +74,10 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    dcdz <- h*((1+(z^2))^(-1/2))
    drdz <- c*((1+(z^2))^(-1/2))
    dzdd <- -z/sigma
-   dldd <- (dldr*drdz+dldc*dcdz+dldz)*dzdd-1/sigma                     
+   dldd <- (dldr*drdz+dldc*dcdz+dldz)*dzdd-1/sigma 
+   dldd                    
                       } ,
-   d2ldd2 = function(){
+   d2ldd2 = function(y,mu,sigma,nu,tau){
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
       c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
@@ -91,7 +93,7 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
  d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)  
  d2ldd2
                       },   
-     dldv = function() { 
+     dldv = function(y,mu,sigma,nu,tau) { 
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
       c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
@@ -100,8 +102,9 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    drdv <- (1/2)*asinh(z)*exp(-nu*asinh(z))
    dcdv <- (1/2)*(1-nu*asinh(z))*exp(-nu*asinh(z))
       dldv <- dldr*drdv+dldc*dcdv
+      dldv
                         } ,
-    d2ldv2 = function() { 
+    d2ldv2 = function(y,mu,sigma,nu,tau) { 
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
       c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
@@ -114,7 +117,7 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    d2ldv2 <- ifelse(d2ldv2 < -1e-15, d2ldv2,-1e-15)  
    d2ldv2
                         },
-      dldt = function() {
+      dldt = function(y,mu,sigma,nu,tau) {
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
       c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
@@ -122,9 +125,10 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    dldc <- 1/c
    drdt <- (1/2)*asinh(z)*exp(tau*asinh(z))
    dcdt <- (1/2)*(1+tau*asinh(z))*exp(tau*asinh(z))
-      dldt <- dldr*drdt+dldc*dcdt
+   dldt <- dldr*drdt+dldc*dcdt
+   dldt   
                         } ,
-      d2ldt2 = function() { 
+      d2ldt2 = function(y,mu,sigma,nu,tau) { 
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
       c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
@@ -137,7 +141,7 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    d2ldt2 <- ifelse(d2ldt2 < -1e-15, d2ldt2,-1e-15)                                    
    d2ldt2
                             } ,
-       d2ldmdd = function()## ok
+       d2ldmdd = function(y,mu,sigma,nu,tau)## ok
                {
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
@@ -154,8 +158,9 @@ SHASH <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.lin
    dzdd <- -z/sigma
    dldd <- (dldr*drdz+dldc*dcdz+dldz)*dzdd-1/sigma           
 d2ldmdd <- -(dldm*dldd)
+d2ldmdd
                },
-       d2ldmdv = function()# OK
+       d2ldmdv = function(y,mu,sigma,nu,tau)# OK
                { 
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
@@ -173,8 +178,9 @@ d2ldmdd <- -(dldm*dldd)
    dcdv <- (1/2)*(1-nu*asinh(z))*exp(-nu*asinh(z))
    dldv <- dldr*drdv+dldc*dcdv
 d2ldmdv <- -(dldm*dldv)
+d2ldmdv
                },
-       d2ldmdt = function() #ok
+       d2ldmdt = function(y,mu,sigma,nu,tau) #ok
                {
           z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
@@ -192,8 +198,9 @@ d2ldmdv <- -(dldm*dldv)
    dcdt <- (1/2)*(1+tau*asinh(z))*exp(tau*asinh(z))
    dldt <- dldr*drdt+dldc*dcdt                          
 d2ldmdt <- -(dldm*dldt)
+d2ldmdt
                },
-       d2ldddv = function() #ok
+       d2ldddv = function(y,mu,sigma,nu,tau) #ok
                {               
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
@@ -210,8 +217,9 @@ d2ldmdt <- -(dldm*dldt)
    dcdv <- (1/2)*(1-nu*asinh(z))*exp(-nu*asinh(z))
    dldv <- dldr*drdv+dldc*dcdv
 d2ldddv <- -(dldd*dldv)
+d2ldddv 
                },
-       d2ldddt = function() #ok
+       d2ldddt = function(y,mu,sigma,nu,tau) #ok
                {
      z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
@@ -227,9 +235,10 @@ d2ldddv <- -(dldd*dldv)
    drdt <- (1/2)*asinh(z)*exp(tau*asinh(z))
    dcdt <- (1/2)*(1+tau*asinh(z))*exp(tau*asinh(z))
    dldt <- dldr*drdt+dldc*dcdt   
-d2ldddt <- -(dldd*dldt)  
+d2ldddt <- -(dldd*dldt) 
+d2ldddt 
                },
-       d2ldvdt = function() #ok
+       d2ldvdt = function(y,mu,sigma,nu,tau) #ok
                { 
       z <- (y-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
@@ -242,7 +251,8 @@ d2ldddt <- -(dldd*dldt)
    drdt <- (1/2)*asinh(z)*exp(tau*asinh(z))
    dcdt <- (1/2)*(1+tau*asinh(z))*exp(tau*asinh(z))
    dldt <- dldr*drdt+dldc*dcdt             
-d2ldvdt <- -(dldv*dldt)  
+d2ldvdt <- -(dldv*dldt) 
+d2ldvdt 
                },
  G.dev.incr  = function(y,mu,sigma,nu,tau,...) -2*dSHASH(y,mu,sigma,nu,tau,log=TRUE),                 
          rqres = expression(   

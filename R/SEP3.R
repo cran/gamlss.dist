@@ -10,7 +10,7 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
     tstats <- checklink("tau.link", "skew exponential power type 2 ",substitute(tau.link), 
                          c("inverse", "log", "identity", "own")) 
     structure(
-          list(family = c("SEP3",  "skew exponential power type 2"),
+          list(family = c("SEP3",  "skew exponential power type 3"),
            parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE, tau=TRUE), 
                 nopar = 4, 
                  type = "Continuous",
@@ -30,14 +30,14 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
                tau.dr = tstats$mu.eta, 
-                 dldm = function() {
+                 dldm = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma
     dldma <- sign(z)*(nu*tau/(2*sigma))*((nu*abs(z))^(tau-1))
     dldmb <- sign(z)*(tau/(2*sigma*nu))*((abs(z)/nu)^(tau-1))
      dldm <- ifelse(y < mu, dldma , dldmb)
      dldm
                                     },
-               d2ldm2 = function(){
+               d2ldm2 = function(y,mu,sigma,nu,tau){
         z <- (y-mu)/sigma
     dldma <- sign(z)*(nu*tau/(2*sigma))*((nu*abs(z))^(tau-1))
     dldmb <- sign(z)*(tau/(2*sigma*nu))*((abs(z)/nu)^(tau-1))
@@ -46,7 +46,7 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
    d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15)  
    d2ldm2
                                    },
-                 dldd = function() {
+                 dldd = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma
     dldda <- (nu*abs(z))^tau
     dlddb <- (abs(z)/nu)^tau
@@ -54,7 +54,7 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
      dldd <- dldd*(tau/(2*sigma))-(1/sigma)
      dldd
                                      } ,
-               d2ldd2 = function() {
+               d2ldd2 = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma
     dldda <- (nu*abs(z))^tau
     dlddb <- (abs(z)/nu)^tau
@@ -64,7 +64,7 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
    d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)  
    d2ldd2
                                      },
-                 dldv = function() {
+                 dldv = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma  
     dldva <- sign(z)*((nu*abs(z))^tau)
     dldvb <- sign(z)*((abs(z)/nu)^tau)
@@ -72,7 +72,7 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
      dldv <- dldv*(tau/(2*nu)) + (1/nu) - (2*nu)/(1+(nu^2))
      dldv
                                      } ,
-               d2ldv2 = function() { 
+               d2ldv2 = function(y,mu,sigma,nu,tau) { 
         z <- (y-mu)/sigma  
     dldva <- sign(z)*((nu*abs(z))^tau)
     dldvb <- sign(z)*((abs(z)/nu)^tau)
@@ -82,7 +82,7 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
    d2ldv2 <- ifelse(d2ldv2 < -1e-4, d2ldv2,-1e-4)  
    d2ldv2
                                      },
-                 dldt = function() { 
+                 dldt = function(y,mu,sigma,nu,tau) { 
         z <- (y-mu)/sigma  
     dldta <- -(log(nu*abs(z)))*((nu*abs(z))^tau) 
     dldtb <- -(log(abs(z)/nu))*((abs(z)/nu)^tau) 
@@ -90,7 +90,7 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
      dldt <- dldt/2 + ((digamma(1+(1/tau)))/(tau^2)) + log(2)/(tau^2)
      dldt
                                      } ,
-               d2ldt2 = function() {
+               d2ldt2 = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma  
     dldta <- -(log(nu*abs(z)))*((nu*abs(z))^tau) 
     dldtb <- -(log(abs(z)/nu))*((abs(z)/nu)^tau) 
@@ -102,7 +102,7 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
                                      } ,
 
 
-              d2ldmdd = function()
+              d2ldmdd = function(y,mu,sigma,nu,tau)
                       {  
         z <- (y-mu)/sigma
     dldma <- sign(z)*(nu*tau/(2*sigma))*((nu*abs(z))^(tau-1))
@@ -112,9 +112,10 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
     dlddb <- (abs(z)/nu)^tau
      dldd <- ifelse(y < mu, dldda , dlddb )
      dldd <- dldd*(tau/(2*sigma))-(1/sigma)
-  d2ldmdd <- -(dldm*dldd)                  
+  d2ldmdd <- -(dldm*dldd)
+  d2ldmdd                  
                       },
-              d2ldmdv = function()
+              d2ldmdv = function(y,mu,sigma,nu,tau)
                       {
         z <- (y-mu)/sigma
     dldma <- sign(z)*(nu*tau/(2*sigma))*((nu*abs(z))^(tau-1))
@@ -125,8 +126,9 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
      dldv <- ifelse(y < mu, dldva , dldvb )
      dldv <- dldv*(tau/(2*nu)) + (1/nu) - (2*nu)/(1+(nu^2))
   d2ldmdv <- -(dldm*dldv)
+  d2ldmdv
                       } ,
-              d2ldmdt = function()
+              d2ldmdt = function(y,mu,sigma,nu,tau)
                      {  
         z <- (y-mu)/sigma
     dldma <- sign(z)*(nu*tau/(2*sigma))*((nu*abs(z))^(tau-1))
@@ -137,8 +139,9 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
      dldt <- ifelse(y < mu, dldta , dldtb)
      dldt <- dldt/2 + ((digamma(1+(1/tau)))/(tau^2)) + log(2)/(tau^2)
   d2ldmdt <- -(dldm*dldt)
+  d2ldmdt
                       },
-              d2ldddv = function()  
+              d2ldddv = function(y,mu,sigma,nu,tau)  
                       {
         z <- (y-mu)/sigma
     dldda <- (nu*abs(z))^tau
@@ -150,8 +153,9 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
      dldv <- ifelse(y < mu, dldva , dldvb )
      dldv <- dldv*(tau/(2*nu)) + (1/nu) - (2*nu)/(1+(nu^2))
   d2ldddv <- -(dldd*dldv)
+  d2ldddv
                       },
-              d2ldddt = function()  
+              d2ldddt = function(y,mu,sigma,nu,tau)  
                       {
         z <- (y-mu)/sigma
     dldda <- (nu*abs(z))^tau
@@ -162,9 +166,10 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
     dldtb <- -(log(abs(z)/nu))*((abs(z)/nu)^tau) 
      dldt <- ifelse(y < mu, dldta , dldtb)
      dldt <- dldt/2 + ((digamma(1+(1/tau)))/(tau^2)) + log(2)/(tau^2)
-  d2ldddt <- -(dldd*dldt)                   
+  d2ldddt <- -(dldd*dldt)
+  d2ldddt                   
                       },
-              d2ldvdt = function()  
+              d2ldvdt = function(y,mu,sigma,nu,tau)  
                       {
         z <- (y-mu)/sigma  
     dldva <- sign(z)*((nu*abs(z))^tau)
@@ -175,7 +180,8 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
     dldtb <- -(log(abs(z)/nu))*((abs(z)/nu)^tau) 
      dldt <- ifelse(y < mu, dldta , dldtb)
      dldt <- dldt/2 + ((digamma(1+(1/tau)))/(tau^2)) + log(2)/(tau^2)
-  d2ldvdt <- -(dldv*dldt)    
+  d2ldvdt <- -(dldv*dldt)
+  d2ldvdt    
                       }, 
           G.dev.incr  = function(y,mu,sigma,nu,tau,...) 
                                   -2*dSEP3(y,mu,sigma,nu,tau,log=TRUE), 

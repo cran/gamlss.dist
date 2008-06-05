@@ -4,6 +4,7 @@
 \alias{pSICHEL}
 \alias{qSICHEL}
 \alias{rSICHEL}
+\alias{VSICHEL}
 
 
 \title{The Sichel dustribution for fitting a GAMLSS model}
@@ -11,7 +12,7 @@
 The \code{SICHEL()} function defines the Sichel distribution, a three parameter discrete distribution, for a \code{gamlss.family} object to be used 
 in GAMLSS fitting using the function \code{gamlss()}.    
 The functions \code{dSICHEL}, \code{pSICHEL}, \code{qSICHEL} and \code{rSICHEL} define the density, distribution function, quantile function and random
-generation for the Sichel \code{SICHEL()}, distribution. 
+generation for the Sichel \code{SICHEL()}, distribution. The function \code{VSICHEL} gives the variance of a fitted Sichel model.  
 }
 \usage{
 SICHEL(mu.link = "log", sigma.link = "log", nu.link = "identity")
@@ -21,6 +22,7 @@ pSICHEL(q, mu=1, sigma=1, nu=-0.5, lower.tail = TRUE,
 qSICHEL(p, mu=1, sigma=1, nu=-0.5,  lower.tail = TRUE, 
         log.p = FALSE, max.value = 10000)        
 rSICHEL(n, mu=1, sigma=1, nu=-0.5, max.value = 10000)
+VSICHEL(obj)
 }
 
 
@@ -39,6 +41,7 @@ rSICHEL(n, mu=1, sigma=1, nu=-0.5, max.value = 10000)
   \item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x],
           otherwise, P[X > x]}  
   \item{max.value}{a constant, set to the default value of 10000 for how far the algorithm  should look for q}
+  \item{obj}{a fitted Sichel gamlss model}
 }
 \details{
 The probability function of the Sichel distribution is given by

@@ -22,35 +22,36 @@ sigma.linkfun = dstats$linkfun,
 sigma.linkinv = dstats$linkinv,
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
-         dldm = function() {  
+         dldm = function(y,mu,sigma) {  
                           mus <- mu/(1-sigma)
                         dldm0 <- -(((1-sigma)+sigma*exp(mus))^(-1))
                          dldm <- ifelse(y==0, dldm0, (y-mus)/mu)
                          dldm}, 
-       d2ldm2 = function() {
+       d2ldm2 = function(y,mu,sigma) {
                           mus <- mu/(1-sigma)
                         dldm0 <- -(((1-sigma)+sigma*exp(mus))^(-1))
                          dldm <- ifelse(y==0, dldm0, (y-mus)/mu)
                        d2ldm2 <- -dldm*dldm
                          d2ldm2},
-          dldd = function() { 
+          dldd = function(y,mu,sigma) { 
                           mus <- mu/(1-sigma)
                         dldd0 <- (1-(1+mus)*exp(-mus))*((sigma+(1-sigma)*exp(-mus))^(-1)) 
                          dldd <- ifelse(y==0, dldd0, ((y-1)/(1-sigma))-((mus^2)/mu))
                          dldd}, 
-        d2ldd2 = function() {
+        d2ldd2 = function(y,mu,sigma) {
                           mus <- mu/(1-sigma)
                         dldd0 <- (1-(1+mus)*exp(-mus))*((sigma+(1-sigma)*exp(-mus))^(-1)) 
                          dldd <- ifelse(y==0, dldd0, ((y-1)/(1-sigma))-((mus^2)/mu))
                        d2ldd2 <- -dldd*dldd
                          d2ldd2},
-        d2ldmdd = function() {
+        d2ldmdd = function(y,mu,sigma) {
                           mus <- mu/(1-sigma)
                         dldm0 <- -(((1-sigma)+sigma*exp(mus))^(-1))
                          dldm <- ifelse(y==0, dldm0, (y-mus)/mu)
                         dldd0 <- (1-(1+mus)*exp(-mus))*((sigma+(1-sigma)*exp(-mus))^(-1)) 
                          dldd <- ifelse(y==0, dldd0, ((y-1)/(1-sigma))-((mus^2)/mu))
-                      d2ldmdd <- -dldm*dldd                        
+                      d2ldmdd <- -dldm*dldd
+                      d2ldmdd                        
                        },
      G.dev.incr = function(y,mu,sigma,...) -2*dZIP2(y,mu,sigma,log=TRUE),                       
           rqres = expression(rqres(pfun="pZIP2", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma)),

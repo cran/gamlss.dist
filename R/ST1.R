@@ -30,14 +30,14 @@ ST1 <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
                tau.dr = tstats$mu.eta, 
-    dldm = function() { 
+    dldm = function(y,mu,sigma,nu,tau) { 
       z <- (y-mu)/sigma
       w <- nu*z
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1)
    dldm <- -(dt(w,df=tau)/pt(w,df=tau))*nu/sigma + lam*z/sigma
    dldm 
                     },
-   d2ldm2 = function(){
+   d2ldm2 = function(y,mu,sigma,nu,tau){
       z <- (y-mu)/sigma
       w <- nu*z
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1)
@@ -46,13 +46,14 @@ ST1 <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
    d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15)  
    d2ldm2
                       }, 
-   dldd = function() {  
+   dldd = function(y,mu,sigma,nu,tau) {  
       z <- (y-mu)/sigma
       w <- nu*z
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1)
    dldd <- -(dt(w,df=tau)/pt(w,df=tau))*nu*z/sigma + ((lam*(z^2))-1)/sigma
+   dldd
       } ,
-   d2ldd2 = function(){
+   d2ldd2 = function(y,mu,sigma,nu,tau){
       z <- (y-mu)/sigma
       w <- nu*z
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1)
@@ -61,13 +62,14 @@ ST1 <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
       d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)  
       d2ldd2
                       },   
-     dldv = function() { 
+     dldv = function(y,mu,sigma,nu,tau) { 
       z <- (y-mu)/sigma
       w <- nu*z
    dwdv <- w/nu 
    dldv <- (dt(w,df=tau)/pt(w,df=tau))*dwdv
+   dldv
                         } ,
-    d2ldv2 = function() { 
+    d2ldv2 = function(y,mu,sigma,nu,tau) { 
       z <- (y-mu)/sigma
       w <- nu*z
    dwdv <- w/nu 
@@ -76,14 +78,15 @@ ST1 <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
    d2ldv2 <- ifelse(d2ldv2 < -1e-15, d2ldv2,-1e-15)  
    d2ldv2
                         },
-      dldt = function() {
+      dldt = function(y,mu,sigma,nu,tau) {
       z <- (y-mu)/sigma
       w <- nu*z 
       j <- (pt(w,df=tau+0.001,log.p=TRUE)-pt(w,df=tau-0.001,log.p=TRUE))/0.002
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1)
     dldt <- j + (digamma((tau+1)/2)-digamma(tau/2)-(1/tau)-log(1+(z^2)/tau)+lam*(z^2)/tau)/2
+    dldt
                         } ,
-      d2ldt2 = function() 
+      d2ldt2 = function(y,mu,sigma,nu,tau) 
                        { 
       z <- (y-mu)/sigma
       w <- nu*z 
@@ -94,15 +97,16 @@ ST1 <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
    d2ldt2 <- ifelse(d2ldt2 < -1e-15, d2ldt2,-1e-15)  
    d2ldt2
                               },
-  d2ldmdd = function() {
+  d2ldmdd = function(y,mu,sigma,nu,tau) {
       z <- (y-mu)/sigma
       w <- nu*z
     lam <- (tau+1)/(tau+(z^2)) 
    dldm <- -(dt(w,df=tau)/pt(w,df=tau))*nu/sigma + lam*z/sigma
    dldd <- -(dt(w,df=tau)/pt(w,df=tau))*nu*z/sigma + ((lam*(z^2))-1)/sigma
    d2ldmdd <- -(dldm*dldd)
+   d2ldmdd
                        },
-  d2ldmdv = function() {
+  d2ldmdv = function(y,mu,sigma,nu,tau) {
       z <- (y-mu)/sigma
       w <- nu*z
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1) 
@@ -110,8 +114,9 @@ ST1 <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
    dwdv <- w/nu 
    dldv <- (dt(w,df=tau)/pt(w,df=tau))*dwdv
   d2ldmdv <- -(dldm*dldv)
+  d2ldmdv
                        },    
-  d2ldmdt = function() {
+  d2ldmdt = function(y,mu,sigma,nu,tau) {
       z <- (y-mu)/sigma
       w <- nu*z
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1) 
@@ -119,8 +124,9 @@ ST1 <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
       j <- (pt(w,df=tau+0.001,log.p=TRUE)-pt(w,df=tau-0.001,log.p=TRUE))/0.002
    dldt <- j + (digamma((tau+1)/2)-digamma(tau/2)-(1/tau)-log(1+(z^2)/tau)+lam*(z^2)/tau)/2
   d2ldmdt <- -(dldm*dldt)
+  d2ldmdt
                        },
-  d2ldddv = function() {
+  d2ldddv = function(y,mu,sigma,nu,tau) {
       z <- (y-mu)/sigma
       w <- nu*z
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1) 
@@ -128,17 +134,19 @@ ST1 <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
    dwdv <- w/nu 
    dldv <- (dt(w,df=tau)/pt(w,df=tau))*dwdv
  d2ldddv <- -(dldd*dldv)
+ d2ldddv 
                        },
-  d2ldddt = function() {
+  d2ldddt = function(y,mu,sigma,nu,tau) {
       z <- (y-mu)/sigma
       w <- nu*z
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1) 
    dldd <- -(dt(w,df=tau)/pt(w,df=tau))*nu*z/sigma + ((lam*(z^2))-1)/sigma
       j <- (pt(w,df=tau+0.001,log.p=TRUE)-pt(w,df=tau-0.001,log.p=TRUE))/0.002
    dldt <- j + (digamma((tau+1)/2)-digamma(tau/2)-(1/tau)-log(1+(z^2)/tau)+lam*(z^2)/tau)/2
-d2ldddt <- -(dldd*dldt)  
+d2ldddt <- -(dldd*dldt) 
+d2ldddt 
                        },
-  d2ldvdt = function() {
+  d2ldvdt = function(y,mu,sigma,nu,tau) {
       z <- (y-mu)/sigma
       w <- nu*z 
     lam <- ifelse(tau < 1000000, (tau+1)/(tau+(z^2)),1) 
@@ -146,11 +154,12 @@ d2ldddt <- -(dldd*dldt)
    dldv <- (dt(w,df=tau)/pt(w,df=tau))*dwdv
       j <- (pt(w,df=tau+0.001,log.p=TRUE)-pt(w,df=tau-0.001,log.p=TRUE))/0.002
    dldt <- j + (digamma((tau+1)/2)-digamma(tau/2)-(1/tau)-log(1+(z^2)/tau)+lam*(z^2)/tau)/2
-d2ldvdt <- -(dldv*dldt)  
+d2ldvdt <- -(dldv*dldt)
+d2ldvdt  
                        },
  G.dev.incr  = function(y,mu,sigma,nu,tau,...) 
                        { 
-G.dev.incr <- -2*dST1(y,mu,sigma,nu,tau,log=TRUE)
+          -2*dST1(y,mu,sigma,nu,tau,log=TRUE)
                         } ,                     
          rqres = expression(   
                rqres(pfun="pST1", type="Continuous", y=y, mu=mu, 

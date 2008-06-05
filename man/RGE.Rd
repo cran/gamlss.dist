@@ -88,16 +88,17 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \author{Bob Rigby \email{r.rigby@londonmet.ac.uk}, Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} and Kalliope Akantziliotou }
 
 
-\note{}
+\note{This distribution is very difficult to fit because the y values depends
+on the parameter  values. The \code{RS()} and \code{CG()} algorithms are not appropriate for this type of problem.}
 
 
 \seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}}
 
 \examples{
 RGE()# gives information about the default links for the reverse generalized extreme family distribution 
-newdata<-rRGE(1000,mu=0,sigma=1,nu=5) # generates 1000 random observations
-histDist(newdata) 
-rm(h,newdata)
+newdata<-rRGE(100,mu=0,sigma=1,nu=5) # generates 100 random observations
+gamlss(newdata~1, family=RGE, method=mixed(5,50)) # difficult to converse 
+rm(newdata)
 }
 \keyword{distribution}
 \keyword{regression}% 

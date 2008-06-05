@@ -30,74 +30,90 @@ GB2 <- function (mu.link="log", sigma.link="identity", nu.link ="log", tau.link=
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
                tau.dr = tstats$mu.eta, 
-    dldm = function() { 
-      z <- (y/mu)^sigma
-   dldm <- -(sigma*nu)/mu + (sigma/mu)*(nu+tau)*z/(1+z)
+    dldm = function(y,mu,sigma,nu,tau) 
+                      { 
+             z <- (y/mu)^sigma
+          dldm <- -(sigma*nu)/mu + (sigma/mu)*(nu+tau)*z/(1+z)
+          dldm
                       },
-   d2ldm2 = function(){
-      d2ldm2 <- -((sigma^2)*nu*tau)/((nu+tau+1)*mu^2)
-      d2ldm2
+   d2ldm2 = function(y,mu,sigma,nu,tau)
+                      {
+        d2ldm2 <- -((sigma^2)*nu*tau)/((nu+tau+1)*mu^2)
+        d2ldm2
                       },     
-   dldd = function() {  
-      z <- (y/mu)^sigma
-      dldd <- (1/(sigma)) + (nu/sigma)*log(z) - (nu+tau)*z*log(z)/(sigma*(1+z))                     
-      } ,
-   d2ldd2 = function(){
-      d2a <- nu*(digamma(nu+1)-digamma(nu))
-      d2b <- ((nu*tau)/(nu+tau+1))*(trigamma(nu+1)+trigamma(tau+1)+(digamma(nu)-digamma(tau))^2)
-      d2ldd2 <- -(d2a+d2b)/(sigma^2)
-      d2ldd2
+   dldd = function(y,mu,sigma,nu,tau)  
+                      {  
+             z <- (y/mu)^sigma
+          dldd <- (1/(sigma)) + (nu/sigma)*log(z) - (nu+tau)*z*log(z)/(sigma*(1+z))
+          dldd                     
+                      },
+   d2ldd2 = function(y,mu,sigma,nu,tau)
+                      {
+           d2a <- nu*(digamma(nu+1)-digamma(nu))
+           d2b <- ((nu*tau)/(nu+tau+1))*(trigamma(nu+1)+trigamma(tau+1)+(digamma(nu)-
+                    digamma(tau))^2)
+        d2ldd2 <- -(d2a+d2b)/(sigma^2)
+        d2ldd2
                       },   
-     dldv = function() { 
-      z <- (y/mu)^sigma
-      dldv <- log(z)-log(1+z)-digamma(nu)+digamma(nu+tau)
-                        } ,
-    d2ldv2 = function() { 
-      d2ldv2 <- trigamma(nu+tau) - trigamma(nu)
-      d2ldv2
-                        },
-      dldt = function() {
-      z <- (y/mu)^sigma
-      dldt <- -log(1+z)-digamma(tau)+digamma(nu+tau)
-                        } ,
-      d2ldt2 = function() { 
-      d2ldt2 <- trigamma(nu+tau) - trigamma(tau)
-      d2ldt2
-                            } ,
-  d2ldmdd = function() {
-  d2ldmdd <- ((nu*tau)/((nu+tau+1)*mu))*(digamma(nu+1)-digamma(tau+1))
-  d2ldmdd 
-                       },
-  d2ldmdv = function() {
-  d2ldmdv <- -(sigma*tau)/(mu*(nu+tau))
-  d2ldmdv
-                       },
-  d2ldmdt = function() {
-  d2ldmdt <- (sigma*nu)/(mu*(nu+tau))
-  d2ldmdt
-                       },
-  d2ldddv = function() {
-  d2ldddv <- -(nu/(sigma*(nu+tau)))*(digamma(nu+1)-digamma(tau))+
-  (1/sigma)*(digamma(nu)-digamma(tau))
-  d2ldddv
-                       },
-  d2ldddt = function() {
-  d2ldddt <- -(nu/(sigma*(nu+tau)))*(digamma(nu+1)-digamma(tau))
-  d2ldddt
-                       },
-  d2ldvdt = function() {
-  d2ldvdt <- trigamma(nu+tau)
-  d2ldvdt
-                       },
+     dldv = function(y,mu,sigma,nu,tau) 
+                      { 
+             z <- (y/mu)^sigma
+          dldv <- log(z)-log(1+z)-digamma(nu)+digamma(nu+tau)
+          dldv
+                      },
+    d2ldv2 = function(nu,tau) 
+                      { 
+         d2ldv2 <- trigamma(nu+tau) - trigamma(nu)
+         d2ldv2
+                      },
+      dldt = function(y,mu,sigma,nu,tau) 
+                      {
+              z <- (y/mu)^sigma
+           dldt <- -log(1+z)-digamma(tau)+digamma(nu+tau)
+           dldt
+                      },
+      d2ldt2 = function(y,mu,sigma,nu,tau) 
+                      { 
+         d2ldt2 <- trigamma(nu+tau) - trigamma(tau)
+         d2ldt2
+                      },
+  d2ldmdd = function(mu,nu,tau) 
+                      {
+        d2ldmdd <- ((nu*tau)/((nu+tau+1)*mu))*(digamma(nu+1)-digamma(tau+1))
+        d2ldmdd 
+                      },
+  d2ldmdv = function(mu,sigma,nu,tau) 
+                      {
+       d2ldmdv <- -(sigma*tau)/(mu*(nu+tau))
+       d2ldmdv
+                      },
+  d2ldmdt = function(mu,sigma,nu,tau) 
+                      {
+       d2ldmdt <- (sigma*nu)/(mu*(nu+tau))
+       d2ldmdt
+                      },
+  d2ldddv = function(y,mu,sigma,nu,tau) 
+                      {
+      d2ldddv <- -(nu/(sigma*(nu+tau)))*(digamma(nu+1)-digamma(tau))+
+                   (1/sigma)*(digamma(nu)-digamma(tau))
+      d2ldddv
+                      },
+  d2ldddt = function(y,mu,sigma,nu,tau) 
+                      {
+      d2ldddt <- -(nu/(sigma*(nu+tau)))*(digamma(nu+1)-digamma(tau))
+      d2ldddt
+                      },
+  d2ldvdt = function(nu,tau) 
+                      {
+     d2ldvdt <- trigamma(nu+tau)
+     d2ldvdt
+                      },
  G.dev.incr  = function(y,mu,sigma,nu,tau,...) 
-                       { 
-G.dev.incr <- -2*dGB2(y,mu,sigma,nu,tau,log=TRUE)
-                        } ,                     
+                      { 
+             -2*dGB2(y,mu,sigma,nu,tau,log=TRUE)
+                      } ,                     
          rqres = expression(   
-               {                                                               
-               cdf <- pGB2(y,mu,sigma,nu,tau)           
-             rqres <- qnorm(cdf)
-                }) ,
+               rqres(pfun="pGB2", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)) ,
     mu.initial = expression(mu <- (y+mean(y))/2),    
  sigma.initial = expression(sigma<- rep(0.1, length(y))),  
     nu.initial = expression(nu <- rep(1, length(y))), #0.03

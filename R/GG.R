@@ -23,47 +23,55 @@ GG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
-                 dldm = function() {
+                 dldm = function(y,mu,sigma,nu) 
+                                   {
                                    z <- (y/mu)^nu
                                theta <- 1/(sigma^2*abs(nu)^2)
                                 dldm <- ifelse(abs(nu)>1e-06, (z-1)*theta*nu/mu, (1/(mu*(sigma^2))*(log(y)-log(mu))))
                                 dldm
                                    },  
-               d2ldm2 = function() {
+               d2ldm2 = function(mu,sigma,nu) 
+                                   {
                              d2ldm2 <- ifelse(abs(nu)>1e-06, -1/((mu^2)*(sigma^2)), -(1/(mu^2*sigma^2)))
                              d2ldm2
                                    },
-                 dldd = function() {
+                 dldd = function(y,mu,sigma,nu) 
+                                   {
                                   z <- (y/mu)^nu
                               theta <- 1/(sigma^2*abs(nu)^2)
                                dldd <- ifelse(abs(nu)<1e-06, -2*theta*(log(theta)+1+log(z)-z-digamma(theta))/sigma,
                                              -(1/sigma)+(1/sigma^3)*(log(y)-log(mu))^2)
                                dldd
                                    },
-               d2ldd2 = function() {
+               d2ldd2 = function(y,mu,sigma,nu) 
+                                   {
                               theta <- 1/(sigma^2*abs(nu)^2)
-                             d2ldd2 <- ifelse(abs(nu)<1e-06,4*(theta/(sigma^2))*(1-theta*trigamma(theta)), -2/sigma^2)
+                             d2ldd2 <- ifelse(abs(nu)<1e-06,4*(theta/(sigma^2))*(1-theta*trigamma(theta)),-2/sigma^2)
                              d2ldd2
                                    },
-                 dldv = function() {
+                 dldv = function(y,mu,sigma,nu) 
+                                   {
                                   z <- (y/mu)^nu
                               theta <- 1/(sigma^2*abs(nu)^2)
                                dldv <- (1/nu)*(1+2*theta*(digamma(theta)+z-log(theta)-1- ((z+1)/2)*log(z)))                 
                                dldv
                                    },
-               d2ldv2 = function() {
-                                  z <- (y/mu)^nu
+               d2ldv2 = function(y,mu,sigma,nu) 
+                                   {
+                                 # z <- (y/mu)^nu
                               theta <- 1/(sigma^2*abs(nu)^2)
                              d2ldv2 <- -(theta/nu^2)*(trigamma(theta)*(1+4*theta)-(4+3/theta)-log(theta)*(2/theta-log(theta))+digamma(theta)*(digamma(theta)+(2/theta)-2*log(theta)))
                              d2ldv2
                                    },
-              d2ldmdd = function() rep(0,length(y)),
-              d2ldmdv = function() { 
+              d2ldmdd = function(y) rep(0,length(y)),
+              d2ldmdv = function(y,mu,sigma,nu) 
+                                   { 
                               theta <- 1/(sigma^2*abs(nu)^2)
                                 ddd <- (theta/mu)*(digamma(theta)+(1/theta)-log(theta))
                                 ddd
                                    },
-              d2ldddv = function() {
+              d2ldddv = function(y,mu,sigma,nu) 
+                                   {
                               theta <- 1/(sigma^2*abs(nu)^2)
                             d2ldddv <- -2*sign(nu)*theta^(3/2)*(2*theta*trigamma(theta)-(1/theta)-2)
                             d2ldddv
@@ -105,7 +113,7 @@ pGG <- function(q, mu=1, sigma=0.1, nu=1,  lower.tail = TRUE, log.p = FALSE)
             z <- (q/mu)^nu
          if(length(nu)>1)  cdf <- ifelse(abs(nu)>1e-06,
                            pGA(z, mu=1, sigma=sigma*abs(nu), lower.tail = lower.tail, log.p = log.p),
-                           pNO(log(y), mu=log(mu), sigma=sigma))
+                           pNO(log(z), mu=log(mu), sigma=sigma))
           else  if (abs(nu)>1e-06) cdf <- pGA(z, mu=1, sigma=sigma*abs(nu), lower.tail = lower.tail, log.p = log.p)
                  else cdf <- pNO(log(q), mu=log(mu), sigma=sigma)
        cdf

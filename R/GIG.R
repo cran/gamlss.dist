@@ -25,27 +25,31 @@ GIG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
-                 dldm = function() {
+                 dldm = function(y,mu,sigma,nu) 
+                        {
        c <- exp(log(besselK(1/(sigma^2),nu+1))-log(besselK(1/(sigma^2),nu)))  
     dldm <- -(nu/mu)+((c*y)/(2*(sigma^2)*mu^2))-1/(2*(sigma^2)*c*y)
     dldm
-                                    },
+                        },
         
-           d2ldm2 = function() {
+           d2ldm2 = function(y,mu,sigma,nu) 
+                        {
          c <- exp(log(besselK(1/(sigma^2),nu+1))-log(besselK(1/(sigma^2),nu)))  
       d2ldm2 <- (nu-(c/(sigma^2)))/(mu^2)
       d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15) 
       d2ldm2
-                                    },
+                        },
 
-                 dldd = function() {
+                 dldd = function(y,mu,sigma,nu) 
+                        {
        c <- exp(log(besselK(1/(sigma^2),nu+1))-log(besselK(1/(sigma^2),nu)))  
     dcdd <- (c*(sigma^2)*(2*nu+1)+1-c*c)/((sigma^2)*(sigma^2))
     dldd <- (1/(sigma^2))*(nu-(c/(sigma^2))+(1/(2*(sigma^2)))*((c*y/mu)+(mu/(c*y)))+dcdd*((sigma^2)*nu/c-(1/2)*((y/mu)-(mu/(c^2*y)))))    
     dldd <- dldd*(2*sigma)
     dldd
-                                    },
-               d2ldd2 = function() {
+                         },
+               d2ldd2 = function(y,mu,sigma,nu) 
+                         {
 #     this uses the squared first derivative
         c <- exp(log(besselK(1/(sigma^2),nu+1))-log(besselK(1/(sigma^2),nu)))  
      dcdd <- (c*(sigma^2)*(2*nu+1)+1-c*c)/((sigma^2)*(sigma^2))
@@ -54,20 +58,23 @@ GIG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
     d2ldd2 <- -dldd*dldd
    d2ldd2 <- ifelse(d2ldd2 < -1e-6, d2ldd2,-1e-6)  
    d2ldd2
-                                    },
-                 dldv = function() {
-       nd <- numeric.deriv(dGIG(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                          },
+                 dldv = function(y,mu,sigma,nu) 
+                          {
+       nd <- gamlss:::numeric.deriv(dGIG(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
      dldv <- as.vector(attr(nd, "gradient"))                
      dldv
-                                    },
-               d2ldv2 = function() {
-        nd <- numeric.deriv(dGIG(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                          },
+               d2ldv2 = function(y,mu,sigma,nu) 
+                          {
+        nd <- gamlss:::numeric.deriv(dGIG(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
       dldv <- as.vector(attr(nd, "gradient"))                
     d2ldv2 <- -dldv*dldv
    d2ldv2 <- ifelse(d2ldv2 < -1e-6, d2ldv2,-1e-6)  
    d2ldv2
-                                    },
-              d2ldmdd = function() {
+                          },
+              d2ldmdd = function(y,mu,sigma,nu) 
+                          {
         c <- exp(log(besselK(1/(sigma^2),nu+1))-log(besselK(1/(sigma^2),nu)))  
      dldm <- -nu/mu+c*y/(2*(sigma^2)*mu^2)-1/(2*(sigma^2)*c*y)
      dcdd <- (c*(sigma^2)*(2*nu+1)+1-c*c)/((sigma^2)*(sigma^2))
@@ -76,20 +83,22 @@ GIG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
   d2ldmdd <- -dldm*dldd
   d2ldmdd
                         },
-              d2ldmdv = function() { 
+              d2ldmdv = function(y,mu,sigma,nu) 
+                        { 
        c <- exp(log(besselK(1/(sigma^2),nu+1))-log(besselK(1/(sigma^2),nu)))   
     dldm <- -nu/mu+c*y/(2*(sigma^2)*mu^2)-1/(2*(sigma^2)*c*y)
-      nd <- numeric.deriv(dGIG(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+      nd <- gamlss:::numeric.deriv(dGIG(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
     dldv <- as.vector(attr(nd, "gradient"))  
  d2ldmdv <- -dldm*dldv      
  d2ldmdv        
                         },
-              d2ldddv = function() {
+              d2ldddv = function(y,mu,sigma,nu) 
+                        {
        c <- exp(log(besselK(1/(sigma^2),nu+1))-log(besselK(1/(sigma^2),nu)))   
     dcdd <- (c*(sigma^2)*(2*nu+1)+1-c*c)/((sigma^2)*(sigma^2))
     dldd <- (1/(sigma^2))*(nu-(c/(sigma^2))+(1/(2*(sigma^2)))*((c*y/mu)+(mu/(c*y)))+dcdd*((sigma^2)*nu/c-(1/2)*((y/mu)-(mu/(c^2*y)))))    
     dldd <- dldd*(2*sigma)
-      nd <- numeric.deriv(dGIG(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+      nd <- gamlss:::numeric.deriv(dGIG(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
     dldv <- as.vector(attr(nd, "gradient"))
  d2ldddv <- -dldv*dldd  
  d2ldddv

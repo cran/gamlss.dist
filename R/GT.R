@@ -21,23 +21,23 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
            mu.linkfun = mstats$linkfun, 
         sigma.linkfun = dstats$linkfun, 
            nu.linkfun = vstats$linkfun,
-           tau.linkfun = tstats$linkfun,  
+          tau.linkfun = tstats$linkfun,  
            mu.linkinv = mstats$linkinv, 
         sigma.linkinv = dstats$linkinv,
            nu.linkinv = vstats$linkinv,
-           tau.linkinv = tstats$linkinv, 
+          tau.linkinv = tstats$linkinv, 
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
                tau.dr = tstats$mu.eta, 
-                 dldm = function() {
+                 dldm = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
        w  <- (nu*tau+1)/(nu+zt)
      dldm <- w*((abs(z))^(tau-1))*sign(z)/sigma
      dldm
                                     },
-               d2ldm2 = function(){
+               d2ldm2 = function(y,mu,sigma,nu,tau){
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
        w  <- (nu*tau+1)/(nu+zt)
@@ -46,14 +46,14 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
     d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15)                                    
     d2ldm2
                                    },
-                 dldd = function() {
+                 dldd = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
        w  <- (nu*tau+1)/(nu+zt)
      dldd <- (w*zt-1)/sigma
      dldd
                                      } ,
-               d2ldd2 = function() {
+               d2ldd2 = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
        w  <- (nu*tau+1)/(nu+zt)
@@ -62,14 +62,14 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
    d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)  
    d2ldd2
                                      },
-                 dldv = function() {
+                 dldv = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
         w <- (nu*tau+1)/(nu+zt)
      dldv <- (w*zt-1)/(nu*tau) - digamma(nu)+digamma(nu+(1/tau)) - log(1+(zt/nu))
      dldv
                                      } ,
-               d2ldv2 = function() { 
+               d2ldv2 = function(y,mu,sigma,nu,tau) { 
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
         w <- (nu*tau+1)/(nu+zt)
@@ -78,7 +78,7 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
    d2ldv2 <- ifelse(d2ldv2 < -1e-4, d2ldv2,-1e-4)  
    d2ldv2
                                      },
-                 dldt = function() { 
+                 dldt = function(y,mu,sigma,nu,tau) { 
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
         w <- (nu*tau+1)/(nu+zt)
@@ -87,7 +87,7 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
      dldt <- dldt/(tau^2)
      dldt
                                      } ,
-               d2ldt2 = function() {
+               d2ldt2 = function(y,mu,sigma,nu,tau) {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
         w <- (nu*tau+1)/(nu+zt)
@@ -98,16 +98,17 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
     d2ldt2 <- ifelse(d2ldt2 < -1e-4, d2ldt2,-1e-4)                                    
     d2ldt2
                                      } ,
-              d2ldmdd = function()  
+              d2ldmdd = function(y,mu,sigma,nu,tau)  
                      {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
        w  <- (nu*tau+1)/(nu+zt)
      dldm <- w*((abs(z))^(tau-1))*sign(z)/sigma
      dldd <- (w*zt-1)/sigma
-  d2ldmdd <- -(dldm*dldd)                  
+  d2ldmdd <- -(dldm*dldd)
+  d2ldmdd                  
                       },
-              d2ldmdv = function()
+              d2ldmdv = function(y,mu,sigma,nu,tau)
                       {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
@@ -115,8 +116,9 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
      dldm <- w*((abs(z))^(tau-1))*sign(z)/sigma
      dldv <- (w*zt-1)/(nu*tau) - digamma(nu)+digamma(nu+(1/tau)) - log(1+(zt/nu))
   d2ldmdv <- -(dldm*dldv)
+  d2ldmdv
                       } ,
-              d2ldmdt = function()
+              d2ldmdt = function(y,mu,sigma,nu,tau)
                      {  
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
@@ -126,8 +128,9 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
      dldt <- dldt + digamma(1/tau)-digamma(nu+(1/tau))+log(nu)+tau
      dldt <- dldt/(tau^2)
   d2ldmdt <- -(dldm*dldt)
+  d2ldmdt
                       },
-              d2ldddv = function()  
+              d2ldddv = function(y,mu,sigma,nu,tau)  
                       {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
@@ -135,8 +138,9 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
      dldd <- (w*zt-1)/sigma
      dldv <- (w*zt-1)/(nu*tau) - digamma(nu)+digamma(nu+(1/tau)) - log(1+(zt/nu))
   d2ldddv <- -(dldd*dldv)
+  d2ldddv
                       },
-              d2ldddt = function()  
+              d2ldddt = function(y,mu,sigma,nu,tau)  
                       {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
@@ -145,9 +149,10 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
      dldt <- -(tau*w*zt*log(abs(z))) + log(1+(zt/nu)) 
      dldt <- dldt + digamma(1/tau)-digamma(nu+(1/tau))+log(nu)+tau
      dldt <- dldt/(tau^2)
-  d2ldddt <- -(dldd*dldt)                   
+  d2ldddt <- -(dldd*dldt)
+  d2ldddt                   
                       },
-              d2ldvdt = function()  
+              d2ldvdt = function(y,mu,sigma,nu,tau)  
                       {
         z <- (y-mu)/sigma
        zt <- (abs(z))^tau
@@ -156,7 +161,8 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
      dldt <- -(tau*w*zt*log(abs(z))) + log(1+(zt/nu)) 
      dldt <- dldt + digamma(1/tau)-digamma(nu+(1/tau))+log(nu)+tau
      dldt <- dldt/(tau^2)
-  d2ldvdt <- -(dldv*dldt)    
+  d2ldvdt <- -(dldv*dldt)
+  d2ldvdt    
                       }, 
           G.dev.incr  = function(y,mu,sigma,nu,tau,...) 
                                   -2*dGT(y,mu,sigma,nu,tau,log=TRUE), 

@@ -22,82 +22,97 @@ EGB2 <- function (mu.link="identity", sigma.link="identity", nu.link ="log", tau
            mu.linkfun = mstats$linkfun, 
         sigma.linkfun = dstats$linkfun, 
            nu.linkfun = vstats$linkfun,
-           tau.linkfun = tstats$linkfun,  
+          tau.linkfun = tstats$linkfun,  
            mu.linkinv = mstats$linkinv, 
         sigma.linkinv = dstats$linkinv,
            nu.linkinv = vstats$linkinv,
-           tau.linkinv = tstats$linkinv, 
+          tau.linkinv = tstats$linkinv, 
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
                tau.dr = tstats$mu.eta, 
-    dldm = function() { 
+    dldm = function(y,mu,sigma,nu,tau) 
+           { 
       z <- (y-mu)/sigma
    dldm <- ((exp(z)*(tau+nu))/(sigma*(1+exp(z))))-(nu/sigma)
-                      },
-   d2ldm2 = function(){
+   dldm
+           },
+   d2ldm2 = function(sigma,nu,tau)
+           {
       d2ldm2 <- -(nu*tau)/((nu+tau+1)*sigma^2)
       d2ldm2
-                      },     
-   dldd = function() {  
-      z <- (y-mu)/sigma
+           },     
+   dldd = function(y,mu,sigma,nu,tau) 
+           {  
+         z <- (y-mu)/sigma
       dldd <- z*((exp(z)*(tau+nu))/(sigma*(1+exp(z))))-(nu*z/sigma)-1/sigma
-      } ,
-   d2ldd2 = function(){
-      d2a <- nu*(digamma(nu+1)-digamma(nu))
-      d2b <- ((nu*tau)/(nu+tau+1))*(trigamma(nu+1)+trigamma(tau+1)+(digamma(nu)-digamma(tau))^2)
+      dldd
+           } ,
+   d2ldd2 = function(sigma,nu,tau)
+           {
+         d2a <- nu*(digamma(nu+1)-digamma(nu))
+         d2b <- ((nu*tau)/(nu+tau+1))*(trigamma(nu+1)+trigamma(tau+1)+(digamma(nu)-digamma(tau))^2)
       d2ldd2 <- -(d2a+d2b)/(sigma^2)
       d2ldd2
-                      },   
-     dldv = function() { 
-      z <- (y-mu)/sigma
+           },   
+     dldv = function(y,mu,sigma,nu,tau) 
+           { 
+         z <- (y-mu)/sigma
       dldv <- z-log(1+exp(z))-digamma(nu)+digamma(nu+tau)
-                        } ,
-    d2ldv2 = function() { 
+      dldv
+           },
+    d2ldv2 = function(nu,tau) 
+           { 
       d2ldv2 <- trigamma(nu+tau) - trigamma(nu)
       d2ldv2
-                        },
-      dldt = function() {
-      z <- (y-mu)/sigma  
+           },
+      dldt = function(y,mu,sigma,nu,tau) 
+           {
+         z <- (y-mu)/sigma  
       dldt <- -log(1+exp(z))-digamma(tau)+digamma(nu+tau)
-                        } ,
-      d2ldt2 = function() { 
+      dldt
+           } ,
+      d2ldt2 = function(nu,tau) 
+           { 
       d2ldt2 <- trigamma(nu+tau) - trigamma(tau)
       d2ldt2
-                            } ,
-  d2ldmdd = function() {
+           },
+  d2ldmdd = function(sigma,nu,tau) 
+           {
   d2ldmdd <- -((nu*tau)/((nu+tau+1)*sigma^2))*(digamma(nu+1)-digamma(tau+1))
   d2ldmdd 
-                       },
-  d2ldmdv = function() {
+           },
+  d2ldmdv = function(sigma,nu,tau) 
+           {
   d2ldmdv <- -tau/(sigma*(nu+tau))
   d2ldmdv
-                       },
-  d2ldmdt = function() {
+           },
+  d2ldmdt = function(sigma,nu,tau) 
+           {
   d2ldmdt <- nu/(sigma*(nu+tau))
   d2ldmdt
-                       },
-  d2ldddv = function() {
+           },
+  d2ldddv = function(sigma,nu,tau) 
+           {
   d2ldddv <- nu/(sigma*(nu+tau))*(digamma(nu+1)-digamma(tau))-(1/sigma)*(digamma(nu)-digamma(tau))
   d2ldddv
-                       },
-  d2ldddt = function() {
+           },
+  d2ldddt = function(sigma,nu,tau) 
+           {
   d2ldddt <- (nu/(sigma*(nu+tau)))*(digamma(nu+1)-digamma(tau))
   d2ldddt
-                       },
-  d2ldvdt = function() {
+           },
+  d2ldvdt = function(nu,tau) 
+           {
   d2ldvdt <- trigamma(nu+tau)
   d2ldvdt
-                       },
+           },
  G.dev.incr  = function(y,mu,sigma,nu,tau,...) 
                        { 
-G.dev.incr <- -2*dEGB2(y,mu,sigma,nu,tau,log=TRUE)
+           -2*dEGB2(y,mu,sigma,nu,tau,log=TRUE)
                         } ,                     
          rqres = expression(   
-               {                                                               
-               cdf <- pEGB2(y,mu,sigma,nu,tau)           
-             rqres <- qnorm(cdf)
-                }) ,
+               rqres(pfun="pGB2", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)) ,
     mu.initial = expression(mu <- (y+mean(y))/2), 
     sigma.initial = expression(sigma <- rep(0.1, length(y))), 
     nu.initial = expression(nu <- rep(1, length(y))), 

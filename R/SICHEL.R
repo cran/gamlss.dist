@@ -31,32 +31,38 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
-                 dldm = function() {
+                 dldm = function(y,mu,sigma,nu) 
+                           {
                          ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma, nu=nu, what=1)
                        dldm <- (y-ty)/mu
                        dldm}, 
-               d2ldm2 = function() {
+               d2ldm2 = function(y,mu,sigma,nu) 
+                           {
                         ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma,nu=nu, what=1)
                       dldm <- (y-ty)/mu
                     d2ldm2 <- - dldm * dldm
                     d2ldm2
-                                    },
-                 dldd = function() {
+                           },
+                 dldd = function(y,mu,sigma,nu) 
+                           {
                         ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma,nu=nu, what=1)
                          c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
                       dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
                       dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
-                                 dldd},
-               d2ldd2 = function(){
+                      dldd 
+                            },
+               d2ldd2 = function(y,mu,sigma,nu)
+                            {
                         ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma,nu=nu, what=1)
                          c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
                       dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
                       dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
                     d2ldd2 <- -dldd*dldd
                     d2ldd2
-                                    },
+                             },
               #d2ldmdd = function() 0,
-              d2ldmdd = function() {
+              d2ldmdd = function(y,mu,sigma,nu) 
+                             {
                          ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma, nu=nu, what=1)
                        dldm <- (y-ty)/mu
                           c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
@@ -64,39 +70,39 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
                        dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
                     d2ldmdd <- -dldm *dldd
                     d2ldmdd
-                                    }, 
-              d2ldmdv = function() {
+                              }, 
+              d2ldmdv = function(y,mu,sigma,nu) {
                    ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma, nu=nu, what=1)
                  dldm <- (y-ty)/mu
                  #calculates the dldv                 
-                   nd <- numeric.deriv(dSICHEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.001)
+                   nd <- gamlss:::numeric.deriv(dSICHEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.001)
                  dldv <- as.vector(attr(nd, "gradient"))
                 #calculates the d2ldmdv
               d2ldmdv <- -dldm *dldv
               d2ldmdv
                                     }, 
-              d2ldddv = function() {
+              d2ldddv = function(y,mu,sigma,nu) {
                    ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma,nu=nu, what=1)
                     c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
                  dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
                  dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
                 #calculates the dldv
-                   nd <- numeric.deriv(dSICHEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.001)
+                   nd <- gamlss:::numeric.deriv(dSICHEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.001)
                  dldv <- as.vector(attr(nd, "gradient"))
                 #calculates the d2ldddv 
               d2ldddv <- -dldd *dldv
               d2ldddv
                                  },               
-                 dldv = function() {                           
-                   nd <- numeric.deriv(dSICHEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.001)
+                 dldv = function(y,mu,sigma,nu) {                           
+                   nd <- gamlss:::numeric.deriv(dSICHEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.001)
                  dldv <- as.vector(attr(nd, "gradient"))
                  dldv
                                     },
-               d2ldv2 = function(){
+               d2ldv2 = function(y,mu,sigma,nu){
                 #  delta  <- 0.01
                 #    dldv <- (dSI(y=y, mu=mu, sigma=sigma, nu=nu+delta, log = TRUE)- 
                 #            dSI(y=y, mu=mu, sigma=sigma, nu=nu, log= TRUE))/ delta   
-                   nd <- numeric.deriv(dSICHEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.001)
+                   nd <- gamlss:::numeric.deriv(dSICHEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.001)
                  dldv <- as.vector(attr(nd, "gradient"))
                d2ldv2 <- -dldv*dldv
                d2ldv2
@@ -149,13 +155,15 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
 #----------------------------------------------------------------------------------------
 tofySICHEL <- function (y, mu, sigma, nu, what=1)
    {
-         ly <- length(y)       
+         ly <- max(length(y),length(mu),length(sigma),length(nu)) 
+          y <- rep(y, length = ly)    
       sigma <- rep(sigma, length = ly)
          mu <- rep(mu, length = ly)   
          nu <- rep(nu, length = ly) 
        cvec <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
-      alpha <- sqrt(1+2*sigma*(mu/cvec))/sigma
-       lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
+       #cvec is  c=R_nu(1/sigma) where R_lambda(t)=K_{lambda+1}(t)/K_{lambda}(t) page 10
+      alpha <- sqrt(1+2*sigma*(mu/cvec))/sigma # alpha^2=sigma^-2+(2*mu)/(c*sigma)
+       lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu)) #R_nu(alpha) page 30
      sumlty <- as.double(.C("tofysin_", as.single(y), as.single(mu), 
                                as.single(sigma), as.single(nu), as.single(lbes),
                                as.single(cvec), as.integer(length(y)),
@@ -207,54 +215,66 @@ logfy <- -lgamma(y+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(bess
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
   fy
   }
-#----------------------------------------------------------------------------------------  
+#----------------------------------------------------------------------------------------     
+#--------------------------------------------------
+#  tocdfS <- function (y, mu, sigma, nu, bsum=TRUE, ...)
+#  {
+#      ly <- length(y)       
+#   sigma <- rep(sigma, length = ly)
+#      mu <- rep(mu, length = ly)   
+#      nu <- rep(nu, length = ly) 
+#      ty <- rep(0,length(y))
+#     cdf <- rep(0,length(y))
+#    cvec <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
+#   alpha <- sqrt(1+2*sigma*mu/cvec)/sigma
+#    lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu)) 
+#    for (i in 1:length(y))
+#    {
+#         lyp1 <- y[i]+1 
+#        tynew <- lpnew <- rep(0,lyp1)
+#        tynew[1] <- (mu[i]/cvec[i])*((1+2*sigma[i]*(mu[i]/cvec[i]))^(-0.5))*exp(lbes[i])
+#        lpnew[1] <- -nu[i]*log(sigma[i]*alpha[i])+log(besselK(alpha[i],nu[i]))-
+#                     log(besselK(1/sigma[i],nu[i])) 
+#        dum <- ifelse(lyp1==1, 1,2)
+#        for (j in dum:lyp1)
+#        {
+#            if (j !=1)
+#             {
+#            tynew[j] <- (cvec[i]*sigma[i]*(2*(j-1+nu[i])/mu[i])+(1/tynew[j-1]))*
+#                         (mu[i]/(sigma[i]*alpha[i]*cvec[i]))**2
+#            lpnew[j] <- lpnew[j-1] + log(tynew[j-1]) - log(j-1)
+#             }           
+#            ty[i] <- tynew[lyp1] 
+#        }
+#        if (bsum ) 
+#            cdf[i] <- sum(exp(lpnew))
+#    }
+#    cdf
+#  }
+#-----------------------------------------------
 pSICHEL <- function(q, mu=1, sigma=1, nu=-0.5, lower.tail = TRUE, log.p = FALSE)
-  {     
-  #--------------------------------------------------
-  tocdfS <- function (y, mu, sigma, nu, bsum=TRUE, ...)
-  {
-      ly <- length(y)       
-   sigma <- rep(sigma, length = ly)
-      mu <- rep(mu, length = ly)   
-      nu <- rep(nu, length = ly) 
-      ty <- rep(0,length(y))
-     cdf <- rep(0,length(y))
-    cvec <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
-   alpha <- sqrt(1+2*sigma*mu/cvec)/sigma
-    lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu)) 
-    for (i in 1:length(y))
-    {
-         lyp1 <- y[i]+1 
-        tynew <- lpnew <- rep(0,lyp1)
-        tynew[1] <- (mu[i]/cvec[i])*((1+2*sigma[i]*(mu[i]/cvec[i]))^(-0.5))*exp(lbes[i])
-        lpnew[1] <- -nu[i]*log(sigma[i]*alpha[i])+log(besselK(alpha[i],nu[i]))-
-                     log(besselK(1/sigma[i],nu[i])) 
-        dum <- ifelse(lyp1==1, 1,2)
-        for (j in dum:lyp1)
-        {
-            if (j !=1)
-             {
-            tynew[j] <- (cvec[i]*sigma[i]*(2*(j-1+nu[i])/mu[i])+(1/tynew[j-1]))*
-                         (mu[i]/(sigma[i]*alpha[i]*cvec[i]))**2
-            lpnew[j] <- lpnew[j-1] + log(tynew[j-1]) - log(j-1)
-             }           
-            ty[i] <- tynew[lyp1] 
-        }
-        if (bsum ) 
-            cdf[i] <- sum(exp(lpnew))
-    }
-    cdf
-  }
-  #-----------------------------------------------
+  {  
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
           if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-          if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))  
+          if (any(q < 0) )  stop(paste("q must be >=0", "\n", ""))  
           ly <- max(length(q),length(mu),length(sigma),length(nu)) 
            q <- rep(q,length = ly)       
        sigma <- rep(sigma, length = ly)
           mu <- rep(mu, length = ly)   
           nu <- rep(nu, length = ly)   
-         cdf <- tocdfS(y=q, mu=mu, sigma=sigma, nu=nu, bsum=TRUE)
+          ty <- rep(0,length=ly)
+         cdf <- rep(0,length=ly)
+        cvec <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
+       alpha <- sqrt(1+2*sigma*mu/cvec)/sigma
+        lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu)) 
+      tynew1 <- (mu/cvec)*((1+2*sigma*(mu/cvec))^(-0.5))*exp(lbes)
+      lpnew1 <- -nu*log(sigma*alpha)+log(besselK(alpha,nu))-
+                     log(besselK(1/sigma,nu)) # need c tynew alpha lpnew  tynew1 lpnew1
+        cdf <- as.double(.C("cdfsichel_", as.single(q), as.single(mu), #
+                               as.single(sigma), as.single(nu), as.single(alpha),
+                               as.single(cvec), as.single(tynew1),
+                               as.single(lpnew1), as.integer(length(q)),
+                               as.integer(max(q)+1), PACKAGE="gamlss.dist" )[[1]])#
           if(lower.tail==TRUE) cdf <- cdf else cdf=1-cdf
           if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf)                                                                    
           cdf
@@ -317,6 +337,17 @@ rSICHEL <- function(n, mu=1, sigma=1, nu=-0.5, max.value = 10000)
           r
   }
 #----------------------------------------------------------------------------------------
+VSICHEL<- function(obj)
+ {
+ if (!is.gamlss(obj)) stop("The object is not a gamlss object")
+ if (obj$family[1]!="SICHEL") stop("The distribution is not a Sichel distribution")
+     mu <- fitted(obj,"mu")
+  sigma <- fitted(obj,"sigma")
+     nu <- fitted(obj,"nu")
+     cc <- exp(log(besselK(1/sigma,nu+1))-log(besselK((1/sigma),nu)))
+ varY <-  mu + mu^2 * (((2*sigma*(nu+1))/cc) + (1/cc^2) -1)
+ varY
+ }
 #Etofy <- function(mu=1, sigma=1, nu=1, maxval=1000)
 #  {
 #       ly <- maxval+1 

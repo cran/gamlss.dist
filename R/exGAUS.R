@@ -8,7 +8,7 @@ exGAUS <- function (mu.link="identity", sigma.link="log", nu.link ="log")
     dstats <- checklink("sigma.link", "ex-Gaussian", substitute(sigma.link), #
                          c("inverse", "log", "identity", "own"))
     vstats <- checklink("nu.link", "ex-Gaussian",substitute(nu.link), 
-                        c("logshifted", "log", "identity", "own"), par.link = c(1))
+                        c("logshifted", "log", "identity", "own"))
     
     structure(
           list(family = c("exGAUS", "ex-Gaussian"),
@@ -27,13 +27,13 @@ exGAUS <- function (mu.link="identity", sigma.link="log", nu.link ="log")
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
-                 dldm = function() {
+                 dldm = function(y,mu,sigma,nu) {
         z <- y-mu-((sigma^2)/nu)
      pphi <- (dnorm(z/sigma)/(pnorm(z/sigma)))
      dldm <- 1/nu-(1/sigma)*pphi
      dldm
                                     },
-               d2ldm2 = function() {
+               d2ldm2 = function(y,mu,sigma,nu) {
         z <- y-mu-((sigma^2)/nu)
      pphi <- (dnorm(z/sigma)/(pnorm(z/sigma)))
      dldm <- 1/nu-(1/sigma)*pphi
@@ -41,13 +41,13 @@ exGAUS <- function (mu.link="identity", sigma.link="log", nu.link ="log")
       d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15) 
       d2ldm2
                                     },
-                 dldd = function() {
+                 dldd = function(y,mu,sigma,nu) {
       z <- y-mu-((sigma^2)/nu) 
    pphi <- (dnorm(z/sigma)/(pnorm(z/sigma)))
    dldd <- (sigma/(nu^2))-((z/sigma^2)+(2/nu))*pphi
    dldd
                                     },
-               d2ldd2 = function() {
+               d2ldd2 = function(y,mu,sigma,nu) {
       z <- y-mu-((sigma^2)/nu) 
    pphi <- (dnorm(z/sigma)/(pnorm(z/sigma)))
    dldd <- (sigma/(nu^2))-((z/sigma^2)+(2/nu))*pphi
@@ -55,13 +55,13 @@ exGAUS <- function (mu.link="identity", sigma.link="log", nu.link ="log")
    d2ldd2 <- ifelse(d2ldd2 < -1e-10, d2ldd2,-1e-10)  
    d2ldd2
                                     },
-                 dldv = function() {
+                 dldv = function(y,mu,sigma,nu) {
        z <- y-mu-((sigma^2)/nu)
     pphi <- (dnorm(z/sigma)/(pnorm(z/sigma))) 
     dldv <- -(1/nu)+(z/nu^2)+(sigma/nu^2)*pphi
     dldv
                                     },
-               d2ldv2 = function() {
+               d2ldv2 = function(y,mu,sigma,nu) {
        z <- y-mu-((sigma^2)/nu)
     pphi <- (dnorm(z/sigma)/(pnorm(z/sigma))) 
     dldv <- -(1/nu)+(z/nu^2)+(sigma/nu^2)*pphi
@@ -69,30 +69,31 @@ exGAUS <- function (mu.link="identity", sigma.link="log", nu.link ="log")
    d2ldv2 <- ifelse(d2ldv2 < -1e-15, d2ldv2,-1e-15)  
    d2ldv2
                                     },
-              d2ldmdd = function() {
+              d2ldmdd = function(y,mu,sigma,nu) {
          z <- y-mu-((sigma^2)/nu)
-   pphi <- (dnorm(z/sigma)/(pnorm(z/sigma)))
-   dldm <- 1/nu-(1/sigma)*pphi
-   dldd <- (sigma/(nu^2))-((z/sigma^2)+(2/nu))*pphi
-             
-       
-                                   },
-              d2ldmdv = function() {
-       z <- y-mu-((sigma^2)/nu)
-    pphi <- (dnorm(z/sigma)/(pnorm(z/sigma))) 
-     dldm <- 1/nu-(1/sigma)*pphi
-    dldv <- -(1/nu)+(z/nu^2)+(sigma/nu^2)*pphi
-             
+      pphi <- (dnorm(z/sigma)/(pnorm(z/sigma)))
+      dldm <- 1/nu-(1/sigma)*pphi
+      dldd <- (sigma/(nu^2))-((z/sigma^2)+(2/nu))*pphi
+   d2ldmdd <- -dldm *dldd          
+   d2ldmdd                          },
+              d2ldmdv = function(y,mu,sigma,nu) {
+          z <- y-mu-((sigma^2)/nu)
+       pphi <- (dnorm(z/sigma)/(pnorm(z/sigma))) 
+       dldm <- 1/nu-(1/sigma)*pphi
+       dldv <- -(1/nu)+(z/nu^2)+(sigma/nu^2)*pphi
+    d2ldmdv <- -dldm *dldv  
+    d2ldmdv         
                                     },
-              d2ldddv = function() {
+              d2ldddv = function(y,mu,sigma,nu) {
        z <- y-mu-((sigma^2)/nu)
     pphi <- (dnorm(z/sigma)/(pnorm(z/sigma))) 
    dldd <- (sigma/(nu^2))-((z/sigma^2)+(2/nu))*pphi
     dldv <- -(1/nu)+(z/nu^2)+(sigma/nu^2)*pphi
-             
+     d2ldddv <- -dldd *dldv
+     d2ldddv         
                                    },
           G.dev.incr  = function(y,mu,sigma,nu,...) {
-G.dev.incr <- -2*dexGAUS(y,mu=mu,sigma=sigma,nu=nu,log=TRUE)
+        -2*dexGAUS(y,mu=mu,sigma=sigma,nu=nu,log=TRUE)
                                                     }, 
              rqres = expression(rqres(pfun="pexGAUS", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu)),
         mu.initial = expression( mu <- (y+mean(y))/2), 

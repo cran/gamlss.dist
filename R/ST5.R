@@ -32,14 +32,14 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
                tau.dr = tstats$mu.eta, 
-    dldm = function() { 
+    dldm = function(y,mu,sigma,nu,tau) { 
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
       su <- sqrt(1-u^2)
     dldm <- (1-nu/r+tau/2)*su*(1+u)-(1+nu/r+tau/2)*su*(1-u)
     dldm <- dldm/(sigma*sqrt(2*tau))
                     },
-   d2ldm2 = function(){
+   d2ldm2 = function(y,mu,sigma,nu,tau){
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
       su <- sqrt(1-u^2)
@@ -49,13 +49,13 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
    d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15)  
    d2ldm2
                       },
-    dldd = function() {  
+    dldd = function(y,mu,sigma,nu,tau) {  
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
     dldd <- (1-nu/r+tau/2)*u*(1+u)-(1+nu/r+tau/2)*u*(1-u)
     dldd <- -(1/sigma) + dldd/(sigma*tau) 
       } ,
-   d2ldd2 = function(){
+   d2ldd2 = function(y,mu,sigma,nu,tau){
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
     dldd <- (1-nu/r+tau/2)*u*(1+u)-(1+nu/r+tau/2)*u*(1-u)
@@ -64,13 +64,13 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
   d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)  
   d2ldd2
                      },   
-     dldv = function(){ 
+     dldv = function(y,mu,sigma,nu,tau){ 
         u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
         r <- sqrt((nu^2)+2*tau)
      dldv <- -digamma((1+nu/r)/tau) + digamma((1-nu/r)/tau)+log(1+u)-log(1-u)
      dldv <- 2*dldv/(r^3)
                        } ,
-    d2ldv2 = function(){ 
+    d2ldv2 = function(y,mu,sigma,nu,tau){ 
         u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
         r <- sqrt((nu^2)+2*tau)
      dldv <- -digamma((1+nu/r)/tau) + digamma((1-nu/r)/tau) +log(1+u)-log(1-u)
@@ -79,7 +79,7 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
    d2ldv2 <- ifelse(d2ldv2 < -1e-4, d2ldv2,-1e-4)  
    d2ldv2
                        },
-      dldt = function(){
+      dldt = function(y,mu,sigma,nu,tau){
         u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
         r <- sqrt((nu^2)+2*tau)
      dldt <- 4*digamma(2/tau)-tau-4*log(2)
@@ -88,7 +88,7 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
      dldt <- dldt + 2*(1-nu*(r^2+tau)/r^3)*(log(1-u)-digamma((1-nu/r)/tau))
      dldt <- -dldt/(2*tau*tau)
                        } ,
-    d2ldt2 = function(){ 
+    d2ldt2 = function(y,mu,sigma,nu,tau){ 
         u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
         r <- sqrt((nu^2)+2*tau)
      dldt <- 4*digamma(2/tau)-tau-4*log(2)
@@ -100,7 +100,7 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
    d2ldt2 <- ifelse(d2ldt2 < -1e-4, d2ldt2,-1e-4)  
    d2ldt2
                        } ,
-  d2ldmdd = function() {
+  d2ldmdd = function(y,mu,sigma,nu,tau) {
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
       su <- sqrt(1-u^2)
@@ -109,8 +109,9 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
     dldd <- (1-nu/r+tau/2)*u*(1+u)-(1+nu/r+tau/2)*u*(1-u)
     dldd <- -(1/sigma) + dldd/(sigma*tau)   
  d2ldmdd <- -(dldm*dldd)
+ d2ldmdd
                        },
-  d2ldmdv = function() {
+  d2ldmdv = function(y,mu,sigma,nu,tau) {
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
       su <- sqrt(1-u^2)
@@ -119,8 +120,9 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
     dldv <- -digamma((1+nu/r)/tau) + digamma((1-nu/r)/tau)+log(1+u)-log(1-u)
     dldv <- 2*dldv/(r^3)   
  d2ldmdv <- -(dldm*dldv)
+ d2ldmdv
                        },
-  d2ldmdt = function() {
+  d2ldmdt = function(y,mu,sigma,nu,tau) {
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
       su <- sqrt(1-u^2)
@@ -132,8 +134,9 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
     dldt <- dldt + 2*(1-nu*(r^2+tau)/r^3)*(log(1-u)-digamma((1-nu/r)/tau))
     dldt <- -dldt/(2*tau*tau)  
  d2ldmdt <- -(dldm*dldt)
+ d2ldmdt
                        },
-  d2ldddv = function() {
+  d2ldddv = function(y,mu,sigma,nu,tau) {
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
     dldd <- (1-nu/r+tau/2)*u*(1+u)-(1+nu/r+tau/2)*u*(1-u)
@@ -141,8 +144,9 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
     dldv <- -digamma((1+nu/r)/tau) + digamma((1-nu/r)/tau)+log(1+u)-log(1-u)
     dldv <- 2*dldv/(r^3) 
  d2ldddv <- -(dldd*dldv)
+ d2ldddv
                        },
-  d2ldddt = function() {
+  d2ldddt = function(y,mu,sigma,nu,tau) {
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
     dldd <- (1-nu/r+tau/2)*u*(1+u)-(1+nu/r+tau/2)*u*(1-u)
@@ -152,9 +156,10 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
     dldt <- dldt + 2*(1+nu*(r^2+tau)/r^3)*(log(1+u)-digamma((1+nu/r)/tau))
     dldt <- dldt + 2*(1-nu*(r^2+tau)/r^3)*(log(1-u)-digamma((1-nu/r)/tau))
     dldt <- -dldt/(2*tau*tau) 
- d2ldddt <- -(dldd*dldt)  
+ d2ldddt <- -(dldd*dldt)
+  d2ldddt  
                        },
-  d2ldvdt = function() {
+  d2ldvdt = function(y,mu,sigma,nu,tau) {
        u <- (((2*sigma^2)+tau*((y-mu)^2))^(-0.5))*sqrt(tau)*(y-mu)
        r <- sqrt((nu^2)+2*tau)
     dldv <- -digamma((1+nu/r)/tau) + digamma((1-nu/r)/tau)+log(1+u)-log(1-u)
@@ -164,11 +169,12 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
     dldt <- dldt + 2*(1+nu*(r^2+tau)/r^3)*(log(1+u)-digamma((1+nu/r)/tau))
     dldt <- dldt + 2*(1-nu*(r^2+tau)/r^3)*(log(1-u)-digamma((1-nu/r)/tau))
     dldt <- -dldt/(2*tau*tau)
- d2ldvdt <- -(dldv*dldt)  
+ d2ldvdt <- -(dldv*dldt)
+ d2ldvdt  
                        },
  G.dev.incr  = function(y,mu,sigma,nu,tau,...) 
                        { 
-G.dev.incr <- -2*dST5(y,mu,sigma,nu,tau,log=TRUE)
+         -2*dST5(y,mu,sigma,nu,tau,log=TRUE)
                         } ,                     
          rqres = expression(
             rqres(pfun="pST5", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)   

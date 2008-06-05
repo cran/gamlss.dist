@@ -1,11 +1,11 @@
  DEL <- function (mu.link ="log", sigma.link="log", nu.link="logit") 
 {
-     mstats <- checklink("mu.link", "Sichel", substitute(mu.link), 
+     mstats <- checklink("mu.link", "DEL", substitute(mu.link), 
                          c("1/mu^2", "log", "identity"))
-    dstats <- checklink("sigma.link", "Sichel", substitute(sigma.link), #
+    dstats <- checklink("sigma.link", "DEL", substitute(sigma.link), #
                          c("inverse", "log", "identity"))
-    vstats <- checklink("nu.link", "Sichel", substitute(nu.link),
-                        c("logit", "probit", "cloglog", "log"))  
+    vstats <- checklink("nu.link", "DEL", substitute(nu.link),
+                         c("logit", "probit", "cloglog", "cauchit", "log"))  
     structure(
           list(family = c("DEL", "Delaporte"),
            parameters = list(mu = TRUE, sigma = TRUE, nu = TRUE), 
@@ -23,84 +23,106 @@
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta,
-                 dldm = function() {
+                 dldm = function(y,mu,sigma,nu) 
+                       {
                      logty <-log(y+1)+dDEL(y+1, mu=mu, sigma=sigma, nu=nu, log=TRUE)-
                                       dDEL(y, mu=mu, sigma=sigma, nu=nu, log=TRUE)
                        ty  <- exp(logty)
                       dldm <- (y-ty)/mu
-                       dldm}, 
-               d2ldm2 = function() {
+                      dldm
+                       }, 
+               d2ldm2 = function(y,mu,sigma,nu) 
+                       {
                      logty <-log(y+1)+dDEL(y+1, mu=mu, sigma=sigma, nu=nu, log=TRUE)-
                                       dDEL(y, mu=mu, sigma=sigma, nu=nu, log=TRUE)
                        ty  <- exp(logty)
                       dldm <- (y-ty)/mu
                     d2ldm2 <- - dldm * dldm
                     d2ldm2
-                                    },
-                 dldd = function() {
+                        },
+                 dldd = function(y,mu,sigma,nu) 
+                        {
                      #    S <- calcS(y = y, mu = mu, sigma = sigma, nu = nu)
                      #    U <- calcU(y = y, mu = mu, sigma = sigma, nu = nu)
                      # dldd <- digamma(1/sigma)/(sigma*sigma)-(mu*(1-nu))/(sigma*(1+mu*sigma*(1-nu)))
                      # dldd <- dldd+log(1+mu*sigma*(1-nu))/(sigma^2)+U/S
-                        nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "sigma", delta=0.01)
+                        nd <- gamlss:::numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "sigma", delta=0.01)
                       dldd <- as.vector(attr(nd, "gradient"))
-                                 dldd},
-               d2ldd2 = function(){
+                      dldd
+                        },
+               d2ldd2 = function(y,mu,sigma,nu)
+                        {
                       #S <- calcS(y = y, mu = mu, sigma = sigma, nu = nu)
                       #   U <- calcU(y = y, mu = mu, sigma = sigma, nu = nu)
                       #dldd <- digamma(1/sigma)/(sigma*sigma)-(mu*(1-nu))/(sigma*(1+mu*sigma*(1-nu)))
                       #dldd <- dldd+log(1+mu*sigma*(1-nu))/(sigma^2)+U/S
-                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "sigma", delta=0.01)
+                     nd <- gamlss:::numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "sigma", delta=0.01)
                    dldd <- as.vector(attr(nd, "gradient"))
-                    d2ldd2 <- -dldd*dldd
-                    d2ldd2
-                                    },
+                 d2ldd2 <- -dldd*dldd
+                 d2ldd2
+                        },
               #d2ldmdd = function() 0,
-              d2ldmdd = function() {
-                         ty <- tofyDEL(y=y, mu=mu, sigma=sigma, nu=nu, what=1)
-                       dldm <- (y-ty)/mu
-                          c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
-                       dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
-                       dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
+              d2ldmdd = function(y,mu,sigma,nu) 
+                       {
+                       
+                       logty <-log(y+1)+dDEL(y+1, mu=mu, sigma=sigma, nu=nu, log=TRUE)-
+                                      dDEL(y, mu=mu, sigma=sigma, nu=nu, log=TRUE)
+                       ty  <- exp(logty)
+                      dldm <- (y-ty)/mu
+                        nd <- gamlss:::numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "sigma", delta=0.01)
+                      dldd <- as.vector(attr(nd, "gradient"))
+                     #     c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
+                     #  dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
+                     #  dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
                     d2ldmdd <- -dldm *dldd
                     d2ldmdd
-                                    }, 
-              d2ldmdv = function() {
+                       }, 
+              d2ldmdv = function(y,mu,sigma,nu) 
+                       {
+                  logty <-log(y+1)+dDEL(y+1, mu=mu, sigma=sigma, nu=nu, log=TRUE)-
+                                      dDEL(y, mu=mu, sigma=sigma, nu=nu, log=TRUE)
+                       ty  <- exp(logty)
+                      dldm <- (y-ty)/mu
                  #calculates the dldv                 
-                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                   nd <- gamlss:::numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
                  dldv <- as.vector(attr(nd, "gradient"))
                 #calculates the d2ldmdv
               d2ldmdv <- -dldm *dldv
               d2ldmdv
-                                    }, 
-              d2ldddv = function() {
+                       }, 
+              d2ldddv = function(y,mu,sigma,nu) 
+                       {
                   # ty <- tofyDEL(y=y, mu=mu, sigma=sigma,nu=nu, what=1)
                   #  c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
                  #dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
                  #dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
                 #calculates the dldv
-                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                   nd <- gamlss:::numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "sigma", delta=0.01)
+                 dldd <- as.vector(attr(nd, "gradient"))
+                   nd <- gamlss:::numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
                  dldv <- as.vector(attr(nd, "gradient"))
                 #calculates the d2ldddv 
               d2ldddv <- -dldd *dldv
               d2ldddv
-                                 },               
-                 dldv = function() {                           
-                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                       },               
+                 dldv = function(y,mu,sigma,nu) 
+                       {                           
+                   nd <- gamlss:::numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
                  dldv <- as.vector(attr(nd, "gradient"))
                  dldv
-                                    },
-               d2ldv2 = function(){
-                   nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
+                       },
+               d2ldv2 = function(y,mu,sigma,nu)
+                       {
+                   nd <- gamlss:::numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
                  dldv <- as.vector(attr(nd, "gradient"))
                d2ldv2 <- -dldv*dldv
                d2ldv2
-                                  } ,
+                       } ,
           G.dev.incr  = function(y,mu,sigma,nu, pw=1,..) -2*dDEL(y, mu, sigma, nu, log=TRUE),
                 rqres = expression(
                  rqres(pfun="pDEL", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma, nu=nu)
                                    ),  #
-            mu.initial = expression(mu<- y+0.5),
+            mu.initial = expression(mu<- (y+mean(y)/2)),
          sigma.initial = expression( sigma<-rep((var(y)-mean(y))/(mean(y)^2), length(y))),
             nu.initial = expression({  nu <- rep(0.5,length(y)) }), 
               mu.valid = function(mu) all(mu > 0) , 
@@ -113,57 +135,71 @@
 #----------------------------------------------------------------------------------------
 dDEL<-function(y, mu=1, sigma=1, nu=.5, log=FALSE)
   {
-  #------
-  calcS <-function (y, mu, sigma, nu)
-  {
-   S <- rep(0,length(y))
-    for (i in 1:length(y))
-    {
-         lyp1 <- y[i]+1 
-        logSi <- rep(0,lyp1)
-            j <- 0:y[i]
-        logSi <- -lgamma(j+1)-lgamma(y[i]+1-j)-
-                 j*log(nu[i]/(sigma[i]*(1-nu[i]))+mu[i]*nu[i])+lgamma((1/sigma[i])+j)+
-                 y[i]*log(mu[i]*nu[i])  
-         S[i] <- sum(exp(logSi))
-       # browser()
-        # S[i] <- ifelse(S[i]==Inf, 0.00001, S[i])        
-    }
-   S
-   } 
-   #------
    if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
    if (any(nu <= 0) | any(nu >= 1))  stop(paste("nu must be between 0 and 1", "\n", "")) 
    if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
-    ly <- length(y)       
+ ly <- max(length(y),length(mu),length(sigma),length(nu)) 
+     y <- rep(y, length = ly)      
  sigma <- rep(sigma, length = ly)
     mu <- rep(mu, length = ly)   
     nu <- rep(nu, length = ly) 
- logfy <- -mu*nu-lgamma(1/sigma)-log(1+mu*sigma*(1-nu))/sigma
-     S <- calcS(y = y, mu = mu, sigma = sigma, nu = nu)
- logfy <- logfy+log(S)
+ logpy0 <- -mu*nu-(1/sigma)*(log(1+mu*sigma*(1-nu)))
+  S <- gamlss.dist:::tofyDEL(y, mu, sigma, nu, what=2)
+#   S <- tofyDELPORT(y, mu, sigma, nu)[,2]
+ logfy <-  logpy0-lgamma(y+1)+S
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
   fy
   }
 #----------------------------------------------------------------------------------------
-#calcU<-function (y, mu, sigma, nu)
-# {
-#  U <- rep(0,length(y))
-# for (i in 1:length(y))
+tofyDEL <- function (y, mu, sigma, nu, what=1)
+   {
+         ly <- max(length(y),length(mu),length(sigma),length(nu)) 
+          y <- rep(y, length = ly)    
+      sigma <- rep(sigma, length = ly)
+         mu <- rep(mu, length = ly)   
+         nu <- rep(nu, length = ly) 
+     sumlty <- as.double(.C("tofydel_", as.double(y), as.double(mu), 
+                               as.double(sigma), as.double(nu),
+                               as.integer(length(y)),
+                               as.integer(max(y)+1),PACKAGE="gamlss.dist")[[what]])
+  sumlty
+   }
+#---------------------------------------------------------------------------------------
+#tofyDELPORT <- function (y, mu, sigma, nu, what=1) 
+#   {
+#        ly <- max(length(y),length(mu),length(sigma),length(nu)) 
+#          y <- rep(y, length = ly)    
+#      sigma <- rep(sigma, length = ly)
+#         mu <- rep(mu, length = ly)   
+#         nu <- rep(nu, length = ly) 
+#         ty <- sumlty <- rep(0,length(y)) 
+#    for (i in 1:length(y))
 #    {
-#         lyp1 <- y[i]+1 
-#        logUi <- Ui <- rep(0,lyp1)
-#            j <- 0:y[i]
-#        logUi <- -lgamma(j+1)-lgamma(y[i]+1-j)-
-#                 (j+1)*log(nu[i]/(sigma[i]*(1-nu[i]))+mu[i]*nu[i])+lgamma((1/sigma[i])+j)+
-#                 y[i]*log(mu[i]*nu[i])-2*log(sigma)
-#            Ui <- exp(logUi)*   
-#                (((j*nu[i])/(1-nu[i]))-(nu[i]/(sigma[i]*(1-nu[i]))+mu[i]*nu[i])*(digamma((1/sigma[i])+j)))  
-#        U[i] <- sum(Ui)   
-#   }
-#T
-#}
+#         iy <- dum <- 0
+#         iy <- y[i]+1 
+#      tofyn <- rep(0,iy)
+#       tofyn[1] <- mu[i]*nu[i]+mu[i]*(1-nu[i])/(1+mu[i]*sigma[i]*(1-nu[i])) 
+#        if (iy<2)
+#        {
+#          ty[i] <- tofyn[iy] 
+#      sumlty[i] <- 0
+#        }
+#        else
+#        {
+#        for (j in 2:iy)
+#         {
+#           dum = (1+(1/(mu[i]*sigma[i]*(1-nu[i]))))
+#             tofyn[j] <- ((j-1)+mu[i]*nu[i]+(1/(sigma[i]*(1-nu[i])))-(mu[i]*nu[i]*(j-1))/ tofyn[j-1])/dum      
+#         }
+#              
+#            ty[i] <- tofyn[iy] 
+#            sumlty[i] <- sum(log(tofyn[1:iy-1]))
+#       }     
+#    }
+#   result <- cbind(ty, sumlty)
+#   result        
+#   }   
 #----------------------------------------------------------------------------------------
 pDEL <- function(q, mu = 1, sigma = 1, nu = .5, lower.tail = TRUE, log.p = FALSE)
   {     
@@ -236,3 +272,8 @@ rDEL <- function(n, mu=1, sigma=1, nu=0.5, max.value = 10000)
           r <- qSICHEL(p, mu=mu, sigma=sigma, nu=nu, max.value = max.value )
           r
   }
+  
+  
+#dyn.load("c:/gamlss/fortran/tofydel.dll")
+#gfortran -O3 -c tofydel.f -o tofydel.0
+#gcc -std-gnu99 -shared -s -o tofydel.dll tofydel.o -lgfortran 

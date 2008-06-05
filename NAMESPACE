@@ -1,6 +1,6 @@
 # distibutions
 export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
-       SICHEL, dSICHEL, pSICHEL, qSICHEL, rSICHEL,
+       SICHEL, dSICHEL, pSICHEL, qSICHEL, rSICHEL,VSICHEL,
        SHASH, dSHASH, pSHASH, qSHASH, rSHASH,
        exGAUS, dexGAUS, pexGAUS, qexGAUS, rexGAUS,
        ST1, dST1, pST1, qST1, rST1,

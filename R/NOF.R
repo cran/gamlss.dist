@@ -23,7 +23,7 @@ NOF <- function (mu.link="identity", sigma.link="log", nu.link ="identity")
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                 nu.dr = vstats$mu.eta, 
-                 dldm = function() {   
+                 dldm = function(y,mu,sigma,nu) {   
                                  #     mu1 <- mu
                                  #  sigma1 <- sigma*mu^(nu/2)
                                  #  dldm1 <- (1/sigma1^2)*(y-mu1) 
@@ -33,14 +33,15 @@ NOF <- function (mu.link="identity", sigma.link="log", nu.link ="identity")
              dldm <- -(nu/(4*mu))+(y-mu)/((sigma^2)*(mu^nu))+(((y-mu)^2)*nu)/(2*(sigma^2)*mu^(nu+1))
                                    dldm
                                     },
-               d2ldm2 = function() {
-                                      mu1 <- mu
+               d2ldm2 = function(mu,sigma,nu) {
+                                     # mu1 <- mu
                                    sigma1 <- sigma*mu^(nu/2)
                                   d2ldm21 <- -(1/sigma1^2)
                                   d2ldd21 <- -(2/(sigma1^2))
                                    d2ldm2 <- d2ldm21+d2ldd21*((sigma*nu/2)^2)*mu^(nu-2)
+                                   d2ldm2
                                    },
-                 dldd = function() {
+                 dldd = function(y,mu,sigma,nu) {
                                  #    mu1 <- mu
                                  # sigma1 <- sigma*mu^(nu/2) 
                                  #  dldd1 <- ((y-mu1)^2-sigma1^2)/(sigma1^3)
@@ -48,31 +49,36 @@ NOF <- function (mu.link="identity", sigma.link="log", nu.link ="identity")
                                    dldd <- -1/(sigma)+((y-mu)^2)/((sigma^3)*(mu^nu))
                                    dldd  
                                     },
-               d2ldd2 = function() {
-                                      mu1 <- mu
+               d2ldd2 = function(mu,sigma,nu) {
+                                  #    mu1 <- mu
                                    sigma1 <- sigma*mu^(nu/2)
                                   d2ldd21 <- -(2/(sigma1^2))
                                    d2ldd2 <- d2ldd21*mu^(nu)
+                                   d2ldd2
                                     },
-                 dldv = function() {
+                 dldv = function(y,mu,sigma,nu) {
                                    #dldv1 <- -0.5*log(mu) + (((y-mu)*log(mu)/sigma)^2)/(2*(mu^nu))
                                    dldv <- -0.5*log(mu)+(((y-mu)^2)*log(mu))/(2*(sigma^2)*mu^nu)
                                    dldv     
                                     },
-               d2ldv2 = function()  {
-                                 d2ldv2 <- -0.5*(log(mu))^2  
+               d2ldv2 = function(mu)  {
+                                 d2ldv2 <- -0.5*(log(mu))^2
+                                 d2ldv2  
                                     },
-              d2ldmdd = function()  {
-                                      mu1 <- mu
+              d2ldmdd = function(y,mu,sigma,nu)  {
+                                   #   mu1 <- mu
                                    sigma1 <- sigma*mu^(nu/2)
                                   d2ldd21 <- -(2/(sigma1^2))
                                   d2ldmdd <- d2ldd21*sigma*(nu/2)*mu^(nu-1)
+                                  d2ldmdd
                                     },
-              d2ldmdv = function()  {
+              d2ldmdv = function(mu,nu)  {
                                   d2ldmdv <- -nu*log(mu)/(2*mu)
+                                  d2ldmdv
                                     },
-              d2ldddv = function()  {
+              d2ldddv = function(mu,sigma)  {
                                   d2ldddv <- -log(mu)/sigma
+                                  d2ldddv
                                     },
           G.dev.incr  = function(y,mu,sigma,nu,...) -2*dNOF(y,mu,sigma,nu,log=TRUE),                           
                 rqres = expression(

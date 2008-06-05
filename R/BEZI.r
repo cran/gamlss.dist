@@ -15,92 +15,88 @@ BEZI = function (mu.link = "logit", sigma.link = "log", nu.link = "logit")
         c("logit", "probit", "cloglog", "log", "own"))
 
     structure(list(family = c("BEZI", "Zero Inflated Beta"),
-        parameters = list(mu = TRUE, 
-        sigma = TRUE, nu = TRUE),
-        nopar = 3,
-        type = "Mixed", 
-        mu.link = as.character(substitute(mu.link)),
-        sigma.link = as.character(substitute(sigma.link)), 
-        nu.link = as.character(substitute(nu.link)),
-        mu.linkfun = mstats$linkfun, 
-        sigma.linkfun = dstats$linkfun,
-        nu.linkfun = vstats$linkfun, 
-        mu.linkinv = mstats$linkinv,
-        sigma.linkinv = dstats$linkinv, 
-        nu.linkinv = vstats$linkinv,
-        mu.dr = mstats$mu.eta,
-        sigma.dr = dstats$mu.eta, 
-        nu.dr = vstats$mu.eta,
-
-
-        dldm = function() #first derivate of log-density respect to mu 
+               parameters = list(mu = TRUE, sigma = TRUE, nu = TRUE),
+                    nopar = 3,
+                     type = "Mixed", 
+                  mu.link = as.character(substitute(mu.link)),
+               sigma.link = as.character(substitute(sigma.link)), 
+                  nu.link = as.character(substitute(nu.link)),
+               mu.linkfun = mstats$linkfun, 
+            sigma.linkfun = dstats$linkfun,
+               nu.linkfun = vstats$linkfun, 
+               mu.linkinv = mstats$linkinv,
+            sigma.linkinv = dstats$linkinv, 
+               nu.linkinv = vstats$linkinv,
+                    mu.dr = mstats$mu.eta,
+                 sigma.dr = dstats$mu.eta, 
+                    nu.dr = vstats$mu.eta,
+        dldm = function(y,mu,sigma) #first derivate of log-density respect to mu 
         {           
-            p <- mu * sigma
-            q <- (1-mu)*sigma
+                  p <- mu * sigma
+                  q <- (1-mu)*sigma
             mustart <-digamma(p)-digamma(q) 
             ystart  <- log(y) - log(1 - y)
-            dldm <- ifelse((y == 0) , 0, sigma * (ystart-mustart))
-            dldm
+               dldm <- ifelse((y == 0) , 0, sigma * (ystart-mustart))
+               dldm
         },
 
-        d2ldm2 = function() {        #second derivate of log-density respect to mu 
-            p <- mu * sigma
-            q <- (1-mu)*sigma
-            d2ldm2 <- ifelse((y == 0) , 0,-sigma^2 * (trigamma(p)+trigamma(q)))
-            d2ldm2
+        d2ldm2 = function(y,mu,sigma) {        #second derivate of log-density respect to mu 
+                  p <- mu * sigma
+                  q <- (1-mu)*sigma
+             d2ldm2 <- ifelse((y == 0) , 0,-sigma^2 * (trigamma(p)+trigamma(q)))
+             d2ldm2
         },
 
 
-        dldd = function() {      #first derivate log-density respect to sigma 
-            p <- mu * sigma
-            q <- (1-mu)*sigma
+        dldd = function(y,mu,sigma) {      #first derivate log-density respect to sigma 
+                  p <- mu * sigma
+                  q <- (1-mu)*sigma
             mustart <-digamma(p)-digamma(q) 
             ystart  <- log(y) - log(1 - y)
-            dldd <- ifelse((y == 0) , 0, mu * (ystart - mustart)
-            + log(1 - y) - digamma(q) + digamma(sigma))
-            dldd
+               dldd <- ifelse((y==0),0,mu*(ystart-mustart)+log(1-y)-digamma(q)+digamma(sigma))
+               dldd
         },
 
-        d2ldd2 = function() {      #second derivate log-density respect to sigma 
-            p <- mu * sigma
-            q <- (1-mu)*sigma
-            mustart <-digamma(p)-digamma(q) 
-
-            d2ldd2 <- ifelse((y == 0) , 0, -(mu^2 * trigamma(p)
-            + (1 - mu)^2 * trigamma(q) -trigamma(sigma)))
-            d2ldd2
+        d2ldd2 = function(y,mu,sigma) {      #second derivate log-density respect to sigma 
+                  p <- mu * sigma
+                  q <- (1-mu)*sigma
+            #mustart <-digamma(p)-digamma(q) 
+             d2ldd2 <- ifelse((y==0),0,-(mu^2*trigamma(p)+(1-mu)^2*trigamma(q)-trigamma(sigma)))
+             d2ldd2
         },
 
-        dldv = function() {       #first derivate log-density respect to nu
+        dldv = function(y,nu) {       #first derivate log-density respect to nu
             dldv <- ifelse(y == 0, 1/nu, -1/(1 - nu))  
             dldv
         },
 
 
-        d2ldv2 = function() {         #second derivate log-density respect to nu
+        d2ldv2 = function(nu) {         #second derivate log-density respect to nu
             d2ldv2 <- -1/(nu * (1 - nu))
             d2ldv2
         },
         
 
-        d2ldmdd = function() {   #partial derivate of log-density respect to mu and sigma  
+        d2ldmdd = function(y,mu,sigma) {   #partial derivate of log-density respect to mu and sigma  
             p <- mu * sigma
             q <- (1-mu)*sigma
             d2ldmdd <- ifelse((y == 0), 0, -sigma * (trigamma(p) * mu) - (trigamma(q) * (1 - mu)))
             d2ldmdd
         },
 
-        d2ldmdv = function() {  #partial derivate of log-density respect to mu and alpha
-            d2ldmdv <- 0
+        d2ldmdv = function(y) {  #partial derivate of log-density respect to mu and alpha
+            d2ldmdv <- rep(0,length(y))
+            d2ldmdv
         },
         
-        d2ldddv = function() {   #partial derivate of log-density respect to sigma and alpha
-            d2ldddv <- 0
+        d2ldddv = function(y) {   #partial derivate of log-density respect to sigma and alpha
+            d2ldddv <- rep(0,length(y))
+            d2ldddv
         },
 
         
         G.dev.incr = function(y, mu, sigma, nu, ...){  # Global deviance
-            G.dev.incr <- -2 * dBEZI(y, mu, sigma, nu, log = TRUE)
+            -2 * dBEZI(y, mu, sigma, nu, log = TRUE)
         },
 
         rqres = expression({     # (Normalize quantile) residuals
@@ -108,16 +104,14 @@ BEZI = function (mu.link = "logit", sigma.link = "log", nu.link = "logit")
                 (1 - nu) * pBEZI(y, mu, sigma, nu))
             rqres <- qnorm(uval) 
         }),
-
-
-        mu.initial = expression(mu <- (y + mean(y))/2),
+           mu.initial = expression(mu <- (y + mean(y))/2),
         sigma.initial = expression(sigma <- rep(1, length(y))),
-        nu.initial = expression(nu <- rep(0.3, length(y))),
-        mu.valid = function(mu) all(mu > 0 & mu < 1),
-        sigma.valid = function(sigma) all(sigma > 0),
-        nu.valid = function(nu) all(nu > 0 & nu < 1),
-        y.valid = function(y) all(y >= 0 & y < 1)),
-        class = c("gamlss.family", "family"))
+           nu.initial = expression(nu <- rep(0.3, length(y))),
+             mu.valid = function(mu) all(mu > 0 & mu < 1),
+          sigma.valid = function(sigma) all(sigma > 0),
+             nu.valid = function(nu) all(nu > 0 & nu < 1),
+              y.valid = function(y) all(y >= 0 & y < 1)),
+                class = c("gamlss.family", "family"))
 
 }
 

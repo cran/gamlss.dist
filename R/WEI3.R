@@ -18,13 +18,13 @@ WEI3 <- function (mu.link="log", sigma.link="log")
         sigma.linkinv = dstats$linkinv,
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
-                 dldm = function() ((y*gamma((1/sigma)+1)/mu)^sigma -1)*(sigma/mu),
-               d2ldm2 = function() - sigma^2/mu^2,
-                 dldd = function() 1/sigma - log(y*gamma((1/sigma)+1)/mu)*
+                 dldm = function(y,mu,sigma) ((y*gamma((1/sigma)+1)/mu)^sigma -1)*(sigma/mu),
+               d2ldm2 = function(sigma,mu) - sigma^2/mu^2,
+                 dldd = function(y,mu,sigma) 1/sigma - log(y*gamma((1/sigma)+1)/mu)*
                          ((y*gamma((1/sigma)+1)/mu)^sigma-1)+
                         (digamma((1/sigma)+1))*((y*gamma((1/sigma)+1)/mu)^sigma-1)/sigma,
-               d2ldd2 = function() -(1.644934+(0.422784-digamma((1/sigma)+1))^2)/(sigma*sigma) ,
-              d2ldmdd = function() (0.422784-digamma((1/sigma)+1))/mu,
+               d2ldd2 = function(sigma) -(1.644934+(0.422784-digamma((1/sigma)+1))^2)/(sigma*sigma) ,
+              d2ldmdd = function(mu,sigma) (0.422784-digamma((1/sigma)+1))/mu,
           G.dev.incr  = function(y,mu,sigma,...) -2*dWEI3(y, mu ,sigma, log=TRUE), 
                 rqres = expression(rqres(pfun="pWEI3", type="Continuous", y=y, mu=mu, sigma=sigma)),
            mu.initial = expression( {  mu <- y+0.01
