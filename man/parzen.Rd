@@ -6,7 +6,7 @@
 \title{The Parzen Data File for GAMLSS}
 \description{
     
-  Parzen: Parzen (1979) and also contained in Hand {\it et al.} (1994), data set 278. The data
+  Parzen: Parzen (1979) and also contained in Hand \emph{et al.} (1994), data set 278. The data
          give the annual \code{snowfall} in Buffalo, NY (inches) for the 63 years, from 1910 to 1972 inclusive.
   
 }

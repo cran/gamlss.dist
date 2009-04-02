@@ -29,9 +29,9 @@ WEI3 <- function (mu.link="log", sigma.link="log")
                 rqres = expression(rqres(pfun="pWEI3", type="Continuous", y=y, mu=mu, sigma=sigma)),
            mu.initial = expression( {  mu <- y+0.01
                                       }),
-        sigma.initial = expression({  v <- var(log(y))
-                                      s <- 1.283/sqrt(v) 
-                                    sigma <-  rep(s,length(y))}),
+        sigma.initial = expression({  var.log.Y <- var(log(y))
+                                      s.Y.s <- 1.283/sqrt(var.log.Y) 
+                                    sigma <-  rep(s.Y.s,length(y))}),
               mu.valid = function(mu) all(mu > 0) , 
            sigma.valid = function(sigma)  all(sigma > 0), 
                y.valid = function(y)  all(y > 0)

@@ -7,10 +7,10 @@
 \description{
  
 
-  tensile: These data  come from Quesenberry and Hales (1980)  and were also reproduced in Hand {\it et al.} (1994),
+  tensile: These data  come from Quesenberry and Hales (1980)  and were also reproduced in Hand \emph{et al.} (1994),
     data set 180, page 140. They contain measurements of tensile strength of polyester fibres and the authors
     were trying to check if they were consistent with the lognormal distribution.
-    According to Hand {\it et al.} (1994) "these data follow from a preliminary transformation.
+    According to Hand \emph{et al.} (1994) "these data follow from a preliminary transformation.
     If the lognormal hypothesis is correct, these data should have been uniformly distributed".
 
  

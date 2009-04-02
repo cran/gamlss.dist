@@ -39,7 +39,7 @@ rRGE(n, mu = 1, sigma = 0.1, nu = 1)
   Definition file for reverse generalized extreme family distribution. 
 
 The probability density function of the generalized extreme value
-distribution is obtained from Johnson {\it et al.} (1995), Volume 2,
+distribution is obtained from Johnson \emph{et al.} (1995), Volume 2,
 p76, equation (22.184) [where \eqn{(\xi, \theta, \gamma)
 \longrightarrow (\mu, \sigma, \nu)}{(xi,theta,gamma)->(mu,sigma, nu)}].
 
@@ -59,8 +59,7 @@ where
 
 and where \eqn{-\infty<\mu<y+\frac{\sigma}{\nu}}, \eqn{\sigma>0}
 and \eqn{\nu>0}. Note that only the case \eqn{\nu>0}{nu>0} is allowed here. The reverse generalized extreme value distribution is denoted
-as {\bf RGE}(\eqn{\mu,\sigma,\nu}) or as {\bf Reverse Generalized.Extreme.
-Family}(\eqn{\mu,\sigma,\nu}).
+as RGE(\eqn{\mu,\sigma,\nu}) or as Reverse Generalized.Extreme.Family(\eqn{\mu,\sigma,\nu}).
 
 Note the the above distribution is a reparameterization of the three parameter Weibull distribution given by
 

@@ -8,7 +8,7 @@
 \description{
  
 
-  alveolar : alveolar-bronchiolar adenomas data used by Tamura and Young (1987) and also reproduce in Hand {\it et
+  alveolar : alveolar-bronchiolar adenomas data used by Tamura and Young (1987) and also reproduce in Hand \emph{et
   al.}   (1994), data set 256. The data are the number of mice out of certain number of mice (the binomial denominator) in
              23 independent  groups, having alveolar-bronchiolar adenomas.
 }

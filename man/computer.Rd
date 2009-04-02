@@ -9,7 +9,7 @@
 
   computing: The data relate to DEC-20 computers which operated at the Open University in the 1980. They give the
   number of
-  computers that broke down in each of the 128 consecutive weeks of operation, starting in late 1983, see Hand {\it et
+  computers that broke down in each of the 128 consecutive weeks of operation, starting in late 1983, see Hand \emph{ et
   al.} (1994) page 109 data set 141.
 
   }

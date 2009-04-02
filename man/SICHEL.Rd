@@ -7,7 +7,7 @@
 \alias{VSICHEL}
 
 
-\title{The Sichel dustribution for fitting a GAMLSS model}
+\title{The Sichel distribution for fitting a GAMLSS model}
 \description{
 The \code{SICHEL()} function defines the Sichel distribution, a three parameter discrete distribution, for a \code{gamlss.family} object to be used 
 in GAMLSS fitting using the function \code{gamlss()}.    
@@ -54,7 +54,7 @@ where  \eqn{\mu>0}{mu>0} , \eqn{\sigma>0}{\sigma>0} and \eqn{-\infty <
 modified Bessel function of the third kind.
 Note that the above parameterization is different from Stein, Zucchini and Juritz (1988) who use the above probability function 
 but treat
-$\mu/c$, $\alpha$ and $\nu$ as the parameters. 
+\eqn{\mu}{mu}, \eqn{\alpha}{alpha}  and \eqn{\nu}{nu} as the parameters. 
  
 }
 \value{
