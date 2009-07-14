@@ -77,13 +77,15 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \author{ Mikis Stasinopoulos d.stasinopoulos@londonmet.ac.uk, Bob Rigby r.rigby@londonmet.ac.uk and Nicoleta Motpan}
 \note{ 
 }
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{GA}}}
+\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{GA}}}
 
 \examples{
 y<-rGG(100,mu=1,sigma=0.1, nu=-.5) # generates 100 random observations  
-histDist(y, family=GG)
-m1 <-gamlss(y~1,family=GG)
-prof.dev(m1, "nu", min=-2, max=2, step=0.2)
+hist(y)
+# library(gamlss)
+#histDist(y, family=GG)
+#m1 <-gamlss(y~1,family=GG)
+#prof.dev(m1, "nu", min=-2, max=2, step=0.2)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

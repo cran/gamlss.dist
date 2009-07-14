@@ -106,7 +106,7 @@ My thesis is concerned with regression modelling of rates and
 proportions with excess of zeros and/or ones}
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{BEOI}} }
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BEOI}} }
 \examples{
 
 BEOI()# gives information about the default links for the BEOI distribution
@@ -119,13 +119,14 @@ plot(function(y) qBEOI(y, mu=.5 ,sigma=5, nu=0.1), 0.001, 0.999)
 # generate random numbers
 dat<-rBEOI(100, mu=.5, sigma=5, nu=0.1)
 # fit a model to the data. 
-mod1<-gamlss(dat~1,sigma.formula=~1, nu.formula=~1, family=BEOI) 
-fitted(mod1)[1]
-summary(mod1)
-fitted(mod1,"mu")[1]        #fitted mu
-fitted(mod1,"sigma")[1]     #fitted sigma
-fitted(mod1,"nu")[1]        #fitted nu
-meanBEOI(mod1)[1] # expected value of the response
+# library(gamlss)
+#mod1<-gamlss(dat~1,sigma.formula=~1, nu.formula=~1, family=BEOI) 
+#fitted(mod1)[1]
+#summary(mod1)
+#fitted(mod1,"mu")[1]        #fitted mu
+#fitted(mod1,"sigma")[1]     #fitted sigma
+#fitted(mod1,"nu")[1]        #fitted nu
+#meanBEOI(mod1)[1] # expected value of the response
 }
 \keyword{distribution}
 \keyword{regression}

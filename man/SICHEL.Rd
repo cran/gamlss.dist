@@ -85,7 +85,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 }  
  
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{PIG}} , \code{\link[gamlss]{SI}}}
+\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{PIG}} , \code{\link{SI}}}
 \examples{
 SICHEL()# gives information about the default links for the  Sichel distribution 
 #plot the pdf using plot 
@@ -96,7 +96,8 @@ plot(seq(from=0,to=100),pSICHEL(seq(from=0,to=100), mu=10, sigma=1, nu=1), type=
 tN <- table(Ni <- rSICHEL(100, mu=5, sigma=1, nu=1))
 r <- barplot(tN, col='lightblue')
 # fit a model to the data 
-gamlss(Ni~1,family=SICHEL, control=gamlss.control(n.cyc=50))
+# library(gamlss)
+# gamlss(Ni~1,family=SICHEL, control=gamlss.control(n.cyc=50))
 }
 \keyword{distribution}
 \keyword{regression}% 

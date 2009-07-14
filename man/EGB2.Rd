@@ -77,7 +77,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 \section{Warning}{} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamls]{gamlss.family}}, \code{\link[gamlss]{JSU}}, \code{\link[gamlss]{BCT}}}
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
 \examples{
 EGB2()   # 
 y<- rEGB2(200, mu=5, sigma=2, nu=1, tau=4)
@@ -86,7 +86,8 @@ truehist(y)
 fx<-dEGB2(y=seq(min(y), 20, length=200), mu=5 ,sigma=2, nu=1, tau=4)
 lines(seq(min(y),20,length=200),fx)
 # something funny here
-histDist(y, family=EGB2, n.cyc=60)
+# library(gamlss)
+# histDist(y, family=EGB2, n.cyc=60)
 integrate(function(x) x*dEGB2(y=x, mu=5, sigma=2, nu=1, tau=4), -Inf, Inf)
 curve(dEGB2(y=x, mu=5 ,sigma=2, nu=1, tau=4), -10, 10, main = "The EGB2  density mu=5, sigma=2, nu=1, tau=4")
 }

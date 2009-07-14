@@ -11,8 +11,8 @@
 \description{
 The function \code{NOF()} defines a normal distribution family, which has three parameters.  The distribution
 can be used  in a GAMLSS fitting using the function \code{gamlss()}.
-The  mean of \code{NOF} is equal to \code{mu}. The variance is equal to \code{sigma\textasciicircum{}2*mu\textasciicircum{}nu} so
-the standard deviation is  \code{sigma*mu\textasciicircum{}(nu/2)}. The function is design for cases where the
+The  mean of \code{NOF} is equal to \code{mu}. The variance is equal to \code{sigma^2*mu^nu} so
+the standard deviation is  \code{sigma*mu^(nu/2)}. The function is design for cases where the
 variance is proportional to a power of the mean.
 The functions \code{dNOF}, \code{pNOF}, \code{qNOF} and \code{rNOF} define the density, distribution function,
 quantile function and random
@@ -82,18 +82,19 @@ method should be used in the fitting.
        }
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{NO}}}
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link[gamlss]{NO}}, \code{\link[gamlss]{NO2}}}
 
 \examples{
 NOF()# gives information about the default links for the normal distribution family
-data(abdom)        
-# the normal distribution fit with constant sigma
-m1<-gamlss(y~poly(x,2), sigma.fo=~1, family=NO, data=abdom)
-# the normal family fit with variance proportional to mu
-m2<-gamlss(y~poly(x,2), sigma.fo=~1, family=NOF, data=abdom, method=mixed(1,20))
-# a nornal distribution fit with variance as a function of x
-m3 <-gamlss(y~poly(x,2), sigma.fo=~x,   family=NO, data=abdom, method=mixed(1,20)) 
-GAIC(m1,m2,m3)
+# library(gamlss)
+#data(abdom)        
+## the normal distribution fit with constant sigma
+#m1<-gamlss(y~poly(x,2), sigma.fo=~1, family=NO, data=abdom)
+## the normal family fit with variance proportional to mu
+#m2<-gamlss(y~poly(x,2), sigma.fo=~1, family=NOF, data=abdom, method=mixed(1,20))
+## a nornal distribution fit with variance as a function of x
+#m3 <-gamlss(y~poly(x,2), sigma.fo=~x,   family=NO, data=abdom, method=mixed(1,20)) 
+#GAIC(m1,m2,m3)
 }
 \keyword{distribution}
 \keyword{regression}

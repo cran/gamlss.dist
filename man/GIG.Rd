@@ -74,7 +74,9 @@ Jorgensen B. (1982) Statistical properties of the generalized inverse Gaussian d
 
 \examples{
 y<-rGIG(100,mu=1,sigma=1, nu=-0.5) # generates 1000 random observations 
-histDist(y, family=GIG) 
+hist(y)
+# library(gamlss)
+# histDist(y, family=GIG) 
 }
 \keyword{distribution}
 \keyword{regression}%

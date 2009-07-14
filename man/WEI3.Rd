@@ -72,12 +72,13 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 }
  \section{Warning }{In \code{WEI3} the estimated parameters \code{mu} and \code{sigma} can be highly correlated so it is advisable to use the 
 \code{CG()} method for fitting  [as the RS() method can be very slow in this situation.] }
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{WEI}},  \code{\link[gamlss]{WEI2}}}
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{WEI}},  \code{\link{WEI2}}}
 
 \examples{
 WEI3()
 dat<-rWEI(100, mu=.1, sigma=2)
-gamlss(dat~1, family=WEI3, method=CG())
+# library(gamlss)
+# gamlss(dat~1, family=WEI3, method=CG())
 
 }
 \keyword{distribution}

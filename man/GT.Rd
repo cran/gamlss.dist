@@ -82,14 +82,14 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 \section{Warning}{The qSHASH and rSHASH are slow since they are relying on golden section for finding the quantiles} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamls]{gamlss.family}}, \code{\link[gamlss]{JSU}}, \code{\link[gamlss]{BCT}}}
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
 \examples{
 GT()   # 
 y<- rGT(200, mu=5, sigma=1, nu=1, tau=4)
 hist(y)
-m1<-gamlss(y~1, family=GT) 
 curve(dGT(y=x, mu=5 ,sigma=2,nu=1, tau=4), -2, 11, main = "The GT  density mu=5 ,sigma=1, nu=1, tau=4")
-
+# library(gamlss)
+# m1<-gamlss(y~1, family=GT) 
 }
 \keyword{distribution}
 \keyword{ regression}

@@ -5,7 +5,7 @@
 \title{
 The GAMLSS distributions
 }
-\description{This package contains additional distributions to be used for GAMLSS models.    
+\description{This package contains all distributions to be used for GAMLSS models.    
 Each distributions has its probability function, \code{d}, its commutative probability function, \code{p}, the 
 inverse of the commutative probability function, \code{q}, its random
 generation function, \code{r}, and also the \code{gamlss.family} generating function  
@@ -18,7 +18,8 @@ Version: \tab 1.5.0\cr
 Date: \tab 2006-12-13\cr
 License: \tab GPL (version 2 or later)\cr
 }
-This package is to be used with the package gamlss.  
+This package is design to be used with the package \pkg{gamlss} but the \code{d}, \code{p}, \code{q} and \code{r} functions
+can be used separately.  
 }
 \author{
 Mikis Stasinopoulos <d.stasinopoulos@londonmet.ac.uk>, Bob Rigby <r.rigby@londonmet.ac.uk> with
@@ -41,7 +42,6 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 \examples{
 plot(function(y) dSICHEL(y, mu=10, sigma = 0.1 , nu=1 ), from=0, to=30, n=30+1, type="h") # pdf
-pdf.plot(family=SICHEL, mu=10, sigma=0.1, nu=1,  min=0, max=30, step=1)  
 # cdf plot
 PPP <- par(mfrow=c(2,1))
 plot(function(y) pSICHEL(y, mu=10, sigma =0.1, nu=1 ), from=0, to=30, n=30+1, type="h") # cdf

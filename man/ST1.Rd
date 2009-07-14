@@ -153,17 +153,19 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \author{Bob Rigby and Mikis Stasinopoulos  }
 \note{ The mean of the ex-Gaussian is \eqn{\mu+\nu}{mu+nu} and the variance is \eqn{\sigma^2+\nu^2}{sigma^2+nu^2}.
 }
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{BCCG}}, \code{\link[gamlss]{GA}}, \code{\link[gamlss]{IG}}  \code{\link[gamlss]{LNO}}}
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCCG}}, \code{\link{GA}}, 
+\code{\link{IG}}  \code{\link{LNO}}}
 \examples{ 
 y<- rST5(200, mu=5, sigma=1, nu=.1)
 hist(y)
-m1<-gamlss(y~1, family=ST1)
-m2<-gamlss(y~1, family=ST2)
-m3<-gamlss(y~1, family=ST3)
-m4<-gamlss(y~1, family=ST4)
-m5<-gamlss(y~1, family=ST5) 
-GAIC(m1,m2,m3,m4,m5)
 curve(dST5(y=x, mu=30 ,sigma=5,nu=-1), -50, 50, main = "The ST5  density mu=30 ,sigma=5,nu=1")
+# library(gamlss)
+# m1<-gamlss(y~1, family=ST1)
+# m2<-gamlss(y~1, family=ST2)
+# m3<-gamlss(y~1, family=ST3)
+# m4<-gamlss(y~1, family=ST4)
+# m5<-gamlss(y~1, family=ST5) 
+# GAIC(m1,m2,m3,m4,m5)
 }
 \keyword{distribution}% 
 \keyword{regression}% 

@@ -78,9 +78,9 @@ mean of \eqn{Y} is given by \eqn{E(Y)=\mu}{E(Y)=mu} and the variance by \eqn{V(Y
  }
  
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{SI}} , \code{\link[gamlss]{SICHEL}}}
+\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{SI}} , \code{\link[gamlss]{SICHEL}}}
 \examples{
-DEL()# gives information about the default links for the  Delaporte distribution 
+ DEL()# gives information about the default links for the  Delaporte distribution 
 #plot the pdf using plot 
 plot(function(y) dDEL(y, mu=10, sigma=1, nu=.5), from=0, to=100, n=100+1, type="h") # pdf
 # plot the cdf
@@ -89,7 +89,8 @@ plot(seq(from=0,to=100),pDEL(seq(from=0,to=100), mu=10, sigma=1, nu=0.5), type="
 tN <- table(Ni <- rDEL(100, mu=10, sigma=1, nu=0.5))
 r <- barplot(tN, col='lightblue')
 # fit a model to the data 
-gamlss(Ni~1,family=DEL, control=gamlss.control(n.cyc=50))
+# libary(gamlss)
+# gamlss(Ni~1,family=DEL, control=gamlss.control(n.cyc=50))
 }
 \keyword{distribution}
 \keyword{regression}% 

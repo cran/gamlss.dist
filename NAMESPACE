@@ -26,22 +26,50 @@ export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
        GB2, dGB2, pGB2, qGB2, rGB2,
        EGB2, dEGB2, pEGB2, qEGB2, rEGB2
        )
+# original distibutions
+export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGuntr,
+       dBCPE, pBCPE, qBCPE, rBCPE, BCPE, BCPEuntr,
+       dBCT, pBCT, qBCT, rBCT, BCT, BCTuntr,
+       dGA, pGA, qGA, rGA, GA,
+       dGU, pGU, qGU, rGU, GU,
+       dIG, pIG, qIG, rIG, IG,
+       dJSU, pJSU, qJSU, rJSU, JSU,
+       dJSUo, pJSUo, qJSUo, rJSUo, JSUo,
+       dLO, pLO, qLO, rLO, LO,
+       dLNO, pLNO, qLNO, rLNO, LNO,
+       dLOGNO, pLOGNO, qLOGNO, rLOGNO, LOGNO,
+       dNO2, pNO2, qNO2, rNO2, NO2,
+       dNET, pNET, NET,
+       dNO, pNO, qNO, rNO, NO,
+       dPE, pPE, qPE, rPE, PE,
+       dPE2, pPE2, qPE2, rPE2, PE2,
+       dRG, pRG, qRG, rRG, RG,
+       dTF, pTF, qTF, rTF,TF,
+       dWEI, pWEI, qWEI, rWEI, WEI,
+       dWEI2, pWEI2, qWEI2, rWEI2, WEI2,
+       PO, dPO, pPO, qPO, rPO,
+       NBI, dNBI, pNBI, qNBI, rNBI,
+       NBII, dNBII, pNBII, qNBII, rNBII,
+       BI, dBI, pBI, qBI, rBI,
+       BB, dBB, pBB, qBB, rBB,
+       BE, dBE, pBE, qBE, rBE,
+       BEo, dBEo, pBEo, qBEo, rBEo,
+       BEINF, dBEINF, pBEINF, qBEINF, rBEINF,plotBEINF,meanBEINF,
+       SEP, dSEP, pSEP, qSEP, rSEP,
+       ZIP, dZIP, pZIP, qZIP, rZIP,
+       PIG, dPIG, pPIG, qPIG, rPIG,
+       SI, dSI, pSI, qSI, rSI,
+       ZAIG, dZAIG, pZAIG, qZAIG, rZAIG, plotZAIG, meanZAIG,
+       ZAGA, dZAGA, pZAGA, qZAGA, rZAGA, plotZAGA, meanZAGA)
 
 # needed for gamlss family
-#export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family)
+export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family,
+       checklink, make.link.gamlss, show.link)
 
 # documented but unexported methods
 
+S3method(gamlss.family, default)
+S3method(print, gamlss.family)
 
-#importFrom(graphics, pairs, plot)
-#importFrom(stats, AIC, deviance, coef, extractAIC, family, fitted,
-#           formula, logLik, model.frame,  predict, residuals, terms, update,
-#           loess)
-#importFrom(MASS, addterm, dropterm, truehist)
-#importFrom(survival, Surv, is.Surv)
-#importFrom(graphics, plot)
-#importFrom(base, print)
-#importFrom(splines, bs, ns, spline.des)
-#importFrom(gamlss.tr, trun)
 
 useDynLib(gamlss.dist)

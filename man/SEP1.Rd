@@ -122,17 +122,17 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 \section{Warning}{} 
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{SEP}}}
+\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{SEP}}}
 \examples{
-SEP() 
-y<- rSEP4(100, mu=5, sigma=1, nu=2, tau=1.5);hist(y)
-m1<-gamlss(y~1, family=SEP1, n.cyc=50)
-m2<-gamlss(y~1, family=SEP2, n.cyc=50)
-m3<-gamlss(y~1, family=SEP3, n.cyc=50)
-m4<-gamlss(y~1, family=SEP4, n.cyc=50) 
-GAIC(m1,m2,m3,m4)
+SEP1() 
 curve(dSEP4(y=x, mu=5 ,sigma=1, nu=2, tau=1.5), -2, 10, main = "The SEP4  density mu=5 ,sigma=1, nu=1, tau=1.5")
-
+# library(gamlss)
+#y<- rSEP4(100, mu=5, sigma=1, nu=2, tau=1.5);hist(y)
+#m1<-gamlss(y~1, family=SEP1, n.cyc=50)
+#m2<-gamlss(y~1, family=SEP2, n.cyc=50)
+#m3<-gamlss(y~1, family=SEP3, n.cyc=50)
+#m4<-gamlss(y~1, family=SEP4, n.cyc=50) 
+#GAIC(m1,m2,m3,m4)
 }
 \keyword{distribution}
 \keyword{ regression}

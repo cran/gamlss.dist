@@ -231,12 +231,12 @@ qST1 <-  function(p, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, log.
     if (log.p==TRUE) p <- exp(p) else p <- p
     if (lower.tail==TRUE) p <- p else p <- 1-p
     if (any(p < 0)|any(p > 1))  stop(paste("p must be between 0 and 1", "\n", ""))     
-        lp <-  max(length(p),length(mu),length(sigma),length(nu), length(tau))
+         lp <-  max(length(p),length(mu),length(sigma),length(nu), length(tau))
           p <- rep(p, length = lp)                                                                    
       sigma <- rep(sigma, length = lp)
          mu <- rep(mu, length = lp)
          nu <- rep(nu, length = lp)
-         tau <- rep(tau, length = lp)
+        tau <- rep(tau, length = lp)
           q <- rep(0,lp)  
          for (i in  seq(along=p)) 
          {

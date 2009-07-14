@@ -56,12 +56,13 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
         \email{r.rigby@londonmet.ac.uk} and Nicoleta Motpan}
 \note{} 
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}}
+\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}}
 
 \examples{
-library(gamlss)
 y<-rEXP(1000,mu=1) # generates 1000 random observations 
-histDist(y, family=EXP) 
+hist(y)
+# library(gamlss)
+# histDist(y, family=EXP) 
 }
 \keyword{distribution}
 \keyword{regression}%

@@ -74,13 +74,15 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \author{Mikis Stasinopoulos and Bob Rigby  }
 \note{ The mean of the ex-Gaussian is \eqn{\mu+\nu}{mu+nu} and the variance is \eqn{\sigma^2+\nu^2}{sigma^2+nu^2}.
 }
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{BCCG}}, \code{\link[gamlss]{GA}}, \code{\link[gamlss]{IG}}  \code{\link[gamlss]{LNO}}}
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCCG}}, \code{\link{GA}}, 
+\code{\link{IG}}  \code{\link{LNO}}}
 \examples{
-%exGAUS()   # 
+exGAUS()   # 
 y<- rexGAUS(100, mu=300, nu=100, sigma=35)
 hist(y)
-m1<-gamlss(y~1, family=exGAUS) 
-plot(m1)
+# library(gamlss)
+# m1<-gamlss(y~1, family=exGAUS) 
+# plot(m1)
 curve(dexGAUS(y=x, mu=300 ,sigma=35,nu=100), 100, 600, 
  main = "The ex-GAUS  density mu=300 ,sigma=35,nu=100")
 plot(function(x) pexGAUS(x, mu=300,sigma=35,nu=100), 100, 600, 

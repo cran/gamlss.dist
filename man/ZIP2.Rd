@@ -67,16 +67,17 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 \note{ }
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{ZIP}} }
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{ZIP}} }
 \examples{
 ZIP2()# gives information about the default links for the normal distribution
 # creating data and plotting them 
 dat<-rZIP2(1000, mu=5, sigma=.1)
 r <- barplot(table(dat), col='lightblue')
-# fit the disteibution 
-mod1<-gamlss(dat~1, family=ZIP2)# fits a constant for mu and sigma 
-fitted(mod1)[1]
-fitted(mod1,"sigma")[1]
+# fit the disteibution
+# library(gamlss) 
+# mod1<-gamlss(dat~1, family=ZIP2)# fits a constant for mu and sigma 
+# fitted(mod1)[1]
+# fitted(mod1,"sigma")[1]
 }
 \keyword{distribution}
 \keyword{regression}

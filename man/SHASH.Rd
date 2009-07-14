@@ -98,7 +98,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 \section{Warning}{The qSHASH and rSHASH are slow since they are relying on golden section for finding the quantiles} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamls]{gamlss.family}}, \code{\link[gamlss]{JSU}}, \code{\link[gamlss]{BCT}}}
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
 \examples{
 SHASH()   # 
 plot(function(x)dSHASH(x, mu=0,sigma=1, nu=1, tau=2), -5, 5, 
@@ -106,7 +106,9 @@ plot(function(x)dSHASH(x, mu=0,sigma=1, nu=1, tau=2), -5, 5,
 plot(function(x) pSHASH(x, mu=0,sigma=1,nu=1, tau=2), -5, 5, 
  main = "The BCPE  cdf mu=0, sigma=1, nu=1, tau=2")
 dat<-rSHASH(100,mu=10,sigma=1,nu=1,tau=1.5)
-gamlss(dat~1,family=SHASH, control=gamlss.control(n.cyc=30))
+hist(dat)
+# library(gamlss)
+# gamlss(dat~1,family=SHASH, control=gamlss.control(n.cyc=30))
 }
 \keyword{distribution}
 \keyword{ regression}

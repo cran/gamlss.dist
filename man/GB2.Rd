@@ -46,7 +46,7 @@ rGB2(n, mu = 1, sigma = 1, nu = 0, tau = 0.5)
 \details{   
  The probability density function of the Generalized Beta type 2, (\code{GB2}), is defined as 
   
-\deqn{f(y|\mu,\sigma\,\nu,\tau)= e^{\mbox{\hspace{0.01cm}}\nu \mbox{\hspace{0.01cm}}z } \{|\sigma|\mbox{\hspace{0.05cm}}B(\nu,\tau) \mbox{\hspace{0.05cm}} [1+e^z]^{\nu+\tau}\}^{-1}}{f(y|mu,sigma,nu,tau)=abs(sigma)*y^{sigma*nu-1}(mu^(sigma*nu)*Beta(nu,tau)(1+(y/mu)^sigma)^(nu+tau))^-1}
+\deqn{f(y|\mu,\sigma\,\nu,\tau)= |\sigma| y^{\mbox{\hspace{0.01cm}}\sigma \mbox{\hspace{0.01cm}}v-1 } \{\mu^{\sigma \nu}\mbox{\hspace{0.05cm}}B(\nu,\tau) \mbox{\hspace{0.05cm}} [1+(y/\mu)^\sigma]^{\nu+\tau}\}^{-1}}{f(y|mu,sigma,nu,tau)=abs(sigma)*y^{sigma*nu-1}(mu^(sigma*nu)*Beta(nu,tau)(1+(y/mu)^sigma)^(nu+tau))^-1}
 
 where  \eqn{ y > 0}{y>0}, \eqn{\mu>0}{mu>0}, \eqn{-\infty <\sigma <\infty}{-Inf<sigma<Inf}, 
 \eqn{\nu>0}{nu>0} and \eqn{\tau>0}{tau>0}.  
@@ -78,7 +78,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 \section{Warning}{The qSHASH and rSHASH are slow since they are relying on golden section for finding the quantiles} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamls]{gamlss.family}}, \code{\link[gamlss]{JSU}}, \code{\link[gamlss]{BCT}}}
+\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
 \examples{
 GB2()   # 
 y<- rGB2(200, mu=5, sigma=2, nu=1, tau=1)
@@ -86,8 +86,6 @@ library(MASS)
 truehist(y)
 fx<-dGB2(y=seq(0.01, 20, length=200), mu=5 ,sigma=2, nu=1, tau=1)
 lines(seq(0.01,20,length=200),fx)
-# something funny here
-histDist(y, family=GB2, n.cyc=60)
 integrate(function(x) x*dGB2(y=x, mu=5, sigma=2, nu=1, tau=1), 0, Inf)
 mean(y)
 curve(dGB2(y=x, mu=5 ,sigma=2, nu=1, tau=1), 0.01, 20, main = "The GB2  density mu=5, sigma=2, nu=1, tau=4")
