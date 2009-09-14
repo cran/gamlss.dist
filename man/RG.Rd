@@ -17,7 +17,7 @@ generation for the specific parameterization of the reverse Gumbel distribution.
 }
 \usage{
 RG(mu.link = "identity", sigma.link = "log")
-dRG(y, mu = 0, sigma = 1, log = FALSE)
+dRG(x, mu = 0, sigma = 1, log = FALSE)
 pRG(q, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qRG(p, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rRG(n, mu = 0, sigma = 1)
@@ -26,7 +26,7 @@ rRG(n, mu = 0, sigma = 1)
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the mu parameter. other available link is "inverse", "log" and "own"}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter, other links are the "inverse", "identity" and "own"}
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{log, log.p}{ logical; if TRUE, probabilities p are given as log(p).}
@@ -62,7 +62,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \note{ The mean of the distribution is  \eqn{\mu+0.57722 \sigma}{mu-0.57722*sigma} and the variance is 
 \eqn{\pi^2 \sigma^2/6}{pi^2 sigma^2/6}.   }
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}} }
+\seealso{  \code{\link{gamlss.family}} }
 \examples{
 
 plot(function(x) dRG(x, mu=0,sigma=1), -3, 6, 

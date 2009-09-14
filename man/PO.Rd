@@ -15,7 +15,7 @@ generation for the Poisson, \code{PO()}, distribution.
 }
 \usage{
 PO(mu.link = "log")
-dPO(y, mu = 1, log = FALSE)
+dPO(x, mu = 1, log = FALSE)
 pPO(q, mu = 1, lower.tail = TRUE, log.p = FALSE)
 qPO(p, mu = 1, lower.tail = TRUE, log.p = FALSE)
 rPO(n, mu = 1)
@@ -23,7 +23,7 @@ rPO(n, mu = 1)
 
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the mu parameter}
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive means}
   \item{p}{vector of probabilities}
   \item{q}{vector of quantiles}
@@ -54,7 +54,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \note{\eqn{\mu}{mu} is the mean of the Poisson distribution}
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}},  \code{\link{NBI}}, \code{\link{NBII}}, 
+\seealso{ \code{\link{gamlss.family}},  \code{\link{NBI}}, \code{\link{NBII}}, 
 \code{\link{SI}}, \code{\link{SICHEL}}}
 
 \examples{

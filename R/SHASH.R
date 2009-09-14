@@ -271,12 +271,12 @@ d2ldvdt
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------
-dSHASH <- function(y, mu = 0, sigma = 1, nu = .5, tau = .5, log = FALSE)
+dSHASH <- function(x, mu = 0, sigma = 1, nu = .5, tau = .5, log = FALSE)
  {
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
           if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))
-      z <- (y-mu)/sigma 
+      z <- (x-mu)/sigma 
       r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))
       c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))
  loglik <- -log(sigma)-log(2*pi)/2-log(1+(z^2))/2+log(c)-(r^2)/2

@@ -27,7 +27,7 @@ BCPE(mu.link = "identity", sigma.link = "log", nu.link = "identity",
           tau.link = "log")
 BCPEuntr(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
           tau.link = "log")
-dBCPE(y, mu = 5, sigma = 0.1, nu = 1, tau = 2, log = FALSE)
+dBCPE(x, mu = 5, sigma = 0.1, nu = 1, tau = 2, log = FALSE)
 pBCPE(q, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)
 qBCPE(p, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)          
 rBCPE(n, mu = 5, sigma = 0.1, nu = 1, tau = 2)
@@ -39,7 +39,7 @@ checkBCPE(obj = NULL, mu = 10, sigma = 0.1, nu = 0.5, tau = 2,...)
   \item{sigma.link}{ Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. Other links are "inverse", "identity" and "own"}
   \item{nu.link}{Defines the  \code{nu.link}, with "identity" link as the default for the \code{nu} parameter. Other links are "inverse", "log" and "own"}
   \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter. Other links are "logshifted", "identity" and "own"}
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values }
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of \code{nu} parameter values}
@@ -100,7 +100,7 @@ where the integrating constant is less than 0.99. A warning will be given if thi
 The \code{BCPE} distribution is suitable for all combinations of the parameters within their ranges [i.e. \eqn{\mu>0,\sigma>0, \nu=(-\infty,\infty) {\rm and} \tau>0}{mu>0, sigma>0, nu=(-Inf,+Inf) and tau>0} ]
 } 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCT}} }
+\seealso{ \code{\link{gamlss.family}}, \code{\link{BCT}} }
 
 \examples{
 # BCPE()   #

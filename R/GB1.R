@@ -165,17 +165,17 @@ GB1 <- function (mu.link="logit", sigma.link="logit", nu.link ="log", tau.link="
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------
-dGB1 <- function(y,  mu = 0.5, sigma = 0.4, nu = 1, tau = 1, log = FALSE)
+dGB1 <- function(x,  mu = 0.5, sigma = 0.4, nu = 1, tau = 1, log = FALSE)
  {
           if (any(mu <= 0) | any(mu >= 1) )  stop(paste("mu must be between 0 and 1", "\n", "")) 
           if (any(sigma <= 0) | any(sigma >= 1))  stop(paste("sigma must be between 0 and 1", "\n", "")) 
           if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))  
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-          if (any(y <= 0) | any(y >= 1))  stop(paste("y must be between 0 and 1", "\n", ""))  
+          if (any(x <= 0) | any(x >= 1))  stop(paste("x must be between 0 and 1", "\n", ""))  
                       a <- mu*((1/sigma^2)-1)
                       b <- a*(1-mu)/mu
-       loglik <- log(tau) + b*log(nu) + (tau*a-1)*log(y) + (b-1)*log(1-y^tau)
-       loglik <- loglik -lgamma(a)-lgamma(b)+lgamma(a+b) - (a+b)*log(nu+(1-nu)*(y^tau))
+       loglik <- log(tau) + b*log(nu) + (tau*a-1)*log(x) + (b-1)*log(1-x^tau)
+       loglik <- loglik -lgamma(a)-lgamma(b)+lgamma(a+b) - (a+b)*log(nu+(1-nu)*(x^tau))
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 
        ft
   }    

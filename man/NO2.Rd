@@ -20,7 +20,7 @@ generation for this specific parameterization of the normal distribution.
 }
 \usage{
 NO2(mu.link = "identity", sigma.link = "log")
-dNO2(y, mu = 0, sigma = 1, log = FALSE)
+dNO2(x, mu = 0, sigma = 1, log = FALSE)
 pNO2(q, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qNO2(p, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rNO2(n, mu = 0, sigma = 1)
@@ -29,7 +29,7 @@ rNO2(n, mu = 0, sigma = 1)
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{log, log.p}{ logical; if TRUE, probabilities p are given as log(p).}
@@ -67,7 +67,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{NO}} }
+\seealso{  \code{\link{gamlss.family}}, \code{\link{NO}} }
 
 \examples{
 NO()# gives information about the default links for the normal distribution

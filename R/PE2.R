@@ -80,11 +80,11 @@ PE2 <- function (mu.link="identity", sigma.link="log", nu.link ="log")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dPE2<-function(y, mu=0, sigma=1, nu=2, log=FALSE)
+dPE2<-function(x, mu=0, sigma=1, nu=2, log=FALSE)
  {
   if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
   if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))  
-      z <- (y-mu)/sigma
+      z <- (x-mu)/sigma
    log.lik <- -log(sigma)+log(nu)-log(2)-((abs(z)^nu))-lgamma(1/nu)
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
       fy 

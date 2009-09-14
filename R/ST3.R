@@ -234,18 +234,18 @@ ST3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link=
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------  
-dST3 <- function(y, mu=0, sigma=1, nu=1, tau=10, log=FALSE)
+dST3 <- function(x, mu=0, sigma=1, nu=1, tau=10, log=FALSE)
  {
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))
           if (any(tau <= 0))  stop(paste("tau must be positive", "\n", ""))  
-          loglik1a <- dt((nu*(y-mu)/sigma), df=tau, log=TRUE)
-          loglik2a <- dt((y-mu)/(sigma*nu), df=tau, log=TRUE)
-          loglika <- ifelse(y < mu, loglik1a, loglik2a)
+          loglik1a <- dt((nu*(x-mu)/sigma), df=tau, log=TRUE)
+          loglik2a <- dt((x-mu)/(sigma*nu), df=tau, log=TRUE)
+          loglika <- ifelse(x < mu, loglik1a, loglik2a)
           loglika <- loglika+log(2*nu/(1+nu^2)) - log(sigma)
-           loglik1b <- dNO((nu*(y-mu)/sigma), mu=0, sigma=1, log=TRUE)
-          loglik2b <- dNO((y-mu)/(sigma*nu), mu=0, sigma=1, log=TRUE)
-          loglikb <- ifelse(y < mu, loglik1b, loglik2b)
+           loglik1b <- dNO((nu*(x-mu)/sigma), mu=0, sigma=1, log=TRUE)
+          loglik2b <- dNO((x-mu)/(sigma*nu), mu=0, sigma=1, log=TRUE)
+          loglikb <- ifelse(x < mu, loglik1b, loglik2b)
           loglikb <- loglikb+log(2*nu/(1+nu^2)) - log(sigma)
      if (length(tau)>1) loglik <- ifelse(tau<1000000, 
                       loglika, 

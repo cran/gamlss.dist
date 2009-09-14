@@ -19,7 +19,7 @@ generation for the Skew Power exponential (SEP) distribution.
 \usage{
 SEP(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
     tau.link = "log")
-dSEP(y, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+dSEP(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
 pSEP(q, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, 
      log.p = FALSE)
 qSEP(p, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, 
@@ -33,7 +33,7 @@ rSEP(n, mu = 0, sigma = 1, nu = 0, tau = 2)
  \item{sigma.link}{  Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. Other links are "inverse" and "identity"}
  \item{nu.link}{Defines the  \code{nu.link}, with "identity" link as the default for the \code{nu} parameter. Other links are "\eqn{1/nu^2}" and "log"}
  \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter. Other links are "\eqn{1/tau^2}", and "identity}
- \item{y,q}{vector of quantiles}
+ \item{x,q}{vector of quantiles}
  \item{mu}{vector of location parameter values }
  \item{sigma}{vector of scale parameter values}
  \item{nu}{vector of skewness \code{nu} parameter values}
@@ -83,11 +83,11 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 }
 \author{Bob Rigby \email{r.rigby@londonmet.ac.uk} and Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} }
-\note{ }
+
 
 \section{Warning}{The qSEP and rSEP are slow since they are relying on golden section for finding the quantiles} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
+\seealso{ \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
 \examples{
 SEP()   # 
 plot(function(x)dSEP(x, mu=0,sigma=1, nu=1, tau=2), -5, 5, 

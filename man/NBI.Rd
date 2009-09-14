@@ -15,7 +15,7 @@ generation for the Negative Binomial type I, \code{NBI()}, distribution.
 }
 \usage{
 NBI(mu.link = "log", sigma.link = "log")
-dNBI(y, mu = 1, sigma = 1, log = FALSE)
+dNBI(x, mu = 1, sigma = 1, log = FALSE)
 pNBI(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qNBI(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rNBI(n, mu = 1, sigma = 1)
@@ -24,7 +24,7 @@ rNBI(n, mu = 1, sigma = 1)
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive means}
   \item{sigma}{vector of positive despersion parameter}
   \item{p}{vector of probabilities}
@@ -62,7 +62,7 @@ type I distribution (so \eqn{\sigma}{sigma} is the dispersion parameter in the u
 
 \section{Warning }{For values of \eqn{\sigma<0.0001}{sigma<0.0001}  the d,p,q,r functions switch to the Poisson distribution} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{NBII}}, \code{\link{PIG}}, \code{\link{SI}}}
+\seealso{  \code{\link{gamlss.family}}, \code{\link{NBII}}, \code{\link{PIG}}, \code{\link{SI}}}
 
 \examples{
 NBI()   # gives information about the default links for the Negative Binomial type I distribution  

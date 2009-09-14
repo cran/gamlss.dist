@@ -21,7 +21,7 @@ See Cole and Green (1992) and Rigby and Stasinopoulos (2003a,2003b) for details.
 \usage{
 BCCG(mu.link = "identity", sigma.link = "log", nu.link = "identity")
 BCCGuntr(mu.link = "identity", sigma.link = "log", nu.link = "identity")
-dBCCG(y, mu = 1, sigma = 0.1, nu = 1, log = FALSE)
+dBCCG(x, mu = 1, sigma = 0.1, nu = 1, log = FALSE)
 pBCCG(q, mu = 1, sigma = 0.1, nu = 1, lower.tail = TRUE, log.p = FALSE)
 qBCCG(p, mu = 1, sigma = 0.1, nu = 1, lower.tail = TRUE, log.p = FALSE)
 rBCCG(n, mu = 1, sigma = 0.1, nu = 1)
@@ -31,7 +31,7 @@ rBCCG(n, mu = 1, sigma = 0.1, nu = 1)
   \item{mu.link}{Defines the \code{mu.link}, with "identity" link as the default for the mu parameter, other links are "inverse", "log" and "own"}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter, other links are "inverse", "identity" and "own"}
   \item{nu.link}{Defines the \code{nu.link}, with "identity" link as the default for the nu parameter, other links are "inverse", "log" and "own"}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of skewness parameter values}
@@ -93,7 +93,7 @@ where the integrating constant is less than 0.99. A warning will be given if thi
 The BCCG distribution is suitable for all combinations of the distributional parameters within
 their range [i.e. \eqn{\mu>0}{mu>0}, \eqn{\sigma>0}{sigma>0}, \eqn{\nu=(-\infty, +\infty)}{nu=(-Inf,+Inf)}]} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCPE}}, \code{\link{BCT}}}
+\seealso{ \code{\link{gamlss.family}}, \code{\link{BCPE}}, \code{\link{BCT}}}
 \examples{
 BCCG()   # gives information about the default links for the Cole and Green distribution 
 # library(gamlss)

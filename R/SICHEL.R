@@ -194,24 +194,24 @@ tofySICHEL <- function (y, mu, sigma, nu, what=1)
 #  fy
 #  }
 #------------------------------------------------------------------------------------------
-dSICHEL<-function(y, mu=1, sigma=1, nu=-0.5, log=FALSE)
+dSICHEL<-function(x, mu=1, sigma=1, nu=-0.5, log=FALSE)
   { 
    if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-   if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
-    ly <- max(length(y),length(mu),length(sigma),length(nu)) 
-     y <- rep(y, length = ly)      
+   if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+    ly <- max(length(x),length(mu),length(sigma),length(nu)) 
+     x <- rep(x, length = ly)      
  sigma <- rep(sigma, length = ly)
     mu <- rep(mu, length = ly)   
     nu <- rep(nu, length = ly) 
   cvec <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
  alpha <- sqrt(1+2*sigma*(mu/cvec))/sigma
   lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
-sumlty <- as.double(.C("tofysin_", as.single(y), as.single(mu), 
+sumlty <- as.double(.C("tofysin_", as.single(x), as.single(mu), 
                                as.single(sigma), as.single(nu), as.single(lbes),
-                               as.single(cvec), as.integer(length(y)),
-                               as.integer(max(y)+1), PACKAGE="gamlss.dist")[[2]])
-logfy <- -lgamma(y+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(besselK((1/sigma),nu))
+                               as.single(cvec), as.integer(length(x)),
+                               as.integer(max(x)+1), PACKAGE="gamlss.dist")[[2]])
+logfy <- -lgamma(x+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(besselK((1/sigma),nu))
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
   fy
   }

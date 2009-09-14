@@ -6,7 +6,7 @@ WEI3 <- function (mu.link="log", sigma.link="log")
     mstats <- checklink("mu.link", "WEI3bull", substitute(mu.link), c("inverse", "log", "identity"))# dummy
     dstats <- checklink("sigma.link", "WEI3bull", substitute(sigma.link), c("inverse", "log", "identity"))
     structure(
-          list(family = c("WEI3", "WEI3bull"),
+          list(family = c("WEI3", "Weibull type 3"),
            parameters = list(mu=TRUE, sigma=TRUE), 
                 nopar = 2, 
                  type = "Continuous",
@@ -39,13 +39,13 @@ WEI3 <- function (mu.link="log", sigma.link="log")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dWEI3<-function(y, mu=1, sigma=1, log=FALSE)
+dWEI3<-function(x, mu=1, sigma=1, log=FALSE)
  { 
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
       mu2 <- mu/gamma((1/sigma)+1)
-      fy <- dweibull(y, scale=mu2, shape=sigma, log =log)
+      fy <- dweibull(x, scale=mu2, shape=sigma, log =log)
       fy 
   }
 #----------------------------------------------------------------------------------------  

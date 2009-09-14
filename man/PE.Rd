@@ -24,12 +24,12 @@ quantile function and random generation of a standard  parameterization of the p
 }
 \usage{
 PE(mu.link = "identity", sigma.link = "log", nu.link = "log")
-dPE(y, mu = 0, sigma = 1, nu = 2, log = FALSE)
+dPE(x, mu = 0, sigma = 1, nu = 2, log = FALSE)
 pPE(q, mu = 0, sigma = 1, nu = 2, lower.tail = TRUE, log.p = FALSE)
 qPE(p, mu = 0, sigma = 1, nu = 2, lower.tail = TRUE, log.p = FALSE)
 rPE(n, mu = 0, sigma = 1, nu = 2)
 PE2(mu.link = "identity", sigma.link = "log", nu.link = "log")
-dPE2(y, mu = 0, sigma = 1, nu = 2, log = FALSE)
+dPE2(x, mu = 0, sigma = 1, nu = 2, log = FALSE)
 pPE2(q, mu = 0, sigma = 1, nu = 2, lower.tail = TRUE, log.p = FALSE)
 qPE2(p, mu = 0, sigma = 1, nu = 2, lower.tail = TRUE, log.p = FALSE)
 rPE2(n, mu = 0, sigma = 1, nu = 2)
@@ -39,7 +39,7 @@ rPE2(n, mu = 0, sigma = 1, nu = 2)
   \item{mu.link}{Defines the \code{mu.link}, with "identity" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
   \item{nu.link}{ Defines the \code{nu.link}, with "log" link as the default for the nu parameter}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of kurtosis parameter }
@@ -82,7 +82,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCPE}}}
+\seealso{  \code{\link{gamlss.family}}, \code{\link{BCPE}}}
 
 \examples{
 PE()# gives information about the default links for the Power Exponential distribution  

@@ -126,11 +126,11 @@ EGB2 <- function (mu.link="identity", sigma.link="identity", nu.link ="log", tau
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------
-dEGB2 <- function(y, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)
+dEGB2 <- function(x, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)
  {
           if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))  
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-      z <- (y-mu)/sigma
+      z <- (x-mu)/sigma
  loglik <- nu*z-log(abs(sigma))-lgamma(nu)-lgamma(tau)+lgamma(nu+tau)-(nu+tau)*log(1+exp(z))
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 
        ft

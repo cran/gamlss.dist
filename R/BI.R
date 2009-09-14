@@ -26,12 +26,12 @@ BI <- function (mu.link = "logit")
             class = c("gamlss.family","family") )
 }
 #------------------------------------------------------------------------------------------
-dBI<-function(y, bd = 1, mu = 0.5, log = FALSE)
+dBI<-function(x, bd = 1, mu = 0.5, log = FALSE)
  { 
     if (any(mu < 0) | any(mu > 1))  stop(paste("mu must be between 0 and 1", "\n", "")) 
-    if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))
-    if (any(bd < y))  stop(paste("y  must be <=  than the binomial denominator", bd, "\n"))   
-    fy <- dbinom(y, size = bd, prob = mu, log = log)
+    if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))
+    if (any(bd < x))  stop(paste("x  must be <=  than the binomial denominator", bd, "\n"))   
+    fy <- dbinom(x, size = bd, prob = mu, log = log)
     fy
   }
 #------------------------------------------------------------------------------------------

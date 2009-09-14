@@ -32,23 +32,23 @@ gamlss.family.default(object,...)
   \bold{Distributions}         \tab \bold{R names}                       \tab \bold{No of parameters} \cr
   Beta                         \tab \code{\link{BE}()}                   \tab  2  \cr
   Beta Binomial                \tab \code{\link{BB}()}                   \tab  2  \cr
-  Beta one inflated            \tab \code{\link[gamlss.dist]{BEOI()}}    \tab  3  \cr
-  Beta zero inflated           \tab \code{\link[gamlss.dist]{BEZI()}}    \tab  3  \cr
+  Beta one inflated            \tab \code{\link{BEOI}()}    \tab  3  \cr
+  Beta zero inflated           \tab \code{\link{BEZI}()}    \tab  3  \cr
   Beta inflated                \tab \code{\link{BEINF}()}                \tab  4  \cr
   Binomial                     \tab \code{\link{BI}()}                   \tab  1  \cr
   Box-Cox Cole and Green       \tab \code{\link{BCCG}()}                 \tab  3  \cr
   Box-Cox Power Exponential    \tab \code{\link{BCPE}()}                 \tab  4  \cr
   Box-Cox-t                    \tab \code{\link{BCT}()}                  \tab  4  \cr
-  Delaport                     \tab \code{\link[gamlss.dist]{DEL()}}     \tab  3  \cr
-  Exponential                  \tab \code{\link[gamlss.dist]{EXP()}}     \tab  1  \cr
-  Exponential Gaussian         \tab \code{\link[gamlss.dist]{exGAUS()}}  \tab  3  \cr
-  Exponential generalized Beta  type 2 \tab \code{\link[gamlss.dist]{EGB2()}} \tab  4  \cr
+  Delaport                     \tab \code{\link{DEL}()}     \tab  3  \cr
+  Exponential                  \tab \code{\link{EXP}()}     \tab  1  \cr
+  Exponential Gaussian         \tab \code{\link{exGAUS}()}  \tab  3  \cr
+  Exponential generalized Beta type 2 \tab \code{\link{EGB2}()} \tab  4  \cr
   Gamma                        \tab \code{\link{GA}()}                   \tab  2  \cr
-  Generalized Beta  type 1     \tab \code{\link[gamlss.dist]{GB1()}}     \tab  4  \cr
-  Generalized Beta  type 2     \tab \code{\link[gamlss.dist]{GB2()}}     \tab  4  \cr
-  Generalized Gamma            \tab \code{\link[gamlss.dist]{GG()}}      \tab  3  \cr
-  Generalized Inverse Gaussian \tab \code{\link[gamlss.dist]{GIG()}}     \tab  3  \cr
-  Generalized t                \tab \code{\link[gamlss.dist]{GT()}}      \tab  4  \cr
+  Generalized Beta  type 1     \tab \code{\link{GB1}()}     \tab  4  \cr
+  Generalized Beta  type 2     \tab \code{\link{GB2}()}     \tab  4  \cr
+  Generalized Gamma            \tab \code{\link{GG}()}      \tab  3  \cr
+  Generalized Inverse Gaussian \tab \code{\link{GIG}()}     \tab  3  \cr
+  Generalized t                \tab \code{\link{GT}()}      \tab  4  \cr
   Gumbel                       \tab \code{\link{GU}()}                   \tab  2  \cr
   Inverse Gaussian             \tab \code{\link{IG}()}                   \tab  2  \cr
   Johnson's SU                 \tab \code{\link{JSU}()}                  \tab  4  \cr   
@@ -59,31 +59,31 @@ gamlss.family.default(object,...)
   Negative Binomial type II    \tab \code{\link{NBII}()}                 \tab  2  \cr
   Normal Exponential \emph{t}   \tab \code{\link{NET}()}                  \tab  4 (2 fixed)  \cr
   Normal                       \tab \code{\link{NO}()}                   \tab  2  \cr
-  Normal Family                \tab \code{\link[gamlss.dist]{NOF()}}     \tab  3 (1 fixed)  \cr
+  Normal Family                \tab \code{\link{NOF}()}     \tab  3 (1 fixed)  \cr
   Power Exponential            \tab \code{\link{PE}()}                   \tab  3  \cr
   Power Exponential  type 2    \tab \code{\link{PE2}()}                  \tab  3  \cr
   Poison                       \tab \code{\link{PO}()}                   \tab  1  \cr
   Poisson inverse Gaussian     \tab \code{\link{PIG}()}                  \tab  2  \cr
-  Reverse generalized extreme  \tab \code{\link[gamlss.dist]{RGE()}}     \tab  3  \cr
+  Reverse generalized extreme  \tab \code{\link{RGE}()}     \tab  3  \cr
   Reverse Gumbel               \tab \code{\link{RG}()}                   \tab  2  \cr 
-  Skew Power Exponential type 1 \tab \code{\link[gamlss.dist]{SEP1()}}   \tab  4  \cr 
-  Skew Power Exponential type 2 \tab \code{\link[gamlss.dist]{SEP2()}}   \tab  4  \cr 
-  Skew Power Exponential type 3 \tab \code{\link[gamlss.dist]{SEP3()}}   \tab  4  \cr 
-  Skew Power Exponential type 4 \tab \code{\link[gamlss.dist]{SEP4()}}   \tab  4  \cr 
-  Shash                        \tab \code{\link[gamlss.dist]{SHASH()}}   \tab  4  \cr 
+  Skew Power Exponential type 1 \tab \code{\link{SEP1}()}   \tab  4  \cr 
+  Skew Power Exponential type 2 \tab \code{\link{SEP2}()}   \tab  4  \cr 
+  Skew Power Exponential type 3 \tab \code{\link{SEP3}()}   \tab  4  \cr 
+  Skew Power Exponential type 4 \tab \code{\link{SEP4}()}   \tab  4  \cr 
+  Shash                        \tab \code{\link{SHASH}()}   \tab  4  \cr 
   Sichel  (original)           \tab \code{\link{SI}()}                   \tab  3  \cr
-  Sichel  (mu as the maen)     \tab \code{\link[gamlss.dist]{SICHEL()}}  \tab  3  \cr
-  Skew t  type 1               \tab \code{\link[gamlss.dist]{ST1()}}     \tab  3  \cr 
-  Skew t  type 2               \tab \code{\link[gamlss.dist]{ST2()}}     \tab  3  \cr 
-  Skew t  type 3               \tab \code{\link[gamlss.dist]{ST3()}}     \tab  3  \cr 
-  Skew t  type 4               \tab \code{\link[gamlss.dist]{ST4()}}     \tab  3  \cr 
-  Skew t  type 5               \tab \code{\link[gamlss.dist]{ST5()}}     \tab  3  \cr 
+  Sichel  (mu as the maen)     \tab \code{\link{SICHEL}()}  \tab  3  \cr
+  Skew t  type 1               \tab \code{\link{ST1}()}     \tab  3  \cr 
+  Skew t  type 2               \tab \code{\link{ST2}()}     \tab  3  \cr 
+  Skew t  type 3               \tab \code{\link{ST3}()}     \tab  3  \cr 
+  Skew t  type 4               \tab \code{\link{ST4}()}     \tab  3  \cr 
+  Skew t  type 5               \tab \code{\link{ST5}()}     \tab  3  \cr 
   t-distribution               \tab \code{\link{TF}()}                   \tab  3  \cr
   Weibull                      \tab \code{\link{WEI}()}                  \tab  2  \cr
   Weibull(PH parameterization) \tab \code{\link{WEI2}()}                 \tab  2  \cr
-  Weibull (mu as mean)         \tab \code{\link[gamlss.dist]{WEI3()}}    \tab  2  \cr
+  Weibull (mu as mean)         \tab \code{\link{WEI3}()}    \tab  2  \cr
   Zero inflated poisson        \tab \code{\link{ZIP}()}                  \tab  2  \cr
-  Zero inf. poiss.(mu as mean) \tab \code{\link[gamlss.dist]{ZIP2()}}    \tab  2  \cr
+  Zero inf. poiss.(mu as mean) \tab \code{\link{ZIP2}()}    \tab  2  \cr
   Zero adjusted IG             \tab \code{\link{ZAIG}()}                 \tab  2  \cr
   }
  Note that some of the distributions are in the package \code{gamlss.dist}.
@@ -118,9 +118,12 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
       be incorporate relatively easy, see, for example, the help documentation accompanying the gamlss library.}
 
 
-\seealso{ \code{\link[gamlss]{gamlss}},\code{\link{BE}},\code{\link{BB}},\code{\link{BEINF}},\code{\link{BI}},\code{\link{LNO}},\code{\link{BCT}},\code{\link{BCPE}},\code{\link{BCCG}},
-\code{\link{GA}},\code{\link{GU}},\code{\link{JSU}},\code{\link{IG}},\code{\link{LO}},\code{\link{NBI}},\code{\link{NBII}},\code{\link{NO}},\code{\link{PE}}
-,\code{\link{PO}},\code{\link{RG}},\code{\link{PIG}},\code{\link{TF}},\code{\link{WEI}},\code{\link{WEI2}},\code{\link{ZIP}}    }
+\seealso{ \code{\link{BE}},\code{\link{BB}},\code{\link{BEINF}},\code{\link{BI}},\code{\link{LNO}},\code{\link{BCT}},
+          \code{\link{BCPE}},\code{\link{BCCG}},
+          \code{\link{GA}},\code{\link{GU}},\code{\link{JSU}},\code{\link{IG}},\code{\link{LO}},
+          \code{\link{NBI}},\code{\link{NBII}},\code{\link{NO}},\code{\link{PE}},\code{\link{PO}},
+          \code{\link{RG}},\code{\link{PIG}},\code{\link{TF}},\code{\link{WEI}},\code{\link{WEI2}},
+          \code{\link{ZIP}}}
 
 \examples{
  normal<-NO(mu.link="log", sigma.link="log")

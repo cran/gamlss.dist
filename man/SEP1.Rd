@@ -33,7 +33,7 @@ distributions.
 \usage{
 SEP1(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
      tau.link = "log")
-dSEP1(y, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+dSEP1(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
 pSEP1(q, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, 
      log.p = FALSE)
 qSEP1(p, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, 
@@ -42,7 +42,7 @@ rSEP1(n, mu = 0, sigma = 1, nu = 0, tau = 2)
 
 SEP2(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
       tau.link = "log")
-dSEP2(y, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+dSEP2(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
 pSEP2(q, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, 
       log.p = FALSE)
 qSEP2(p, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, 
@@ -51,7 +51,7 @@ rSEP2(n, mu = 0, sigma = 1, nu = 0, tau = 2)
 
 SEP3(mu.link = "identity", sigma.link = "log", nu.link = "log", 
       tau.link = "log")
-dSEP3(y, mu = 0, sigma = 1, nu = 2, tau = 2, log = FALSE)
+dSEP3(x, mu = 0, sigma = 1, nu = 2, tau = 2, log = FALSE)
 pSEP3(q, mu = 0, sigma = 1, nu = 2, tau = 2, lower.tail = TRUE, 
       log.p = FALSE)
 qSEP3(p, mu = 0, sigma = 1, nu = 2, tau = 2, lower.tail = TRUE, 
@@ -59,7 +59,7 @@ qSEP3(p, mu = 0, sigma = 1, nu = 2, tau = 2, lower.tail = TRUE,
 
 SEP4(mu.link = "identity", sigma.link = "log", nu.link = "log", 
       tau.link = "log")
-dSEP4(y, mu = 0, sigma = 1, nu = 2, tau = 2, log = FALSE)      
+dSEP4(x, mu = 0, sigma = 1, nu = 2, tau = 2, log = FALSE)      
 pSEP4(q, mu = 0, sigma = 1, nu = 2, tau = 2, lower.tail = TRUE, 
       log.p = FALSE)
 qSEP4(p, mu = 0, sigma = 1, nu = 2, tau = 2, lower.tail = TRUE, 
@@ -72,7 +72,7 @@ rSEP4(n, mu = 0, sigma = 1, nu = 2, tau = 2)
  \item{sigma.link}{ Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. Other links are "inverse" and "identity"}
  \item{nu.link}{Defines the  \code{nu.link}, with "log" link as the default for the \code{nu} parameter. Other links are "identity" and "inverse"}
  \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter. Other links are "inverse", and "identity}
- \item{y,q}{vector of quantiles}
+ \item{x,q}{vector of quantiles}
  \item{mu}{vector of location parameter values}
  \item{sigma}{vector of scale parameter values}
  \item{nu}{vector of skewness \code{nu} parameter values}
@@ -118,14 +118,13 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 }
 \author{Bob Rigby \email{r.rigby@londonmet.ac.uk} and Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} }
-\note{ }
 
-\section{Warning}{} 
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{SEP}}}
+
+\seealso{ \code{\link{gamlss.family}}, \code{\link{SEP}}}
 \examples{
 SEP1() 
-curve(dSEP4(y=x, mu=5 ,sigma=1, nu=2, tau=1.5), -2, 10, main = "The SEP4  density mu=5 ,sigma=1, nu=1, tau=1.5")
+curve(dSEP4(x, mu=5 ,sigma=1, nu=2, tau=1.5), -2, 10, main = "The SEP4  density mu=5 ,sigma=1, nu=1, tau=1.5")
 # library(gamlss)
 #y<- rSEP4(100, mu=5, sigma=1, nu=2, tau=1.5);hist(y)
 #m1<-gamlss(y~1, family=SEP1, n.cyc=50)

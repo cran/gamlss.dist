@@ -72,14 +72,14 @@ BCCG <- function (mu.link="identity", sigma.link="log", nu.link ="identity")
             class = c("gamlss.family","family"))
 }
 #--------------------------------------------------------------
-dBCCG <- function(y, mu=1, sigma=0.1, nu=1,  log = FALSE)
+dBCCG <- function(x, mu=1, sigma=0.1, nu=1,  log = FALSE)
  {
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
-          if(length(nu)>1)  z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
-          else   if (nu != 0) z <- (((y/mu)^nu-1)/(nu*sigma)) else z <- log(y/mu)/sigma
-      loglik <- nu*log(y/mu)-log(sigma)-(z*z)/2 -log(y) -(log(2*pi))/2
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+          if(length(nu)>1)  z <- ifelse(nu != 0,(((x/mu)^nu-1)/(nu*sigma)),log(x/mu)/sigma)
+          else   if (nu != 0) z <- (((x/mu)^nu-1)/(nu*sigma)) else z <- log(x/mu)/sigma
+      loglik <- nu*log(x/mu)-log(sigma)-(z*z)/2 -log(x) -(log(2*pi))/2
       loglik <- loglik-log(pnorm(1/(sigma*abs(nu))))
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 
        ft

@@ -107,21 +107,21 @@ exGAUS <- function (mu.link="identity", sigma.link="log", nu.link ="log")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dexGAUS<-function(y, mu=5, sigma=1, nu=1, log=FALSE)
+dexGAUS<-function(x, mu=5, sigma=1, nu=1, log=FALSE)
   { 
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
    if (any(nu <= 0) )  stop(paste("nu must be greater than 1 ", "\n", "")) 
-    ly <- length(y)       
+    ly <- length(x)       
  sigma <- rep(sigma, length = ly)
     mu <- rep(mu, length = ly)   
     nu <- rep(nu, length = ly) 
-     z <- y-mu-((sigma^2)/nu)
+     z <- x-mu-((sigma^2)/nu)
 logfy <- ifelse(nu>0.05*sigma,  
           -log(nu)-(z+(sigma^2/(2*nu)))/nu+log(pnorm(z/sigma)),
-           dnorm(y, mean=mu, sd=sigma, log=TRUE)
+           dnorm(x, mean=mu, sd=sigma, log=TRUE)
                )
-#logfy <- ifelse(nu > 0.05, logfy, dnorm(y,mean=mu,sd=sigma, log=TRUE))
-#logfy <- -log(nu)+((mu-y)/nu)+(sigma^2/(2*nu^2))+log(pnorm(((y-mu)/sigma)-sigma/nu))
+#logfy <- ifelse(nu > 0.05, logfy, dnorm(x,mean=mu,sd=sigma, log=TRUE))
+#logfy <- -log(nu)+((mu-x)/nu)+(sigma^2/(2*nu^2))+log(pnorm(((x-mu)/sigma)-sigma/nu))
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
   fy
   }

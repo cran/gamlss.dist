@@ -14,7 +14,7 @@ generation for the specific parameterization of the reverse generalized extreme 
 }
 \usage{
 RGE(mu.link = "identity", sigma.link = "log", nu.link = "log")
-dRGE(y, mu = 1, sigma = 0.1, nu = 1, log = FALSE)
+dRGE(x, mu = 1, sigma = 0.1, nu = 1, log = FALSE)
 pRGE(q, mu = 1, sigma = 0.1, nu = 1, lower.tail = TRUE, log.p = FALSE)
 qRGE(p, mu = 1, sigma = 0.1, nu = 1, lower.tail = TRUE, log.p = FALSE) 
 rRGE(n, mu = 1, sigma = 0.1, nu = 1)
@@ -24,7 +24,7 @@ rRGE(n, mu = 1, sigma = 0.1, nu = 1)
   \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
   \item{nu.link}{ Defines the \code{nu.link}, with "log" link as the default for the nu parameter}
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of the shape parameter values}
@@ -91,7 +91,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 on the parameter  values. The \code{RS()} and \code{CG()} algorithms are not appropriate for this type of problem.}
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}}
+\seealso{  \code{\link{gamlss.family}}}
 
 \examples{
 RGE()# gives information about the default links for the reverse generalized extreme family distribution 

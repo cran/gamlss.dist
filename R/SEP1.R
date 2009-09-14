@@ -250,11 +250,11 @@ G.dev.incr  = function(y,mu,sigma,nu,tau,...)
             class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dSEP1 <- function(y, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+dSEP1 <- function(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
  {
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-      z <- (y-mu)/sigma
+      z <- (x-mu)/sigma
       w <- nu*z
      sz <- ((abs(z))^tau)/tau 
       s <- ((abs(w))^tau)/tau 

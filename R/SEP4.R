@@ -218,7 +218,7 @@ SEP4 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------  
-dSEP4 <- function(y, mu=0, sigma=1, nu=2, tau=2, log=FALSE)
+dSEP4 <- function(x, mu=0, sigma=1, nu=2, tau=2, log=FALSE)
  {
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))
@@ -227,10 +227,10 @@ dSEP4 <- function(y, mu=0, sigma=1, nu=2, tau=2, log=FALSE)
           lk2 <- lgamma(1+(1/tau))
           k1 <- exp(lk1)  
           k2 <- exp(lk2)     
-          z <- (y-mu)/sigma
+          z <- (x-mu)/sigma
           loglik1 <- -((abs(z)^nu))
           loglik2 <- -((abs(z)^tau))
-          loglik <- ifelse(y < mu, loglik1, loglik2)
+          loglik <- ifelse(x < mu, loglik1, loglik2)
           loglik <- loglik - log(k1+k2) - log(sigma)
           fy <- if(log==FALSE) exp(loglik) else loglik 
        fy

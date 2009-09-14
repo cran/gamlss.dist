@@ -37,8 +37,7 @@ Accompanying documentation in the current GAMLSS  help files, (see also  \url{ht
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 }
-\seealso{
-\code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}} } 
+\seealso{ \code{\link{gamlss.family}} } 
 
 \examples{
 plot(function(y) dSICHEL(y, mu=10, sigma = 0.1 , nu=1 ), from=0, to=30, n=30+1, type="h") # pdf

@@ -53,14 +53,14 @@ LNO <- function (mu.link="identity", sigma.link="log")
             class = c("gamlss.family","family"))
 }
 #-------------------------------------------
-dLNO <- function(y, mu=1, sigma=0.1, nu=0,  log = FALSE)
+dLNO <- function(x, mu=1, sigma=0.1, nu=0,  log = FALSE)
  {
           if (any(nu!=0 & mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
-          if(length(nu)>1)  z <- ifelse(nu != 0,((y^nu)-1)/nu,log(y))
-          else   if (nu != 0) z <- ((y^nu)-1)/nu else z <- log(y)
-      loglik <- -0.5*log(2*pi)-log(sigma)-0.5*((z-mu)^2)/(sigma^2)+(nu-1)*log(y)
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+          if(length(nu)>1)  z <- ifelse(nu != 0,((x^nu)-1)/nu,log(x))
+          else   if (nu != 0) z <- ((x^nu)-1)/nu else z <- log(x)
+      loglik <- -0.5*log(2*pi)-log(sigma)-0.5*((z-mu)^2)/(sigma^2)+(nu-1)*log(x)
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 
        ft
   }    

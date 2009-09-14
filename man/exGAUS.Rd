@@ -18,7 +18,7 @@ The functions \code{dexGAUS}, \code{pexGAUS}, \code{qexGAUS} and \code{rexGAUS} 
 }
 \usage{
 exGAUS(mu.link = "identity", sigma.link = "log", nu.link = "log")
-dexGAUS(y, mu = 5, sigma = 1, nu = 1, log = FALSE)
+dexGAUS(x, mu = 5, sigma = 1, nu = 1, log = FALSE)
 pexGAUS(q, mu = 5, sigma = 1, nu = 1, lower.tail = TRUE, log.p = FALSE)
 qexGAUS(p, mu = 5, sigma = 1, nu = 1, lower.tail = TRUE, log.p = FALSE)
 rexGAUS(n, mu = 5, sigma = 1, nu = 1, ...)
@@ -29,7 +29,7 @@ rexGAUS(n, mu = 5, sigma = 1, nu = 1, ...)
   \item{sigma.link}{ Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter.}
   \item{nu.link}{Defines the  \code{nu.link}, with "log" link as the default for the \code{nu} parameter. 
                    Other links are "inverse", "identity", "logshifted" (shifted from one) and "own"}
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of \code{mu} parameter values }
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of \code{nu} parameter values}
@@ -74,7 +74,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \author{Mikis Stasinopoulos and Bob Rigby  }
 \note{ The mean of the ex-Gaussian is \eqn{\mu+\nu}{mu+nu} and the variance is \eqn{\sigma^2+\nu^2}{sigma^2+nu^2}.
 }
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCCG}}, \code{\link{GA}}, 
+\seealso{ \code{\link{gamlss.family}}, \code{\link{BCCG}}, \code{\link{GA}}, 
 \code{\link{IG}}  \code{\link{LNO}}}
 \examples{
 exGAUS()   # 
@@ -83,7 +83,7 @@ hist(y)
 # library(gamlss)
 # m1<-gamlss(y~1, family=exGAUS) 
 # plot(m1)
-curve(dexGAUS(y=x, mu=300 ,sigma=35,nu=100), 100, 600, 
+curve(dexGAUS(x, mu=300 ,sigma=35,nu=100), 100, 600, 
  main = "The ex-GAUS  density mu=300 ,sigma=35,nu=100")
 plot(function(x) pexGAUS(x, mu=300,sigma=35,nu=100), 100, 600, 
  main = "The ex-GAUS  cdf mu=300, sigma=35, nu=100")

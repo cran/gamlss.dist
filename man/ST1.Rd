@@ -38,31 +38,31 @@ The functions \code{dST3}, \code{pST3}, \code{qST3} and \code{rST3} define the d
 }
 \usage{
 ST1(mu.link = "identity", sigma.link = "log", nu.link = "identity", tau.link="log")
-dST1(y, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+dST1(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
 pST1(q, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, log.p = FALSE)
 qST1(p, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, log.p = FALSE)
 rST1(n, mu = 0, sigma = 1, nu = 0, tau = 2)
 
 ST2(mu.link = "identity", sigma.link = "log", nu.link = "identity", tau.link = "log")
-dST2(y, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+dST2(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
 pST2(q, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, log.p = FALSE)
 qST2(p, mu = 1, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, log.p = FALSE)
 rST2(n, mu = 0, sigma = 1, nu = 0, tau = 2)
 
 ST3(mu.link = "identity", sigma.link = "log", nu.link = "log", tau.link = "log")
-dST3(y, mu = 0, sigma = 1, nu = 1, tau = 10, log = FALSE)
+dST3(x, mu = 0, sigma = 1, nu = 1, tau = 10, log = FALSE)
 pST3(q, mu = 0, sigma = 1, nu = 1, tau = 10, lower.tail = TRUE, log.p = FALSE)
 qST3(p, mu = 0, sigma = 1, nu = 1, tau = 10, lower.tail = TRUE, log.p = FALSE)
 rST3(n, mu = 0, sigma = 1, nu = 1, tau = 10)
 
 ST4(mu.link = "identity", sigma.link = "log", nu.link = "log", tau.link = "log")
-dST4(y, mu = 0, sigma = 1, nu = 1, tau = 10, log = FALSE)
+dST4(x, mu = 0, sigma = 1, nu = 1, tau = 10, log = FALSE)
 pST4(q, mu = 0, sigma = 1, nu = 1, tau = 10, lower.tail = TRUE, log.p = FALSE)
 qST4(p, mu = 0, sigma = 1, nu = 1, tau = 10, lower.tail = TRUE, log.p = FALSE)
 rST4(n, mu = 0, sigma = 1, nu = 1, tau = 10)
 
 ST5(mu.link = "identity", sigma.link = "log", nu.link = "identity", tau.link = "log")
-dST5(y, mu = 0, sigma = 1, nu = 0, tau = 1, log = FALSE)
+dST5(x, mu = 0, sigma = 1, nu = 0, tau = 1, log = FALSE)
 pST5(q, mu = 0, sigma = 1, nu = 0, tau = 1, lower.tail = TRUE, log.p = FALSE)
 qST5(p, mu = 0, sigma = 1, nu = 0, tau = 1, lower.tail = TRUE, log.p = FALSE)
 rST5(n, mu = 0, sigma = 1, nu = 0, tau = 1)
@@ -77,7 +77,7 @@ rST5(n, mu = 0, sigma = 1, nu = 0, tau = 1)
                   Other links are "\eqn{1/mu^2}" and "log"}
    \item{tau.link}{Defines the  \code{nu.link}, with "log" link as the default for the \code{nu} parameter. 
                    Other links are "inverse", "identity" }                
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of \code{mu} parameter values }
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of \code{nu} parameter values}
@@ -153,12 +153,12 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \author{Bob Rigby and Mikis Stasinopoulos  }
 \note{ The mean of the ex-Gaussian is \eqn{\mu+\nu}{mu+nu} and the variance is \eqn{\sigma^2+\nu^2}{sigma^2+nu^2}.
 }
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCCG}}, \code{\link{GA}}, 
+\seealso{ \code{\link{gamlss.family}}, \code{\link{BCCG}}, \code{\link{GA}}, 
 \code{\link{IG}}  \code{\link{LNO}}}
 \examples{ 
 y<- rST5(200, mu=5, sigma=1, nu=.1)
 hist(y)
-curve(dST5(y=x, mu=30 ,sigma=5,nu=-1), -50, 50, main = "The ST5  density mu=30 ,sigma=5,nu=1")
+curve(dST5(x, mu=30 ,sigma=5,nu=-1), -50, 50, main = "The ST5  density mu=30 ,sigma=5,nu=1")
 # library(gamlss)
 # m1<-gamlss(y~1, family=ST1)
 # m2<-gamlss(y~1, family=ST2)

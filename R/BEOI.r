@@ -112,8 +112,8 @@ BEOI = function (mu.link = "logit", sigma.link = "log", nu.link = "logit")
 }
 
 #----------------------------------------------------------------------------------------
-########## Density  function of One Inflated Beta ##########
-dBEOI = function (y, mu = 0.5, sigma = 1, nu = 0.1, log = FALSE) 
+########## Densitx  function of One Inflated Beta ##########
+dBEOI = function (x, mu = 0.5, sigma = 1, nu = 0.1, log = FALSE) 
 {
 
     if (any(mu <= 0)|any(mu >= 1)) 
@@ -122,15 +122,15 @@ dBEOI = function (y, mu = 0.5, sigma = 1, nu = 0.1, log = FALSE)
         stop(paste("sigma must be positive", "\n", ""))
     if (any(nu <= 0)|any(nu >= 1))  #In this parametrization  nu = alpha
         stop(paste("nu must be beetwen 0 and 1 ", "\n", ""))
-    if (any(y <= 0)|any(y >1) ) 
-        stop(paste("y must be beetwen (0, 1]", "\n", ""))
+    if (any(x <= 0)|any(x >1) ) 
+        stop(paste("x must be beetwen (0, 1]", "\n", ""))
 
     a = mu * sigma
     b = (1 - mu) * sigma
 
-    log.beta = dbeta(y, shape1 = a, shape2 = b, ncp = 0, log = TRUE)
+    log.beta = dbeta(x, shape1 = a, shape2 = b, ncp = 0, log = TRUE)
         
-    log.lik <- ifelse(y == 1, log(nu), log(1 - nu) + log.beta)
+    log.lik <- ifelse(x == 1, log(nu), log(1 - nu) + log.beta)
     if (log == FALSE) 
         fy <- exp(log.lik)
     else fy <- log.lik

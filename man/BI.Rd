@@ -14,7 +14,7 @@ generation for the binomial, \code{BI()}, distribution.
 }
 \usage{
 BI(mu.link = "logit")
-dBI(y, bd = 1, mu = 0.5, log = FALSE)
+dBI(x, bd = 1, mu = 0.5, log = FALSE)
 pBI(q, bd = 1, mu = 0.5, lower.tail = TRUE, log.p = FALSE)
 qBI(p, bd = 1, mu = 0.5, lower.tail = TRUE, log.p = FALSE)
 rBI(n, bd = 1, mu = 0.5)
@@ -22,7 +22,7 @@ rBI(n, bd = 1, mu = 0.5)
 
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "logit" link as the default for the \code{mu} parameter.  Other links are "probit" and "cloglog"'(complementary log-log)}
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive probabilities}
   \item{bd}{vector of binomial denominators}
   \item{p}{vector of probabilities}
@@ -56,7 +56,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
        \eqn{n\mu}{n*mu} is the mean of the distribution where n is the binomial denominator. }
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}}
+\seealso{ \code{\link{gamlss.family}}}
 
 \examples{
  BI()# gives information about the default links for the Binomial distribution 
@@ -64,7 +64,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 # library(gamlss)
 # h<-gamlss(y~ward+loglos+year, family=BI, data=aep)  
 # plot of the binomial distribution
-curve(dBI(y=x, mu = .5, bd=10), from=0, to=10, n=10+1, type="h")
+curve(dBI(x, mu = .5, bd=10), from=0, to=10, n=10+1, type="h")
 tN <- table(Ni <- rBI(1000, mu=.2, bd=10))
 r <- barplot(tN, col='lightblue')
 }

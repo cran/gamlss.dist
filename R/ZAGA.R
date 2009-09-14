@@ -48,12 +48,12 @@ ZAGA <- function (mu.link ="log", sigma.link="log", nu.link ="logit")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dZAGA<-function(y, mu=1, sigma=1, nu=.1, log=FALSE)
+dZAGA<-function(x, mu=1, sigma=1, nu=.1, log=FALSE)
  {        if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))
           if (any(nu < 0)|any(nu > 1))  stop(paste("nu must be between 0 and 1", "\n", ""))     
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
- log.lik <- ifelse(y==0, log(nu), log(1-nu)+(1/sigma^2)*log(y/(mu*sigma^2))-y/(mu*sigma^2)-log(y)-lgamma(1/sigma^2))
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+ log.lik <- ifelse(x==0, log(nu), log(1-nu)+(1/sigma^2)*log(x/(mu*sigma^2))-x/(mu*sigma^2)-log(x)-lgamma(1/sigma^2))
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
       fy 
   }

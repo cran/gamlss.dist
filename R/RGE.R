@@ -92,15 +92,15 @@ RGE <- function (mu.link="identity", sigma.link="log", nu.link ="log")
 #----------------------------------------------------------------------------------------
 #--------------------------------------------------------------
 #----------------------------------------------------------------------------------------
-dRGE <- function(y, mu=1, sigma=0.1, nu=1,  log = FALSE)
+dRGE <- function(x, mu=1, sigma=0.1, nu=1,  log = FALSE)
  {
       #   if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(nu <= 0))  stop(paste("nu must be positive", "\n", "")) 
-          if (any(y < mu-(sigma/nu)))  stop(paste("y must greater than mu-sigma/nu", "\n", ""))  
-         y.sca <- nu*(y-mu)/sigma 
+          if (any(x < mu-(sigma/nu)))  stop(paste("x must greater than mu-sigma/nu", "\n", ""))  
+         y.sca <- nu*(x-mu)/sigma 
        loglik1 <- (-log(sigma)+((1/nu)-1)*ifelse((1+y.sca) <= 0,0,log(1+y.sca)))-(1+y.sca)^(1/nu)
-       loglik2 <- -log(sigma)+(y-mu)/sigma-exp((y-mu)/sigma)
+       loglik2 <- -log(sigma)+(x-mu)/sigma-exp((x-mu)/sigma)
        if(length(nu)>1)  loglik <- ifelse(abs(nu)<0.001,loglik2,loglik1)
        else   loglik <- if(abs(nu)<0.001) loglik2 else loglik1 
        ft <- if(log==FALSE) exp(loglik) else loglik 

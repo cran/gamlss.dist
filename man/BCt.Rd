@@ -21,7 +21,7 @@ BCT(mu.link = "identity", sigma.link = "log", nu.link = "identity",
           tau.link = "log")
 BCTuntr(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
           tau.link = "log")
-dBCT(y, mu = 5, sigma = 0.1, nu = 1, tau = 2, log = FALSE)
+dBCT(x, mu = 5, sigma = 0.1, nu = 1, tau = 2, log = FALSE)
 pBCT(q, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)
 qBCT(p, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)          
 rBCT(n, mu = 5, sigma = 0.1, nu = 1, tau = 2)
@@ -32,7 +32,7 @@ rBCT(n, mu = 5, sigma = 0.1, nu = 1, tau = 2)
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. Other links are "inverse","identity", "own"}
   \item{nu.link}{Defines the  \code{nu.link}, with "identity" link as the default for the \code{nu} parameter. Other links are "inverse", "log", "own"}
   \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter. Other links are "inverse", "identity" and "own"}
-  \item{y,q}{vector of quantiles }
+  \item{x,q}{vector of quantiles }
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of \code{nu} parameter values}
@@ -89,7 +89,7 @@ The \code{BCT} distribution is suitable for all combinations of the parameters w
 
 } 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCPE}}, \code{\link{BCCG}}}
+\seealso{  \code{\link{gamlss.family}}, \code{\link{BCPE}}, \code{\link{BCCG}}}
 
 \examples{
 BCT()   # gives information about the default links for the Box Cox t distribution

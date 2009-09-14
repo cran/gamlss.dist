@@ -26,7 +26,7 @@ the response for a fitted model.
 \usage{
 BEOI(mu.link = "logit", sigma.link = "log", nu.link = "logit")
 
-dBEOI(y, mu = 0.5, sigma = 1, nu = 0.1, log = FALSE)
+dBEOI(x, mu = 0.5, sigma = 1, nu = 0.1, log = FALSE)
 
 pBEOI(q, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
 
@@ -45,7 +45,7 @@ meanBEOI(obj)
   \item{mu.link}{the \code{mu} link function with default \code{logit}}
   \item{sigma.link}{the \code{sigma} link function with default \code{log}}
   \item{nu.link}{the \code{nu} link function with default \code{logit}}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values} 
   \item{sigma}{vector of precision parameter values}
   \item{nu}{vector of parameter values modelling the probability at one}
@@ -106,7 +106,7 @@ My thesis is concerned with regression modelling of rates and
 proportions with excess of zeros and/or ones}
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BEOI}} }
+\seealso{\code{\link{gamlss.family}}, \code{\link{BEOI}} }
 \examples{
 
 BEOI()# gives information about the default links for the BEOI distribution

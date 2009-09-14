@@ -47,11 +47,11 @@ ZAIG <- function (mu.link ="log", sigma.link="log", nu.link ="logit")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dZAIG<-function(y, mu=1, sigma=1, nu=.1, log=FALSE)
+dZAIG<-function(x, mu=1, sigma=1, nu=.1, log=FALSE)
  {        if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
- log.lik <- ifelse(y==0, log(nu), log(1-nu)+(-0.5*log(2*pi)-log(sigma)-(3/2)*log(y)-((y-mu)^2)/(2*sigma^2*(mu^2)*y)))
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+ log.lik <- ifelse(x==0, log(nu), log(1-nu)+(-0.5*log(2*pi)-log(sigma)-(3/2)*log(x)-((x-mu)^2)/(2*sigma^2*(mu^2)*x)))
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
       fy 
   }

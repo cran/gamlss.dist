@@ -245,7 +245,7 @@ d2ldvdt
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dJSU <- function(y, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)
+dJSU <- function(x, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)
  {
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
@@ -255,7 +255,7 @@ dJSU <- function(y, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)
     else w <- if (rtau<0.0000001) 1  else  exp(rtau^2)
   omega <- -nu*rtau 
       c <- (.5*(w-1)*(w*cosh(2*omega)+1))^(-0.5)  
-      z <- (y-(mu+c*sigma*w^(.5)*sinh(omega)))/(c*sigma)
+      z <- (x-(mu+c*sigma*w^(.5)*sinh(omega)))/(c*sigma)
       r <- -nu + asinh(z)/rtau
  loglik <- -log(sigma)-log(c)-log(rtau)-.5*log(z*z+1)-.5*log(2*pi)-.5*r*r
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 

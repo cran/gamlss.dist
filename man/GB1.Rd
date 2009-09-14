@@ -20,7 +20,7 @@ generation for the generalized beta type 1 distribution.
 \usage{
 GB1(mu.link = "logit", sigma.link = "logit", nu.link = "log", 
       tau.link = "log")
-dGB1(y, mu = 0.5, sigma = 0.4, nu = 1, tau = 1, log = FALSE)
+dGB1(x, mu = 0.5, sigma = 0.4, nu = 1, tau = 1, log = FALSE)
 pGB1(q, mu = 0.5, sigma = 0.4, nu = 1, tau = 1, lower.tail = TRUE, 
        log.p = FALSE)
 qGB1(p, mu = 0.5, sigma = 0.4, nu = 1, tau = 1, lower.tail = TRUE, 
@@ -33,7 +33,7 @@ rGB1(n, mu = 0.5, sigma = 0.4, nu = 1, tau = 1)
  \item{sigma.link}{  Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. }
  \item{nu.link}{Defines the  \code{nu.link}, with "log" link as the default for the \code{nu} parameter. }
  \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter.}
- \item{y,q}{vector of quantiles}
+ \item{x,q}{vector of quantiles}
  \item{mu}{vector of location parameter values }
  \item{sigma}{vector of scale parameter values}
  \item{nu}{vector of skewness \code{nu} parameter values}
@@ -78,18 +78,17 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
  }
 \author{Bob Rigby \email{r.rigby@londonmet.ac.uk} and Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} }
-\note{ }
 
 \section{Warning}{The qSHASH and rSHASH are slow since they are relying on golden section for finding the quantiles} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link[gamls]{gamlss.family}}, \code{\link[gamlss]{JSU}}, \code{\link[gamlss]{BCT}}}
+\seealso{ \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
 \examples{
 GB1()   # 
 y<- rGB1(200, mu=.1, sigma=.6, nu=1, tau=4)
 hist(y)
 # library(gamlss)
 # histDist(y, family=GB1, n.cyc=60)
-curve(dGB1(y=x, mu=.1 ,sigma=.6, nu=1, tau=4), 0.01, 0.99, main = "The GB1  density mu=0.1, sigma=.6, nu=1, tau=4")
+curve(dGB1(x, mu=.1 ,sigma=.6, nu=1, tau=4), 0.01, 0.99, main = "The GB1  density mu=0.1, sigma=.6, nu=1, tau=4")
 
 }
 \keyword{distribution}

@@ -37,18 +37,16 @@ WEI <- function (mu.link="log", sigma.link="log")
           ),
             class = c("gamlss.family","family"))
 }
-
-dWEI<-function(y, mu=1, sigma=1, log=FALSE)
+#----------------------------------------------------------------------------------------
+dWEI<-function(x, mu=1, sigma=1, log=FALSE)
  { 
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
-      fy <- dweibull(y, scale=mu, shape=sigma, log =log)
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+      fy <- dweibull(x, scale=mu, shape=sigma, log =log)
       fy 
   }
-  
-
-
+#----------------------------------------------------------------------------------------
 pWEI <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
   {     
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
@@ -57,7 +55,7 @@ pWEI <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
     cdf <- pweibull(q, scale=mu, shape=sigma, lower.tail = lower.tail, log.p = log.p)
     cdf
    }
-
+#----------------------------------------------------------------------------------------
 qWEI <- function(p, mu=1, sigma=1,  lower.tail = TRUE, log.p = FALSE)
   { if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -65,7 +63,7 @@ qWEI <- function(p, mu=1, sigma=1,  lower.tail = TRUE, log.p = FALSE)
     q <- qweibull(p, scale=mu, shape=sigma, lower.tail = lower.tail)
     q
    }
-
+#----------------------------------------------------------------------------------------
 rWEI <- function(n, mu=1, sigma=1)
   { if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -73,3 +71,4 @@ rWEI <- function(n, mu=1, sigma=1)
     r <-  rweibull(n, scale=mu, shape=sigma)
     r
   }
+#----------------------------------------------------------------------------------------

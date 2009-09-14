@@ -123,7 +123,7 @@ BEINF <- function (mu.link = "logit", sigma.link = "logit",
             class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dBEINF<-function(y, mu = 0.5, sigma = 0.1, 
+dBEINF<-function(x, mu = 0.5, sigma = 0.1, 
                     nu = 0.1, tau = 0.1, log = FALSE)
  { 
           if (any(mu <= 0) | any(mu >= 1) )  
@@ -134,14 +134,14 @@ dBEINF<-function(y, mu = 0.5, sigma = 0.1,
              stop(paste("nu must greated than 0", "\n", ""))           
           if (any(tau <= 0) )  
              stop(paste("tau must greated than 0", "\n", "")) 
-          if (any(y < 0) | any(y > 1))  
-             stop(paste("y must be 0<=y<=1, i.e. 0 to 1 inclusively", "\n", ""))  
+          if (any(x < 0) | any(x > 1))  
+             stop(paste("x must be 0<=x<=1, i.e. 0 to 1 inclusively", "\n", ""))  
               a <- mu*(1-sigma^2)/(sigma^2)
               b <- a*(1-mu)/mu
-          logfy <- rep(0, length(y))
-          logfy <- ifelse((y>0 & y<1), dbeta(y, shape1=a, shape2=b, ncp=0, log=TRUE), 0)
-          logfy <- ifelse((y==0), log(nu), logfy)          
-          logfy <- ifelse((y==1), log(tau) , logfy)
+          logfy <- rep(0, length(x))
+          logfy <- ifelse((x>0 & x<1), dbeta(x, shape1=a, shape2=b, ncp=0, log=TRUE), 0)
+          logfy <- ifelse((x==0), log(nu), logfy)          
+          logfy <- ifelse((x==1), log(tau) , logfy)
           logfy <- logfy - log(1+nu+tau)          
           if(log==FALSE) fy <- exp(logfy) else fy <- logfy
           fy

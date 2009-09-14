@@ -16,7 +16,7 @@ generation for the Poisson-inverse Gaussian \code{PIG()}, distribution.
 }
 \usage{
 PIG(mu.link = "log", sigma.link = "log")
-dPIG(y, mu = 0.5, sigma = 0.02, log = FALSE)
+dPIG(x, mu = 0.5, sigma = 0.02, log = FALSE)
 pPIG(q, mu = 0.5, sigma = 0.02, lower.tail = TRUE, log.p = FALSE)
 qPIG(p, mu = 0.5, sigma = 0.02, lower.tail = TRUE, log.p = FALSE, 
      max.value = 10000)
@@ -27,7 +27,7 @@ rPIG(n, mu = 0.5, sigma = 0.02)
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive means}
   \item{sigma}{vector of positive despersion parameter}
   \item{p}{vector of probabilities}
@@ -66,10 +66,9 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
  
  }
 \author{Mikis Stasinopoulos ans Bob Rigby}
-\note{ }
 
 
-\seealso{  \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}},  \code{\link{NBI}}, \code{\link{NBII}}, 
+\seealso{ \code{\link{gamlss.family}},  \code{\link{NBI}}, \code{\link{NBII}}, 
 \code{\link{SI}}, \code{\link{SICHEL}}}
 \examples{
 PIG()# gives information about the default links for the  Poisson-inverse Gaussian distribution 

@@ -18,7 +18,7 @@ generation for the specific parameterization of the Gumbel distribution.
 }
 \usage{
 GU(mu.link = "identity", sigma.link = "log")
-dGU(y, mu = 0, sigma = 1, log = FALSE)
+dGU(x, mu = 0, sigma = 1, log = FALSE)
 pGU(q, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qGU(p, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rGU(n, mu = 0, sigma = 1)
@@ -27,7 +27,7 @@ rGU(n, mu = 0, sigma = 1)
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the mu parameter. other available link is "inverse", "log" and "own")}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter, other links are the "inverse", "identity" and "own"}
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{log, log.p}{ logical; if TRUE, probabilities p are given as log(p).}
@@ -65,7 +65,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \note{  The mean of the distribution is  \eqn{\mu-0.57722 \sigma}{mu-0.57722*sigma} and the variance is 
 \eqn{\pi^2 \sigma^2/6}{(pi^2)*(sigma^2)/6}.  }
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}},  \code{\link{RG}} }
+\seealso{ \code{\link{gamlss.family}},  \code{\link{RG}} }
 \examples{
 
 plot(function(x) dGU(x, mu=0,sigma=1), -6, 3, 

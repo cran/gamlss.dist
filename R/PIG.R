@@ -104,17 +104,17 @@ PIG <- function (mu.link = "log", sigma.link = "log")
 # result
 #}
 #-----------------------------------------------------------------------------------------
-dPIG<-function(y, mu = 0.5, sigma = 0.02 , log = FALSE)
+dPIG<-function(x, mu = 0.5, sigma = 0.02 , log = FALSE)
  { 
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
           if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-          if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
-          ly <- length(y)                                                                    
+          if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+          ly <- length(x)                                                                    
       nsigma <- rep(sigma, length = ly)
          nmu <- rep(mu, length = ly)
-      sumlty <- as.double(.C("tofy_", as.single(y), as.single(nmu),as.single(nsigma),as.integer(ly),
-                          as.integer(max(y)+1),PACKAGE="gamlss.dist")[[2]])
-       logfy <- -lgamma(y+1)+(1-sqrt(1+2*sigma*mu))/sigma +sumlty
+      sumlty <- as.double(.C("tofy_", as.single(x), as.single(nmu),as.single(nsigma),as.integer(ly),
+                          as.integer(max(x)+1),PACKAGE="gamlss.dist")[[2]])
+       logfy <- -lgamma(x+1)+(1-sqrt(1+2*sigma*mu))/sigma +sumlty
           if(log==FALSE) fy <- exp(logfy) else fy <- logfy
           fy
   }

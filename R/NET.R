@@ -76,7 +76,7 @@ NET <- function (mu.link ="identity", sigma.link="log")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dNET <- function(y, mu=0, sigma=1, nu=1.5, tau=2, log=FALSE)
+dNET <- function(x, mu=0, sigma=1, nu=1.5, tau=2, log=FALSE)
  {
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))  
@@ -88,7 +88,7 @@ dNET <- function(y, mu=0, sigma=1, nu=1.5, tau=2, log=FALSE)
         c2 <- (2/k1)*exp(-((k1^2)/2))
         c3 <- 2*exp(-k1*k2+((k1^2)/2))/((k1*k2-1)*k1)
        ct  <- 1/(c1+c2+c3)
-       tc  <- (y-mu)/sigma
+       tc  <- (x-mu)/sigma
         d1 <- (abs(tc) <= k1)*(-(tc^2)/2)
         d2 <- ((abs(tc) > k1) & (abs(tc) <= k2))*(-k1*abs(tc)+((k1^2)/2))
         d3 <- (abs(tc) > k2)*(-k1*k2*log(abs(tc)/k2)-k1*k2+((k1^2)/2))

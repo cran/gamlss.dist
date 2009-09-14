@@ -16,7 +16,7 @@ generation for the specific parameterization of the Weibul distribution.
 }
 \usage{
 WEI(mu.link = "log", sigma.link = "log")
-dWEI(y, mu = 1, sigma = 1, log = FALSE)
+dWEI(x, mu = 1, sigma = 1, log = FALSE)
 pWEI(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qWEI(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rWEI(n, mu = 1, sigma = 1)
@@ -25,7 +25,7 @@ rWEI(n, mu = 1, sigma = 1)
 \arguments{
   \item{mu.link}{Defines the \code{mu.link}, with "log" link as the default for the mu parameter, other links are  "inverse", "identity" and "own"}
   \item{sigma.link}{ Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter, other link is the "inverse", "identity" and "own"}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of the mu parameter }
   \item{sigma}{vector of sigma parameter }
   \item{log, log.p}{ logical; if TRUE, probabilities p are given as log(p).}
@@ -72,7 +72,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \frac{1}{\sigma}+1))^2\right]}{(mu^2)*(gamma((2/sigma)+1)-gamma((1/sigma)+1)^2)}
 }
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{WEI2}}, \code{\link{WEI3}}}
+\seealso{  \code{\link{gamlss.family}}, \code{\link{WEI2}}, \code{\link{WEI3}}}
 
 \examples{
 WEI()

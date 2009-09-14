@@ -31,16 +31,14 @@ RG <-function (mu.link ="identity", sigma.link="log")
           ),
             class = c("gamlss.family","family"))
    }
-
-
-dRG<-function(y, mu=0, sigma=1, log=FALSE)
+#----------------------------------------------------------------------------------------
+dRG<-function(x, mu=0, sigma=1, log=FALSE)
   { if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
- log.lik <- (-log(sigma) -((y-mu)/sigma)  -exp(-(y-mu)/sigma))
+ log.lik <- (-log(sigma) -((x-mu)/sigma)  -exp(-(x-mu)/sigma))
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
       fy 
   }
-  
-
+#----------------------------------------------------------------------------------------
 pRG <- function(q, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   { if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     cdf <- exp(-exp(-(q-mu)/sigma))
@@ -48,8 +46,7 @@ pRG <- function(q, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
     if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 
     cdf
   }
-                                                    
-
+#----------------------------------------------------------------------------------------                                              
 qRG <- function(p, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   { if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     if (log.p==TRUE) p <- exp(p) else p <- p
@@ -58,7 +55,7 @@ qRG <- function(p, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
     q <- mu-sigma*log(-log(p))
     q
    }
-
+#----------------------------------------------------------------------------------------
 rRG <- function(n, mu=0, sigma=1)
   { if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     if (any(n <= 0))  stop(paste("n must be a positive integer", "\n", ""))  
@@ -67,3 +64,4 @@ rRG <- function(n, mu=0, sigma=1)
     r <- qRG(p,mu=mu,sigma=sigma)
     r
   }
+#--------------------------------------------------------------------------------------

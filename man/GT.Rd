@@ -20,7 +20,7 @@ generation for the generalized t distribution.
 \usage{
 GT(mu.link = "identity", sigma.link = "log", nu.link = "log", 
    tau.link = "log")
-dGT(y, mu = 0, sigma = 1, nu = 3, tau = 1.5, log = FALSE)
+dGT(x, mu = 0, sigma = 1, nu = 3, tau = 1.5, log = FALSE)
 pGT(q, mu = 0, sigma = 1, nu = 3, tau = 1.5, lower.tail = TRUE, 
    log.p = FALSE)
 qGT(p, mu = 0, sigma = 1, nu = 3, tau = 1.5, lower.tail = TRUE, 
@@ -33,7 +33,7 @@ rGT(n, mu = 0, sigma = 1, nu = 3, tau = 1.5)
  \item{sigma.link}{  Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. }
  \item{nu.link}{Defines the  \code{nu.link}, with "log" link as the default for the \code{nu} parameter. }
  \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter.}
- \item{y,q}{vector of quantiles}
+ \item{x,q}{vector of quantiles}
  \item{mu}{vector of location parameter values }
  \item{sigma}{vector of scale parameter values}
  \item{nu}{vector of skewness \code{nu} parameter values}
@@ -78,16 +78,16 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
  }
 \author{Bob Rigby \email{r.rigby@londonmet.ac.uk} and Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} }
-\note{ }
+
 
 \section{Warning}{The qSHASH and rSHASH are slow since they are relying on golden section for finding the quantiles} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
+\seealso{ \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
 \examples{
 GT()   # 
 y<- rGT(200, mu=5, sigma=1, nu=1, tau=4)
 hist(y)
-curve(dGT(y=x, mu=5 ,sigma=2,nu=1, tau=4), -2, 11, main = "The GT  density mu=5 ,sigma=1, nu=1, tau=4")
+curve(dGT(x, mu=5 ,sigma=2,nu=1, tau=4), -2, 11, main = "The GT  density mu=5 ,sigma=1, nu=1, tau=4")
 # library(gamlss)
 # m1<-gamlss(y~1, family=GT) 
 }

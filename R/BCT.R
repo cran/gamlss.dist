@@ -94,20 +94,20 @@ BCT <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------  
-dBCT <- function(y, mu=5, sigma=0.1, nu=1, tau=2, log=FALSE)
+dBCT <- function(x, mu=5, sigma=0.1, nu=1, tau=2, log=FALSE)
  {
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau <= 0))  stop(paste("tau must be positive", "\n", ""))  
-          if (any(y < 0))  stop(paste("y must be positive", "\n", "")) 
-          if(length(nu)>1)  z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
-          else   if (nu != 0) z <- (((y/mu)^nu-1)/(nu*sigma)) else z <- log(y/mu)/sigma
-          loglik <- (nu-1)*log(y)-nu*log(mu)-log(sigma)
+          if (any(x < 0))  stop(paste("x must be positive", "\n", "")) 
+          if(length(nu)>1)  z <- ifelse(nu != 0,(((x/mu)^nu-1)/(nu*sigma)),log(x/mu)/sigma)
+          else   if (nu != 0) z <- (((x/mu)^nu-1)/(nu*sigma)) else z <- log(x/mu)/sigma
+          loglik <- (nu-1)*log(x)-nu*log(mu)-log(sigma)
              fTz <-  lgamma((tau+1)/2)-lgamma(tau/2)-0.5*log(tau)-lgamma(0.5)
              fTz <- fTz-((tau+1)/2)* log(1+(z*z)/tau)
           loglik <- loglik+fTz-log(pt(1/(sigma*abs(nu)),df=tau))
-          if (length(tau)>1) loglik <- ifelse(tau>1000000, dBCCG(y,mu,sigma,nu,log=TRUE), loglik) # MS Wednesday, April 12, 2006
-          else if (tau>1000000) loglik <- dBCCG(y,mu,sigma,nu,log=TRUE)
+          if (length(tau)>1) loglik <- ifelse(tau>1000000, dBCCG(x,mu,sigma,nu,log=TRUE), loglik) # MS Wednesday, April 12, 2006
+          else if (tau>1000000) loglik <- dBCCG(x,mu,sigma,nu,log=TRUE)
              ft <- if(log==FALSE) exp(loglik) else loglik 
        ft
   }    

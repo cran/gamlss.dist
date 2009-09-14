@@ -14,7 +14,7 @@ for a \code{gamlss.family} object to be used in GAMLSS fitting using the functio
 }
 \usage{
 LO(mu.link = "identity", sigma.link = "log")
-dLO(y, mu = 0, sigma = 1, log = FALSE)
+dLO(x, mu = 0, sigma = 1, log = FALSE)
 pLO(q, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qLO(p, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rLO(n, mu = 0, sigma = 1)
@@ -23,7 +23,7 @@ rLO(n, mu = 0, sigma = 1)
 \arguments{
   \item{mu.link}{Defines the \code{mu.link}, with "identity" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{log, log.p}{ logical; if TRUE, probabilities p are given as log(p).}
@@ -62,7 +62,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \note{\eqn{\mu}{mu} is the mean and \eqn{\sigma \pi/ \sqrt3}{sigma*pi/sqrt(3)} is the standard deviation for the logistic distribution}
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{NO}}, \code{\link{TF}}}
+\seealso{ \code{\link{gamlss.family}}, \code{\link{NO}}, \code{\link{TF}}}
 
 \examples{
 LO()# gives information about the default links for the Logistic distribution 

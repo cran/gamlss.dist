@@ -28,7 +28,7 @@ LOGNO <- function (mu.link="identity", sigma.link="log")
                                     },
                d2ldd2 = function(sigma) -2/sigma^2,
               d2ldmdd = function(y)  rep(0,length(y)),
-          G.dev.incr  = function(y,mu,sigma,...) -2*dLOGNO(y=y, mu=mu,  sigma = sigma, log = TRUE), #
+          G.dev.incr  = function(y,mu,sigma,...) -2*dLOGNO(x=y, mu=mu,  sigma = sigma, log = TRUE), #
                             rqres = expression(  rqres(pfun="pLOGNO", type="Continuous", y=y, mu=mu, sigma=sigma)),
            mu.initial = expression({    mu <- (log(y)+mean(log(y)))/2  }),
          sigma.initial = expression({sigma <- rep(sd(log(y)),length(y)) }),  
@@ -40,11 +40,11 @@ LOGNO <- function (mu.link="identity", sigma.link="log")
 }
 #----------------------------------------------------------------------------------------
 
-dLOGNO <- function(y, mu=0, sigma=1,  log = FALSE)
+dLOGNO <- function(x, mu=0, sigma=1,  log = FALSE)
  {
           if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-          if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
-          fy <- dlnorm(x=y, meanlog = mu, sdlog = sigma, log = log) 
+          if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+          fy <- dlnorm(x=x, meanlog = mu, sdlog = sigma, log = log) 
           fy
   }    
 #----------------------------------------------------------------------------------------

@@ -177,11 +177,11 @@ d2ldvdt
             class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dST1 <- function(y, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+dST1 <- function(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
  {
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-      z <- (y-mu)/sigma
+      z <- (x-mu)/sigma
       w <- nu*z 
  loglik1 <- pt(w,df=tau,log.p=TRUE) + dt(z,df=tau,log =TRUE) + log(2) - log(sigma)
  loglik2 <- pNO(w,mu=0,sigma=1,log.p=TRUE) + dNO(z,mu=0,sigma=1,log =TRUE) + log(2) - log(sigma)

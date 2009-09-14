@@ -254,7 +254,7 @@ ST4 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link=
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------  
-dST4 <- function(y, mu=0, sigma=1, nu=1, tau=10, log=FALSE)
+dST4 <- function(x, mu=0, sigma=1, nu=1, tau=10, log=FALSE)
  {
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))
@@ -265,22 +265,22 @@ dST4 <- function(y, mu=0, sigma=1, nu=1, tau=10, log=FALSE)
     lk2 <- ifelse(tau < 1000000, lk2, 0.5*log(2*pi))
           lk <- lk2 - lk1
           k <- exp(lk)       
-           loglikb <- dNO(((y-mu)/sigma), mu=0, sigma=1, log=TRUE)
-         loglik1 <- dt((y-mu)/sigma, df=nu, log=TRUE)
+           loglikb <- dNO(((x-mu)/sigma), mu=0, sigma=1, log=TRUE)
+         loglik1 <- dt((x-mu)/sigma, df=nu, log=TRUE)
      if (length(nu)>1) loglik1 <- ifelse(nu<1000000, 
                       loglik1, 
                       loglikb) 
     else loglik1 <- if (tau<1000000) loglik1
                 else  loglikb
 
-          loglik2 <- dt((y-mu)/sigma, df=tau, log=TRUE)
+          loglik2 <- dt((x-mu)/sigma, df=tau, log=TRUE)
      if (length(tau)>1) loglik2 <- ifelse(tau<1000000, 
                       loglik2, 
                       loglikb) 
     else loglik2 <- if (tau<1000000) loglik2
                 else  loglikb
 
-          loglik <- ifelse(y < mu, loglik1, loglik2 + lk)
+          loglik <- ifelse(x < mu, loglik1, loglik2 + lk)
           loglik <- loglik + log(2/(1+k)) - log(sigma)
 
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 

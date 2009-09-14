@@ -33,11 +33,11 @@ IG <-function (mu.link = "log", sigma.link = "log")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------  
-dIG<-function(y, mu = 1, sigma = 1, log=FALSE)
+dIG<-function(x, mu = 1, sigma = 1, log=FALSE)
  {        if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
- log.lik <- (-0.5*log(2*pi)-log(sigma)-(3/2)*log(y)-((y-mu)^2)/(2*sigma^2*(mu^2)*y) )
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+ log.lik <- (-0.5*log(2*pi)-log(sigma)-(3/2)*log(x)-((x-mu)^2)/(2*sigma^2*(mu^2)*x) )
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
       fy 
   }

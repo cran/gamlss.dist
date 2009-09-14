@@ -54,12 +54,12 @@ BEo <- function (mu.link = "log", sigma.link = "log")
                 class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dBEo<-function(y, mu = 0.5, sigma = 0.02, log = FALSE)
+dBEo<-function(x, mu = 0.5, sigma = 0.02, log = FALSE)
  { 
           if (any(mu <= 0)) stop(paste("mu must be positive", "\n", ""))
           if (any(sigma <= 0)) stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y <= 0) | any(y >= 1))  stop(paste("y must be between 0 and 1", "\n", ""))  
-          fy <- dbeta(y, shape1=mu, shape2=sigma, ncp=0, log=log)
+          if (any(x <= 0) | any(x >= 1))  stop(paste("x must be between 0 and 1", "\n", ""))  
+          fy <- dbeta(x, shape1=mu, shape2=sigma, ncp=0, log=log)
           fy
   }
 #------------------------------------------------------------------------------------------

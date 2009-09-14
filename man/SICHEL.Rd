@@ -16,7 +16,7 @@ generation for the Sichel \code{SICHEL()}, distribution. The function \code{VSIC
 }
 \usage{
 SICHEL(mu.link = "log", sigma.link = "log", nu.link = "identity")
-dSICHEL(y, mu=1, sigma=1, nu=-0.5, log=FALSE)
+dSICHEL(x, mu=1, sigma=1, nu=-0.5, log=FALSE)
 pSICHEL(q, mu=1, sigma=1, nu=-0.5, lower.tail = TRUE, 
          log.p = FALSE)
 qSICHEL(p, mu=1, sigma=1, nu=-0.5,  lower.tail = TRUE, 
@@ -30,7 +30,7 @@ VSICHEL(obj)
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
   \item{nu.link}{ Defines the \code{nu.link}, with "identity" link as the default for the nu parameter }
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive mu}
   \item{sigma}{vector of positive despersion parameter}
    \item{nu}{vector of nu}
@@ -85,7 +85,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 }  
  
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{PIG}} , \code{\link{SI}}}
+\seealso{ \code{\link{gamlss.family}}, \code{\link{PIG}} , \code{\link{SI}}}
 \examples{
 SICHEL()# gives information about the default links for the  Sichel distribution 
 #plot the pdf using plot 

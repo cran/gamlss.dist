@@ -37,21 +37,21 @@ NO <-function (mu.link ="identity", sigma.link="log")
             class = c("gamlss.family","family"))
 }
 
-#---------------------------------------------
-dNO<-function(y, mu=0, sigma=1, log=FALSE)
+#----------------------------------------------------------------------------------------
+dNO<-function(x, mu=0, sigma=1, log=FALSE)
  { 
          # if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-    fy <- dnorm(y, mean=mu, sd=sigma, log=log)
+    fy <- dnorm(x, mean=mu, sd=sigma, log=log)
     fy
   }
-
+#----------------------------------------------------------------------------------------
 pNO <- function(q, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   {     
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     cdf <- pnorm(q, mean=mu, sd=sigma, lower.tail = lower.tail, log.p = log.p)
     cdf
    }
-
+#----------------------------------------------------------------------------------------
 qNO <- function(p, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   { if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     if (log.p==TRUE) p <- exp(p) else p <- p
@@ -66,14 +66,14 @@ rNO <- function(n, mu=0, sigma=1)
     r <- rnorm(n, mean=mu, sd=sigma)
     r
   }
-#-------------------------------------------
+#----------------------------------------------------------------------------------------
 
 
-#--------------------------------------------------------- 
+#----------------------------------------------------------------------------------------
 # MS Saturday, April 6, 2002 at 14:40
 # Thursday, January 16, 2003 at 12:20
 # the version of the Normal with sigma as the variance 
-#---------------------------------------------------------
+#----------------------------------------------------------------------------------------
  NO2 <-function (mu.link ="identity", sigma.link="log") 
 {
     mstats <- checklink(   "mu.link", "Normal", substitute(mu.link),    
@@ -108,21 +108,21 @@ rNO <- function(n, mu=0, sigma=1)
           ),
             class = c("gamlss.family","family"))
 }
-#--------------------------------------
-dNO2<-function(y, mu=0, sigma=1, log=FALSE)
+#----------------------------------------------------------------------------------------
+dNO2<-function(x, mu=0, sigma=1, log=FALSE)
  { 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-    fy <- dnorm(y, mean=mu, sd=sqrt(sigma), log=log)
+    fy <- dnorm(x, mean=mu, sd=sqrt(sigma), log=log)
     fy
   }
-
+#----------------------------------------------------------------------------------------
 pNO2 <- function(q, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   {     
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     cdf <- pnorm(q, mean=mu, sd=sqrt(sigma), lower.tail = lower.tail, log.p = log.p)
     cdf
    }
-
+#----------------------------------------------------------------------------------------
 qNO2 <- function(p, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   { if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     if (log.p==TRUE) p <- exp(p) else p <- p
@@ -130,11 +130,11 @@ qNO2 <- function(p, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
     q <- qnorm(p, mean=mu, sd=sqrt(sigma), lower.tail = lower.tail )
     q
    }
-
+#----------------------------------------------------------------------------------------
 rNO2 <- function(n, mu=0, sigma=1)
   { 
     if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     r <- rnorm(n, mean=mu, sd=sqrt(sigma))
     r
   }
-#----------------------------------------  
+#----------------------------------------------------------------------------------------

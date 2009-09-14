@@ -16,7 +16,7 @@ generation for the Negative Binomial type II, \code{NBII()}, distribution.
 
 \usage{
 NBII(mu.link = "log", sigma.link = "log")
-dNBII(y, mu = 1, sigma = 1, log = FALSE)
+dNBII(x, mu = 1, sigma = 1, log = FALSE)
 pNBII(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qNBII(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rNBII(n, mu = 1, sigma = 1)
@@ -25,7 +25,7 @@ rNBII(n, mu = 1, sigma = 1)
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive means}
   \item{sigma}{vector of positive despersion parameter}
   \item{p}{vector of probabilities}
@@ -67,7 +67,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \eqn{\sigma}{sigma} is a dispersion parameter}
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{NBI}}, \code{\link{PIG}}, 
+\seealso{  \code{\link{gamlss.family}}, \code{\link{NBI}}, \code{\link{PIG}}, 
 \code{\link{SI}}}
 
 \examples{

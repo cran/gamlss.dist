@@ -95,15 +95,15 @@ NOF <- function (mu.link="identity", sigma.link="log", nu.link ="identity")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dNOF<-function(y, mu=0, sigma=1, nu=0, log=FALSE)
+dNOF<-function(x, mu=0, sigma=1, nu=0, log=FALSE)
  { 
   if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
     #if (any(nu <= 0))  stop(paste("nu must be positive", "\n", "")) 
                mu1 <- mu
             sigma1 <- sigma*mu^(nu/2)
-               fy1 <- dnorm(y, mean=mu1, sd=sigma1, log=log)
-     # fy <- -0.5*(log(2*pi))-log(sigma)-(nu/2)*log(mu)-((y-mu)^2)/(2*(sigma^2)*(mu^nu))
+               fy1 <- dnorm(x, mean=mu1, sd=sigma1, log=log)
+     # fy <- -0.5*(log(2*pi))-log(sigma)-(nu/2)*log(mu)-((x-mu)^2)/(2*(sigma^2)*(mu^nu))
      # fy <- if (log==TRUE) fy else exp(fy) 
     fy1 
   }

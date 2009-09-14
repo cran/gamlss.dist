@@ -13,7 +13,7 @@ EXP <- function (mu.link ="log")
                 mu.dr = mstats$mu.eta, 
                  dldm = function(y,mu) ((y-mu)/mu^2),
                d2ldm2 = function(mu) (-1/mu^2), 
-          G.dev.incr  = function(y,mu,...)  -2*dEXP(y = y, mu = mu, log = TRUE) , 
+          G.dev.incr  = function(y,mu,...)  -2*dEXP(x = y, mu = mu, log = TRUE) , 
                 rqres = expression(rqres(pfun="pEXP", type="Continuous", y=y, mu=mu)), 
            mu.initial = expression(mu <- (y+mean(y))/2),
              mu.valid = function(mu) all(mu > 0) ,  
@@ -21,12 +21,12 @@ EXP <- function (mu.link ="log")
           ),
             class = c("gamlss.family","family"))
 }
-
-dEXP<-function(y, mu = 1, log = FALSE)
+#----------------------------------------------------------------------------------------
+dEXP<-function(x, mu = 1, log = FALSE)
  { 
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
-          if (any(y < 0) )  stop(paste("y must be >0", "\n", ""))  
-          fy <- dexp(x = y, rate =1/mu, log = log)
+          if (any(x < 0) )  stop(paste("x must be >0", "\n", ""))  
+          fy <- dexp(x = x, rate =1/mu, log = log)
           fy
   }
   
@@ -54,3 +54,4 @@ rEXP <- function(n, mu = 1)
           r <- rexp(n, rate =1/mu)
           r
   }
+#----------------------------------------------------------------------------------------

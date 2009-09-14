@@ -32,14 +32,14 @@ GU <-function (mu.link ="identity", sigma.link="log")
             class = c("gamlss.family","family"))
 }
 
-
-dGU<-function(y, mu=0, sigma=1, log=FALSE)
+#----------------------------------------------------------------------------------------
+dGU<-function(x, mu=0, sigma=1, log=FALSE)
  {  if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
- log.lik <- -log(sigma)+((y-mu)/sigma)-exp((y-mu)/sigma)
+ log.lik <- -log(sigma)+((x-mu)/sigma)-exp((x-mu)/sigma)
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
       fy 
   }
-  
+#----------------------------------------------------------------------------------------  
 
 pGU <- function(q, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   { if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -48,7 +48,7 @@ pGU <- function(q, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
     if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 
     cdf
    }
-
+#----------------------------------------------------------------------------------------
 
 qGU <- function(p, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   { if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -58,7 +58,7 @@ qGU <- function(p, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
     q <- mu+sigma*log(-log(1-p))
     q
    }
-
+#----------------------------------------------------------------------------------------
 rGU <- function(n, mu=0, sigma=1)
   { if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))
     if (any(n <= 0))  stop(paste("n must be a positive integer", "\n", ""))   
@@ -67,3 +67,4 @@ rGU <- function(n, mu=0, sigma=1)
     r <- qGU(p,mu=mu,sigma=sigma)
     r
   }
+#----------------------------------------------------------------------------------------

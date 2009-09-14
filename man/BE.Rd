@@ -24,12 +24,12 @@ generation for the \code{BE} and \code{BEo} parameterizations respectively of th
 }
 \usage{
 BE(mu.link = "logit", sigma.link = "logit")
-dBE(y, mu = 0.5, sigma = 0.02, log = FALSE)
+dBE(x, mu = 0.5, sigma = 0.02, log = FALSE)
 pBE(q, mu = 0.5, sigma = 0.02, lower.tail = TRUE, log.p = FALSE)
 qBE(p, mu = 0.5, sigma = 0.02, lower.tail = TRUE, log.p = FALSE)
 rBE(n, mu = 0.5, sigma = 0.02)
 BEo(mu.link = "log", sigma.link = "log")
-dBEo(y, mu = 0.5, sigma = 0.02, log = FALSE)
+dBEo(x, mu = 0.5, sigma = 0.02, log = FALSE)
 pBEo(q, mu = 0.5, sigma = 0.02, lower.tail = TRUE, log.p = FALSE)
 qBEo(p, mu = 0.5, sigma = 0.02, lower.tail = TRUE, log.p = FALSE)
 }
@@ -38,7 +38,7 @@ qBEo(p, mu = 0.5, sigma = 0.02, lower.tail = TRUE, log.p = FALSE)
 \arguments{
   \item{mu.link}{the \code{mu} link function with default \code{logit}}
   \item{sigma.link}{the \code{sigma} link function with default \code{logit}}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values} 
   \item{sigma}{vector of scale parameter values}
   \item{log, log.p}{ logical; if TRUE, probabilities p are given as log(p).}   
@@ -75,7 +75,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \note{Note that for \code{BE}, \code{mu} is the mean and \code{sigma} a scale parameter contributing to the variance of y}
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BEINF}} }
+\seealso{  \code{\link{gamlss.family}}, \code{\link{BEINF}} }
 \examples{
 BE()# gives information about the default links for the normal distribution
 dat1<-rBE(100, mu=.3, sigma=.5)

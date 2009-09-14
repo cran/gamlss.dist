@@ -4,7 +4,7 @@ WEI2 <- function (mu.link ="log", sigma.link="log")
     mstats <- checklink("mu.link", "Weibull.2", substitute(mu.link), c("inverse", "log", "identity", "own"))
     dstats <- checklink("sigma.link", "Weibull.2", substitute(sigma.link), c("inverse", "log", "identity", "own"))
     structure(
-          list(family = c("WEI2", "Weibull"),
+          list(family = c("WEI2", "Weibull type 2"),
            parameters = list(mu=TRUE, sigma=TRUE), 
                 nopar = 2, 
                  type = "Continuous",
@@ -37,18 +37,17 @@ WEI2 <- function (mu.link ="log", sigma.link="log")
           ),
             class = c("gamlss.family","family"))
 }
-
-
-dWEI2<-function(y, mu=1, sigma=1, log=FALSE)
+#----------------------------------------------------------------------------------------
+dWEI2<-function(x, mu=1, sigma=1, log=FALSE)
  { 
           muinv <- function(mubar,sigma) {  mu <- mubar^(-1/sigma); mu}
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
-      fy <- dweibull(y, scale=muinv(mu,sigma), shape=sigma, log=log)
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+      fy <- dweibull(x, scale=muinv(mu,sigma), shape=sigma, log=log)
       fy 
   }
-  
+#----------------------------------------------------------------------------------------  
 pWEI2 <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
   {     
          muinv <- function(mubar,sigma) {  mu <- mubar^(-1/sigma); mu}      
@@ -58,7 +57,7 @@ pWEI2 <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
     cdf <- pweibull(q, scale=muinv(mu,sigma), shape=sigma, lower.tail = lower.tail, log.p = log.p)
     cdf
    }
-
+#----------------------------------------------------------------------------------------
 qWEI2 <- function(p, mu=1, sigma=1,  lower.tail = TRUE, log.p = FALSE)
   {  muinv <- function(mubar,sigma) {  mu <- mubar^(-1/sigma); mu}   
     if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
@@ -67,7 +66,7 @@ qWEI2 <- function(p, mu=1, sigma=1,  lower.tail = TRUE, log.p = FALSE)
     q <- qweibull(p, scale=muinv(mu,sigma), shape=sigma, lower.tail = lower.tail)
     q
    }
-
+#----------------------------------------------------------------------------------------
 rWEI2 <- function(n, mu=1, sigma=1)
   {  muinv <- function(mubar,sigma) {  mu <- mubar^(-1/sigma); mu}   
     if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
@@ -76,3 +75,4 @@ rWEI2 <- function(n, mu=1, sigma=1)
     r <-  rweibull(n, scale=muinv(mu,sigma), shape=sigma)
     r
   }
+#----------------------------------------------------------------------------------------

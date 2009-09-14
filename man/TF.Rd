@@ -15,7 +15,7 @@ and standard deviation equal to \eqn{\sigma (\frac{\nu}{\nu-2})^{0.5}}{sigma*(nu
 }
 \usage{
 TF(mu.link = "identity", sigma.link = "log", nu.link = "log")
-dTF(y, mu = 0, sigma = 1, nu = 10, log = FALSE)
+dTF(x, mu = 0, sigma = 1, nu = 10, log = FALSE)
 pTF(q, mu = 0, sigma = 1, nu = 10, lower.tail = TRUE, log.p = FALSE)
 qTF(p, mu = 0, sigma = 1, nu = 10, lower.tail = TRUE, log.p = FALSE) 
 rTF(n, mu = 0, sigma = 1, nu = 10)
@@ -25,7 +25,7 @@ rTF(n, mu = 0, sigma = 1, nu = 10)
   \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
   \item{nu.link}{ Defines the \code{nu.link}, with "log" link as the default for the nu parameter}
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of the degrees of freedom parameter values}
@@ -62,7 +62,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \eqn{\nu>0}{nu>0} is a positive real valued parameter. 
 }
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}}
+\seealso{  \code{\link{gamlss.family}}}
 
 \examples{
 TF()# gives information about the default links for the t-family distribution 

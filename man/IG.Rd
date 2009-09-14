@@ -15,7 +15,7 @@ generation for the specific parameterization of the Inverse Gaussian distributio
 }
 \usage{
 IG(mu.link = "log", sigma.link = "log")
-dIG(y, mu = 1, sigma = 1, log = FALSE)
+dIG(x, mu = 1, sigma = 1, log = FALSE)
 pIG(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qIG(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rIG(n, mu = 1, sigma = 1, ...)
@@ -24,7 +24,7 @@ rIG(n, mu = 1, sigma = 1, ...)
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the mu parameter }
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter }
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{log, log.p}{ logical; if TRUE, probabilities p are given as log(p).}
@@ -60,7 +60,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \note{\eqn{\mu}{mu} is the mean and \eqn{\sigma^2 \mu^3}{(sigma^2)*(mu^3)} is the variance of the inverse Gaussian}
 
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}} ,  \code{\link{GA}},  \code{\link{GIG}}}
+\seealso{ \code{\link{gamlss.family}} ,  \code{\link{GA}},  \code{\link{GIG}}}
 \examples{
 IG()# gives information about the default links for the normal distribution
 # library(gamlss)

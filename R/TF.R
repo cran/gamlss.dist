@@ -78,14 +78,14 @@ TF <- function (mu.link="identity", sigma.link="log", nu.link ="log")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dTF<-function(y, mu=0, sigma=1, nu=10, log=FALSE)
+dTF<-function(x, mu=0, sigma=1, nu=10, log=FALSE)
  {  if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))  
     if (length(nu)>1) lik <- ifelse(nu>1000000, 
-                       dNO(y,mu=mu,sigma=sigma,log=FALSE), 
-                       (1/sigma)*dt((y-mu)/sigma, df=nu, log =FALSE)) 
-    else lik <- if (nu>1000000) dNO(y,mu=mu,sigma=sigma,log=FALSE)
-                else  (1/sigma)*dt((y-mu)/sigma, df=nu, log =FALSE)
+                       dNO(x,mu=mu,sigma=sigma,log=FALSE), 
+                       (1/sigma)*dt((x-mu)/sigma, df=nu, log =FALSE)) 
+    else lik <- if (nu>1000000) dNO(x,mu=mu,sigma=sigma,log=FALSE)
+                else  (1/sigma)*dt((x-mu)/sigma, df=nu, log =FALSE)
     fy <- if(log==FALSE) lik else log(lik)
     fy 
   }

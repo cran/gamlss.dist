@@ -94,13 +94,13 @@ PE <- function (mu.link="identity", sigma.link="log", nu.link ="log")
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dPE<-function(y, mu=0, sigma=1, nu=2, log=FALSE)
+dPE<-function(x, mu=0, sigma=1, nu=2, log=FALSE)
  {
   if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
   if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))  
   log.c <- 0.5*(-(2/nu)*log(2)+lgamma(1/nu)-lgamma(3/nu))
       c <- exp(log.c)
-      z <- (y-mu)/sigma
+      z <- (x-mu)/sigma
    log.lik <- -log(sigma)+log(nu)-log.c-(0.5*(abs(z/c)^nu))-(1+(1/nu))*log(2)-lgamma(1/nu)
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
       fy 

@@ -180,12 +180,12 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------  
-dGT <- function(y, mu=0, sigma=1, nu=3, tau=1.5, log=FALSE)
+dGT <- function(x, mu=0, sigma=1, nu=3, tau=1.5, log=FALSE)
  {
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))
           if (any(tau <= 0))  stop(paste("tau must be positive", "\n", ""))  
-          z <- (y-mu)/sigma
+          z <- (x-mu)/sigma
           zt <- (abs(z))^tau
           loglik <- log(tau)-log(2*sigma)-(1/tau)*log(nu)- lgamma(1/tau)-lgamma(nu)
           loglik <- loglik +lgamma(nu+(1/tau)) - (nu+(1/tau))*log(1+(zt/nu))

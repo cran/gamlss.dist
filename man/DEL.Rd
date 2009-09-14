@@ -15,7 +15,7 @@ generation for the Delaporte \code{DEL()}, distribution.
 }
 \usage{
 DEL(mu.link = "log", sigma.link = "log", nu.link = "logit")
-dDEL(y, mu=1, sigma=1, nu=0.5, log=FALSE)
+dDEL(x, mu=1, sigma=1, nu=0.5, log=FALSE)
 pDEL(q, mu=1, sigma=1, nu=0.5, lower.tail = TRUE, 
         log.p = FALSE)
 qDEL(p, mu=1, sigma=1, nu=0.5,  lower.tail = TRUE, 
@@ -28,7 +28,7 @@ rDEL(n, mu=1, sigma=1, nu=0.5, max.value = 10000)
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
   \item{nu.link}{ Defines the \code{nu.link}, with "logit" link as the default for the nu parameter }
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive mu}
   \item{sigma}{vector of positive dispersion parameter}
    \item{nu}{vector of nu}
@@ -78,7 +78,7 @@ mean of \eqn{Y} is given by \eqn{E(Y)=\mu}{E(Y)=mu} and the variance by \eqn{V(Y
  }
  
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{SI}} , \code{\link[gamlss]{SICHEL}}}
+\seealso{ \code{\link{gamlss.family}}, \code{\link{SI}} , \code{\link{SICHEL}}}
 \examples{
  DEL()# gives information about the default links for the  Delaporte distribution 
 #plot the pdf using plot 

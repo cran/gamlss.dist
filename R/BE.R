@@ -64,14 +64,14 @@ BE <- function (mu.link = "logit", sigma.link = "logit")
                 class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dBE<-function(y, mu = 0.5, sigma = 0.02, log = FALSE)
+dBE<-function(x, mu = 0.5, sigma = 0.02, log = FALSE)
  { 
           if (any(mu <= 0) | any(mu >= 1) )  stop(paste("mu must be between 0 and 1", "\n", "")) 
           if (any(sigma <= 0) | any(sigma >= 1))  stop(paste("sigma must be between 0 and 1", "\n", "")) 
-          if (any(y <= 0) | any(y >= 1))  stop(paste("y must be between 0 and 1", "\n", ""))  
+          if (any(x <= 0) | any(x >= 1))  stop(paste("x must be between 0 and 1", "\n", ""))  
           a <- mu*(1-sigma^2)/(sigma^2)
           b <- a*(1-mu)/mu
-          fy <- dbeta(y, shape1=a, shape2=b, ncp=0, log=log)
+          fy <- dbeta(x, shape1=a, shape2=b, ncp=0, log=log)
           fy
   }
 #------------------------------------------------------------------------------------------

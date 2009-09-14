@@ -20,7 +20,7 @@ generation for the \code{NOF} parametrization of the normal distribution family.
 }
 \usage{
 NOF(mu.link = "identity", sigma.link = "log", nu.link = "identity")
-dNOF(y, mu = 0, sigma = 1, nu = 0, log = FALSE)
+dNOF(x, mu = 0, sigma = 1, nu = 0, log = FALSE)
 pNOF(q, mu = 0, sigma = 1, nu = 0, lower.tail = TRUE, log.p = FALSE)
 qNOF(p, mu = 0, sigma = 1, nu = 0, lower.tail = TRUE, log.p = FALSE)
 rNOF(n, mu = 0, sigma = 1, nu = 0)
@@ -30,7 +30,7 @@ rNOF(n, mu = 0, sigma = 1, nu = 0)
   \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
   \item{nu.link}{ Defines the \code{nu.link} with "identity" link as the default for the nu parameter}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of power parameter values}
@@ -82,7 +82,7 @@ method should be used in the fitting.
        }
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link[gamlss]{NO}}, \code{\link[gamlss]{NO2}}}
+\seealso{  \code{\link{gamlss.family}}, \code{\link{NO}}, \code{\link{NO2}}}
 
 \examples{
 NOF()# gives information about the default links for the normal distribution family

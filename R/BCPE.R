@@ -166,7 +166,7 @@ BCPE <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau
 #-----------------------------------------------------------------
 
 #-----------------------------------------------------------------
-dBCPE <- function(y, mu=5, sigma=0.1, nu=1, tau=2, log=FALSE)
+dBCPE <- function(x, mu=5, sigma=0.1, nu=1, tau=2, log=FALSE)
  {
      f.T <- function(t,log=FALSE){
          log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
@@ -184,11 +184,11 @@ dBCPE <- function(y, mu=5, sigma=0.1, nu=1, tau=2, log=FALSE)
           if (any(mu < 0))  stop(paste("mu must be positive", "\n", ""))  
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
-          if(length(nu)>1)  z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
-          else   if (nu != 0) z <- (((y/mu)^nu-1)/(nu*sigma)) else z <- log(y/mu)/sigma
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+          if(length(nu)>1)  z <- ifelse(nu != 0,(((x/mu)^nu-1)/(nu*sigma)),log(x/mu)/sigma)
+          else   if (nu != 0) z <- (((x/mu)^nu-1)/(nu*sigma)) else z <- log(x/mu)/sigma
         logfZ <- f.T(z,log=TRUE)-log(F.T(1/(sigma*abs(nu))))
-       logder <- (nu-1)*log(y)-nu*log(mu)-log(sigma)
+       logder <- (nu-1)*log(x)-nu*log(mu)-log(sigma)
        loglik <- logder+logfZ
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 
        ft

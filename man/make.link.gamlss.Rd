@@ -96,7 +96,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
                            c("logshifted", "log", "identity"), par.link = c(1))  }}
 
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}} }
+\seealso{ \code{\link{gamlss.family}} }
 \examples{
 str(make.link.gamlss("logshiftto1"))
 l2<-make.link.gamlss("logshiftto1")

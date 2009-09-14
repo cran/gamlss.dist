@@ -192,11 +192,11 @@ ST5<- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.l
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dST5<- function(y, mu = 0, sigma = 1, nu = 0, tau = 1, log = FALSE)
+dST5<- function(x, mu = 0, sigma = 1, nu = 0, tau = 1, log = FALSE)
  {
        if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
        if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-      z <- (y-mu)/sigma
+      z <- (x-mu)/sigma
      ve <- 2/tau
     lam <- 2*nu/(tau*sqrt(2*tau+nu*nu))
       a <- (ve+lam)/2

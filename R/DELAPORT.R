@@ -133,21 +133,21 @@
             class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dDEL<-function(y, mu=1, sigma=1, nu=.5, log=FALSE)
+dDEL<-function(x, mu=1, sigma=1, nu=.5, log=FALSE)
   {
    if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
    if (any(nu <= 0) | any(nu >= 1))  stop(paste("nu must be between 0 and 1", "\n", "")) 
-   if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
- ly <- max(length(y),length(mu),length(sigma),length(nu)) 
-     y <- rep(y, length = ly)      
+   if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+ ly <- max(length(x),length(mu),length(sigma),length(nu)) 
+     x <- rep(x, length = ly)      
  sigma <- rep(sigma, length = ly)
     mu <- rep(mu, length = ly)   
     nu <- rep(nu, length = ly) 
  logpy0 <- -mu*nu-(1/sigma)*(log(1+mu*sigma*(1-nu)))
-  S <- gamlss.dist:::tofyDEL(y, mu, sigma, nu, what=2)
-#   S <- tofyDELPORT(y, mu, sigma, nu)[,2]
- logfy <-  logpy0-lgamma(y+1)+S
+  S <- gamlss.dist:::tofyDEL(x, mu, sigma, nu, what=2)
+#   S <- tofyDELPORT(x, mu, sigma, nu)[,2]
+ logfy <-  logpy0-lgamma(x+1)+S
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
   fy
   }

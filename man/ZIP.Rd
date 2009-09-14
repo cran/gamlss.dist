@@ -14,7 +14,7 @@ and random generation for the inflated poisson, \code{ZIP()}, distribution.
 }
 \usage{
 ZIP(mu.link = "log", sigma.link = "logit")
-dZIP(y, mu = 5, sigma = 0.1, log = FALSE)
+dZIP(x, mu = 5, sigma = 0.1, log = FALSE)
 pZIP(q, mu = 5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
 qZIP(p, mu = 5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
 rZIP(n, mu = 5, sigma = 0.1)
@@ -24,7 +24,7 @@ rZIP(n, mu = 5, sigma = 0.1)
   \item{mu.link}{defines the \code{mu.link}, with "log" link as the default for the \code{mu} parameter}
   \item{sigma.link}{defines the \code{sigma.link}, with "logit" link as the default for the sigma parameter which in this case is the probability at zero. 
                    Other links are "probit" and "cloglog"'(complementary log-log)}
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive means}
   \item{sigma}{vector of probabilities at zero}
   \item{p}{vector of probabilities}
@@ -60,9 +60,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 }
 \author{ Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}, Bob Rigby \email{r.rigby@londonmet.ac.uk}}
 
-\note{ }
-
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{PO}}, \code{\link{ZIP2}} }
+\seealso{ \code{\link{gamlss.family}}, \code{\link{PO}}, \code{\link{ZIP2}} }
 \examples{
 ZIP()# gives information about the default links for the normal distribution
 # creating data and plotting them 

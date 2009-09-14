@@ -199,17 +199,17 @@ SEP3 <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------  
-dSEP3 <- function(y, mu=0, sigma=1, nu=2, tau=2, log=FALSE)
+dSEP3 <- function(x, mu=0, sigma=1, nu=2, tau=2, log=FALSE)
  {
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))
           if (any(tau <= 0))  stop(paste("tau must be positive", "\n", ""))    
-          z <- (y-mu)/sigma
+          z <- (x-mu)/sigma
            suppressWarnings(loglik1 <- -0.5*((nu*abs(z))^tau))
            suppressWarnings(loglik2 <- -0.5*((abs(z)/nu)^tau))
-#    if (length(mu)>1) loglik <- ifelse(y < mu, loglik1, loglik2)
-#    else loglik <- if (y < mu)   loglik1  else  loglik2 
-          loglik <- ifelse(y < mu, loglik1, loglik2)
+#    if (length(mu)>1) loglik <- ifelse(x < mu, loglik1, loglik2)
+#    else loglik <- if (x < mu)   loglik1  else  loglik2 
+          loglik <- ifelse(x < mu, loglik1, loglik2)
           loglik <- loglik-log(sigma)+log(nu)-log(1+(nu^2))-(1/tau)*log(2)-lgamma(1+(1/tau))
           fy <- if(log==FALSE) exp(loglik) else loglik 
        fy

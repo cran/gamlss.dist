@@ -15,7 +15,7 @@ generation for the Sichel \code{SI()}, distribution.
 }
 \usage{
 SI(mu.link = "log", sigma.link = "log", nu.link = "identity")
-dSI(y, mu = 0.5, sigma = 0.02, nu = -0.5, log = FALSE)
+dSI(x, mu = 0.5, sigma = 0.02, nu = -0.5, log = FALSE)
 pSI(q, mu = 0.5, sigma = 0.02, nu = -0.5, lower.tail = TRUE, 
        log.p = FALSE)
 qSI(p, mu = 0.5, sigma = 0.02, nu = -0.5, lower.tail = TRUE, 
@@ -28,7 +28,7 @@ rSI(n, mu = 0.5, sigma = 0.02, nu = -0.5)
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the mu parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
   \item{nu.link}{ Defines the \code{nu.link}, with "identity" link as the default for the nu parameter }
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive mu}
   \item{sigma}{vector of positive despersion parameter}
    \item{nu}{vector of nu}
@@ -70,10 +70,10 @@ Estimation of the Sichel Distribution and its Multivariate Extension.
 \emph{Journal of American Statistical Association}, \bold{82}, 938-944.
 }
 \author{Akantziliotou C., Rigby, R. A. and  Stasinopoulos D. M. }
-\note{  }
+
  
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{PIG}}, \code{\link{NBI}}, 
+\seealso{\code{\link{gamlss.family}}, \code{\link{PIG}}, \code{\link{NBI}}, 
 \code{\link{NBII}}}
 \examples{
 SI()# gives information about the default links for the  Sichel distribution 

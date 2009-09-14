@@ -16,7 +16,7 @@ of the generalized inverse gaussian distribution defined by function GIG.
 \usage{
 GIG(mu.link = "log", sigma.link = "log", 
                        nu.link = "identity")
-dGIG(y, mu=1, sigma=1, nu=1,  
+dGIG(x, mu=1, sigma=1, nu=1,  
                       log = FALSE)
 pGIG(q, mu=1, sigma=1, nu=1,  lower.tail = TRUE, 
                      log.p = FALSE)
@@ -32,7 +32,7 @@ rGIG(n, mu=1, sigma=1, nu=1, ...)
                                            other links are "inverse" and "identity" }
   \item{nu.link}{Defines the nu.link, with "identity" link as the default for the \code{nu} parameter, 
                                        other links are "inverse" and "log"}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of shape parameter values}
@@ -68,9 +68,8 @@ Jorgensen B. (1982) Statistical properties of the generalized inverse Gaussian d
 }
 \author{Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}, Bob Rigby 
         \email{r.rigby@londonmet.ac.uk} and Nicoleta Motpan}
-\note{} 
 
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link[gamlss]{gamlss.family}}, \code{\link[gamlss]{GI}}}
+\seealso{ \code{\link{gamlss.family}}, \code{\link{IG}}}
 
 \examples{
 y<-rGIG(100,mu=1,sigma=1, nu=-0.5) # generates 1000 random observations 

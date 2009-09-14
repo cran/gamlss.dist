@@ -18,7 +18,7 @@ generation for the generalized beta type 2 distribution.
 \usage{
 EGB2(mu.link = "identity", sigma.link = "identity", nu.link = "log", 
       tau.link = "log")
-dEGB2(y, mu = 0, sigma = 1, nu = 1, tau = 0.5, log = FALSE)
+dEGB2(x, mu = 0, sigma = 1, nu = 1, tau = 0.5, log = FALSE)
 pEGB2(q, mu = 0, sigma = 1, nu = 1, tau = 0.5, lower.tail = TRUE, 
       log.p = FALSE)
 qEGB2(p, mu = 0, sigma = 1, nu = 0, tau = 0.5, lower.tail = TRUE, 
@@ -31,7 +31,7 @@ rEGB2(n, mu = 0, sigma = 1, nu = 0, tau = 0.5)
  \item{sigma.link}{  Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. }
  \item{nu.link}{Defines the  \code{nu.link}, with "log" link as the default for the \code{nu} parameter. }
  \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter.}
- \item{y,q}{vector of quantiles}
+ \item{x,q}{vector of quantiles}
  \item{mu}{vector of location parameter values }
  \item{sigma}{vector of scale parameter values}
  \item{nu}{vector of skewness \code{nu} parameter values}
@@ -73,23 +73,22 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 }
 \author{Bob Rigby \email{r.rigby@londonmet.ac.uk} and Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} }
-\note{ }
 
-\section{Warning}{} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
+
+\seealso{  \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
 \examples{
 EGB2()   # 
 y<- rEGB2(200, mu=5, sigma=2, nu=1, tau=4)
 library(MASS)
 truehist(y)
-fx<-dEGB2(y=seq(min(y), 20, length=200), mu=5 ,sigma=2, nu=1, tau=4)
+fx<-dEGB2(seq(min(y), 20, length=200), mu=5 ,sigma=2, nu=1, tau=4)
 lines(seq(min(y),20,length=200),fx)
 # something funny here
 # library(gamlss)
 # histDist(y, family=EGB2, n.cyc=60)
-integrate(function(x) x*dEGB2(y=x, mu=5, sigma=2, nu=1, tau=4), -Inf, Inf)
-curve(dEGB2(y=x, mu=5 ,sigma=2, nu=1, tau=4), -10, 10, main = "The EGB2  density mu=5, sigma=2, nu=1, tau=4")
+integrate(function(x) x*dEGB2(x=x, mu=5, sigma=2, nu=1, tau=4), -Inf, Inf)
+curve(dEGB2(x, mu=5 ,sigma=2, nu=1, tau=4), -10, 10, main = "The EGB2  density mu=5, sigma=2, nu=1, tau=4")
 }
 \keyword{distribution}
 \keyword{ regression}

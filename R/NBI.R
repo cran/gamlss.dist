@@ -49,15 +49,15 @@ NBI <- function (mu.link = "log", sigma.link = "log")
             class = c("gamlss.family","family"))
 }
 #-------------------------------------------------------------------------------------------
-dNBI<-function(y, mu = 1, sigma = 1, log = FALSE)
+dNBI<-function(x, mu = 1, sigma = 1, log = FALSE)
  { 
         if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
         if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-        if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
-        if (length(sigma)>1) fy <- ifelse(sigma>0.0001, dnbinom(y, size=1/sigma, mu = mu, log = log), 
-                                          dPO(y, mu = mu, log = log) )
-        else fy <- if (sigma<0.0001) dPO(y, mu = mu, log = log) 
-                   else dnbinom(y, size=1/sigma, mu = mu, log = log)
+        if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+        if (length(sigma)>1) fy <- ifelse(sigma>0.0001, dnbinom(x, size=1/sigma, mu = mu, log = log), 
+                                          dPO(x, mu = mu, log = log) )
+        else fy <- if (sigma<0.0001) dPO(x, mu = mu, log = log) 
+                   else dnbinom(x, size=1/sigma, mu = mu, log = log)
         fy
   }
 #------------------------------------------------------------------------------------------

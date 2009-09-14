@@ -25,7 +25,7 @@ generation for the \code{BEZI} parameterization of the zero-inflated beta distri
 \usage{
 BEZI(mu.link = "logit", sigma.link = "log", nu.link = "logit")
 
-dBEZI(y, mu = 0.5, sigma = 1, nu = 0.1, log = FALSE)
+dBEZI(x, mu = 0.5, sigma = 1, nu = 0.1, log = FALSE)
 
 pBEZI(q, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
 
@@ -45,7 +45,7 @@ meanBEZI(obj)
   \item{sigma.link}{the \code{sigma} link function with default \code{log}}
   \item{nu.link}{the \code{nu} link function with default \code{logit}}
 
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values} 
   \item{sigma}{vector of precision parameter values}
   \item{nu}{vector of parameter values modelling the probability at zero}
@@ -106,7 +106,7 @@ My thesis is concerned with regression modelling of rates and
 proportions with excess of zeros and/or ones}
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BEZI}} }
+\seealso{ \code{\link{gamlss.family}}, \code{\link{BEZI}} }
 \examples{
 
  BEZI()# gives information about the default links for the BEZI distribution

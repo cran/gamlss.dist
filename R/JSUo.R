@@ -153,11 +153,11 @@ JSUo <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------
-dJSUo <- function(y, mu=0, sigma=1, nu=0, tau=1, log=FALSE)
+dJSUo <- function(x, mu=0, sigma=1, nu=0, tau=1, log=FALSE)
  {
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-       z <- (y-mu)/sigma
+       z <- (x-mu)/sigma
        r <- nu + tau*asinh(z)
        loglik <- -log(sigma)+ log(tau)- .5*log(z*z+1) -.5*log(2*pi)-.5*r*r
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 

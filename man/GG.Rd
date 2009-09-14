@@ -21,7 +21,7 @@ of the generalized gamma distribution defined by function GG.
 \usage{
 GG(mu.link = "log", sigma.link = "log", 
                        nu.link = "identity")
-dGG(y, mu=1, sigma=0.1, nu=1,  
+dGG(x, mu=1, sigma=0.1, nu=1,  
                       log = FALSE)
 pGG(q, mu=1, sigma=0.1, nu=1,  lower.tail = TRUE, 
                      log.p = FALSE)
@@ -37,7 +37,7 @@ rGG(n, mu=1, sigma=0.1, nu=1)
                                            other links are "inverse" and "identity" }
   \item{nu.link}{ Defines the nu.link, with "identity" link as the default for the sigma parameter, 
                                        other links are \eqn{1/nu^2}{"1/nu^2"} and "log"}
-  \item{y,q}{ vector of quantiles }
+  \item{x,q}{ vector of quantiles }
   \item{mu}{ vector of location parameter values }
   \item{sigma}{ vector of scale parameter values }
   \item{nu}{ vector of shape parameter values }
@@ -75,9 +75,8 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 }
 \author{ Mikis Stasinopoulos d.stasinopoulos@londonmet.ac.uk, Bob Rigby r.rigby@londonmet.ac.uk and Nicoleta Motpan}
-\note{ 
-}
-\seealso{\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{GA}}}
+
+\seealso{\code{\link{gamlss.family}}, \code{\link{GA}}}
 
 \examples{
 y<-rGG(100,mu=1,sigma=0.1, nu=-.5) # generates 100 random observations  

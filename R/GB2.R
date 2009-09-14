@@ -127,13 +127,13 @@ GB2 <- function (mu.link="log", sigma.link="identity", nu.link ="log", tau.link=
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------
-dGB2 <- function(y, mu = 1, sigma = 1, nu = 1, tau = .5, log = FALSE)
+dGB2 <- function(x, mu = 1, sigma = 1, nu = 1, tau = .5, log = FALSE)
  {
           if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))  
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-       z <- (y/mu)^sigma
-       loglik <- nu*log(z)+log(abs(sigma))-log(y)-lgamma(nu)-lgamma(tau)+
+       z <- (x/mu)^sigma
+       loglik <- nu*log(z)+log(abs(sigma))-log(x)-lgamma(nu)-lgamma(tau)+
        lgamma(nu+tau)-(nu+tau)*log(1+z)
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 
        ft

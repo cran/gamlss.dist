@@ -23,7 +23,7 @@ generation for the \code{ZAIG} parameterization of the zero adjusted Inverse Gau
 }
 \usage{
 ZAIG(mu.link = "log", sigma.link = "log", nu.link = "logit")
-dZAIG(y, mu = 1, sigma = 1, nu = 0.1, log = FALSE)
+dZAIG(x, mu = 1, sigma = 1, nu = 0.1, log = FALSE)
 pZAIG(q, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
 qZAIG(p, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE, 
      upper.limit = mu + 10 * sqrt(sigma^2 * mu^3))
@@ -36,7 +36,7 @@ meanZAIG(obj)
   \item{mu.link}{Defines the \code{mu.link}, with "log" link as the default for the mu parameter }
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
   \item{nu.link}{Defines the  \code{nu.link}, with "logit" link as the default for the sigma parameter}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values }
   \item{nu}{vector of probability at zero parameter values}
@@ -86,10 +86,9 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 }
 \author{Bob Rigby and Mikis Stasinopoulos}
+ 
 
-\note{} 
-
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{IG}} }
+\seealso{  \code{\link{gamlss.family}}, \code{\link{IG}} }
 \examples{
 ZAIG()# gives information about the default links for the ZAIG distribution
 # plotting the distribution

@@ -155,22 +155,22 @@ tofyS <- function (y, mu, sigma, nu, what=1)
    sumlty
    }
 #----------------------------------------------------------------------------------------
-dSI<-function(y, mu=0.5, sigma=0.02, nu=-0.5, log=FALSE)
+dSI<-function(x, mu=0.5, sigma=0.02, nu=-0.5, log=FALSE)
   { 
    if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-   if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
-    ly <- max(length(y),length(mu),length(sigma),length(nu)) 
-     y <- rep(y, length = ly)        
+   if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+    ly <- max(length(x),length(mu),length(sigma),length(nu)) 
+     x <- rep(x, length = ly)        
  sigma <- rep(sigma, length = ly)
     mu <- rep(mu, length = ly)   
     nu <- rep(nu, length = ly) 
  alpha <- sqrt(1+2*sigma*mu)/sigma
   lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
-sumlty <- as.double(.C("tofys_", as.single(y), as.single(mu), 
+sumlty <- as.double(.C("tofys_", as.single(x), as.single(mu), 
                    as.single(sigma), as.single(nu), as.single(lbes),
-                   as.integer(length(y)), as.integer(max(y)+1), PACKAGE="gamlss.dist")[[2]])
-logfy <- -lgamma(y+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(besselK((1/sigma),nu))
+                   as.integer(length(x)), as.integer(max(x)+1), PACKAGE="gamlss.dist")[[2]])
+logfy <- -lgamma(x+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(besselK((1/sigma),nu))
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
   fy
   }

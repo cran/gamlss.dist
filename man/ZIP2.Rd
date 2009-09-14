@@ -15,7 +15,7 @@ The ZIP2 is a different parameterization of the ZIP distribution. In the ZIP2 th
 }
 \usage{
 ZIP2(mu.link = "log", sigma.link = "logit")
-dZIP2(y, mu = 5, sigma = 0.1, log = FALSE)
+dZIP2(x, mu = 5, sigma = 0.1, log = FALSE)
 pZIP2(q, mu = 5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
 qZIP2(p, mu = 5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
 rZIP2(n, mu = 5, sigma = 0.1)
@@ -25,7 +25,7 @@ rZIP2(n, mu = 5, sigma = 0.1)
   \item{mu.link}{defines the \code{mu.link}, with "log" link as the default for the \code{mu} parameter}
   \item{sigma.link}{defines the \code{sigma.link}, with "logit" link as the default for the sigma parameter which in this case is the probability at zero. 
                    Other links are "probit" and "cloglog"'(complementary log-log)}
-  \item{y}{ vector of (non-negative integer) quantiles}
+  \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive means}
   \item{sigma}{vector of probabilities at zero}
   \item{p}{vector of probabilities}
@@ -65,9 +65,9 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 }
 \author{ Bob Rigby, Gillian Heller and Mikis Stasinopoulos }
 
-\note{ }
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{ZIP}} }
+
+\seealso{ \code{\link{gamlss.family}}, \code{\link{ZIP}} }
 \examples{
 ZIP2()# gives information about the default links for the normal distribution
 # creating data and plotting them 

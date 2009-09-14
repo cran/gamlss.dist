@@ -15,7 +15,7 @@ generation for the the Johnson's Su distribution.
 }
 \usage{
 JSU(mu.link = "identity", sigma.link = "log", nu.link = "identity", tau.link = "log")
-dJSU(y, mu = 0, sigma = 1, nu = 1, tau = 0.5, log = FALSE)
+dJSU(x, mu = 0, sigma = 1, nu = 1, tau = 0.5, log = FALSE)
 pJSU(q, mu = 0, sigma = 1, nu = 1, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
 qJSU(p, mu = 0, sigma = 1, nu = 0, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
 rJSU(n, mu = 0, sigma = 1, nu = 0, tau = 0.5)
@@ -26,7 +26,7 @@ rJSU(n, mu = 0, sigma = 1, nu = 0, tau = 0.5)
   \item{sigma.link}{  Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. Other links are "inverse", "identity" ans "own"}
   \item{nu.link}{Defines the  \code{nu.link}, with "identity" link as the default for the \code{nu} parameter. Other links are "onverse", "log" and "own"}
   \item{tau.link}{Defines the  \code{tau.link}, with "log" link as the default for the \code{tau} parameter. Other links are "onverse", "identity" ans "own"}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values }
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of skewness \code{nu} parameter values}
@@ -81,12 +81,12 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 }
 
 \author{Bob Rigby and Mikis Stasinopoulos}
-\note{  }
+
 
 \section{Warning }{The function \code{JSU} uses first derivatives square in the fitting procedure so 
 standard errors should be interpreted with caution} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{JSUo}}, \code{\link{BCT}}  }
+\seealso{ \code{\link{gamlss.family}}, \code{\link{JSUo}}, \code{\link{BCT}}  }
 \examples{
 JSU()   
 plot(function(x)dJSU(x, mu=0,sigma=1,nu=-1, tau=.5), -4, 4, 

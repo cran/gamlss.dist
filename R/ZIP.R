@@ -56,13 +56,13 @@ ZIP <- function (mu.link = "log", sigma.link = "logit")
             class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dZIP<-function(y, mu = 5, sigma = 0.1, log = FALSE)
+dZIP<-function(x, mu = 5, sigma = 0.1, log = FALSE)
  { 
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0", "\n", ""))           
           if (any(sigma <= 0) | any(sigma >= 1) )  stop(paste("sigma must be between 0 and 1", "\n", "")) 
-          if (any(y < 0) )  stop(paste("y must be 0 or greater than 0", "\n", ""))   
-          logfy <- rep(0, length(y))
-          logfy <- ifelse((y==0), log(sigma+(1-sigma)*exp(-mu)), (log(1-sigma) -mu +y*log(mu) -lgamma(y+1)))          
+          if (any(x < 0) )  stop(paste("x must be 0 or greater than 0", "\n", ""))   
+          logfy <- rep(0, length(x))
+          logfy <- ifelse((x==0), log(sigma+(1-sigma)*exp(-mu)), (log(1-sigma) -mu +x*log(mu) -lgamma(x+1)))          
           if(log == FALSE) fy <- exp(logfy) else fy <- logfy
           fy
   }

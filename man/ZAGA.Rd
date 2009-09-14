@@ -25,7 +25,7 @@ generation for the \code{ZAGA} parameterization of the zero adjusted Gamma distr
 }
 \usage{
 ZAGA(mu.link = "log", sigma.link = "log", nu.link = "logit")
-dZAGA(y, mu = 1, sigma = 1, nu = 0.1, log = FALSE)
+dZAGA(x, mu = 1, sigma = 1, nu = 0.1, log = FALSE)
 pZAGA(q, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, 
       log.p = FALSE)
 qZAGA(p, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, 
@@ -42,7 +42,7 @@ meanZAGA(obj)
  \item{mu.link}{Defines the \code{mu.link}, with "log" link as the default for the mu parameter }
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter}
   \item{nu.link}{Defines the  \code{nu.link}, with "logit" link as the default for the sigma parameter}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values }
   \item{nu}{vector of probability at zero parameter values}
@@ -85,13 +85,12 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \author{
 Bob Rigby and Mikis Stasinopoulos
 }
-\note{
-}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{GA}}, \code{\link{ZAIG}}
+\code{\link{gamlss.family}}, \code{\link{GA}}, \code{\link{ZAIG}}
 }
 
 \examples{

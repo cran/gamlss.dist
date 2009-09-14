@@ -34,18 +34,17 @@ GA <-function (mu.link ="log", sigma.link="log")
           ),
                 class = c("gamlss.family","family"))
 }
-
-dGA<-function(y, mu=1, sigma=1, log=FALSE)
+#----------------------------------------------------------------------------------------
+dGA<-function(x, mu=1, sigma=1, log=FALSE)
  { 
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y < 0))  stop(paste("y must be positive", "\n", ""))  
- log.lik <- (1/sigma^2)*log(y/(mu*sigma^2))-y/(mu*sigma^2)-log(y)-lgamma(1/sigma^2)
+          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+ log.lik <- (1/sigma^2)*log(x/(mu*sigma^2))-x/(mu*sigma^2)-log(x)-lgamma(1/sigma^2)
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
       fy 
   }
-  
-
+#----------------------------------------------------------------------------------------
 pGA <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
   {     
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
@@ -54,7 +53,7 @@ pGA <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
     cdf <- pgamma(q,shape=1/sigma^2,scale=mu*sigma^2, lower.tail = lower.tail, log.p = log.p)
     cdf
    }
-
+#---------------------------------------------------------------------------------------- 
 qGA <- function(p, mu=1, sigma=1,  lower.tail = TRUE, log.p = FALSE)
   { if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -62,7 +61,7 @@ qGA <- function(p, mu=1, sigma=1,  lower.tail = TRUE, log.p = FALSE)
     q <- qgamma(p,shape=1/sigma^2,scale=mu*sigma^2, lower.tail = lower.tail, log.p = log.p)
     q
    }
-
+#---------------------------------------------------------------------------------------- 
 rGA <- function(n, mu=1, sigma=1)
   { if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -72,3 +71,4 @@ rGA <- function(n, mu=1, sigma=1)
     r <- qGA(p,mu=mu,sigma=sigma)
     r
   }
+#---------------------------------------------------------------------------------------- 

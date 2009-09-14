@@ -190,11 +190,11 @@ d2ldvdt
             class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dST2 <- function(y, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+dST2 <- function(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
  {
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-      z <- (y-mu)/sigma
+      z <- (x-mu)/sigma
     if (length(tau)>1) lam <- ifelse(tau<1000000,(tau+1)/(tau+(z^2)),1) 
      else lam <- if (tau<1000000) (tau+1)/(tau+(z^2)) else 1
       w <- nu*(lam^0.5)*z

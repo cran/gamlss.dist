@@ -31,21 +31,21 @@ LO <- function (mu.link ="identity", sigma.link="log")
           ),
             class = c("gamlss.family","family"))
 }
-
-dLO<-function(y, mu=0, sigma=1, log=FALSE)
+#----------------------------------------------------------------------------------------
+dLO<-function(x, mu=0, sigma=1, log=FALSE)
  { 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-    fy <- dlogis(y, location=mu, scale=sigma, log=log)
+    fy <- dlogis(x, location=mu, scale=sigma, log=log)
     fy
   }
-
+#----------------------------------------------------------------------------------------
 pLO <- function(q, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   {     
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     cdf <- plogis(q, location=mu, scale=sigma, lower.tail = lower.tail, log.p = log.p)
     cdf
    }
-
+#----------------------------------------------------------------------------------------
 qLO <- function(p, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
   { if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     if (log.p==TRUE) p <- exp(p) else p <- p
@@ -53,10 +53,11 @@ qLO <- function(p, mu=0, sigma=1, lower.tail = TRUE, log.p = FALSE)
     q <- qlogis(p, location=mu, scale=sigma, lower.tail = lower.tail )
     q
    }
-
+#----------------------------------------------------------------------------------------
 rLO <- function(n, mu=0, sigma=1)
   { 
     if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     r <- rlogis(n, location=mu, scale=sigma)
     r
   }
+#----------------------------------------------------------------------------------------

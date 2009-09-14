@@ -18,9 +18,7 @@ checklink(which.link = NULL, which.dist = NULL, link = NULL, link.List = NULL)
   \item{link}{a repetition of \code{which.link} e.g. \code{link=substitute(mu.link)} }
   \item{link.List}{what link function are required e.g. \code{link.List=c("inverse", "log", "identity")} }
 }
-\details{
 
-}
 \value{
 Defines the right link for each parameter
 }
@@ -36,6 +34,6 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
  }
 \author{Calliope Akantziliotou}
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}} }
-\examples{}
+\seealso{ \code{\link{gamlss.family}} }
+
 \keyword{regression}% 

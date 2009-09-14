@@ -21,7 +21,7 @@ generation for the \code{BEINF} parameterization of the beta inflated distributi
 \usage{
 BEINF(mu.link = "logit", sigma.link = "logit", nu.link = "log", 
       tau.link = "log")
-dBEINF(y, mu = 0.5, sigma = 0.1, nu = 0.1, tau = 0.1, 
+dBEINF(x, mu = 0.5, sigma = 0.1, nu = 0.1, tau = 0.1, 
        log = FALSE)
 pBEINF(q, mu = 0.5, sigma = 0.1, nu = 0.1, tau = 0.1, 
        lower.tail = TRUE, log.p = FALSE)
@@ -38,7 +38,7 @@ meanBEINF(obj)
   \item{sigma.link}{the \code{sigma} link function with default \code{logit}}
   \item{nu.link}{the \code{nu} link function with default \code{log}}
   \item{tau.link}{the \code{tau} link function with default \code{log}}
-   \item{y,q}{vector of quantiles}
+   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values} 
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of parameter values modelling the probability at zero}
@@ -81,10 +81,9 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 }
 \author{Bob Rigby and Mikis Stasinopoulos }
-\note{ }
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BE}} }
+\seealso{ \code{\link{gamlss.family}}, \code{\link{BE}} }
 \examples{
 BEINF()# gives information about the default links for the normal distribution
 # plotting the distribution

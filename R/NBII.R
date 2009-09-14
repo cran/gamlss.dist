@@ -71,15 +71,15 @@
             class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dNBII<-function(y, mu=1, sigma=1, log=FALSE)
+dNBII<-function(x, mu=1, sigma=1, log=FALSE)
  { 
          if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
          if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
          if (length(sigma)>1) fy <- ifelse(sigma>0.0001, 
-                                        dnbinom(y, size=mu/sigma, mu=mu, log=log), 
-                                        dpois(x = y, lambda = mu, log = log) )
-         else fy <- if (sigma<0.0001)   dpois(x = y, lambda = mu, log = log) 
-                   else dnbinom(y, size=mu/sigma, mu=mu, log=log)
+                                        dnbinom(x, size=mu/sigma, mu=mu, log=log), 
+                                        dpois(x = x, lambda = mu, log = log) )
+         else fy <- if (sigma<0.0001)   dpois(x = x, lambda = mu, log = log) 
+                   else dnbinom(x, size=mu/sigma, mu=mu, log=log)
           fy
   }
 #------------------------------------------------------------------------------------------

@@ -19,7 +19,7 @@ generation for the specific parameterization of the gamma distribution defined b
 
 \usage{
 GA(mu.link = "log", sigma.link ="log")
-dGA(y, mu = 1, sigma = 1, log = FALSE) 
+dGA(x, mu = 1, sigma = 1, log = FALSE) 
 pGA(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qGA(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rGA(n, mu = 1, sigma = 1)
@@ -27,7 +27,7 @@ rGA(n, mu = 1, sigma = 1)
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the mu parameter, other links are  "inverse", "identity" ans "own"}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter, other link is the "inverse", "identity" and "own"}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{log, log.p}{ logical; if TRUE, probabilities p are given as log(p).}
@@ -65,11 +65,11 @@ usual dispersion parameter for a GLM gamma model. Hence  \eqn{\sigma \mu}{sigma*
 
 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}}
+\seealso{ \code{\link{gamlss.family}}}
 
 \examples{
 GA()# gives information about the default links for the gamma distribution      
-dat<-rgamma(100, shape=1, scale=10) # generates 100 random observations 
+# dat<-rgamma(100, shape=1, scale=10) # generates 100 random observations 
 # fit a gamlss model
 # gamlss(dat~1,family=GA) 
 # fits a constant for each parameter mu and sigma of the gamma distribution

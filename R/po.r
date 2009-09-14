@@ -16,7 +16,7 @@ PO <- function (mu.link = "log")
                 mu.dr = mstats$mu.eta, 
                  dldm = function(y,mu) (y-mu)/mu,
                d2ldm2 = function(mu) -1/mu,
-          G.dev.incr  = function(y,mu,...) -2*dPO(y = y, mu = mu, log = TRUE),
+          G.dev.incr  = function(y,mu,...) -2*dPO(x = y, mu = mu, log = TRUE),
                 rqres = expression(rqres(pfun="pPO", type="Discrete", ymin=0, y=y, mu=mu)), 
             mu.initial =expression({mu <- (y +mean(y))/2 } ),
               mu.valid = function(mu) all(mu > 0), 
@@ -25,11 +25,11 @@ PO <- function (mu.link = "log")
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------------------------------
-dPO<-function(y, mu = 1, log = FALSE)
+dPO<-function(x, mu = 1, log = FALSE)
  { 
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
-          if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
-          fy <- dpois(x = y, lambda = mu, log = log)
+          if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+          fy <- dpois(x = x, lambda = mu, log = log)
           fy
   }
   

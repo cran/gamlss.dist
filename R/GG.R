@@ -89,18 +89,18 @@ GG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
             class = c("gamlss.family","family"))
 }
 #--------------------------------------------------------------
-dGG <- function(y, mu=1, sigma=0.1, nu=1,  log = FALSE)
+dGG <- function(x, mu=1, sigma=0.1, nu=1,  log = FALSE)
  {
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(y < 0))  stop(paste("y must be positive", "\n", "")) 
-               z <- (y/mu)^nu 
+          if (any(x < 0))  stop(paste("x must be positive", "\n", "")) 
+               z <- (x/mu)^nu 
            theta <- 1/(sigma^2*nu^2) 
-         # loglik <- theta*log(theta)+theta*log(z)-theta*z-lgamma(theta)+log(abs(nu))-log(y)
-           if(length(nu)>1)  loglik <- ifelse(abs(nu)>1e-06,dGA(z, mu=1, sigma=sigma*abs(nu), log=TRUE)+ log(abs(nu)*z/y),
-                                    -log(y)-.5*log(2*pi)-log(sigma)-(1/(2*sigma^2))*(log(y)-log(mu))^2)
-          else  if (abs(nu)>1e-06) loglik <-  dGA(z, mu=1, sigma=sigma*abs(nu), log=TRUE)+ log(abs(nu)*z/y) 
-                 else loglik <- -log(y)-.5*log(2*pi)-log(sigma)-(1/(2*sigma^2))*(log(y)-log(mu))^2
+         # loglik <- theta*log(theta)+theta*log(z)-theta*z-lgamma(theta)+log(abs(nu))-log(x)
+           if(length(nu)>1)  loglik <- ifelse(abs(nu)>1e-06,dGA(z, mu=1, sigma=sigma*abs(nu), log=TRUE)+ log(abs(nu)*z/x),
+                                    -log(x)-.5*log(2*pi)-log(sigma)-(1/(2*sigma^2))*(log(x)-log(mu))^2)
+          else  if (abs(nu)>1e-06) loglik <-  dGA(z, mu=1, sigma=sigma*abs(nu), log=TRUE)+ log(abs(nu)*z/x) 
+                 else loglik <- -log(x)-.5*log(2*pi)-log(sigma)-(1/(2*sigma^2))*(log(x)-log(mu))^2
           if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 
           ft
   }    

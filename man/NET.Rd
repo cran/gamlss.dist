@@ -12,13 +12,13 @@ GAMLSS fitting using the function \code{gamlss()}.  The functions \code{dNET},
 \usage{
 NET(mu.link = "identity", sigma.link = "log")
 pNET(q, mu = 5, sigma = 0.1, nu = 1, tau = 2)
-dNET(y, mu = 0, sigma = 1, nu = 1.5, tau = 2, log = FALSE)
+dNET(x, mu = 0, sigma = 1, nu = 1.5, tau = 2, log = FALSE)
 }
 
 \arguments{
   \item{mu.link}{Defines the \code{mu.link}, with "identity" link as the default for the \code{mu} parameter. Other links are "inverse", "log" and "own" }
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. Other links are "inverse", "identity" and "own"}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values }
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of \code{nu} parameter values}
@@ -60,7 +60,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \author{Mikis Stasinopoulos, Bob Rigby and Calliope Akantziliotou }
 
 
-\seealso{  \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCPE}} }
+\seealso{  \code{\link{gamlss.family}}, \code{\link{BCPE}} }
 \examples{
 NET()   # 
 data(abdom)

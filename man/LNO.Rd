@@ -35,8 +35,8 @@ generation for the specific parameterization of the log-normal distribution and 
 
 LNO(mu.link = "identity", sigma.link = "log")
 LOGNO(mu.link = "identity", sigma.link = "log")
-dLNO(y, mu = 1, sigma = 0.1, nu = 0, log = FALSE)
-dLOGNO(y, mu = 0, sigma = 1, log = FALSE)
+dLNO(x, mu = 1, sigma = 0.1, nu = 0, log = FALSE)
+dLOGNO(x, mu = 0, sigma = 1, log = FALSE)
 pLNO(q, mu = 1, sigma = 0.1, nu = 0, lower.tail = TRUE, log.p = FALSE)
 pLOGNO(q, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qLNO(p, mu = 1, sigma = 0.1, nu = 0, lower.tail = TRUE, log.p = FALSE)
@@ -48,7 +48,7 @@ rLOGNO(n, mu = 0, sigma = 1)
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the mu parameter. Other links are "inverse", "log" and "own"}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter. Other links are "inverse", "identity" ans "own"}
-  \item{y,q}{vector of quantiles}
+  \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of shape parameter values}
@@ -97,7 +97,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \section{Warning }{This is a two parameter fit for \eqn{\mu}{mu} and \eqn{\sigma}{sigma} while \eqn{\nu}{nu} is fixed. 
              If you wish to model \eqn{\nu}{nu} use the gamlss family \code{BCCG}.} 
 
-\seealso{ \code{\link[gamlss]{gamlss}}, \code{\link{gamlss.family}}, \code{\link{BCCG}} }
+\seealso{ \code{\link{gamlss.family}}, \code{\link{BCCG}} }
 
 \examples{
 LOGNO()#  gives information about the default links for the log normal distribution 

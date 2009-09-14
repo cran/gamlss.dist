@@ -182,11 +182,11 @@ d2ldvdt
             class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dSEP2 <- function(y, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+dSEP2 <- function(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
  {
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
           if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
-      z <- (y-mu)/sigma
+      z <- (x-mu)/sigma
       w <- sign(z)*(abs(z)^(tau/2))*nu*(sqrt(2/tau)) 
  loglik <- log(pnorm(w)) - (abs(z)^(tau))/tau - log(sigma) - lgamma(1/tau) - ((1/tau)-1)*log(tau)
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 

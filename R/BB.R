@@ -55,17 +55,17 @@ BB <- function (mu.link = "logit", sigma.link = "log")
             class = c("gamlss.family","family"))
 }
 #------------------------------------------------------------------------------------------
-dBB <- function(y, mu = 0.5, sigma = 1, bd = 10, log = FALSE)
+dBB <- function(x, mu = 0.5, sigma = 1, bd = 10, log = FALSE)
  { 
     if (any(mu < 0) | any(mu > 1))   stop(paste("mu must be between 0 and 1 ", "\n", "")) 
     if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", ""))
     if (any(sigma < 1e-10)) warning(" values of sigma in BB less that 1e-10 are set to 1e-10" )
     sigma <- ifelse((sigma < 1e-10),1e-10,sigma)
-    if (any(y < 0) )  stop(paste("y must be >=0", "\n", ""))  
-    if (any(bd < y))  stop(paste("y  must be <=  than the binomial denominator", bd, "\n"))
-      logfy <-   (lgamma(bd+1)-lgamma(y+1)-lgamma(bd-y+1)
-                  +lgamma((1/sigma))+lgamma(y+mu*(1/sigma))
-                  +lgamma(bd+((1-mu)/sigma)-y)-lgamma(mu*(1/sigma))
+    if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+    if (any(bd < x))  stop(paste("x  must be <=  than the binomial denominator", bd, "\n"))
+      logfy <-   (lgamma(bd+1)-lgamma(x+1)-lgamma(bd-x+1)
+                  +lgamma((1/sigma))+lgamma(x+mu*(1/sigma))
+                  +lgamma(bd+((1-mu)/sigma)-x)-lgamma(mu*(1/sigma))
                   -lgamma((1-mu)/sigma)-lgamma(bd+(1/sigma)))
         fy <- if(log == FALSE) exp(logfy) else logfy
         fy
