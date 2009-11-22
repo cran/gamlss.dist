@@ -9,9 +9,9 @@
 
 \title{The generalized Beta type 1 distribution for fitting a GAMLSS}
 \description{
-This function defines the generalized t distribution, a four parameter distribution, 
-for a \code{gamlss.family} object to be used for a  
-GAMLSS fitting using the function \code{gamlss()}. Note the range of the response variable is from zero to one. 
+This function defines the generalized beta  type 1 distribution, a four parameter distribution.
+The function \code{GB1} creates a \code{gamlss.family} object which can be used to fit the distribution using the function 
+\code{gamlss()}. Note the range of the response variable is from zero to one. 
 The functions \code{dGB1}, 
 \code{GB1}, \code{qGB1} and \code{rGB1} define the density, 
 distribution function, quantile function and random

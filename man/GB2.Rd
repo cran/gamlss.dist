@@ -8,7 +8,9 @@
 
 \title{The generalized Beta type 2 distribution for fitting a GAMLSS}
 \description{
-This function defines the generalized t distribution, a four parameter distribution. The response variable is 
+This function defines the generalized beta  type 2 distribution, a four parameter distribution.
+The function \code{GB2} creates a \code{gamlss.family} object which can be used to fit the distribution using the function 
+\code{gamlss()}. The response variable is 
 in the range from zero to infinity.  
 The functions \code{dGB2}, 
 \code{GB2}, \code{qGB2} and \code{rGB2} define the density, 
