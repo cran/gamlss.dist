@@ -30,6 +30,8 @@
                                    log(1+sigma))  
                          d2ldm2 <- ((1/sigma)^2)*(trigamma(y+(mu/sigma))-trigamma((mu/sigma))) #
                          d2ldm2 <- if (any(d2ldm2 >= 0))  -dldm^2 else  d2ldm2 # MS Thursday, September 29, 2005
+                         # d2ldm2 <- -dldm^2
+                         d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15)  
                          d2ldm2   
                                }, 
                                #observed ((1/sigma)^2)*(trigamma(y+(mu/sigma))-trigamma((mu/sigma))),
@@ -41,6 +43,7 @@
                         dldd <- -(mu/(sigma^2))*(digamma(y+(mu/sigma))-digamma((mu/sigma))-
                                    log(1+sigma))+(y-mu)/(sigma*(1+sigma))
                       d2ldd2 <- -dldd^2
+                      d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)  
                       d2ldd2
                                }, 
 #     d2ldd2 = function()  ((mu^2)/(sigma^4))* (trigamma(y+(mu/sigma))-trigamma((mu/sigma)))

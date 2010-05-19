@@ -31,7 +31,8 @@ NBI <- function (mu.link = "log", sigma.link = "log")
                d2ldd2 = function(y,mu,sigma) {# eval.parent(quote(-dldp*dldp))
                     dldd <- -((1/sigma)^2)* (digamma(y+(1/sigma))-digamma(1/sigma)
                              -log(1+mu*sigma)-(y-mu)*sigma/(1+mu*sigma))
-                  d2ldd2 <- -dldd^2  
+                  d2ldd2 <- -dldd^2
+                  d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)    
                   d2ldd2               
                                    }, #change this
               d2ldmdd = function(y) rep(0,length(y)),     
@@ -39,7 +40,7 @@ NBI <- function (mu.link = "log", sigma.link = "log")
                rqres = expression(
                           rqres(pfun="pNBI", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma)
                                  ), 
-            mu.initial = expression(mu <-  y+0.5),
+            mu.initial = expression(mu <-  (y+mean(y))/2),
          sigma.initial = expression(
                       sigma <- rep( max( ((var(y)-mean(y))/(mean(y)^2)),0.1),length(y))),
               mu.valid = function(mu) all(mu > 0) , 

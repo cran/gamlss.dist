@@ -56,7 +56,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
        \eqn{n\mu}{n*mu} is the mean of the distribution where n is the binomial denominator. }
 
 
-\seealso{ \code{\link{gamlss.family}}}
+\seealso{ \code{\link{gamlss.family}}, \code{\link{ZABI}},  \code{\link{ZIBI}}}
 
 \examples{
  BI()# gives information about the default links for the Binomial distribution 

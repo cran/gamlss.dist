@@ -52,6 +52,7 @@ gamlss.family.default(object,...)
   Gumbel                       \tab \code{\link{GU}()}                   \tab  2  \cr
   Inverse Gaussian             \tab \code{\link{IG}()}                   \tab  2  \cr
   Johnson's SU                 \tab \code{\link{JSU}()}                  \tab  4  \cr   
+  Logarithmic                  \tab \code{\link{LG}()}     \tab  1  \cr
   Logistic                     \tab \code{\link{LO}()}                   \tab  2  \cr
   log-Normal                   \tab \code{\link{LOGNO}()}                \tab  2  \cr
   log-Normal  (Box-Cox)        \tab \code{\link{LNO}()}                  \tab  3 (1 fixed)  \cr
@@ -71,20 +72,24 @@ gamlss.family.default(object,...)
   Skew Power Exponential type 3 \tab \code{\link{SEP3}()}   \tab  4  \cr 
   Skew Power Exponential type 4 \tab \code{\link{SEP4}()}   \tab  4  \cr 
   Shash                        \tab \code{\link{SHASH}()}   \tab  4  \cr 
-  Sichel  (original)           \tab \code{\link{SI}()}                   \tab  3  \cr
+  Sichel  (original)           \tab \code{\link{SI}()}      \tab  3  \cr
   Sichel  (mu as the maen)     \tab \code{\link{SICHEL}()}  \tab  3  \cr
   Skew t  type 1               \tab \code{\link{ST1}()}     \tab  3  \cr 
   Skew t  type 2               \tab \code{\link{ST2}()}     \tab  3  \cr 
   Skew t  type 3               \tab \code{\link{ST3}()}     \tab  3  \cr 
   Skew t  type 4               \tab \code{\link{ST4}()}     \tab  3  \cr 
   Skew t  type 5               \tab \code{\link{ST5}()}     \tab  3  \cr 
-  t-distribution               \tab \code{\link{TF}()}                   \tab  3  \cr
-  Weibull                      \tab \code{\link{WEI}()}                  \tab  2  \cr
-  Weibull(PH parameterization) \tab \code{\link{WEI2}()}                 \tab  2  \cr
+  t-distribution               \tab \code{\link{TF}()}      \tab  3  \cr
+  Weibull                      \tab \code{\link{WEI}()}     \tab  2  \cr
+  Weibull(PH parameterization) \tab \code{\link{WEI2}()}    \tab  2  \cr
   Weibull (mu as mean)         \tab \code{\link{WEI3}()}    \tab  2  \cr
-  Zero inflated poisson        \tab \code{\link{ZIP}()}                  \tab  2  \cr
+  Zero adjusted binomial       \tab \code{\link{ZABI}()}    \tab  2   \cr 
+  Zero inflated binomial       \tab \code{\link{ZIBI}()}    \tab  2   \cr 
+  Zero adjusted logarithmic    \tab \code{\link{ZALG}()}    \tab  2   \cr 
+  Zero inflated poisson        \tab \code{\link{ZIP}()}     \tab  2  \cr
   Zero inf. poiss.(mu as mean) \tab \code{\link{ZIP2}()}    \tab  2  \cr
-  Zero adjusted IG             \tab \code{\link{ZAIG}()}                 \tab  2  \cr
+  Zero adjusted poisson        \tab \code{\link{ZAP}()}     \tab  2   \cr 
+  Zero adjusted IG             \tab \code{\link{ZAIG}()}    \tab  2  \cr
   }
  Note that some of the distributions are in the package \code{gamlss.dist}.
  The parameters of the distributions are in order, \bold{\code{mu}} for location, \bold{\code{sigma}} for scale (or dispersion), 

@@ -123,7 +123,8 @@
                  rqres(pfun="pDEL", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma, nu=nu)
                                    ),  #
             mu.initial = expression(mu<- (y+mean(y)/2)),
-         sigma.initial = expression( sigma<-rep((var(y)-mean(y))/(mean(y)^2), length(y))),
+         sigma.initial = expression(
+                      sigma <- rep( max( ((var(y)-mean(y))/(mean(y)^2)),0.1),length(y))),
             nu.initial = expression({  nu <- rep(0.5,length(y)) }), 
               mu.valid = function(mu) all(mu > 0) , 
            sigma.valid = function(sigma)  all(sigma > 0), 
@@ -148,7 +149,14 @@ dDEL<-function(x, mu=1, sigma=1, nu=.5, log=FALSE)
   S <- gamlss.dist:::tofyDEL(x, mu, sigma, nu, what=2)
 #   S <- tofyDELPORT(x, mu, sigma, nu)[,2]
  logfy <-  logpy0-lgamma(x+1)+S
-  if(log==FALSE) fy <- exp(logfy) else fy <- logfy
+ if(log==FALSE) fy <- exp(logfy) else fy <- logfy
+ 
+ if (length(sigma)>1) fy <- ifelse(sigma>0.0001, fy, 
+                                          dPO(x, mu = mu, log = log) )
+        else fy <- if (sigma<0.0001) dPO(x, mu = mu, log = log) 
+                   else fy
+ 
+  
   fy
   }
 #----------------------------------------------------------------------------------------

@@ -110,7 +110,7 @@ exGAUS <- function (mu.link="identity", sigma.link="log", nu.link ="log")
 dexGAUS<-function(x, mu=5, sigma=1, nu=1, log=FALSE)
   { 
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-   if (any(nu <= 0) )  stop(paste("nu must be greater than 1 ", "\n", "")) 
+   if (any(nu <= 0) )  stop(paste("nu must be greater than 0 ", "\n", "")) 
     ly <- length(x)       
  sigma <- rep(sigma, length = ly)
     mu <- rep(mu, length = ly)   

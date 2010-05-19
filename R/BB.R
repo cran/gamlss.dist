@@ -1,4 +1,4 @@
-# MS , RAR, KA
+# MS , RAR, KA amended 21_04_2010
 BB <- function (mu.link = "logit", sigma.link = "log") 
 {
     mstats <- checklink("mu.link", "Beta Binomial", substitute(mu.link),
@@ -26,15 +26,13 @@ BB <- function (mu.link = "logit", sigma.link = "log")
                                                   +trigamma(bd+((1-mu)/sigma)-y)
                                                   -trigamma(mu/sigma)
                                                   -trigamma((1-mu)/sigma)),
-               #d2ldm2 = function() {d2ldm2 <- eval.parent(expression(-dldp^2))}, 
                  dldd = function(y,mu,sigma,bd) {k <- 1/sigma
                                  dldd <- -(k^2)*(digamma(k)+mu*digamma(y+mu*k)+(1-mu)*
                                          digamma(bd+(1-mu)*k-y)-mu*digamma(mu*k)-(1-mu)*
                                          digamma((1-mu)*k)-digamma(bd+k))
                                  dldd 
                                    }, 
-               d2ldd2 = function(y,mu,sigma,bd) {#d2ldd2 <- eval.parent(expression(-dldp^2))
-                                   k <- 1/sigma
+               d2ldd2 = function(y,mu,sigma,bd) {k <- 1/sigma
                                 dldd <- -(k^2)*(digamma(k)+mu*digamma(y+mu*k)+(1-mu)*
                                          digamma(bd+(1-mu)*k-y)-mu*digamma(mu*k)-(1-mu)*
                                          digamma((1-mu)*k)-digamma(bd+k))
@@ -67,7 +65,11 @@ dBB <- function(x, mu = 0.5, sigma = 1, bd = 10, log = FALSE)
                   +lgamma((1/sigma))+lgamma(x+mu*(1/sigma))
                   +lgamma(bd+((1-mu)/sigma)-x)-lgamma(mu*(1/sigma))
                   -lgamma((1-mu)/sigma)-lgamma(bd+(1/sigma)))
-        fy <- if(log == FALSE) exp(logfy) else logfy
+        if (length(sigma)>1) logfy2 <- ifelse(sigma>0.0001, logfy, 
+                                          dBI(x, mu = mu, bd=bd, log = TRUE) )
+        else logfy2 <- if (sigma<0.0001)  dBI(x, mu = mu, bd=bd, log = TRUE) 
+                   else logfy
+        fy <- if(log == FALSE) exp(logfy2) else logfy2
         fy
   }
 #------------------------------------------------------------------------------------------
@@ -96,7 +98,11 @@ pBB <- function(q, mu = 0.5, sigma = 1, bd = 10, lower.tail = TRUE, log.p = FALS
       cdf <- FFF
       cdf <- if(lower.tail==TRUE) cdf else 1-cdf
       cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
-      cdf
+      if (length(sigma)>1) cdf2 <- ifelse(sigma>0.0001, cdf, 
+                                          pBI(q, mu = mu, bd=bd, lower.tail=lower.tail, log.p = log.p) )
+      else cdf2 <- if (sigma<0.0001) qBI(q, mu = mu, bd=bd, lower.tail=lower.tail, log.p = log.p)
+                   else cdf
+      cdf2
   }
 #------------------------------------------------------------------------------------------
 qBB <- function(p, mu=0.5, sigma=1, bd=10, lower.tail = TRUE, log.p = FALSE, fast = FALSE)
@@ -116,13 +122,18 @@ qBB <- function(p, mu=0.5, sigma=1, bd=10, lower.tail = TRUE, log.p = FALSE, fas
     cumpro <- 0                                                                      
           for (j in seq(from = 0, to = nbd[i]))
             {
-       cumpro <-  if (fast == FALSE) pBB(j, mu = nmu[i], sigma = nsigma[i] , bd = nbd[i] , log = FALSE)
+       cumpro <-  if (fast == FALSE) pBB(j, mu = nmu[i], sigma = nsigma[i] , bd = nbd[i] , log.p = FALSE)
                  else  cumpro+dBB(j, mu = nmu[i], sigma = nsigma[i] , bd = nbd[i] , log = FALSE)# the above is faster 
        QQQ[i] <- j 
        if  (p[i] <= cumpro ) break 
             } 
       }           
-          QQQ
+          invcdf <- QQQ
+         if (length(sigma)>1) invcdf2 <- ifelse(sigma>0.0001, invcdf, 
+                                          qBI(p, mu = mu, bd=bd, lower.tail=TRUE))
+        else invcdf2 <- if (sigma<0.0001) qBI(p, mu = mu, bd=bd, lower.tail=TRUE)
+                   else invcdf
+     invcdf2    
    }
 #------------------------------------------------------------------------------------------
 rBB <- function(n, mu = 0.5, sigma = 1, bd = 10, fast = FALSE )

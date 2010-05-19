@@ -32,6 +32,7 @@ sigma.linkinv = dstats$linkinv,
                         dldm0 <- -(((1-sigma)+sigma*exp(mus))^(-1))
                          dldm <- ifelse(y==0, dldm0, (y-mus)/mu)
                        d2ldm2 <- -dldm*dldm
+                       d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15)  
                          d2ldm2},
           dldd = function(y,mu,sigma) { 
                           mus <- mu/(1-sigma)
@@ -41,8 +42,9 @@ sigma.linkinv = dstats$linkinv,
         d2ldd2 = function(y,mu,sigma) {
                           mus <- mu/(1-sigma)
                         dldd0 <- (1-(1+mus)*exp(-mus))*((sigma+(1-sigma)*exp(-mus))^(-1)) 
-                         dldd <- ifelse(y==0, dldd0, ((y-1)/(1-sigma))-((mus^2)/mu))
+                         dldd <- ifelse(y==0, dldd0, ((y-1)/(1-sigma))-((mus^2)/mu)) 
                        d2ldd2 <- -dldd*dldd
+                       d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15) 
                          d2ldd2},
         d2ldmdd = function(y,mu,sigma) {
                           mus <- mu/(1-sigma)
@@ -99,7 +101,7 @@ qZIP2 <- function(p, mu = 5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
          if (log.p == TRUE) p <- exp(p)   else p <- p
          if (lower.tail == TRUE)  p <- p  else p <- 1 - p
            mus <- mu/(1-sigma)
-          pnew <- (p-sigma)/(1-sigma)
+          pnew <- (p-sigma)/(1-sigma)-1e-10
           suppressWarnings(q <- ifelse((pnew > 0 ), qpois(pnew, lambda = mus, ), 0))
           q
    }

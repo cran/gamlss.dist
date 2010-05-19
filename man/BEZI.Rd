@@ -75,9 +75,13 @@ returns a \code{gamlss.family} object which can be used to fit a zero-inflated b
 }
 \references{
 
+
 Ferrari, S.L.P., Cribari-Neto, F. (2004). Beta regression for
      modelling rates and proportions. \emph{Journal of Applied Statistics},
      \bold{31} (1), 799-815.
+
+Ospina R. and Ferrari S. L. P. (2010) Inflated beta distributions, \emph{Statistical Papers}, 
+    \bold{23},  111-126. 
 
 Rigby, R. A. and  Stasinopoulos D. M. (2005).
 Generalized additive models for location, scale and shape (with discussion). 

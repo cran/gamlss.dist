@@ -30,11 +30,12 @@ PIG <- function (mu.link = "log", sigma.link = "log")
                                     }, 
                d2ldm2 = function(y,mu,sigma) { 
                                     #d2ldm2 <- eval.parent(quote(-dldp*dldp))
-                     ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
+                         ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
                                    as.integer(length(y)),as.integer(max(y)+1), PACKAGE="gamlss.dist")[[1]])
-                    dldm <- (y-ty)/mu
-                    d2ldm2 <- -dldm*dldm
-                    d2ldm2
+                       dldm <- (y-ty)/mu
+                     d2ldm2 <- -dldm*dldm
+                     d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15) 
+                     d2ldm2
                                     },
                  dldd = function(y,mu,sigma) {
               ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
@@ -45,11 +46,12 @@ PIG <- function (mu.link = "log", sigma.link = "log")
                                     },
                d2ldd2 = function(y,mu,sigma){
                                     #d2ldd2 <- eval.parent(quote(-dldp*dldp))
-                   ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
+                       ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
                               as.integer(length(y)),as.integer(max(y)+1),PACKAGE="gamlss.dist")[[1]])
-             dldd <- ((ty*(1+sigma*mu)/mu)-(1+sigma*y))/(sigma^2)
-              d2ldd2 <- -dldd*dldd
-              d2ldd2
+                     dldd <- ((ty*(1+sigma*mu)/mu)-(1+sigma*y))/(sigma^2)
+                   d2ldd2 <- -dldd*dldd
+                   d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15)  
+                   d2ldd2
                                    },
               d2ldmdd = function(y,mu,sigma) {
              ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
@@ -65,7 +67,7 @@ PIG <- function (mu.link = "log", sigma.link = "log")
                 rqres = expression(
                   rqres(pfun="pPIG", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma)
                                    ), 
-           mu.initial = expression(mu <- y+0.5),
+           mu.initial = expression(mu <- (y+mean(y))/2),
         sigma.initial = expression( sigma <- rep( max( ((var(y)-mean(y))/(mean(y)^2)),0.1),
                                         length(y)) ),
              mu.valid = function(mu) all(mu > 0) , 
