@@ -1,0 +1,795 @@
+rm(liat=ls())#
+car<-dget("/users/stasinom/documents/gamlss/data/car200") #
+car1<-subset(car, car$numclaims!=0)#
+car1$veh_age<-factor(car1$veh_age) #
+str(car1) #
+dim(car1) #
+sVV<-car1$AMRETVAL#
+lnc<-with(car1, log(numclaims))#
+#
+#
+m0 <- gamlss(claimcst0 ~ 1, sigma.formula = ~1, family = BCT, data = car1)
+library(gamlss)#
+#
+m0 <- gamlss(claimcst0 ~ 1, sigma.formula = ~1, family = BCT, data = car1)
+#
+m2 <- stepGAICAll.A(m0, scope=list(lower=~1, upper=~pb(sVV)+lnc+(veh_make+veh_age+gender+area+agecat)^2),k=log(3911))
+m2
+# quinta feira 02 de setembro de 2010
+ls()
+# quinta feira 02 de setembro de 2010#
+# nu = v = a e tau = t =  b#
+# Universidade federal de alfenas - Instituto de ciÍncias exatas - Brasil#
+# Denismar Alves Nogueira#
+# Michelle Aparecida Correa#
+#
+#
+KumN <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="log")#
+{#
+    mstats <- checklink(   "mu.link", "kumaraswamy-Normal", substitute(mu.link),#
+                           c("1/mu^2", "log", "identity"))#
+    dstats <- checklink("sigma.link", "kumaraswamy-Normal", substitute(sigma.link),#
+                           c("inverse", "log", "identity"))#
+    vstats <- checklink(   "nu.link", "kumaraswamy-Normal", substitute(nu.link),#
+                           c("1/nu^2", "log", "identity"))#
+    tstats <- checklink(  "tau.link", "kumaraswamy-Normal", substitute(tau.link),#
+                           c("1/tau^2", "log", "identity"))#
+    structure(#
+          list(family = c("KumN", "kumaraswamy-Normal"),#
+           parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE, tau=TRUE),#
+                nopar = 4,#
+                 type = "Continuous",#
+              mu.link = as.character(substitute(mu.link)),#
+           sigma.link = as.character(substitute(sigma.link)),#
+              nu.link = as.character(substitute(nu.link)),#
+              tau.link = as.character(substitute(tau.link)),#
+           mu.linkfun = mstats$linkfun,#
+        sigma.linkfun = dstats$linkfun,#
+           nu.linkfun = vstats$linkfun,#
+           tau.linkfun = tstats$linkfun,#
+           mu.linkinv = mstats$linkinv,#
+        sigma.linkinv = dstats$linkinv,#
+           nu.linkinv = vstats$linkinv,#
+           tau.linkinv = tstats$linkinv,#
+                mu.dr = mstats$mu.eta,#
+             sigma.dr = dstats$mu.eta,#
+                nu.dr = vstats$mu.eta,#
+                tau.dr = tstats$mu.eta,#
+    dldm = function() {#
+#
+   f<-(1/(sqrt(2*pi*sigma^2))*exp(-1/2*((y-mu)/sigma)^2)) #f= densidade de probabilidade da distribuiÁ„o Normal#
+   p<-pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+   dfdm<-((y-mu)/((sigma^3)*(sqrt(2*pi)))*(exp(-1/2((y-mu)/sigma)^2)))    #dfdm= derivada de f em relaÁ„o a "mu"#
+   dpdm<-((-1/((sigma^2)*sqrt(2*pi)))*exp(-1/2((y-mu)/sigma)^2))    #dpdm= derivada de p em relaÁ„o "mu"#
+   dldm<-((1/f)*(dfdm)+(1/p)*(dpdm)*(1-(nu*(tau-1))/((p^(-nu))-1)))      #dldm= derivada primeira da log-verossimilhanÁa em relaÁ„o a "mu"#
+                      },#
+#
+   d2ldm2 = function(){#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+    d2ldm2 <- -(1/sigma^2)-((r*(y-mu)*h+hh)/(r^2))+(((c*p^(-nu)-c)*(nu*(tau-1)*(y-mu)*h)-nu^2*(tau-1)*hh*p^(-nu-1))/((c*p^(-nu)-c)^2))#
+                      },#
+#
+   dldd = function() {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    dldd <-((((y-mu)^2)/c)-(sqrt(2*pi)/(2*pi*sigma)))+(((mu-y)*h/c*p)-(((mu-y)*(nu*(tau-1))*h)/((c*p)*(p^(-nu)-1))))#
+                      } ,#
+#
+   d2ldd2 = function(){#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+d2ldd2_1 <- (((-(y-mu)*sqrt(2*pi))/((sigma^3)*pi))+(sqrt(2*pi)/(2*pi*sigma^2)))#
+d2ldd2_2 <- (c*p*(mu-y)*h*(((y-mu)^2)/sigma^3)-(mu-y)*h*2*sigma*sqrt(2*pi)*p+((mu-y)/sigma)*h)/((c*p)^2)#
+       Q <- (((c*p)*(p^(-nu)-1))*(mu-y)*(nu*(tau-1))*h*(((y-mu)^2)/sigma^3)-(mu-y)*((nu*(tau-1))*h))*(2*sigma*sqrt(2*pi)*p*p^(-nu)+(mu-y)*h*p^(-nu)-nu*sigma*sqrt(2*pi)*p*p^(-nu-1)*(mu-y)*h-2*sigma*sqrt(2*pi)*p-sigma*sqrt(2*pi)*(mu-y)*h)#
+       W <- ((c*p)*(p^(-nu)-1))^2#
+d2ldd2_3 <- -Q/W#
+d2ldd2  <- d2ldd2_1+d2ldd2_2+d2ldd2_3#
+                      },#
+#
+     dldv = function() {#
+    p <- pnorm(y,mu,sigma)#
+    dldv <- (1/nu)+(log(p))*(1-(((tau-1)*p^nu)/(1-p^nu)))#
+                        } ,#
+#
+    d2ldv2 = function() {#
+       p <- pnorm(y,mu,sigma)#
+       d2ldv2 <- -(1/nu^2)+(log(p))*((nu*(tau-1)*(-p^(nu-1)+2*p^(2*nu-1)))/(1-p^nu)^2)#
+                        },#
+#
+      dldt = function() {#
+       p <- pnorm(y,mu,sigma)#
+       dldt <- (1/tau)+log(1-p^nu)#
+                        } ,#
+#
+      d2ldt2 = function() {#
+d2ldt2 <- -(1/tau^2)#
+                            } ,#
+#
+       d2ldmdd = function()## ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+    dl2dmdd_1 <- 2*(mu-y)/sigma^3#
+    dl2dmdd_2 <- ((sqrt(2*pi)*p*((y-mu)^2/sigma)*h))+(h*2*sigma*sqrt(2*pi)*p-((y-mu)/sigma)*hh)/(r)^2#
+    dl2dmdd_3 <- ((r*((p)^(-nu)-1)-(nu*(tau-1))*((y-mu)^2/sigma^3)*h)-(nu*(tau-1)*h*2*sigma*sqrt(2*pi)*p*(p^(-nu))))/(r*(p^(-nu))-1)^2#
+    dl2dmdd_4 <- (((mu-y)*h*(p^(-nu)))-(nu*sigma*sqrt(2*pi)*p*(p^(-nu-1))*(mu-y)*h)-(2*sigma*sqrt(2*pi)*p)-(sigma*sqrt(2*pi)*(y-mu)*h))/(r*(p^(-nu))-1)^2#
+               dl2dmdd <- dl2dmdd_1-dl2dmdd_2+dl2dmdd_3+dl2dmdd_4#
+               },#
+#
+       d2ldmdv = function()# OK#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+    d2ldmdv_1 <- (r*(p^(-nu)-1)*(tau-1)*h)/(r*(p^(-nu)-1)^2)#
+    d2ldmdv_2 <- (nu*(tau-1)*h*c*p*(p^(-nu)*log(p)))/(r*(p^(-nu)-1)^2)#
+    d2ldmdv <- d2ldmdv_1+d2ldmdv_2#
+             },#
+#
+#
+       d2ldmdt = function() #ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+           d2ldmdt <- (nu*h)/(r*(p^(-nu)-1))#
+               },#
+#
+       d2ldddv = function() #ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+       d2ldddv_1 <- (r*(p^(-nu)-1)*(mu-x)*(nu-1)*h)/(r*(p^(-nu)-1)^2)#
+       d2ldddv_2 <- (r*(p^(-nu))*log(p)*(mu-y)*(nu*(tau-1)*h))/(r*(p^(-nu)-1)^2)#
+       d2ldddv <- -(d2ldddv_1 + d2ldddv_2)#
+               },#
+#
+       d2ldddt = function() #ok#
+              {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+           d2ldddt <- -(((mu-y)*nu*h)/(r*(p^(-nu)-1)))#
+               },#
+#
+       d2ldvdt = function() #ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+#
+           d2ldvdt <- -(log(p)*(p^(nu)/(1-p^(nu))))#
+#
+               },#
+#
+ G.dev.incr  = function(y,mu,sigma,nu,tau,...) -2*dKumN(y,mu,sigma,nu,tau,log=TRUE),#
+         rqres = expression(#
+                   rqres(pfun="pKumN", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)#
+                           ),#
+    mu.initial = expression(mu <- (y+mean(y))/2),# rep(mean(y),length(y))#
+ sigma.initial = expression(sigma<- rep(sd(y)/5, length(y))),#
+    nu.initial = expression(nu <- rep(.5, length(y))),#
+   tau.initial = expression(tau <-rep(.5, length(y))),#
+      mu.valid = function(mu) TRUE,#
+   sigma.valid = function(sigma)  all(sigma > 0),#
+      nu.valid = function(nu) TRUE ,#
+     tau.valid = function(tau) all(tau > 0),#
+       y.valid = function(y)  TRUE#
+          ),#
+            class = c("gamlss.family","family"))#
+}#
+#-----------------------------------------------------------------#
+dKumN <- function(y, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)#
+ {#
+          if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))#
+          if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))#
+          if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))#
+#      z <- (y-mu)/sigma#
+#      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))#
+#      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))#
+# loglik <- -log(sigma)-log(2*pi)/2-log(1+(z^2))/2+log(c)-(r^2)/2#
+#       if(log==FALSE) ft  <- exp(loglik) else ft <- loglik#
+#       ft#
+#  }#
+  p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+  f<-(1/(sqrt(2*pi*sigma^2))*exp(-1/2*((y-mu)/sigma)^2)) #f= densidade de probabilidade da distribuiÁ„o Normal#
+  loglik <- log(nu)+log(tau)+log(f)+(nu-1)*log(p)+(tau-1)*log(1-(p^(nu)))#
+     if(log==FALSE) ft  <- exp(loglik) else ft <- loglik#
+           ft#
+  }#
+#-----------------------------------------------------------------#
+pKumN <- function(q, mu = 0, sigma = 1, nu = 1, tau = .5, lower.tail = TRUE, log.p = FALSE)#
+ {#
+         if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))#
+         if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))#
+         if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))#
+#      z <- (q-mu)/sigma#
+#      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))#
+#      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))#
+      p <- 1-(1-(pnorm(q,mu,sigma))^nu)^tau#
+      if(lower.tail==TRUE) p <- p else  p <- 1-p#
+      if(log.p==FALSE) p  <- p else  p <- log(p)#
+      p#
+ }#
+#-----------------------------------------------------------------#
+qKumN <-  function(p, mu=0, sigma=1, nu=1, tau=.5, lower.tail = TRUE, log.p = FALSE,#
+                     lower.limit = mu-10*(sigma/(nu*tau)), # this is completly wrong#
+                     upper.limit = mu+10*(sigma/(nu*tau)) )#
+ {#
+####### q da skew t ####### adaptado da skew t#
+#function (p, mu = 0, sigma = 1, a = 0, b = 2, lower.tail = TRUE, log.p = FALSE)#
+#{#
+    h1 <- function(q) {#
+        pKumN(q, mu = mu[i], sigma = sigma[i], nu = nu[i], tau = tau[i]) -#
+            p[i]#
+    }#
+    h <- function(q) {#
+        pKumN(q, mu = mu[i], sigma = sigma[i], nu = nu[i], tau = tau[i])#
+    }#
+    if (any(sigma <= 0))#
+        stop(paste("sigma must be positive", "\n", ""))#
+    if (log.p == TRUE)#
+        p <- exp(p)#
+    else p <- p#
+    if (lower.tail == TRUE)#
+        p <- p#
+    else p <- 1 - p#
+    if (any(p < 0) | any(p > 1))#
+        stop(paste("p must be between 0 and 1", "\n", ""))#
+    lp <- max(length(p), length(mu), length(sigma), length(nu),#
+        length(tau))#
+    p <- rep(p, length = lp)#
+    sigma <- rep(sigma, length = lp)#
+    mu <- rep(mu, length = lp)#
+    nu <- rep(nu, length = lp)#
+    tau <- rep(tau, length = lp)#
+    q <- rep(0, lp)#
+    for (i in seq(along = p)) {#
+        if (h(mu[i]) < p[i]) {#
+            interval <- c(mu[i], mu[i] + sigma[i])#
+            j <- 2#
+            while (h(interval[2]) < p[i]) {#
+                interval[2] <- mu[i] + j * sigma[i]#
+                j <- j + 1#
+            }#
+        }#
+        else {#
+            interval <- c(mu[i] - sigma[i], mu[i])#
+            j <- 2#
+            while (h(interval[1]) > p[i]) {#
+                interval[1] <- mu[i] - j * sigma[i]#
+                j <- j + 1#
+            }#
+        }#
+        q[i] <- uniroot(h1, interval)$root#
+    }#
+    q#
+}#
+#-----------------------------------------------------------------#
+rKumN <- function(n, mu=0, sigma=1, nu=1, tau=.5)#
+  {#
+    if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", ""))#
+    if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))#
+    if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))#
+    n <- ceiling(n)#
+    p <- runif(n)#
+    r <- qKumN(p,mu=mu,sigma=sigma,nu=nu,tau=tau)#
+   r#
+  }#
+#-----------------------------------------------------------------#
+
+ls()
+library(gamlss)
+data(parzen)
+gamlss(snofall~1, data=parzen)
+gamlss(snowfall~1, data=parzen)
+m1<-gamlss(snowfall~1, data=parzen)
+m1<-gamlss(snowfall~1, data=parzen, family=KumN)
+setwd("/Users/stasinom/Documents/library/gamlss.dist")
+NO
+KumN <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="log")#
+{#
+    mstats <- checklink(   "mu.link", "kumaraswamy-Normal", substitute(mu.link),#
+                           c("1/mu^2", "log", "identity"))#
+    dstats <- checklink("sigma.link", "kumaraswamy-Normal", substitute(sigma.link),#
+                           c("inverse", "log", "identity"))#
+    vstats <- checklink(   "nu.link", "kumaraswamy-Normal", substitute(nu.link),#
+                           c("1/nu^2", "log", "identity"))#
+    tstats <- checklink(  "tau.link", "kumaraswamy-Normal", substitute(tau.link),#
+                           c("1/tau^2", "log", "identity"))#
+    structure(#
+          list(family = c("KumN", "kumaraswamy-Normal"),#
+           parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE, tau=TRUE),#
+                nopar = 4,#
+                 type = "Continuous",#
+              mu.link = as.character(substitute(mu.link)),#
+           sigma.link = as.character(substitute(sigma.link)),#
+              nu.link = as.character(substitute(nu.link)),#
+              tau.link = as.character(substitute(tau.link)),#
+           mu.linkfun = mstats$linkfun,#
+        sigma.linkfun = dstats$linkfun,#
+           nu.linkfun = vstats$linkfun,#
+           tau.linkfun = tstats$linkfun,#
+           mu.linkinv = mstats$linkinv,#
+        sigma.linkinv = dstats$linkinv,#
+           nu.linkinv = vstats$linkinv,#
+           tau.linkinv = tstats$linkinv,#
+                mu.dr = mstats$mu.eta,#
+             sigma.dr = dstats$mu.eta,#
+                nu.dr = vstats$mu.eta,#
+                tau.dr = tstats$mu.eta,#
+    dldm =  function(y, mu, sigma){#
+   f<-(1/(sqrt(2*pi*sigma^2))*exp(-1/2*((y-mu)/sigma)^2)) #f= densidade de probabilidade da distribuiÁ„o Normal#
+   p<-pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+   dfdm<-((y-mu)/((sigma^3)*(sqrt(2*pi)))*(exp(-1/2((y-mu)/sigma)^2)))    #dfdm= derivada de f em relaÁ„o a "mu"#
+   dpdm<-((-1/((sigma^2)*sqrt(2*pi)))*exp(-1/2((y-mu)/sigma)^2))    #dpdm= derivada de p em relaÁ„o "mu"#
+   dldm<-((1/f)*(dfdm)+(1/p)*(dpdm)*(1-(nu*(tau-1))/((p^(-nu))-1)))      #dldm= derivada primeira da log-verossimilhanÁa em relaÁ„o a "mu"#
+                      },#
+#
+   d2ldm2 = function(){#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+    d2ldm2 <- -(1/sigma^2)-((r*(y-mu)*h+hh)/(r^2))+(((c*p^(-nu)-c)*(nu*(tau-1)*(y-mu)*h)-nu^2*(tau-1)*hh*p^(-nu-1))/((c*p^(-nu)-c)^2))#
+                      },#
+#
+   dldd = function() {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    dldd <-((((y-mu)^2)/c)-(sqrt(2*pi)/(2*pi*sigma)))+(((mu-y)*h/c*p)-(((mu-y)*(nu*(tau-1))*h)/((c*p)*(p^(-nu)-1))))#
+                      } ,#
+#
+   d2ldd2 = function(){#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+d2ldd2_1 <- (((-(y-mu)*sqrt(2*pi))/((sigma^3)*pi))+(sqrt(2*pi)/(2*pi*sigma^2)))#
+d2ldd2_2 <- (c*p*(mu-y)*h*(((y-mu)^2)/sigma^3)-(mu-y)*h*2*sigma*sqrt(2*pi)*p+((mu-y)/sigma)*h)/((c*p)^2)#
+       Q <- (((c*p)*(p^(-nu)-1))*(mu-y)*(nu*(tau-1))*h*(((y-mu)^2)/sigma^3)-(mu-y)*((nu*(tau-1))*h))*(2*sigma*sqrt(2*pi)*p*p^(-nu)+(mu-y)*h*p^(-nu)-nu*sigma*sqrt(2*pi)*p*p^(-nu-1)*(mu-y)*h-2*sigma*sqrt(2*pi)*p-sigma*sqrt(2*pi)*(mu-y)*h)#
+       W <- ((c*p)*(p^(-nu)-1))^2#
+d2ldd2_3 <- -Q/W#
+d2ldd2  <- d2ldd2_1+d2ldd2_2+d2ldd2_3#
+                      },#
+#
+     dldv = function() {#
+    p <- pnorm(y,mu,sigma)#
+    dldv <- (1/nu)+(log(p))*(1-(((tau-1)*p^nu)/(1-p^nu)))#
+                        } ,#
+#
+    d2ldv2 = function() {#
+       p <- pnorm(y,mu,sigma)#
+       d2ldv2 <- -(1/nu^2)+(log(p))*((nu*(tau-1)*(-p^(nu-1)+2*p^(2*nu-1)))/(1-p^nu)^2)#
+                        },#
+#
+      dldt = function() {#
+       p <- pnorm(y,mu,sigma)#
+       dldt <- (1/tau)+log(1-p^nu)#
+                        } ,#
+#
+      d2ldt2 = function() {#
+d2ldt2 <- -(1/tau^2)#
+                            } ,#
+#
+       d2ldmdd = function()## ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+    dl2dmdd_1 <- 2*(mu-y)/sigma^3#
+    dl2dmdd_2 <- ((sqrt(2*pi)*p*((y-mu)^2/sigma)*h))+(h*2*sigma*sqrt(2*pi)*p-((y-mu)/sigma)*hh)/(r)^2#
+    dl2dmdd_3 <- ((r*((p)^(-nu)-1)-(nu*(tau-1))*((y-mu)^2/sigma^3)*h)-(nu*(tau-1)*h*2*sigma*sqrt(2*pi)*p*(p^(-nu))))/(r*(p^(-nu))-1)^2#
+    dl2dmdd_4 <- (((mu-y)*h*(p^(-nu)))-(nu*sigma*sqrt(2*pi)*p*(p^(-nu-1))*(mu-y)*h)-(2*sigma*sqrt(2*pi)*p)-(sigma*sqrt(2*pi)*(y-mu)*h))/(r*(p^(-nu))-1)^2#
+               dl2dmdd <- dl2dmdd_1-dl2dmdd_2+dl2dmdd_3+dl2dmdd_4#
+               },#
+#
+       d2ldmdv = function()# OK#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+    d2ldmdv_1 <- (r*(p^(-nu)-1)*(tau-1)*h)/(r*(p^(-nu)-1)^2)#
+    d2ldmdv_2 <- (nu*(tau-1)*h*c*p*(p^(-nu)*log(p)))/(r*(p^(-nu)-1)^2)#
+    d2ldmdv <- d2ldmdv_1+d2ldmdv_2#
+             },#
+#
+#
+       d2ldmdt = function() #ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+           d2ldmdt <- (nu*h)/(r*(p^(-nu)-1))#
+               },#
+#
+       d2ldddv = function() #ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+       d2ldddv_1 <- (r*(p^(-nu)-1)*(mu-x)*(nu-1)*h)/(r*(p^(-nu)-1)^2)#
+       d2ldddv_2 <- (r*(p^(-nu))*log(p)*(mu-y)*(nu*(tau-1)*h))/(r*(p^(-nu)-1)^2)#
+       d2ldddv <- -(d2ldddv_1 + d2ldddv_2)#
+               },#
+#
+       d2ldddt = function() #ok#
+              {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+           d2ldddt <- -(((mu-y)*nu*h)/(r*(p^(-nu)-1)))#
+               },#
+#
+       d2ldvdt = function() #ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+#
+           d2ldvdt <- -(log(p)*(p^(nu)/(1-p^(nu))))#
+#
+               },#
+#
+ G.dev.incr  = function(y,mu,sigma,nu,tau,...) -2*dKumN(y,mu,sigma,nu,tau,log=TRUE),#
+         rqres = expression(#
+                   rqres(pfun="pKumN", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)#
+                           ),#
+    mu.initial = expression(mu <- (y+mean(y))/2),# rep(mean(y),length(y))#
+ sigma.initial = expression(sigma<- rep(sd(y)/5, length(y))),#
+    nu.initial = expression(nu <- rep(.5, length(y))),#
+   tau.initial = expression(tau <-rep(.5, length(y))),#
+      mu.valid = function(mu) TRUE,#
+   sigma.valid = function(sigma)  all(sigma > 0),#
+      nu.valid = function(nu) TRUE ,#
+     tau.valid = function(tau) all(tau > 0),#
+       y.valid = function(y)  TRUE#
+          ),#
+            class = c("gamlss.family","family"))#
+}#
+#------------------
+m1<-gamlss(snowfall~1, data=parzen, family=KumN)
+# quinta feira 02 de setembro de 2010#
+# nu = v = a e tau = t =  b#
+# Universidade federal de alfenas - Instituto de ciÍncias exatas - Brasil#
+# Denismar Alves Nogueira#
+# Michelle Aparecida Correa#
+#
+#
+KumN <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="log")#
+{#
+    mstats <- checklink(   "mu.link", "kumaraswamy-Normal", substitute(mu.link),#
+                           c("1/mu^2", "log", "identity"))#
+    dstats <- checklink("sigma.link", "kumaraswamy-Normal", substitute(sigma.link),#
+                           c("inverse", "log", "identity"))#
+    vstats <- checklink(   "nu.link", "kumaraswamy-Normal", substitute(nu.link),#
+                           c("1/nu^2", "log", "identity"))#
+    tstats <- checklink(  "tau.link", "kumaraswamy-Normal", substitute(tau.link),#
+                           c("1/tau^2", "log", "identity"))#
+    structure(#
+          list(family = c("KumN", "kumaraswamy-Normal"),#
+           parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE, tau=TRUE),#
+                nopar = 4,#
+                 type = "Continuous",#
+              mu.link = as.character(substitute(mu.link)),#
+           sigma.link = as.character(substitute(sigma.link)),#
+              nu.link = as.character(substitute(nu.link)),#
+              tau.link = as.character(substitute(tau.link)),#
+           mu.linkfun = mstats$linkfun,#
+        sigma.linkfun = dstats$linkfun,#
+           nu.linkfun = vstats$linkfun,#
+           tau.linkfun = tstats$linkfun,#
+           mu.linkinv = mstats$linkinv,#
+        sigma.linkinv = dstats$linkinv,#
+           nu.linkinv = vstats$linkinv,#
+           tau.linkinv = tstats$linkinv,#
+                mu.dr = mstats$mu.eta,#
+             sigma.dr = dstats$mu.eta,#
+                nu.dr = vstats$mu.eta,#
+                tau.dr = tstats$mu.eta,#
+    dldm =  function(y, mu, sigma){#
+    	browser()#
+   f<-(1/(sqrt(2*pi*sigma^2))*exp(-1/2*((y-mu)/sigma)^2)) #f= densidade de probabilidade da distribuiÁ„o Normal#
+   p<-pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+   dfdm<-((y-mu)/((sigma^3)*(sqrt(2*pi)))*(exp(-1/2((y-mu)/sigma)^2)))    #dfdm= derivada de f em relaÁ„o a "mu"#
+   dpdm<-((-1/((sigma^2)*sqrt(2*pi)))*exp(-1/2((y-mu)/sigma)^2))    #dpdm= derivada de p em relaÁ„o "mu"#
+   dldm<-((1/f)*(dfdm)+(1/p)*(dpdm)*(1-(nu*(tau-1))/((p^(-nu))-1)))      #dldm= derivada primeira da log-verossimilhanÁa em relaÁ„o a "mu"#
+                      },#
+#
+   d2ldm2 = function(){#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+    d2ldm2 <- -(1/sigma^2)-((r*(y-mu)*h+hh)/(r^2))+(((c*p^(-nu)-c)*(nu*(tau-1)*(y-mu)*h)-nu^2*(tau-1)*hh*p^(-nu-1))/((c*p^(-nu)-c)^2))#
+                      },#
+#
+   dldd = function() {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    dldd <-((((y-mu)^2)/c)-(sqrt(2*pi)/(2*pi*sigma)))+(((mu-y)*h/c*p)-(((mu-y)*(nu*(tau-1))*h)/((c*p)*(p^(-nu)-1))))#
+                      } ,#
+#
+   d2ldd2 = function(){#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+d2ldd2_1 <- (((-(y-mu)*sqrt(2*pi))/((sigma^3)*pi))+(sqrt(2*pi)/(2*pi*sigma^2)))#
+d2ldd2_2 <- (c*p*(mu-y)*h*(((y-mu)^2)/sigma^3)-(mu-y)*h*2*sigma*sqrt(2*pi)*p+((mu-y)/sigma)*h)/((c*p)^2)#
+       Q <- (((c*p)*(p^(-nu)-1))*(mu-y)*(nu*(tau-1))*h*(((y-mu)^2)/sigma^3)-(mu-y)*((nu*(tau-1))*h))*(2*sigma*sqrt(2*pi)*p*p^(-nu)+(mu-y)*h*p^(-nu)-nu*sigma*sqrt(2*pi)*p*p^(-nu-1)*(mu-y)*h-2*sigma*sqrt(2*pi)*p-sigma*sqrt(2*pi)*(mu-y)*h)#
+       W <- ((c*p)*(p^(-nu)-1))^2#
+d2ldd2_3 <- -Q/W#
+d2ldd2  <- d2ldd2_1+d2ldd2_2+d2ldd2_3#
+                      },#
+#
+     dldv = function() {#
+    p <- pnorm(y,mu,sigma)#
+    dldv <- (1/nu)+(log(p))*(1-(((tau-1)*p^nu)/(1-p^nu)))#
+                        } ,#
+#
+    d2ldv2 = function() {#
+       p <- pnorm(y,mu,sigma)#
+       d2ldv2 <- -(1/nu^2)+(log(p))*((nu*(tau-1)*(-p^(nu-1)+2*p^(2*nu-1)))/(1-p^nu)^2)#
+                        },#
+#
+      dldt = function() {#
+       p <- pnorm(y,mu,sigma)#
+       dldt <- (1/tau)+log(1-p^nu)#
+                        } ,#
+#
+      d2ldt2 = function() {#
+d2ldt2 <- -(1/tau^2)#
+                            } ,#
+#
+       d2ldmdd = function()## ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+    dl2dmdd_1 <- 2*(mu-y)/sigma^3#
+    dl2dmdd_2 <- ((sqrt(2*pi)*p*((y-mu)^2/sigma)*h))+(h*2*sigma*sqrt(2*pi)*p-((y-mu)/sigma)*hh)/(r)^2#
+    dl2dmdd_3 <- ((r*((p)^(-nu)-1)-(nu*(tau-1))*((y-mu)^2/sigma^3)*h)-(nu*(tau-1)*h*2*sigma*sqrt(2*pi)*p*(p^(-nu))))/(r*(p^(-nu))-1)^2#
+    dl2dmdd_4 <- (((mu-y)*h*(p^(-nu)))-(nu*sigma*sqrt(2*pi)*p*(p^(-nu-1))*(mu-y)*h)-(2*sigma*sqrt(2*pi)*p)-(sigma*sqrt(2*pi)*(y-mu)*h))/(r*(p^(-nu))-1)^2#
+               dl2dmdd <- dl2dmdd_1-dl2dmdd_2+dl2dmdd_3+dl2dmdd_4#
+               },#
+#
+       d2ldmdv = function()# OK#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+    d2ldmdv_1 <- (r*(p^(-nu)-1)*(tau-1)*h)/(r*(p^(-nu)-1)^2)#
+    d2ldmdv_2 <- (nu*(tau-1)*h*c*p*(p^(-nu)*log(p)))/(r*(p^(-nu)-1)^2)#
+    d2ldmdv <- d2ldmdv_1+d2ldmdv_2#
+             },#
+#
+#
+       d2ldmdt = function() #ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+           d2ldmdt <- (nu*h)/(r*(p^(-nu)-1))#
+               },#
+#
+       d2ldddv = function() #ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+       d2ldddv_1 <- (r*(p^(-nu)-1)*(mu-x)*(nu-1)*h)/(r*(p^(-nu)-1)^2)#
+       d2ldddv_2 <- (r*(p^(-nu))*log(p)*(mu-y)*(nu*(tau-1)*h))/(r*(p^(-nu)-1)^2)#
+       d2ldddv <- -(d2ldddv_1 + d2ldddv_2)#
+               },#
+#
+       d2ldddt = function() #ok#
+              {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+           d2ldddt <- -(((mu-y)*nu*h)/(r*(p^(-nu)-1)))#
+               },#
+#
+       d2ldvdt = function() #ok#
+               {#
+    p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+    c <- (sigma^2)*sqrt(2*pi)#
+    r <- p*c#
+    h <-  exp(-1/2*((y-mu)/sigma)^2)#
+    hh <- exp(-((y-mu)/sigma)^2)#
+#
+           d2ldvdt <- -(log(p)*(p^(nu)/(1-p^(nu))))#
+#
+               },#
+#
+ G.dev.incr  = function(y,mu,sigma,nu,tau,...) -2*dKumN(y,mu,sigma,nu,tau,log=TRUE),#
+         rqres = expression(#
+                   rqres(pfun="pKumN", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)#
+                           ),#
+    mu.initial = expression(mu <- (y+mean(y))/2),# rep(mean(y),length(y))#
+ sigma.initial = expression(sigma<- rep(sd(y)/5, length(y))),#
+    nu.initial = expression(nu <- rep(.5, length(y))),#
+   tau.initial = expression(tau <-rep(.5, length(y))),#
+      mu.valid = function(mu) TRUE,#
+   sigma.valid = function(sigma)  all(sigma > 0),#
+      nu.valid = function(nu) TRUE ,#
+     tau.valid = function(tau) all(tau > 0),#
+       y.valid = function(y)  TRUE#
+          ),#
+            class = c("gamlss.family","family"))#
+}#
+#-----------------------------------------------------------------#
+dKumN <- function(y, mu = 0, sigma = 1, nu = 1, tau = .5, log = FALSE)#
+ {#
+          if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))#
+          if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))#
+          if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))#
+#      z <- (y-mu)/sigma#
+#      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))#
+#      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))#
+# loglik <- -log(sigma)-log(2*pi)/2-log(1+(z^2))/2+log(c)-(r^2)/2#
+#       if(log==FALSE) ft  <- exp(loglik) else ft <- loglik#
+#       ft#
+#  }#
+  p <- pnorm(y,mu,sigma)    #p= funÁ„o de distribuiÁ„o acumulada da Normal#
+  f<-(1/(sqrt(2*pi*sigma^2))*exp(-1/2*((y-mu)/sigma)^2)) #f= densidade de probabilidade da distribuiÁ„o Normal#
+  loglik <- log(nu)+log(tau)+log(f)+(nu-1)*log(p)+(tau-1)*log(1-(p^(nu)))#
+     if(log==FALSE) ft  <- exp(loglik) else ft <- loglik#
+           ft#
+  }#
+#-----------------------------------------------------------------#
+pKumN <- function(q, mu = 0, sigma = 1, nu = 1, tau = .5, lower.tail = TRUE, log.p = FALSE)#
+ {#
+         if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))#
+         if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))#
+         if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))#
+#      z <- (q-mu)/sigma#
+#      r <- (1/2)*(exp(tau*asinh(z))-exp(-nu*asinh(z)))#
+#      c <- (1/2)*(tau*exp(tau*asinh(z))+nu*exp(-nu*asinh(z)))#
+      p <- 1-(1-(pnorm(q,mu,sigma))^nu)^tau#
+      if(lower.tail==TRUE) p <- p else  p <- 1-p#
+      if(log.p==FALSE) p  <- p else  p <- log(p)#
+      p#
+ }#
+#-----------------------------------------------------------------#
+qKumN <-  function(p, mu=0, sigma=1, nu=1, tau=.5, lower.tail = TRUE, log.p = FALSE,#
+                     lower.limit = mu-10*(sigma/(nu*tau)), # this is completly wrong#
+                     upper.limit = mu+10*(sigma/(nu*tau)) )#
+ {#
+####### q da skew t ####### adaptado da skew t#
+#function (p, mu = 0, sigma = 1, a = 0, b = 2, lower.tail = TRUE, log.p = FALSE)#
+#{#
+    h1 <- function(q) {#
+        pKumN(q, mu = mu[i], sigma = sigma[i], nu = nu[i], tau = tau[i]) -#
+            p[i]#
+    }#
+    h <- function(q) {#
+        pKumN(q, mu = mu[i], sigma = sigma[i], nu = nu[i], tau = tau[i])#
+    }#
+    if (any(sigma <= 0))#
+        stop(paste("sigma must be positive", "\n", ""))#
+    if (log.p == TRUE)#
+        p <- exp(p)#
+    else p <- p#
+    if (lower.tail == TRUE)#
+        p <- p#
+    else p <- 1 - p#
+    if (any(p < 0) | any(p > 1))#
+        stop(paste("p must be between 0 and 1", "\n", ""))#
+    lp <- max(length(p), length(mu), length(sigma), length(nu),#
+        length(tau))#
+    p <- rep(p, length = lp)#
+    sigma <- rep(sigma, length = lp)#
+    mu <- rep(mu, length = lp)#
+    nu <- rep(nu, length = lp)#
+    tau <- rep(tau, length = lp)#
+    q <- rep(0, lp)#
+    for (i in seq(along = p)) {#
+        if (h(mu[i]) < p[i]) {#
+            interval <- c(mu[i], mu[i] + sigma[i])#
+            j <- 2#
+            while (h(interval[2]) < p[i]) {#
+                interval[2] <- mu[i] + j * sigma[i]#
+                j <- j + 1#
+            }#
+        }#
+        else {#
+            interval <- c(mu[i] - sigma[i], mu[i])#
+            j <- 2#
+            while (h(interval[1]) > p[i]) {#
+                interval[1] <- mu[i] - j * sigma[i]#
+                j <- j + 1#
+            }#
+        }#
+        q[i] <- uniroot(h1, interval)$root#
+    }#
+    q#
+}#
+#-----------------------------------------------------------------#
+rKumN <- function(n, mu=0, sigma=1, nu=1, tau=.5)#
+  {#
+    if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", ""))#
+    if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))#
+    if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))#
+    n <- ceiling(n)#
+    p <- runif(n)#
+    r <- qKumN(p,mu=mu,sigma=sigma,nu=nu,tau=tau)#
+   r#
+  }#
+#-----------------------------------------------------------------#
+
+m1<-gamlss(snowfall~1, data=parzen, family=KumN)
+n
+n
+f
+p
+n
+p
+ls()
+n
+m1<-gamlss(snowfall~1, data=parzen, family=KumN)
+n
+n
+n
+n
+m1<-gamlss(snowfall~1, data=parzen, family=KumN)
+n
+n
+n
+dfdm
+n
+m1<-gamlss(snowfall~1, data=parzen, family=KumN)
+n
+n
+ dfdm<-((y-mu)/((sigma^3)*(sqrt(2*pi)))*(exp(-1/2((y-mu)/sigma)^2)))
+ dfdm<-((y-mu)/((sigma^3)*(sqrt(2*pi)))
+)
+ dfdm<-((y-mu)/((sigma^3)*(sqrt(2*pi))
+ dfdm<-((y-mu)/((sigma^3)*(sqrt(2*pi))))
+(exp(-1/2((y-mu)/sigma)^2)))
+(exp(-1/2((y-mu)/sigma)^2))

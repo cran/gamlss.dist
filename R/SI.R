@@ -249,7 +249,7 @@ qSI <- function(p, mu=0.5, sigma=0.02, nu=-0.5,  lower.tail = TRUE, log.p = FALS
         {  
             for (j in seq(from = 0, to = max.value))
             {
-            cumpro <-   pSI(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE)  
+            cumpro <-   pSI(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log.p = FALSE)  
             QQQ[i] <- j 
        if  (p[i] <= cumpro ) break 
             } 

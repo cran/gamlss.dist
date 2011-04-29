@@ -317,7 +317,7 @@ qSICHEL <- function(p, mu=1, sigma=1, nu=-0.5,  lower.tail = TRUE, log.p = FALSE
         {  
             for (j in seq(from = 0, to = max.value))
             {
-            cumpro <-  pSICHEL(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE) 
+            cumpro <-  pSICHEL(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log.p = FALSE) 
                        # else  cumpro+dSICHEL(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE)# the above is faster 
            QQQ[i] <- j 
        if  (p[i] <= cumpro ) break 
@@ -326,13 +326,13 @@ qSICHEL <- function(p, mu=1, sigma=1, nu=-0.5,  lower.tail = TRUE, log.p = FALSE
       }          
 #        for (i in seq(along=p))                                                          
 #      {                                                                 
-#     cumpro <- pSI(0, mu = nmu[i], sigma = nsigma[i],  nu = nnu, log = FALSE)
+#     cumpro <- pSI(0, mu = nmu[i], sigma = nsigma[i],  nu = nnu, log.p = FALSE)
 #      for (j in seq(from = 1,to = max.value))
 #        {
 #        if (p[i]+0.000000001 >= 1) QQQ[i] <- Inf
 #        else if (p[i]-cumpro > 0 | identical(p[i],cumpro) )#((cumpro+.Machine$double.eps) < p.p) 
-#           { cumpro <-  if (fast == FALSE) pSI(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE) 
-#                        else  cumpro+dSI(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE)# the above is faster 
+#           { cumpro <-  if (fast == FALSE) pSI(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log.p = FALSE) 
+#                        else  cumpro+dSI(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log.p = FALSE)# the above is faster 
 #             QQQ[i] <- j-1 #if (! identical(all.equal(p[i],1),TRUE)) j-1 else Inf
 #           }
 #        else break

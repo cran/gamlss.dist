@@ -76,7 +76,7 @@ qLG <- function(p, mu=0.5,  lower.tail = TRUE, log.p = FALSE,
         {  
             for (j in seq(from = 1, to = max.value))
             {
-            cumpro <-  pLG(j, mu = nmu[i], log = FALSE) 
+            cumpro <-  pLG(j, mu = nmu[i], log.p = FALSE) 
            QQQ[i] <- j 
        if  (p[i] <= cumpro ) break 
             } 

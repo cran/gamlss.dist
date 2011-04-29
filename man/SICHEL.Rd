@@ -69,7 +69,7 @@ Rigby, R. A., Stasinopoulos D. M. and Akantziliotou, C. (2006) Modelling the par
 Submitted for publication.
 
 Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2003) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.org/}).
+Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).
 
 Stein, G. Z., Zucchini, W. and Juritz, J. M. (1987). Parameter
 Estimation of the Sichel Distribution and its Multivariate Extension.

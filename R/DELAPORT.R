@@ -259,7 +259,7 @@ qDEL <- function(p, mu=1, sigma=1, nu=0.5,  lower.tail = TRUE, log.p = FALSE,
         {  
             for (j in seq(from = 0, to = max.value))
             {
-            cumpro <-  pDEL(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE) 
+            cumpro <-  pDEL(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log.p = FALSE) 
                        # else  cumpro+dSICHEL(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE)# the above is faster 
            QQQ[i] <- j 
        if  (p[i] <= cumpro ) break 

@@ -112,10 +112,10 @@ if (is.character(link) && length(grep("^power", link) > 0))
        #}, 
          own     = 
      {
-       linkfun <- function(mu)   eval(body(get("own.linkfun", env=globalenv())))  
-       linkinv <- function(eta)  eval(body(get("own.linkinv", env=globalenv())))  
-        mu.eta <- function(eta)  eval(body(get("own.mu.eta", env=globalenv())))   
-      valideta <- function(eta)  eval(body(get("own.valideta", env=globalenv())))      
+       linkfun <- function(mu)   eval(body(get("own.linkfun", envir=globalenv())))  
+       linkinv <- function(eta)  eval(body(get("own.linkinv", envir=globalenv())))  
+        mu.eta <- function(eta)  eval(body(get("own.mu.eta", envir=globalenv())))   
+      valideta <- function(eta)  eval(body(get("own.valideta", envir=globalenv())))      
       # linkfun <- function(mu) 
       #                    { 
       #             if (!exists("own.linkfun")) stop("own.linkfun is not defined") else own.linkfun(mu) 
@@ -147,10 +147,10 @@ if (is.character(link) && length(grep("^power", link) > 0))
 #own.mu.eta <- function(eta){ stop("own.mu.eta is not defined")} 
 #own.valideta <- function(eta){ stop("own.valideta is not defined")} 
 
-# own.linkfun <- get(" own.linkfun", env=globalenv()) 
-#own.linkinv <- get("own.linkinv", env=globalenv()) 
-#own.mu.eta <- get("own.mu.eta", env=globalenv()) 
-#own.valideta <- get("own.valideta", env=globalenv()) 
+# own.linkfun <- get(" own.linkfun", envir=globalenv()) 
+#own.linkinv <- get("own.linkinv", envir=globalenv()) 
+#own.mu.eta <- get("own.mu.eta", envir=globalenv()) 
+#own.valideta <- get("own.valideta", envir=globalenv()) 
 #----------------------------------------------------------------------------------------
 show.link <- function(family = "NO")
  {

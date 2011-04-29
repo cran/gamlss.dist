@@ -186,7 +186,7 @@ qPIG <- function(p, mu = 0.5, sigma = 0.02,  lower.tail = TRUE, log.p = FALSE,
         {  
             for (j in seq(from = 0, to = max.value))
             {
-           cumpro <-  pPIG(j, mu = nmu[i], sigma = nsigma[i] , log = FALSE)  
+           cumpro <-  pPIG(j, mu = nmu[i], sigma = nsigma[i] , log.p = FALSE)  
            QQQ[i] <- j 
        if  (p[i] <= cumpro ) break 
             } 
