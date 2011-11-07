@@ -207,7 +207,7 @@ pST1 <- function(q, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, log.p
        for (i in 1:lp)
           {
          cdf[i] <- integrate(function(x) 
-                 dST1(x, mu = 0, sigma = 1, nu = nu[i], tau = tau[i], log=log.p), -Inf, (q[i]-mu[i])/sigma[i] )$value
+                 dST1(x, mu = 0, sigma = 1, nu = nu[i], tau = tau[i]), -Inf, (q[i]-mu[i])/sigma[i] )$value # ds br 7-10-11
           }    
     if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf 
     if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 

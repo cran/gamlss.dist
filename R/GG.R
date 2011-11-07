@@ -1,3 +1,4 @@
+# last change 29 Jul 2011 DS
 GG <- function (mu.link="log", sigma.link="log", nu.link ="identity") 
 {
     mstats <- checklink("mu.link", "GG", substitute(mu.link), 
@@ -39,14 +40,14 @@ GG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
                                    {
                                   z <- (y/mu)^nu
                               theta <- 1/(sigma^2*abs(nu)^2)
-                               dldd <- ifelse(abs(nu)<1e-06, -2*theta*(log(theta)+1+log(z)-z-digamma(theta))/sigma,
-                                             -(1/sigma)+(1/sigma^3)*(log(y)-log(mu))^2)
+                               dldd <- ifelse(abs(nu) > 1e-06, -2*theta*(log(theta)+1+log(z)-z-digamma(theta))/sigma,
+                                             -(1/sigma)+(1/sigma^3)*(log(y)-log(mu))^2) #DS 29-7-11
                                dldd
                                    },
                d2ldd2 = function(y,mu,sigma,nu) 
                                    {
                               theta <- 1/(sigma^2*abs(nu)^2)
-                             d2ldd2 <- ifelse(abs(nu)<1e-06,4*(theta/(sigma^2))*(1-theta*trigamma(theta)),-2/sigma^2)
+                             d2ldd2 <- ifelse(abs(nu) > 1e-06, 4*(theta/(sigma^2))*(1-theta*trigamma(theta)),-2/sigma^2) # DS 29-7-11
                              d2ldd2
                                    },
                  dldv = function(y,mu,sigma,nu) 
@@ -89,7 +90,7 @@ GG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
             class = c("gamlss.family","family"))
 }
 #--------------------------------------------------------------
-dGG <- function(x, mu=1, sigma=0.1, nu=1,  log = FALSE)
+dGG <- function(x, mu=1, sigma=0.5, nu=1,  log = FALSE)
  {
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -105,7 +106,7 @@ dGG <- function(x, mu=1, sigma=0.1, nu=1,  log = FALSE)
           ft
   }    
 #--------------------------------------------------------------  
-pGG <- function(q, mu=1, sigma=0.1, nu=1,  lower.tail = TRUE, log.p = FALSE)
+pGG <- function(q, mu=1, sigma=0.5, nu=1,  lower.tail = TRUE, log.p = FALSE)
  {  
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -120,32 +121,37 @@ pGG <- function(q, mu=1, sigma=0.1, nu=1,  lower.tail = TRUE, log.p = FALSE)
  }
 
 #--------------------------------------------------------------
-qGG <- function(p, mu=1, sigma=0.1, nu=1,  lower.tail = TRUE, log.p = FALSE )
+qGG <- function(p, mu=1, sigma=0.5, nu=1,  lower.tail = TRUE, log.p = FALSE )
  { 
     if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", ""))  
     if (log.p==TRUE) p <- exp(p) else p <- p
     if (lower.tail==TRUE) p <- p else p <- 1-p
     if (any(p < 0)|any(p > 1))  stop(paste("p must be between 0 and 1", "\n", ""))       
+
+    
     if(length(nu)>1) 
       {
+       p <- ifelse(nu>0, p, 1-p)
        z <- ifelse(abs(nu)>1e-06, qGA(p, mu=1, sigma=sigma*abs(nu)),qNO(p, mu=log(mu), sigma=sigma,))
        y <- ifelse(abs(nu)>1e-06, mu*z^(1/nu), exp(z))
       }
     else  if (abs(nu)>1e-06) 
               {
+               p <- if(nu>0)  p else 1-p
               z <- qGA(p, mu=1, sigma=sigma*abs(nu))
               y <- mu*z^(1/nu)
               }
           else 
               {
+             #  p <- if(nu>0)  p else 1-p
               z <- qNO(p, mu=log(mu), sigma=sigma)
               y <- exp(z)
               }
     y
  }
 #--------------------------------------------------------------
-rGG <- function(n, mu=1, sigma=0.1, nu=1)
+rGG <- function(n, mu=1, sigma=0.5, nu=1)
   {
     if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", ""))     

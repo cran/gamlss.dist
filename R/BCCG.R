@@ -215,3 +215,81 @@ BCCGuntr <- function (mu.link="identity", sigma.link="log", nu.link ="identity")
           ),
             class = c("gamlss.family","family"))
 }
+#----------------------------
+#-----------------------------------------------------------------
+
+BCCGo <- function (mu.link="log", sigma.link="log", nu.link ="identity") 
+{
+    mstats <- checklink("mu.link", "BC Cole Green", substitute(mu.link), 
+                         c("inverse", "log", "identity", "own"))
+    dstats <- checklink("sigma.link", "BC Cole Green", substitute(sigma.link), #
+                         c("inverse", "log", "identity", "own"))
+    vstats <- checklink("nu.link", "BC Cole Green",substitute(nu.link), 
+                         c("inverse", "log", "identity", "own"))  
+    structure(
+          list(family = c("BCCG", "Box-Cox-Cole-Green"),
+           parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE), 
+                nopar = 3, 
+                 type = "Continuous",
+              mu.link = as.character(substitute(mu.link)),  
+           sigma.link = as.character(substitute(sigma.link)), 
+              nu.link = as.character(substitute(nu.link)), 
+           mu.linkfun = mstats$linkfun, 
+        sigma.linkfun = dstats$linkfun, 
+           nu.linkfun = vstats$linkfun,
+           mu.linkinv = mstats$linkinv, 
+        sigma.linkinv = dstats$linkinv,
+           nu.linkinv = vstats$linkinv,
+                mu.dr = mstats$mu.eta, 
+             sigma.dr = dstats$mu.eta, 
+                nu.dr = vstats$mu.eta,
+                 dldm = function(y,mu,sigma,nu) {
+      z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
+   dldm <- ((z/sigma)+nu*(z*z-1))/mu
+   dldm
+                                    },
+               d2ldm2 = function(y,mu,sigma,nu) {
+ d2ldm2 <- -(1+2*nu*nu*sigma*sigma)
+ d2ldm2 <- d2ldm2/(mu*mu*sigma*sigma)
+ d2ldm2
+                                    },
+                 dldd = function(y,mu,sigma,nu) {
+      z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
+      h <- dnorm(1/(sigma*abs(nu)))/pnorm(1/(sigma*abs(nu)))
+   dldd <- (z^2-1)/sigma+ h/(sigma^2*abs(nu))
+   dldd
+                                    },
+               d2ldd2 = function(sigma) {
+ d2ldd2 <- -2/(sigma^2)
+ d2ldd2
+                                    },
+                 dldv = function(y,mu,sigma,nu) {
+       z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
+       h <- dnorm(1/(sigma*abs(nu)))/pnorm(1/(sigma*abs(nu)))   
+       l <- log(y/mu)                                       
+    dldv <- (z-(l/sigma))*(z/nu) -l*(z*z-1)
+    dldv <- dldv+sign(nu)*h/(sigma*nu^2)                 
+    dldv
+                                    },
+               d2ldv2 = function(sigma) {
+   d2ldv2 <- -7*sigma*sigma/4
+   d2ldv2
+                                    },
+              d2ldmdd = function(mu,sigma,nu) -2*nu/(mu*sigma),
+              d2ldmdv = function(mu) 1/(2*mu),
+              d2ldddv = function(sigma,nu) -sigma*nu,
+          G.dev.incr  = function(y,mu,sigma,nu,...) 
+                     -2*dBCCG(y,mu=mu,sigma=sigma,nu=nu,log=TRUE), 
+             rqres = expression(rqres(pfun="pBCCG", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu)),
+        mu.initial = expression( mu <- (y+mean(y))/2), 
+     sigma.initial = expression( sigma <- rep(0.1,length(y))), 
+        nu.initial = expression( nu <- rep(0.5, length(y))), 
+          mu.valid = function(mu) TRUE , 
+       sigma.valid = function(sigma)  all(sigma > 0),
+          nu.valid = function(nu) TRUE , 
+           y.valid = function(y) all(y>0)
+          ),
+            class = c("gamlss.family","family"))
+}
+#--------------------------------------------------------------
+

@@ -200,7 +200,7 @@ pSEP <- function(q, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, log.p
        for (i in 1:lp)
           {
         cdf[i] <- integrate(function(x) 
-                 dSEP(x, mu = mu[i], sigma = sigma[i], nu = nu[i], tau = tau[i], log=log.p), -Inf, q[i] )$value
+                 dSEP(x, mu = mu[i], sigma = sigma[i], nu = nu[i], tau = tau[i]), -Inf, q[i] )$value #ds br 7-10-11
           }    
     if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf 
     if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 

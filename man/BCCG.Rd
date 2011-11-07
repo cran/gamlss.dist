@@ -6,20 +6,21 @@
 \alias{pBCCG}
 \alias{qBCCG}
 \alias{rBCCG}
-
+\alias{BCCGo}
 
 \title{Box-Cox Cole and Green distribution (or Box-Cox normal) for fitting a GAMLSS}
 \description{
 The function \code{BCCG}  defines the Box-Cox Cole and Green distribution (Box-Cox normal), a three parameter distribution,
 for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}. 
-The functions \code{dBCCG}, \code{pBCCG}, \code{qBCCG} and \code{rBCCG} define the density, distribution function, quantile function and random
-generation for the specific parameterization of the Box-Cox Cole and Green distribution.  
+The functions \code{dBCCG}, \code{pBCCG}, \code{qBCCG} and \code{rBCCG} define the density, distribution function, quantile function and random generation for the specific parameterization of the Box-Cox Cole and Green distribution.  
 [The function \code{BCCGuntr()} is the original version of the function suitable only for the untruncated Box-Cox Cole and Green distribution 
 See Cole and Green (1992) and Rigby and Stasinopoulos (2003a,2003b) for details.
+The function \code{BCCGo} is identical to \code{BCCG} but with log link for mu.
 
 }
 \usage{
 BCCG(mu.link = "identity", sigma.link = "log", nu.link = "identity")
+BCCGo(mu.link = "log", sigma.link = "log", nu.link = "identity")
 BCCGuntr(mu.link = "identity", sigma.link = "log", nu.link = "identity")
 dBCCG(x, mu = 1, sigma = 0.1, nu = 1, log = FALSE)
 pBCCG(q, mu = 1, sigma = 0.1, nu = 1, lower.tail = TRUE, log.p = FALSE)

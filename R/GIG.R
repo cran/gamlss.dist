@@ -141,7 +141,7 @@ pGIG <- function(q, mu=1, sigma=1, nu=1,  lower.tail = TRUE, log.p = FALSE)
        for (i in 1:lq)
           {
         cdf[i] <- integrate(function(x) 
-                 dGIG(x, mu = 1, sigma = sigma[i], nu = nu[i], log=log.p), 0.001, q[i]/mu[i] )$value
+                 dGIG(x, mu = 1, sigma = sigma[i], nu = nu[i]), 0.001, q[i]/mu[i] )$value #md br 7-10-11
           }    
     if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf 
     if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 

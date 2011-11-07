@@ -21,13 +21,13 @@ of the generalized gamma distribution defined by function GG.
 \usage{
 GG(mu.link = "log", sigma.link = "log", 
                        nu.link = "identity")
-dGG(x, mu=1, sigma=0.1, nu=1,  
+dGG(x, mu=1, sigma=0.5, nu=1,  
                       log = FALSE)
-pGG(q, mu=1, sigma=0.1, nu=1,  lower.tail = TRUE, 
+pGG(q, mu=1, sigma=0.5, nu=1,  lower.tail = TRUE, 
                      log.p = FALSE)
-qGG(p, mu=1, sigma=0.1, nu=1,  lower.tail = TRUE, 
+qGG(p, mu=1, sigma=0.5, nu=1,  lower.tail = TRUE, 
                      log.p = FALSE )
-rGG(n, mu=1, sigma=0.1, nu=1)
+rGG(n, mu=1, sigma=0.5, nu=1)
 }
 
 \arguments{

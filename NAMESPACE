@@ -37,9 +37,9 @@ export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
        ZIPIG, dZIPIG, pZIPIG, qZIPIG, rZIPIG
        )
 # original distibutions
-export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGuntr,
-       dBCPE, pBCPE, qBCPE, rBCPE, BCPE, BCPEuntr,
-       dBCT, pBCT, qBCT, rBCT, BCT, BCTuntr,
+export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGo, BCCGuntr,
+       dBCPE, pBCPE, qBCPE, rBCPE, BCPE, BCPEo, BCPEuntr,
+       dBCT, pBCT, qBCT, rBCT, BCT, BCTo, BCTuntr,
        dGA, pGA, qGA, rGA, GA,
        dGU, pGU, qGU, rGU, GU,
        dIG, pIG, qIG, rIG, IG,
@@ -72,7 +72,14 @@ export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGuntr,
        PIG, dPIG, pPIG, qPIG, rPIG,
        SI, dSI, pSI, qSI, rSI,
        ZAIG, dZAIG, pZAIG, qZAIG, rZAIG, plotZAIG, meanZAIG,
-       ZAGA, dZAGA, pZAGA, qZAGA, rZAGA, plotZAGA, meanZAGA)
+       ZAGA, dZAGA, pZAGA, qZAGA, rZAGA, plotZAGA, meanZAGA,
+       GE, dGE, pGE, qGE, rGE,
+       IGAMMA, dIGAMMA, pIGAMMA, qIGAMMA,rIGAMMA,
+       PARETO2, dPARETO2, pPARETO2, qPARETO2, rPARETO2,
+      WARING, dWARING, pWARING, qWARING, rWARING,
+      YULE, dYULE, pYULE, qYULE, rYULE,
+      GEOM, dGEOM, pGEOM, qGEOM, rGEOM 
+)
 
 # needed for gamlss family
 export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family,

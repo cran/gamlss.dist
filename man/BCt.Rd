@@ -5,6 +5,7 @@
 \alias{qBCT}
 \alias{rBCT}
 \alias{BCTuntr}
+\alias{BCTo}
 
 
 \title{Box-Cox t distribution for fitting a GAMLSS}
@@ -15,9 +16,12 @@ for a \code{gamlss.family} object to be used in GAMLSS fitting using the functio
 generation for the Box-Cox t distribution.  
 [The function \code{BCTuntr()} is the original version of the function suitable only for the untruncated BCT distribution]. 
  See Rigby and Stasinopoulos (2003) for details. 
+The function \code{BCT} is identical to \code{BCT} but with log link for mu.
 }
 \usage{
 BCT(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
+          tau.link = "log")
+BCTo(mu.link = "log", sigma.link = "log", nu.link = "identity", 
           tau.link = "log")
 BCTuntr(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
           tau.link = "log")

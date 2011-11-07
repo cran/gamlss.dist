@@ -9,6 +9,7 @@
 \alias{rBCPE}
 \alias{BCPEuntr}
 \alias{checkBCPE}
+\alias{BCPEo}
 
 \title{Box-Cox Power Exponential distribution for fitting a GAMLSS}
 \description{
@@ -20,10 +21,13 @@ The function \code{checkBCPE} can be used, typically when a BCPE model is fitted
 of the distribution close to zero. It give the number of values of the response below their minimum turning point and also 
 the maximum probability of the lower tail below minimum turning point.   
  [The function \code{Biventer()} is the original version of the function suitable only 
-for the untruncated BCPE distribution.] See Rigby and Stasinopoulos (2003) for details.    
+for the untruncated BCPE distribution.] See Rigby and Stasinopoulos (2003) for details.
+The function \code{BCPEo} is identical to \code{BCPE} but with log link for mu.    
 }
 \usage{
 BCPE(mu.link = "identity", sigma.link = "log", nu.link = "identity",
+          tau.link = "log")
+BCPEo(mu.link = "log", sigma.link = "log", nu.link = "identity", 
           tau.link = "log")
 BCPEuntr(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
           tau.link = "log")

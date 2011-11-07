@@ -414,3 +414,169 @@ BCPEuntr <- function (mu.link="identity", sigma.link="log", nu.link ="identity",
           ),
             class = c("gamlss.family","family"))
 }
+#---------------------------------------------------------------------
+#------------------------------------------------------------------------
+BCPEo <- function (mu.link="log", sigma.link="log", nu.link ="identity", tau.link="log")
+{
+    mstats <- checklink(   "mu.link", "Box Cox Power Exponential", substitute(mu.link), 
+                           c("inverse", "log", "identity", "own"))
+    dstats <- checklink("sigma.link", "Box Cox Power Exponential", substitute(sigma.link), 
+                           c("inverse", "log", "identity", "own"))
+    vstats <- checklink(   "nu.link", "Box Cox Power Exponential", substitute(nu.link),    
+                           c("inverse", "log", "identity", "own"))
+    tstats <- checklink(  "tau.link", "Box Cox Power Exponential", substitute(tau.link),   
+                           c("logshiftto1", "log", "identity", "own")) 
+    structure(
+          list(family = c("BCPE", "Box-Cox Power Exponential"),
+           parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE, tau=TRUE), 
+                nopar = 4, 
+                 type = "Continuous",
+              mu.link = as.character(substitute(mu.link)),  
+           sigma.link = as.character(substitute(sigma.link)), 
+              nu.link = as.character(substitute(nu.link)), 
+             tau.link = as.character(substitute(tau.link)), 
+           mu.linkfun = mstats$linkfun, 
+        sigma.linkfun = dstats$linkfun, 
+           nu.linkfun = vstats$linkfun,
+           tau.linkfun = tstats$linkfun,  
+           mu.linkinv = mstats$linkinv, 
+        sigma.linkinv = dstats$linkinv,
+           nu.linkinv = vstats$linkinv,
+           tau.linkinv = tstats$linkinv, 
+                mu.dr = mstats$mu.eta, 
+             sigma.dr = dstats$mu.eta, 
+                nu.dr = vstats$mu.eta,
+               tau.dr = tstats$mu.eta, 
+    dldm = function(y,mu,sigma,nu,tau) { 
+      z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
+  log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+      c <- exp(log.c)
+   dldm <- (tau/(2*mu*sigma*c^2))*(z+sigma*nu*z^2)*
+                        ((abs(z/c))^(tau-2))-(nu/mu)
+   dldm
+                      },
+   d2ldm2 = function(y,mu,sigma,nu,tau){
+       z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
+   log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+       c <- exp(log.c)
+    dldm <- (tau/(2*mu*sigma*c^2))*(z+sigma*nu*z^2)*
+                        ((abs(z/c))^(tau-2))-(nu/mu)
+   d2ldm2 <- -((tau*tau)*gamma(2-(1/tau))*gamma(3/tau))/(mu^2*sigma^2*(gamma(1/tau))^2)
+   d2ldm2 <- d2ldm2-(tau*nu^2)/mu^2 # BR MS Wednesday, February 4, 2004 at 15:25
+   d2ldm2 <- if (any(tau<1.05)) -dldm*dldm else d2ldm2
+                      },
+                       
+   dldd = function(y,mu,sigma,nu,tau) {  
+   f.T <- function(t,log=FALSE)
+        {
+      log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+          c <- exp(log.c)
+    loglik <- log(tau)-log.c-(0.5*(abs(t/c)^tau))-(1+(1/tau))*log(2)-lgamma(1/tau)
+      if(log==FALSE) fT  <- exp(loglik) else fT <- loglik
+        fT     
+        }
+    F.T <- function(t)
+        {
+     log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+         c <- exp(log.c) 
+         s <- 0.5*((abs(t/c))^tau)
+       F.s <- pgamma(s,shape = 1/tau, scale = 1)
+       cdf <- 0.5*(1+F.s*sign(t))        
+       cdf   
+        } 
+       z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
+   log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+       c <- exp(log.c) 
+       h <- f.T(1/(sigma*abs(nu)))/F.T(1/(sigma*abs(nu)))
+    dldd <- (1/sigma)*((tau/2)*(abs(z/c))^tau-1)+h/(sigma^2*abs(nu))
+    dldd
+                      } ,
+   d2ldd2 = function(sigma,tau) -tau/sigma^2,
+     dldv = function(y,mu,sigma,nu,tau) { 
+    f.T <- function(t,log=FALSE)
+       {
+     log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+         c <- exp(log.c)
+   loglik <- log(tau)-log.c-(0.5*(abs(t/c)^tau))-(1+(1/tau))*log(2)-lgamma(1/tau)
+    if(log==FALSE) fT  <- exp(loglik) else fT <- loglik
+        fT     
+        }   
+    F.T <- function(t)
+        {
+     log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+         c <- exp(log.c) 
+         s <- 0.5*((abs(t/c))^tau)
+       F.s <- pgamma(s,shape = 1/tau, scale = 1)
+       cdf <- 0.5*(1+F.s*sign(t))        
+       cdf   
+       } 
+      z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
+  log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+      c <- exp(log.c)
+      h <- f.T(1/(sigma*abs(nu)))/F.T(1/(sigma*abs(nu)))                                      
+   dldv <-  -(tau/(2*nu*c^2))*((abs(z/c))^(tau-2))*z*((nu*z+1/sigma)
+                       *log(y/mu)-z)
+   dldv <- dldv+log(y/mu)+sign(nu)*h/(sigma*nu^2)
+                        } ,
+    d2ldv2 = function(sigma,tau) { 
+                      -sigma^2*(3*tau+1)/4  
+                        },
+      dldt = function(y,mu,sigma,nu,tau) {
+      F.T <- function(t,tau)
+          {
+    log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+        c <- exp(log.c) 
+        s <- 0.5*((abs(t/c))^tau)
+      F.s <- pgamma(s,shape = 1/tau, scale = 1)
+      cdf <- 0.5*(1+F.s*sign(t))        
+      cdf   
+          } 
+        z <- ifelse(nu != 0,(((y/mu)^nu-1)/(nu*sigma)),log(y/mu)/sigma)
+    log.c <- 0.5*(-(2/tau)*log(2)+lgamma(1/tau)-lgamma(3/tau))
+        c <- exp(log.c)
+ dlogc.dt <- (1/(2*tau^2))*(2*log(2)-digamma(1/tau)+3*digamma(3/tau))   
+        j <- (log(F.T(1/(sigma*abs(nu)),tau+0.001))-log(F.T(1/(sigma*abs(nu)),tau)))/0.001
+     dldt <- (1/tau)-0.5*(log(abs(z/c)))*(abs(z/c))^tau+
+                      (1/tau^2)*(log(2)+digamma(1/tau))+
+                      ((tau/2)*((abs(z/c))^tau)-1)*dlogc.dt-j               
+     dldt                                       
+                        } ,
+      d2ldt2 = function(y,mu,sigma,nu,tau) {
+        p <- (tau+1)/tau
+ dlogc.dt <- (1/(2*tau^2))*(2*log(2)-digamma(1/tau)+3*digamma(3/tau))         
+    part1 <- p*trigamma(p)+2*(digamma(p))^2
+    part2 <- digamma(p)*(log(2)+3-3*digamma(3/tau)-tau)
+    part3 <- -3*(digamma(3/tau))*(1+log(2))    
+    part4 <- -(tau+log(2))*log(2)
+    part5 <- -tau+(tau^4)*(dlogc.dt)^2
+   d2ldt2 <- part1+part2+part3+part4+part5
+   d2ldt2 <- -d2ldt2/tau^3    
+   d2ldt2 <- ifelse(d2ldt2 < -1e-15, d2ldt2,-1e-15)                                    
+   d2ldt2
+                            } ,
+  d2ldmdd = function(mu,sigma,nu,tau) -(nu*tau)/(mu*sigma),
+  d2ldmdv = function(mu,sigma,nu,tau) (2*(tau-1)-(tau+1)*(sigma^2)*(nu^2))/(4*mu),
+  d2ldmdt = function(mu,sigma,nu,tau) (nu/(mu*tau))*(1+tau+(3/2)*(digamma(1/tau)-digamma(3/tau))),
+  d2ldddv = function(sigma,nu,tau) -(sigma*nu*tau)/2,
+  d2ldddt = function(sigma,tau) (1/(sigma*tau))*(1+tau+(3/2)*(digamma(1/tau)-digamma(3/tau))),
+  d2ldvdt = function(mu,sigma,nu,tau) {
+    d2ldvdt  <- (((sigma^2)*nu)/(2*tau))*(1+(tau/3)+0.5*(digamma(1/tau)-digamma(3/tau)))
+    d2ldvdt
+                        },
+ G.dev.incr  = function(y,mu,sigma,nu,tau,...) 
+                       -2*dBCPE(y,mu,sigma,nu,tau,log=TRUE),                     
+         rqres = expression(rqres(pfun="pBCPE", type="Continuous", y=y, mu=mu, 
+                                              sigma=sigma, nu=nu, tau=tau) ),
+    mu.initial = expression(mu <- (y+mean(y))/2), #
+ sigma.initial = expression(sigma<- rep(0.1, length(y))),
+    nu.initial = expression(nu <- rep(1, length(y))), 
+   tau.initial = expression(tau <-rep(2, length(y))), 
+      mu.valid = function(mu) all(mu > 0), 
+   sigma.valid = function(sigma)  all(sigma > 0),
+      nu.valid = function(nu) TRUE , 
+     tau.valid = function(tau) all(tau > 0), 
+       y.valid = function(y)  all(y > 0)
+          ),
+            class = c("gamlss.family","family"))
+}
+#-----------------------------------------------------------------

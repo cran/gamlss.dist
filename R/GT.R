@@ -210,8 +210,10 @@ pGT <- function(q, mu=0, sigma=1, nu=3, tau=1.5, lower.tail = TRUE, log.p = FALS
         cdf <- rep(0, length = lp)
        for (i in 1:lp)
           {
+          endInt <- (q[i]-mu[i])/sigma[i]
          cdf[i] <- integrate(function(x) 
-                 dGT(x, mu = 0, sigma = 1, nu = nu[i], tau = tau[i], log=log.p), -Inf, (q[i]-mu[i])/sigma[i] )$value
+                 dGT(x, mu = 0, sigma = 1, nu = nu[i], tau = tau[i]), -Inf, endInt)$value
+         if(endInt>0&&cdf<0.001) cdf[i] <- 1  # MS and BR 7-10-11    
           }    
          if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf 
          if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 

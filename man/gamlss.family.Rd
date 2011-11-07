@@ -14,7 +14,6 @@ gamlss.family(object,...)
 as.gamlss.family(object)
 as.family(object)
 \method{print}{gamlss.family}(x,...)
-gamlss.family.default(object,...)
 }
 
 \arguments{
@@ -49,7 +48,9 @@ gamlss.family.default(object,...)
   Generalized Gamma            \tab \code{\link{GG}()}      \tab  3  \cr
   Generalized Inverse Gaussian \tab \code{\link{GIG}()}     \tab  3  \cr
   Generalized t                \tab \code{\link{GT}()}      \tab  4  \cr
+  Geometric                    \tab \code{\link{GEOM}()}                 \tab  1  \cr
   Gumbel                       \tab \code{\link{GU}()}                   \tab  2  \cr
+  Inverse Gamma                \tab \code{\link{IGAMMA}()}               \tab  2  \cr
   Inverse Gaussian             \tab \code{\link{IG}()}                   \tab  2  \cr
   Johnson's SU                 \tab \code{\link{JSU}()}                  \tab  4  \cr   
   Logarithmic                  \tab \code{\link{LG}()}     \tab  1  \cr
@@ -61,6 +62,7 @@ gamlss.family.default(object,...)
   Normal Exponential \emph{t}   \tab \code{\link{NET}()}                  \tab  4 (2 fixed)  \cr
   Normal                       \tab \code{\link{NO}()}                   \tab  2  \cr
   Normal Family                \tab \code{\link{NOF}()}     \tab  3 (1 fixed)  \cr
+  Pareto type 2                \tab \code{\link{PARETO2}()}              \tab  2  \cr
   Power Exponential            \tab \code{\link{PE}()}                   \tab  3  \cr
   Power Exponential  type 2    \tab \code{\link{PE2}()}                  \tab  3  \cr
   Poison                       \tab \code{\link{PO}()}                   \tab  1  \cr
@@ -80,9 +82,11 @@ gamlss.family.default(object,...)
   Skew t  type 4               \tab \code{\link{ST4}()}     \tab  3  \cr 
   Skew t  type 5               \tab \code{\link{ST5}()}     \tab  3  \cr 
   t-distribution               \tab \code{\link{TF}()}      \tab  3  \cr
+  Waring                       \tab \code{\link{WARING}()} \tab  1  \cr
   Weibull                      \tab \code{\link{WEI}()}     \tab  2  \cr
   Weibull(PH parameterization) \tab \code{\link{WEI2}()}    \tab  2  \cr
   Weibull (mu as mean)         \tab \code{\link{WEI3}()}    \tab  2  \cr
+  Yule                         \tab \code{\link{YULE}()}    \tab  1  \cr
   Zero adjusted binomial       \tab \code{\link{ZABI}()}    \tab  2   \cr 
   Zero inflated binomial       \tab \code{\link{ZIBI}()}    \tab  2   \cr 
   Zero adjusted logarithmic    \tab \code{\link{ZALG}()}    \tab  2   \cr 
