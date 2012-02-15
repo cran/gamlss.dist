@@ -36,15 +36,18 @@ rGEOM(n, mu = 2)
 }
 \details{
 The parameterization of the Geometric distribution in the function \code{GEOM} is
-\deqn{f(y|mu) = (1-p)^y*p}
+\deqn{f(y|\mu) = (1-p)^y\,p}{f(y|mu) = (1-p)^y p}
 where
 \eqn{p = 1/(mu+1)}
 for \eqn{y>=0} and \eqn{mu>0}.
 }
 \value{
 returns a \code{gamlss.family} object which can be used to fit a Geometric distribution in the \code{gamlss()} function.}
-\author{ Fiona McElduff, Bob Rigby and Mikis Stasinopoulos.}
+\author{
+Fiona McElduff, Bob Rigby and Mikis Stasinopoulos.
+}
 \references{
+
 Johnson, N. L., Kemp, A. W., and Kotz, S. (2005). \emph{Univariate discrete distributions.}
 Wiley.
 
@@ -56,9 +59,8 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 }
 
-\seealso{
-\code{\link{gamlss.family}}, \code{\link{PO}}
-}
+\seealso{\code{\link{gamlss.family}}} 
+
 \examples{
 par(mfrow=c(2,2))
 y<-seq(0,20,1)

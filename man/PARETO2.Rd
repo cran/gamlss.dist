@@ -4,11 +4,17 @@
 \alias{pPARETO2}
 \alias{qPARETO2}
 \alias{rPARETO2}
+\alias{PARETO2o}
+\alias{dPARETO2o}
+\alias{pPARETO2o}
+\alias{qPARETO2o}
+\alias{rPARETO2o}
 \title{
 Pareto Type 2 distribution for fitting a GAMLSS
 }
 \description{
-The function \code{PARETO2()} defines the Pareto Type 2 distribution, a two parameter distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}, with parameters \code{mu} and \code{sigma}. The functions \code{dPARETO2}, \code{pPARETO2}, \code{qPARETO2} and \code{rPARETO2} define the density, distribution function, quantile function and random generation for the \code{PARETO2} parameterization of the Pareto type 2 distribution. 
+The functions \code{PARETO2()} and  \code{PARETO2o()} define the Pareto Type 2 distribution, a two parameter distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}.
+The parameters are  \code{mu} and \code{sigma} in both functions but the parameterasation different.  The \code{mu} is identical for both \code{PARETO2()} and  \code{PARETO2o()}. The \code{sigma} in  \code{PARETO2o()} is the inverse of the \code{sigma} in code{PARETO2()} and coresponse to the usual parameter \code{alpha} of the Patreto distribution. The functions \code{dPARETO2}, \code{pPARETO2}, \code{qPARETO2} and \code{rPARETO2} define the density, distribution function, quantile function and random generation for the \code{PARETO2} parameterization of the Pareto type 2 distribution while the functions \code{dPARETO2o}, \code{pPARETO2o}, \code{qPARETO2o} and \code{rPARETO2o} define the density, distribution function, quantile function and random generation for the original \code{PARETO2o} parameterization of the Pareto type 2 distribution
 }
 \usage{
 PARETO2(mu.link = "log", sigma.link = "log")
@@ -16,6 +22,11 @@ dPARETO2(x, mu = 1, sigma = 0.5, log = FALSE)
 pPARETO2(q, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
 qPARETO2(p, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
 rPARETO2(n, mu = 1, sigma = 0.5)
+PARETO2o(mu.link = "log", sigma.link = "log")
+dPARETO2o(x, mu = 1, sigma = 0.5, log = FALSE)
+pPARETO2o(q, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
+qPARETO2o(p, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
+rPARETO2o(n, mu = 1, sigma = 0.5)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,17 +41,24 @@ rPARETO2(n, mu = 1, sigma = 0.5)
   \item{n}{number of observations. If \code{length(n) > 1}, the length is taken to be the number required}
 }
 \details{
-The parameterization of the Pareto Type 2 distribution in the function \code{PARETO2} is
-\deqn{f(y|mu, sigma) = (1/sigma)*mu^(1/sigma)*(y+mu)^(-(1/sigma+1))}
+The parameterization of the Pareto Type 2 distribution in the function \code{PA2} is:
+
+\deqn{f(y|\mu, \sigma) = \frac{1}{\sigma} \mu^{\frac{1}{\sigma}} \, (y+mu)^{-\frac{1
+}{sigma+1}}}{f(y|mu, sigma) = (1/sigma) mu^(1/sigma) (y+mu)^(-(1/sigma+1))}
+
 for \eqn{y>=0}, \eqn{mu>0} and \eqn{sigma>0}.
 }
 \value{
 returns a gamlss.family object which can be used to fit a Pareto type 2 distribution in the \code{gamlss()} function.
 }
 \author{
-Mikis Stasinopoulos, Bob Rigby, Fiona Mcelduff  }
+Fiona McElduff, Bob Rigby and Mikis Stasinopoulos}
 
 \references{
+
+Johnson, N., Kotz, S., and Balakrishnan, N. (1997). \emph{Discrete Multivariate
+Distributions.} Wiley-Interscience, NY, USA.
+
 Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 

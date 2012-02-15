@@ -63,6 +63,7 @@ as.family(object)
   Normal                       \tab \code{\link{NO}()}                   \tab  2  \cr
   Normal Family                \tab \code{\link{NOF}()}     \tab  3 (1 fixed)  \cr
   Pareto type 2                \tab \code{\link{PARETO2}()}              \tab  2  \cr
+  Pareto type 2  original      \tab \code{\link{PARETO2o}()}              \tab  2  \cr
   Power Exponential            \tab \code{\link{PE}()}                   \tab  3  \cr
   Power Exponential  type 2    \tab \code{\link{PE2}()}                  \tab  3  \cr
   Poison                       \tab \code{\link{PO}()}                   \tab  1  \cr
@@ -74,6 +75,8 @@ as.family(object)
   Skew Power Exponential type 3 \tab \code{\link{SEP3}()}   \tab  4  \cr 
   Skew Power Exponential type 4 \tab \code{\link{SEP4}()}   \tab  4  \cr 
   Shash                        \tab \code{\link{SHASH}()}   \tab  4  \cr 
+  Shash  original              \tab \code{\link{SHASHo}()}   \tab  4  \cr
+  Shash  original 2            \tab \code{\link{SHASH}()}   \tab  4  \cr
   Sichel  (original)           \tab \code{\link{SI}()}      \tab  3  \cr
   Sichel  (mu as the maen)     \tab \code{\link{SICHEL}()}  \tab  3  \cr
   Skew t  type 1               \tab \code{\link{ST1}()}     \tab  3  \cr 

@@ -20,8 +20,8 @@ rIGAMMA(n, mu = 1, sigma = .5)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-	\item{mu.link}{Defines the \code{mu.link}, with "`"' link sa the default for the mu parameter}
-  \item{sigma.link}{Defines the \code{sigma.link}, with "`log"' as the default for the sigma parameter }
+  \item{mu.link}{Defines the \code{mu.link}, with \code{log} link as the default for the mu parameter}
+  \item{sigma.link}{Defines the \code{sigma.link}, with \code{log} as the default for the sigma parameter }
   \item{x, q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
@@ -31,8 +31,8 @@ rIGAMMA(n, mu = 1, sigma = .5)
   \item{n}{number of observations. If \code{length(n) > 1}, the length is taken to be the number required}
 }
 \details{
-The parameterization of the Inverse Gamma distribution in the function \code{IGAMMA} is
-\deqn{f(y|mu, sigma) = ([mu*(alpha+1)]^alpha)/Gamma(alpha)*y^(-(alpha+1))*exp(-(mu*(alpha+1))/y)}
+The parameterization of the Inverse Gamma distribution in the function \code{IGA} is
+\deqn{f(y|\mu, \sigma) = \frac{\left[\mu\,(\alpha+1)\right]^{\alpha}}{\Gamma(\alpha)} \,y^{-(\alpha+1)}\, \exp{\left[-\frac{\mu\,(\alpha+1)}{y}\right]}}{f(y|mu, sigma) = ([mu (alpha+1)]^alpha)/Gamma(alpha) y^(-(alpha+1)) exp(-(mu (alpha+1))/y)}
 where \eqn{alpha = 1/(sigma^2)}
 for \eqn{y>0}, \eqn{mu>0} and \eqn{sigma>0}.
 }

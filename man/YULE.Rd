@@ -38,6 +38,7 @@ The Yule distribution has density
 where 
 \deqn{lambda = (mu+1)/mu}
 for \eqn{y=0,1,2,\ldots} and \eqn{mu>0}.  
+
 }
 \value{
 Returns a \code{gamlss.family} object which can be used to fit a Yule distribution in the \code{gamlss()} function.

@@ -277,7 +277,7 @@ rDEL <- function(n, mu=1, sigma=1, nu=0.5, max.value = 10000)
           if (any(n <= 0))  stop(paste("n must be a positive integer", "\n", ""))  
           n <- ceiling(n)
           p <- runif(n)
-          r <- qSICHEL(p, mu=mu, sigma=sigma, nu=nu, max.value = max.value )
+          r <- qDEL(p, mu=mu, sigma=sigma, nu=nu, max.value = max.value )
           r
   }
   

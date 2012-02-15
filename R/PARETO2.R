@@ -26,44 +26,23 @@ PARETO2 <- function (mu.link = "log", sigma.link = "log")
           sigma.dr = dstats$mu.eta, 
               dldm = function(y, mu, sigma) #(1/(mu*sigma))-(1+(1/sigma))/(y+mu),
               {
-               dldm1 <- (1/(mu*sigma))-(1+(1/sigma))*(1/(y+mu)) # bob's
-               #dldm2 <- (y-mu*sigma)/(y*mu*sigma+mu^2*sigma) # fiona's 
-                #   z <- (y/mu)
-                #dldm3 <- -1/mu + (1/mu)*(1+(1/sigma))*z/(1+z) # gb2
-               dldm1
+               dldm <- (1/(mu*sigma))-(1+(1/sigma))*(1/(y+mu)) # bob's
+               dldm
                 },      
             d2ldm2 = function(y, mu, sigma)
               {
-              #d2ldm21 <- -(1/sigma)/((1+(1/sigma)+1)*mu^2) # gb2      
-              #  dldm <-  (1/(mu*sigma))-(1+(1/sigma))/(y+mu) (1/(mu*sigma))-1/(y+mu)-(1/(sigma*(y+mu)))
-              #d2ldm22 <- -(1/((mu^2)*sigma)) + (1+(1/sigma)/((y+mu)^2)) # bob's
-              d2ldm23 <- -(1/(mu^2*(1+2*sigma))) # fiona's
-            # browser() #1 and 3 similar
-              d2ldm23
+              d2ldm2 <- -(1/(mu^2*(1+2*sigma))) # fiona's
+              d2ldm2
               },
               dldd = function(y, mu, sigma)  
               {
-        #     z <- (y/mu)
-        #   dldd1 <- -log(1+z)-digamma(1/sigma)+digamma(1+(1/sigma)) # bg2
-        #   dldd     
-           dldd2 <- -(1/sigma)+(log(y+mu)/(sigma^2))-(log(mu)/sigma^2) # bob's
-        #   dldd3 <- (-sigma-log(mu)+log(y+mu))/(sigma^2) # fiona's
-        #   cat(dldd[1], "\n")
-         #   browser() #all different
-            dldd2
-            },
+             dldd2 <- -(1/sigma)+(log(y+mu)/(sigma^2))-(log(mu)/sigma^2) # bob's
+             dldd2
+              },
             d2ldd2 = function(y, mu, sigma)      
              {
-              #dldd<- -(1/sigma)+(log(y+mu)/sigma^2)-(log(mu)/sigma^2)
-             #d2ldd2<- -dldd^2
-            #  cat(d2ldd2[1], "\n")
-            #(1/sigma^2)+(2*log(mu))/(sigma^3)- (2*log(y+mu))/(sigma^3)
-            # d2ldd21 <- -(1/sigma)+(log(y+mu)/(sigma^2))-(log(mu)/sigma^2) # bob's
-            # d2ldd2 <- trigamma(1+(1/sigma)) - trigamma(1/sigma)
-            d2ldd22 <- -(1/sigma^2) 
-               #dldd2 <- -(1/sigma)+(log(y+mu)/(sigma^2))-(log(mu)/sigma^2)
-               #d2ldd2 <- -dldd2^2
-             d2ldd22  
+              d2ldd22 <- -(1/sigma^2) 
+              d2ldd22  
               },
         d2ldmdd = function(y, mu, sigma) #
         {

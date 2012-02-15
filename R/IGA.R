@@ -32,7 +32,7 @@ pIGAMMA <- function(q, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
    if (any(q < 0))
 	stop(paste("q must be greater than 0", "\n", ""))
    alpha <- 1/(sigma^2)
-   lcdf <- pgamma(((mu*(alpha + 1))/q), alpha, lower=FALSE, log.p = TRUE)  
+   lcdf <- pgamma(((mu*(alpha + 1))/q), shape=alpha, lower.tail=FALSE, log.p = TRUE)  
    if (log.p == FALSE) cdf <- exp(lcdf)
    else cdf <- lcdf 
    if (lower.tail == TRUE) cdf <- cdf
