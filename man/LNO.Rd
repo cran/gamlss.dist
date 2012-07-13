@@ -9,13 +9,20 @@
 \alias{pLOGNO}
 \alias{qLOGNO}
 \alias{rLOGNO}
+\alias{LOGNO2}
+\alias{dLOGNO2}
+\alias{pLOGNO2}
+\alias{qLOGNO2}
+\alias{rLOGNO2}
 
-\title{Log Normal distribution for fitting a GAMLSS}
+\title{Log Normal distribution for fitting in GAMLSS}
 \description{
-The function  \code{LOGNO} defines a \code{gamlss.family} distribution to fits the log-Normal distribution.
+The functions  \code{LOGNO} and \code{LOGNO2} define a \code{gamlss.family} distribution to fits the log-Normal distribution. 
+The difference between them is that while \code{LOGNO} retains the original parametrization for \code{mu}, (identical to the normal distribution \code{NO}) and therefore \eqn{\mu=(-\infty,+\infty)}{mu=(-Inf,+Inf)}, the function  \code{LOGNO2} use \code{mu} as the median, so \eqn{\mu=(0,+\infty)}{mu=(0,+Inf)}.
+
 The function   \code{LNO} is more general and can fit a Box-Cox transformation 
 to data using the \code{gamlss()} function.
-In the  \code{LOGNO} there are two parameters involved \code{mu} \code{sigma}, while in the 
+In the  \code{LOGNO} (and \code{LOGNO2}) there are two parameters involved \code{mu} \code{sigma}, while in the 
 \code{LNO} there are three parameters \code{mu} \code{sigma},
 and the transformation parameter \code{nu}. 
 The transformation parameter \code{nu} in \code{LNO} is a 'fixed' parameter (not estimated) and it has its default value equal to 
@@ -25,6 +32,10 @@ In order to estimate (or model) the parameter \code{nu}, use the \code{\link{gam
 \code{\link{BCCG}} distribution which uses a reparameterized version of the the Box-Cox transformation.
 The functions \code{dLOGNO}, \code{pLOGNO}, \code{qLOGNO} and \code{rLOGNO} define the density, distribution function, quantile function and random
 generation for the specific parameterization of the log-normal distribution.
+
+The functions \code{dLOGNO2}, \code{pLOGNO2}, \code{qLOGNO2} and \code{rLOGNO2} define the density, distribution function, quantile function and random
+generation when \code{mu} is the median  of the log-normal distribution.
+
 The functions \code{dLNO}, \code{pLNO}, \code{qLNO} and \code{rLNO} define the density, distribution function, quantile function and random
 generation for the specific parameterization of the log-normal distribution and more generally a Box-Cox transformation. 
 }
@@ -35,18 +46,24 @@ generation for the specific parameterization of the log-normal distribution and 
 
 LNO(mu.link = "identity", sigma.link = "log")
 LOGNO(mu.link = "identity", sigma.link = "log")
+LOGNO2(mu.link = "log", sigma.link = "log")
 dLNO(x, mu = 1, sigma = 0.1, nu = 0, log = FALSE)
 dLOGNO(x, mu = 0, sigma = 1, log = FALSE)
+dLOGNO2(x, mu = 1, sigma = 1, log = FALSE)
 pLNO(q, mu = 1, sigma = 0.1, nu = 0, lower.tail = TRUE, log.p = FALSE)
 pLOGNO(q, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+pLOGNO2(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qLNO(p, mu = 1, sigma = 0.1, nu = 0, lower.tail = TRUE, log.p = FALSE)
 qLOGNO(p, mu = 0, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+qLOGNO2(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 rLNO(n, mu = 1, sigma = 0.1, nu = 0)
 rLOGNO(n, mu = 0, sigma = 1)
+rLOGNO2(n, mu = 1, sigma = 1)
+
 }
 
 \arguments{
-  \item{mu.link}{ Defines the \code{mu.link}, with "identity" link as the default for the mu parameter. Other links are "inverse", "log" and "own"}
+  \item{mu.link}{ Defines the \code{mu.link}, with "identity" or "log" link depending on te parametrization}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the sigma parameter. Other links are "inverse", "identity" ans "own"}
   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
@@ -64,6 +81,7 @@ rLOGNO(n, mu = 0, sigma = 1)
 \deqn{f(y|\mu,\sigma)=\frac{1}{y \sqrt{2\pi}\sigma} \exp [-\frac{1}{2 \sigma^2}(log(y)-\mu)^2 ] }{f(y|mu,sigma)=(1/(y*sqrt(2*pi)*sigma))*exp(-0.5*((log(y)-mu)/(sigma))^2)}  
 for \eqn{y>0}, \eqn{\mu=(-\infty,+\infty)}{mu=(-Inf,+Inf)} and \eqn{\sigma>0}. 
 
+
 The probability density function in \code{LNO} is defined as  
 \deqn{f(y|\mu,\sigma,\nu)=\frac{1}{\sqrt{2\pi}\sigma}y^{\nu-1} \exp [-\frac{1}{2 \sigma^2}(z-\mu)^2 ] }{f(y|mu,sigma,nu)=(1/(sqrt(2*pi)*sigma))*(y^(nu-1))*exp(-((z-mu)/(2sigma))^2)}
 
@@ -72,7 +90,7 @@ for \eqn{y>0}, \eqn{\mu>0}, \eqn{\sigma>0} and \eqn{\nu=(-\infty,+\infty)}{\nu=(
 
 }
 \value{
-  \code{LNO()} returns a \code{gamlss.family} object which can be used to fit a log-narmal distribution in the \code{gamlss()} function.
+  \code{LNO()} returns a \code{gamlss.family} object which can be used to fit a log-normal distribution in the \code{gamlss()} function.
   \code{dLNO()} gives the density, \code{pLNO()} gives the distribution
      function, \code{qLNO()} gives the quantile function, and \code{rLNO()}
      generates random deviates.
@@ -101,7 +119,27 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 
 \examples{
 LOGNO()#  gives information about the default links for the log normal distribution 
+LOGNO2()
 LNO()# gives information about the default links for the Box Cox distribution 
+
+# plotting the d, p, q, and r functions
+op<-par(mfrow=c(2,2))
+curve(dLOGNO(x, mu=0), 0, 10)
+curve(pLOGNO(x, mu=0), 0, 10)
+curve(qLOGNO(x, mu=0), 0, 1)
+Y<- rLOGNO(200)
+hist(Y)
+par(op)
+
+# plotting the d, p, q, and r functions
+op<-par(mfrow=c(2,2))
+curve(dLOGNO2(x, mu=1), 0, 10)
+curve(pLOGNO2(x, mu=1), 0, 10)
+curve(qLOGNO2(x, mu=1), 0, 1)
+Y<- rLOGNO(200)
+hist(Y)
+par(op)
+
 # library(gamlss)
 # data(abdom)
 # h1<-gamlss(y~cs(x), family=LOGNO, data=abdom)#fits the log-Normal distribution  

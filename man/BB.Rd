@@ -45,7 +45,7 @@ rBB(n, mu = 0.5, sigma = 1, bd = 10, fast = FALSE)
 }
 \details{
   Definition file for beta binomial distribution. 
- \deqn{f(y|\mu,\sigma)=\frac{\Gamma(n+1)} {\Gamma(y+1)\Gamma(n-y+1)} \frac{\Gamma(\frac{1}{\sigma}) \Gamma(y+\frac{\mu}{\sigma}) \Gamma[n+\frac{(1-\mu)}{\sigma}-y]}{\Gamma(n+\frac{1}{\sigma}) \Gamma(\frac{\mu}{\sigma}) \Gamma(\frac{1-\mu}{\sigma})}}{f(y|mu,sigma)=[Gamma(n+1)*Gamma(y+1)/Gamma(n-y+1)]*[Gamma(y+mu/sigma)*Gamma(1/sigma)*Gamma[n+(1-mu)/sigma-y]]/[Gamma(n+(1/sigma)) * Gamma(mu/sigma) * Gamma((1-mu)/sigma)]} 
+ \deqn{f(y|\mu,\sigma)=\frac{\Gamma(n+1)} {\Gamma(y+1)\Gamma(n-y+1)} \frac{\Gamma(\frac{1}{\sigma}) \Gamma(y+\frac{\mu}{\sigma}) \Gamma[n+\frac{(1-\mu)}{\sigma}-y]}{\Gamma(n+\frac{1}{\sigma}) \Gamma(\frac{\mu}{\sigma}) \Gamma(\frac{1-\mu}{\sigma})}}{f(y|mu,sigma)=[Gamma(n+1)/Gamma(y+1)/Gamma(n-y+1)]*[Gamma(y+mu/sigma)*Gamma(1/sigma)*Gamma[n+(1-mu)/sigma-y]]/[Gamma(n+(1/sigma)) * Gamma(mu/sigma) * Gamma((1-mu)/sigma)]} 
 
  for \eqn{y=0,1,2,\ldots,n}, \eqn{0<\mu<1} and \eqn{\sigma>0}. For \eqn{\mu=0.5} and \eqn{\sigma=0.5} the distribution is uniform. 
 }

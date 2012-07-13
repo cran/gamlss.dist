@@ -92,7 +92,13 @@ if (is.character(link) && length(grep("^power", link) > 0))
        linkinv <- function(eta) 1+pmax(.Machine$double.eps, exp(eta)) 
         mu.eta <- function(eta) pmax(.Machine$double.eps, exp(eta))
       valideta <- function(eta) TRUE   
-     }, #logitshift.5 = { # MS Saturday, February 19, 2005 depreciated  
+     },  logshiftto2 = 
+     {    # 6=7-2012  
+       linkfun <- function(mu)  log(mu-2+0.00001) # changed 6-7-12
+       linkinv <- function(eta) 2+pmax(.Machine$double.eps, exp(eta)) 
+        mu.eta <- function(eta) pmax(.Machine$double.eps, exp(eta))
+      valideta <- function(eta) TRUE   
+     },   #logitshift.5 = { # MS Saturday, February 19, 2005 depreciated 
        #linkfun <- function(mu, shift = par )           
        #                  log((mu-shift[1])/(shift[2]-mu))
        #linkinv <- function(eta,  shift = par) 

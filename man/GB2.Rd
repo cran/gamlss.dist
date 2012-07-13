@@ -4,9 +4,13 @@
 \alias{pGB2}
 \alias{qGB2}
 \alias{rGB2}
+\alias{dGP}
+\alias{pGP}
+\alias{qGP}
+\alias{rGP}
+\alias{GP}
 
-
-\title{The generalized Beta type 2 distribution for fitting a GAMLSS}
+\title{The generalized Beta type 2 and generalized Pareto distributions for fitting a GAMLSS}
 \description{
 This function defines the generalized beta  type 2 distribution, a four parameter distribution.
 The function \code{GB2} creates a \code{gamlss.family} object which can be used to fit the distribution using the function 
@@ -16,6 +20,8 @@ The functions \code{dGB2},
 \code{GB2}, \code{qGB2} and \code{rGB2} define the density, 
 distribution function, quantile function and random
 generation for the generalized beta type 2 distribution.   
+The generalised Pareto \code{GP} distribution is defined by setting the parameters \code{sigma} and \code{nu} of the \code{GB2} distribution to 1.  
+
 }
 \usage{
 GB2(mu.link = "log", sigma.link = "identity", nu.link = "log", 
@@ -23,9 +29,16 @@ GB2(mu.link = "log", sigma.link = "identity", nu.link = "log",
 dGB2(x, mu = 1, sigma = 1, nu = 1, tau = 0.5, log = FALSE)
 pGB2(q, mu = 1, sigma = 1, nu = 1, tau = 0.5, lower.tail = TRUE, 
      log.p = FALSE)
-qGB2(p, mu = 1, sigma = 1, nu = 0, tau = 0.5, lower.tail = TRUE, 
+qGB2(p, mu = 1, sigma = 1, nu = 1, tau = 0.5, lower.tail = TRUE, 
      log.p = FALSE)
-rGB2(n, mu = 1, sigma = 1, nu = 0, tau = 0.5)
+rGB2(n, mu = 1, sigma = 1, nu = 1, tau = 0.5)
+
+GP(mu.link = "log", sigma.link = "log")
+dGP(x, mu = 1, sigma = 1, log = FALSE)
+pGP(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+qGP(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+rGP(n, mu = 1, sigma = 1)
+
 }
 %
 \arguments{

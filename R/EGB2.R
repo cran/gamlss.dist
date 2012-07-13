@@ -150,7 +150,7 @@ pEGB2 <- function(q, mu = 0, sigma = 1, nu = 1, tau = .5, lower.tail = TRUE, log
  }
 #-----------------------------------------------------------------  
 
-qEGB2 <-  function(p, mu=0, sigma=1, nu=0, tau=.5, lower.tail = TRUE, log.p = FALSE)
+qEGB2 <-  function(p, mu=0, sigma=1, nu=1, tau=.5, lower.tail = TRUE, log.p = FALSE)
  {   
     if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))  
     if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  
@@ -164,7 +164,7 @@ qEGB2 <-  function(p, mu=0, sigma=1, nu=0, tau=.5, lower.tail = TRUE, log.p = FA
     q
  }
 #-----------------------------------------------------------------  
-rEGB2 <- function(n, mu=0, sigma=1, nu=0, tau=.5)
+rEGB2 <- function(n, mu=0, sigma=1, nu=1, tau=.5)
   {
     if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))  
     if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  

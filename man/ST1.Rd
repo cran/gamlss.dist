@@ -24,6 +24,11 @@
 \alias{pST5}
 \alias{qST5}
 \alias{rST5}
+\alias{SST}
+\alias{dSST}
+\alias{pSST}
+\alias{qSST}
+\alias{rSST}
 
 \title{The skew t distributions, type 1 to 5 }
 \description{
@@ -34,6 +39,8 @@ There are 5 different skew t distributions implemented in GAMLSS.
 The Skew t type 3 distribution Jones and Faddy (2003). 
 The functions \code{dST3}, \code{pST3}, \code{qST3} and \code{rST3} define the density, distribution function,
  quantile function and random generation for the skew t distribution type 3. 
+The \code{SST} is a reparametrised version of  \code{dST3} where \code{sigma} is the standard deviation of the distribution.  
+ 
       
 }
 \usage{
@@ -54,6 +61,13 @@ dST3(x, mu = 0, sigma = 1, nu = 1, tau = 10, log = FALSE)
 pST3(q, mu = 0, sigma = 1, nu = 1, tau = 10, lower.tail = TRUE, log.p = FALSE)
 qST3(p, mu = 0, sigma = 1, nu = 1, tau = 10, lower.tail = TRUE, log.p = FALSE)
 rST3(n, mu = 0, sigma = 1, nu = 1, tau = 10)
+
+SST(mu.link = "identity", sigma.link = "log", nu.link = "log", 
+   tau.link = "logshiftto2")
+dSST(x, mu = 0, sigma = 1, nu = 0.8, tau = 7, log = FALSE)
+pSST(q, mu = 0, sigma = 1, nu = 0.8, tau = 7, lower.tail = TRUE, log.p = FALSE)
+qSST(p, mu = 0, sigma = 1, nu = 0.8, tau = 7, lower.tail = TRUE, log.p = FALSE)
+rSST(n, mu = 0, sigma = 1, nu = 0.8, tau = 7)
 
 ST4(mu.link = "identity", sigma.link = "log", nu.link = "log", tau.link = "log")
 dST4(x, mu = 0, sigma = 1, nu = 1, tau = 10, log = FALSE)

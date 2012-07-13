@@ -4,6 +4,11 @@
 \alias{pTF}
 \alias{qTF}
 \alias{rTF}
+\alias{TF2}
+\alias{dTF2}
+\alias{pTF2}
+\alias{qTF2}
+\alias{rTF2}
 
 \title{t family distribution for fitting a GAMLSS}
 \description{
@@ -11,7 +16,9 @@ The function \code{TF} defines the t-family distribution, a three parameter dist
  for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}. 
  The functions \code{dTF}, \code{pTF}, \code{qTF} and \code{rTF} define the density, distribution function, quantile function and random
 generation for the specific parameterization of the t distribution given in details below, with mean equal to \eqn{\mu}{mu}
-and standard deviation equal to \eqn{\sigma (\frac{\nu}{\nu-2})^{0.5}}{sigma*(nu/(nu-2))^0.5} with the degrees of freedom \eqn{\nu}{nu}   
+and standard deviation equal to \eqn{\sigma (\frac{\nu}{\nu-2})^{0.5}}{sigma*(nu/(nu-2))^0.5} with the degrees of freedom \eqn{\nu}{nu}  
+The function \code{TF2} is a different parametrization where \code{sigma} is the standard deviation. 
+
 }
 \usage{
 TF(mu.link = "identity", sigma.link = "log", nu.link = "log")
@@ -19,6 +26,12 @@ dTF(x, mu = 0, sigma = 1, nu = 10, log = FALSE)
 pTF(q, mu = 0, sigma = 1, nu = 10, lower.tail = TRUE, log.p = FALSE)
 qTF(p, mu = 0, sigma = 1, nu = 10, lower.tail = TRUE, log.p = FALSE) 
 rTF(n, mu = 0, sigma = 1, nu = 10)
+
+TF2(mu.link = "identity", sigma.link = "log", nu.link = "logshiftto2")
+dTF2(x, mu = 0, sigma = 1, nu = 10, log = FALSE)
+pTF2(q, mu = 0, sigma = 1, nu = 10, lower.tail = TRUE, log.p = FALSE)
+qTF2(p, mu = 0, sigma = 1, nu = 10, lower.tail = TRUE, log.p = FALSE)
+rTF2(n, mu = 0, sigma = 1, nu = 10)
 }
 
 \arguments{

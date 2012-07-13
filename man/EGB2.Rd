@@ -21,9 +21,9 @@ EGB2(mu.link = "identity", sigma.link = "identity", nu.link = "log",
 dEGB2(x, mu = 0, sigma = 1, nu = 1, tau = 0.5, log = FALSE)
 pEGB2(q, mu = 0, sigma = 1, nu = 1, tau = 0.5, lower.tail = TRUE, 
       log.p = FALSE)
-qEGB2(p, mu = 0, sigma = 1, nu = 0, tau = 0.5, lower.tail = TRUE, 
+qEGB2(p, mu = 0, sigma = 1, nu = 1, tau = 0.5, lower.tail = TRUE, 
       log.p = FALSE)
-rEGB2(n, mu = 0, sigma = 1, nu = 0, tau = 0.5)
+rEGB2(n, mu = 0, sigma = 1, nu = 1, tau = 0.5)
 }
 %
 \arguments{

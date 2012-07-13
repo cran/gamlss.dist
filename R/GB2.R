@@ -155,7 +155,7 @@ pGB2 <- function(q, mu = 1, sigma = 1, nu = 1, tau = .5, lower.tail = TRUE, log.
  }
 #-----------------------------------------------------------------  
 
-qGB2 <-  function(p, mu=1, sigma=1, nu=0, tau=.5, lower.tail = TRUE, log.p = FALSE)
+qGB2 <-  function(p, mu=1, sigma=1, nu=1, tau=.5, lower.tail = TRUE, log.p = FALSE)
  {   
     if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))  
@@ -170,7 +170,7 @@ qGB2 <-  function(p, mu=1, sigma=1, nu=0, tau=.5, lower.tail = TRUE, log.p = FAL
     q
  }
 #-----------------------------------------------------------------  
-rGB2 <- function(n, mu=1, sigma=1, nu=0, tau=.5)
+rGB2 <- function(n, mu=1, sigma=1, nu=1, tau=.5)
   {
     if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(nu < 0))  stop(paste("nu must be positive", "\n", ""))  
