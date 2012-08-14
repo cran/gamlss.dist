@@ -8,7 +8,7 @@
 Skew Normal Type 2 distribution for fitting a GAMLSS
 }
 \description{
-The function \code{SN2()} defines the Skew Normal Type 1 distribution, a three parameter distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}, with parameters \code{mu}, \code{sigma} and \code{nu}. The functions \code{dSN2}, \code{pSN2}, \code{qSN2} and \code{rSN2} define the density, distribution function, quantile function and random generation for the \code{SN2} parameterization of the Skew Normal Type 2 distribution. 
+The function \code{SN2()} defines the Skew Normal Type 2 distribution, a three parameter distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}, with parameters \code{mu}, \code{sigma} and \code{nu}. The functions \code{dSN2}, \code{pSN2}, \code{qSN2} and \code{rSN2} define the density, distribution function, quantile function and random generation for the \code{SN2} parameterization of the Skew Normal Type 2 distribution. 
 }
 \usage{
 

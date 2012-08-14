@@ -25,9 +25,14 @@ if (is.character(link) && length(grep("^power", link) > 0))
     }
     else switch(link, logit = 
     {
-        linkfun <- function(mu) .Call("logit_link", mu, PACKAGE = "stats")
-        linkinv <- function(eta) .Call("logit_linkinv", eta, PACKAGE = "stats")
-         mu.eta <- function(eta) .Call("logit_mu_eta", eta, PACKAGE = "stats")
+        linkfun <- function(mu)  qLO(mu) #.Call("logit_link", mu, PACKAGE = "stats")
+        linkinv <- function(eta)         #.Call("logit_linkinv", eta, PACKAGE = "stats")
+       {
+            thresh <- -qLO(.Machine$double.eps)
+               eta <- pmin(thresh, pmax(eta, -thresh))
+            pLO(eta)
+           }  
+         mu.eta <- function(eta) pmax(dLO(eta), .Machine$double.eps)#.Call("logit_mu_eta", eta, PACKAGE = "stats")
        valideta <- function(eta) TRUE
     }, probit = 
     {

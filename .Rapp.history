@@ -1,1127 +1,0 @@
-predict(mod)
-debug(predict.gamlss)
-debug(gamlss:::predict.gamlss)
-predict(mod, newdata=nData)
-X
-w
-length(w)
-read.table('Users/stasinom/Documents/mikis/teaching/MA3041N/DATA-for-the-students/R/fuel.r')
-read.table('Users/stasinom/Documents/mikis/teaching/MA3041N/DATA-for-the-students/R/fuel.txt')
-read.table("Users/stasinom/Documents/mikis/teaching/MA3041N/DATA-for-the-students/R/fuel.r")
-read.table("Users/stasinom/Documents/mikis/teaching/MA3041N/DATA-for-the-students/R/fuel.R")
-read.table("/Users/stasinom/Documents/mikis/teaching/MA3041N/DATA-for-the-students/R/fuel.R")
-read.table("/Users/stasinom/Documents/mikis/teaching/MA3041N/DATA-for-the-students/R/fuel.R", header=T)
-fuel<-read.table("/Users/stasinom/Documents/mikis/teaching/MA3041N/DATA-for-the-students/R/fuel.R", header=T)
-with(fuel,matplot(year,cbind(coal,petrol),type="l",col=c(2,3)))
-library(stable)
-f <- function(x) exp(-(x-2)^2/2)/sqrt(2*pi)#
-int(f, a=0:3)#
-int(f, a=0:3, d=2)#
-1-pnorm(0:3, 2)
-?int2
-library(spam)
-?spam
-#
-regr <- paste(x, collapse = "+")#
-form <- as.formula(sprintf("%s ~ %s", resp, regr))
-# example data, bivariate normal, no correlation#
-x <- rnorm(2000, sd=4)#
-y <- rnorm(2000, sd=1)#
-#
-# separate scales for each axis, this looks circular#
-hist2d(x,y, nbins=50, col = c("white",heat.colors(16)))#
-rug(x,side=1)#
-rug(y,side=2)#
-box()
-require(gplots)#
-#
-# example data, bivariate normal, no correlation#
-x <- rnorm(2000, sd=4)#
-y <- rnorm(2000, sd=1)#
-#
-# separate scales for each axis, this looks circular#
-hist2d(x,y, nbins=50, col = c("white",heat.colors(16)))#
-rug(x,side=1)#
-rug(y,side=2)#
-box()
-x11()#
-library(gamlss.util)#
-scattersmooth(x,y)
-library(gamlss.dist)#
-library(gamlss.tr)#
-library(gamlss.cens)#
-library(survaval)#
-#
-dat<-read.table("/Users/stasinom/documents/gamlss/new functions/niel/participants_final.csv", header=T, sep=",")#
-attach(dat)#
-#histDist(dat$cnt_count, family=PIG)#
-#y29<-ifelse(cnt_count>29,29,cnt_count)  #
-#gen.trun(29,NBI,type="right")#
-#fit0<-gamlss(y29~1,family=NBItr)#
-#fit1<-gamlss(y29~1,family=NBItr, weight=diary_weight)#
-#
-y29<-ifelse(cnt_count>29,1,0)  #
-#
-# PO#
-fPO<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("PO"))#
-fPO1<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("PO"), method=CG(30))#
-fPO2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("PO"), method=mixed(3,30))#
-# NBI#
-fnbi<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBI"))#
-fnbi1<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBI"), method=CG(200))#
-fnbi2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBI"), method=mixed(5,50))#
-# NBII fails in any[]#
-fnbii<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBII"))#
-fnbii1<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBII"), method=CG(200))#
-fnbii2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBII"), method=mixed(5,50))#
-# ZIP#
-fzip<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP"))#
-fzip1<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP"), method=CG(200))#
-fzip2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP"), method=mixed(5,50))#
-# ZIP2#
-fzip2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP2"))#
-fzip21<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP2"), method=CG(200))#
-fzip22<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP2"), method=mixed(5,50))
-library(gamlss.dist)#
-library(gamlss.tr)#
-library(gamlss.cens)#
-library(survival)#
-#
-dat<-read.table("/Users/stasinom/documents/gamlss/new functions/niel/participants_final.csv", header=T, sep=",")#
-attach(dat)#
-#histDist(dat$cnt_count, family=PIG)#
-#y29<-ifelse(cnt_count>29,29,cnt_count)  #
-#gen.trun(29,NBI,type="right")#
-#fit0<-gamlss(y29~1,family=NBItr)#
-#fit1<-gamlss(y29~1,family=NBItr, weight=diary_weight)#
-#
-y29<-ifelse(cnt_count>29,1,0)  #
-#
-# PO#
-fPO<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("PO"))#
-fPO1<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("PO"), method=CG(30))#
-fPO2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("PO"), method=mixed(3,30))#
-# NBI#
-fnbi<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBI"))#
-fnbi1<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBI"), method=CG(200))#
-fnbi2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBI"), method=mixed(5,50))#
-# NBII fails in any[]#
-fnbii<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBII"))#
-fnbii1<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBII"), method=CG(200))#
-fnbii2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("NBII"), method=mixed(5,50))#
-# ZIP#
-fzip<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP"))#
-fzip1<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP"), method=CG(200))#
-fzip2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP"), method=mixed(5,50))#
-# ZIP2#
-fzip2<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP2"))#
-fzip21<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP2"), method=CG(200))#
-fzip22<-gamlss(Surv(y29,c29)[1:200]~1,family=cens("ZIP2"), method=mixed(5,50))
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,7, length=100),7), c(0, dBCT(seq(0.001,7, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)
-#
-lines(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)#
-text(8,0.17, expression(F[Y](y)))#
-text(7.3,0.03, "y")#
- arrows(8,0.15, 5, 0.05, length=.10 )
-ibrary(gamlss)#
-#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,7, length=100),7), c(0, dBCT(seq(0.001,7, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)#
-text(8,0.17, expression(F[Y](y)))#
-text(7.3,0.03, "y")#
- arrows(8,0.15, 5, 0.05, length=.10 )#
-#plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="y", ylab="f(y)", type="n")
-library(gamlss)#
-#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,7, length=100),7), c(0, dBCT(seq(0.001,7, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)#
-text(8,0.17, expression(F[Y](y)))#
-text(7.3,0.03, "y")#
- arrows(8,0.15, 5, 0.05, length=.10 )#
-#plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="y", ylab="f(y)", type="n")
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),7), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,7, length=100),7), c(0, dBCT(seq(0.001,7, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")
-text(5,0.25, "median")
-meanY <- sum(x*dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))
-meanY <- sum(x*dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))/201
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")
-ibrary(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")
-integrate(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0,inf)
-integrate(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0,Inf)
-meanF <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)
-meanF(4)
-meanF(15)
-meanY <- integrate(mranFun, 0.0001, Inf)
-meanY <- integrate(meanFun, 0.0001, Inf)
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, Inf)
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 100)
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h"
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, Inf)
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)
-names(meanY)
-meanY <- integrate(meanFun, 0.0001, 1000)$value
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6.5,0.10, "mean")
-meanY
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7,0.10, "mean")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3),, "mean")
-text(7, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-#
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.3, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)#
-#
-#
-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))
-?max
-which.max(max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)))
-dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))
-dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)
-which(max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)))
-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))
-which,max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))
-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))
-x[60]
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines(maxF, wm, type="h")
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)
-)
-maxF
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines(maxF, wm, type="h")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines(maxF, wm, type="h")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines( wm, maxF, type="h")
-wm
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines( x[wm], maxF, type="h")
-#
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines( x[wm], maxF, type="h")#
-text(x[wm]+0.5), maxF, "mode")
-text((x[wm]+0.5), maxF, "mode")
-text((x[wm]+1), maxF, "mode")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(5.8,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines( x[wm], maxF, type="h")#
-text((x[wm]+1), maxF, "mode")#
-#
-#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey80", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines( x[wm], maxF, type="h")#
-text((x[wm]+0.8), maxF, "mode")#
-#
-#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey50", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines( x[wm], maxF, type="h")#
-text((x[wm]+0.8), maxF, "mode")#
-#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines( x[wm], maxF, type="h")#
-text((x[wm]+0.8), maxF, "mode")#
-#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)
-arrows(8,0.15, 5, 0.05, length=.10 )
-arrows(meanY,0, meadY,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) , length=.10 )
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows(meanY,0, meadY,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) , length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows(dBCT(meanY, mu=5,meanY,0, meanY, sigma=.3, nu=-1, tau=3) , length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows(dBCT(meanY, mu=5,sigma=.3, nu=-1, tau=3), meanY, 0, meanY,  length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-#
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows(dBCT(meanY, mu=5,sigma=.3, nu=-1, tau=3), meanY, 0, meanY,  length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows(meanY, dBCT(meanY, mu=5,sigma=.3, nu=-1, tau=3), 0, meanY,  length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows(meanY,0, meanY,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) , length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows(meanY,0, meanY,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) , length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows( meanY,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) ,meanY,0, length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows( 5,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) ,5,0, length=.10 )#
-text(6,0.25, "median"
-#
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows( 5,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) ,5,0, length=.10 )#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows( meanY,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) ,meanY,0, length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines( x[wm], maxF, type="h")#
-arrows( x[wm],maxF,x[wm],0, length=.10 )#
-text((x[wm]+0.8), maxF, "mode")#
-#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)
-pdf("/Users/stasinom/Documents/gamlss/Books/Distributions/CH1-Types/Pictures/mean-median-mode-plot.pdf")#
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-polygon(c(0,seq(0,5, length=100),5), c(0, dBCT(seq(0.001,5, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-lines(zero~x)#
-#points(7, dBCT(7, mu=5, sigma=.3, nu=-1, tau=3))#
-#
-lines(5, dBCT(5, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows( 5,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) ,5,0, length=.10 )#
-text(6,0.25, "median")#
-#
-meanFun <- function(x) x * dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)#
-meanY <- integrate(meanFun, 0.0001, 1000)$value#
-#
-lines(meanY, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows( meanY,dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3) ,meanY,0, length=.10 )#
-text(7.5, dBCT(meanY, mu=5, sigma=.3, nu=-1, tau=3), "mean")#
-#
-#
-#
-maxF<-max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-wm<-which.max(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3))#
-lines( x[wm], maxF, type="h")#
-arrows( x[wm],maxF,x[wm],0, length=.10 )#
-text((x[wm]+0.8), maxF, "mode")#
-#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)#
-dev.off()
-q()
-library(gamlss.demo)
-gamlss.demo()
-library(gamlss)#
-x=seq(0.001, 15, length=201)#
-zero<-rep(0,201) #
-plot(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x,  xlab="Y", ylab=expression(f[Y](y)), type="n")#
-title("pdf")#
-#curve(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3), 0.001,15, xlab="y", ylab="f(y)")#
-medianY <-  qBCT(.5, mu=5, sigma=.3, nu=-1, tau=3)#
-Q1 <-  qBCT(.25, mu=5, sigma=.3, nu=-1, tau=3)#
-Q3 <-  qBCT(.75, mu=5, sigma=.3, nu=-1, tau=3)#
-polygon(c(0,seq(0,Q1, length=100),Q1), c(0, dBCT(seq(0.001,Q1, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-polygon(c(15,seq(15,Q3, length=100),Q3), c(dBCT(15, mu=5, sigma=.3, nu=-1, tau=3), dBCT(seq(15,Q3, length=100), mu=5, sigma=.3, nu=-1, tau=3),0), col="grey90", lty=0)#
-#
-lines(zero~x)#
-#
-#
-#lines(medianY, dBCT(medianY, mu=5, sigma=.3, nu=-1, tau=3), type="h")#
-arrows( medianY,dBCT(medianY, mu=5, sigma=.3, nu=-1, tau=3) ,medianY,0, length=.10 )#
-text(6,0.25, "median")#
-#
-arrows( Q1,dBCT(Q1, mu=5, sigma=.3, nu=-1, tau=3) ,Q1,0, length=.10 )#
-text(3.6,dBCT(Q1, mu=5, sigma=.3, nu=-1, tau=3), "Q1")#
- #
-arrows( Q3,dBCT(Q3, mu=5, sigma=.3, nu=-1, tau=3) ,Q3,0, length=.10 )#
-text(Q3+.5,dBCT(Q3, mu=5, sigma=.3, nu=-1, tau=3), "Q3")#
-#
-lines(dBCT(x, mu=5, sigma=.3, nu=-1, tau=3)~x)#
-#
-text(Q1-0.8,.03, "0.25")#
-text(Q3+0.8,.03, "0.25")#
-#
-arrows( Q1,0.15,Q3,0.15, length=.10 )#
-arrows( Q3,0.15,Q1,0.15, length=.10 )#
-#
-text(Q3,.168, "IR")#
-#points(7, dBCT(7, mu=5, sig
-?int
-x=seq(-10,10, length=201)
-x
-t <- TF(x=x)
-t <- TF(x)
-t <- dTF(x)
-plot(t~x)
-plot(log(t)~log(x), type="l")
-S <- 1-TF(x)
-S <- 1-pTF(x)
-S
-plot(log(S)~log(x), type="l")
-plot(log(S)~log(x, 10), type="l")
-plot(log(S)~log10(x), type="l")
-?log
-log10
-log10(x)
-?ntlm
-plot(dGT(200:430, mu=224, sigma=4, nu=3, tau=2, lower.tail=TRUE, log.p=FALSE))
-plot(dGT(200:430, mu=224, sigma=4, nu=3, tau=2))
-plot(dGT(200:430, mu=224, sigma=4, nu=3, tau=2, lower.tail=TRUE, log=FALSE))
-plot(pGT(200:430, mu=224, sigma=4, nu=3, tau=2, lower.tail=TRUE, log.p=FALSE))
-x <- seq(0,10, length=201)
-plot(dTF(x), log=TRUE, type=L)
-plot(dTF(x, log=TRUE), type=L)
-plot(dTF(x, log=TRUE), type="l")
-plot(x, dTF(x, log=TRUE), type="l")
-plot(x, dTF(x, log=F), type="l")
-plot(x, dTF(x, log=T), type="l")
-plot(x, 1-pTF(x, log=T), type="l")
-plot(log(x), 1-pTF(x, log=T), type="l")
-plot(log(x), 1-pTF(x, log.p=T), type="l")
-pTF
-history(200)
-history(100)
-??nltm
-library(nltm)
-?nltm
-data(melanoma)#
-fit <- nltm(Surv(time,status) ~ size + age, data=melanoma, nlt.model="PO")#
-summary(fit)
-library(gamlss)
-Dear Keeven #
-#
-This sounds a good idea. Let me have a look at the "cure" component and how easy is to implement. #
-#
-Mikis
-Dear Keeven #
-#
-This sounds a good idea. Let me have a look at the "cure" component and how easy is
- plot(pGT(430, mu=224, sigma=4, nu=3, tau=2, lower.tail=TRUE, log.p=FALSE))
-debug(pGT)
-pGT(430, mu=224, sigma=4, nu=3, tau=2, lower.tail=TRUE, log.p=FALSE)
-n
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[i], tau = tau[i], log = log.p), -Inf, (q[i] - #
-        mu[i])/sigma[i])$value
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, (q[1] - #
-        mu[1])/sigma[1])$value
-mu
-sigma
-p
-log.p
-formal(pGT)
-formals(pGT)
-dGT(x, mu = 0, sigma = 1, #
-+         nu = nu[1], tau = tau[1], log = log.p)
-dGT(x, mu = 0, sigma = 1, nu = nu[1], tau = tau[1], log = log.p)
-dGT(-10:10, mu = 0, sigma = 1, nu = nu[1], tau = tau[1], log = log.p)
-plot(dGT(-10:10, mu = 0, sigma = 1, nu = nu[1], tau = tau[1], log = log.p))
-q
-(q-mu)/sigma
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, (q[1] - #
-        mu[1]])/sigma[1])$value#
-}
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 20)$value
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 50)$value
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 40)$value
-setwd("/Users/stasinom/Documents/library/gamlss.dist")
-plot(-10:10,dGT(-10:10, mu = 0, sigma = 1, nu = nu[1], tau = tau[1], log = log.p))
-plot(-10:10,dGT(-10:10, mu = 0, sigma = 1, nu = nu[1], tau = tau[1], log = log.p), type="l")
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 30)$value
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 55)$value
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 55, subdivisions=100)$value
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 55, subdivisions=1000)$value
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 55, subdivisions=10)$value
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 55, subdivisions=10000)$value
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 55, subdivisions=10000)
-library(int)
-int(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 55, subdivisions=10000)
-int(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 60)
-int(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 1000)
-int(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf)
-int(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p))
-int(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 1)
-nu
-tau
-int(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 3, tau = 2, log = log.p), -Inf, 55)
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 3, tau = 2, log = log.p), -Inf, 55)
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 3, tau = 2, log = log.p), -Inf, 30)
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, log = log.p), -Inf, 30)
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, log = log.p), -Inf, 55)
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, log = log.p), -Inf, 100)
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, log = log.p), -Inf, 1000)
-source("/Users/stasinom/Documents/library/gamlss.dist")
-rm(pGT)
-Q
-undebug(pGT)
-pGT <- function(q, mu=0, sigma=1, nu=3, tau=1.5, lower.tail = TRUE, log.p = FALSE)#
- {  #
-         if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) #
-         if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))#
-         if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  #
-         lp <- pmax.int(length(q), length(mu), length(sigma), length(nu), length(tau))                                                                  #
-          q <- rep(q, length = lp)#
-      sigma <- rep(sigma, length = lp)#
-         mu <- rep(mu, length = lp)#
-         nu <- rep(nu, length = lp)#
-        tau <- rep(tau, length = lp)#
-        cdf <- rep(0, length = lp)#
-       for (i in 1:lp)#
-          {#
-          endInt <- (q[i]-mu[i])/sigma[i]#
-         cdf[i] <- integrate(function(x) #
-                 dGT(x, mu = 0, sigma = 1, nu = nu[i], tau = tau[i]), -Inf, endInt)$value#
-         if(endInt>0&&cdf<0.001) cdf[i] <- 1  # MS and BR 7-10-11    #
-          }    #
-         if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf #
-         if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) #
-         cdf    #
- }
-pGT <- function(q, mu=0, sigma=1, nu=3, tau=1.5, lower.tail = TRUE, log.p = FALSE)#
- {  #
-         if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) #
-         if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))#
-         if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  #
-         lp <- pmax.int(length(q), length(mu), length(sigma), length(nu), length(tau))                                                                  #
-          q <- rep(q, length = lp)#
-      sigma <- rep(sigma, length = lp)#
-         mu <- rep(mu, length = lp)#
-         nu <- rep(nu, length = lp)#
-        tau <- rep(tau, length = lp)#
-        cdf <- rep(0, length = lp)#
-       for (i in 1:lp)#
-          {#
-          endInt <- (q[i]-mu[i])/sigma[i]#
-         cdf[i] <- integrate(function(x) #
-                 dGT(x, mu = 0, sigma = 1, nu = nu[i], tau = tau[i]), -Inf, endInt)$value#
-         if(endInt>0&&cdf<0.00001) cdf[i] <- 1  # MS and BR 7-10-11    #
-          }    #
-         if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf #
-         if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) #
-         cdf    #
- }
-pGT <- function(q, mu=0, sigma=1, nu=3, tau=1.5, lower.tail = TRUE, log.p = FALSE)#
- {  #
-         if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) #
-         if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))#
-         if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  #
-         lp <- pmax.int(length(q), length(mu), length(sigma), length(nu), length(tau))                                                                  #
-          q <- rep(q, length = lp)#
-      sigma <- rep(sigma, length = lp)#
-         mu <- rep(mu, length = lp)#
-         nu <- rep(nu, length = lp)#
-        tau <- rep(tau, length = lp)#
-        cdf <- rep(0, length = lp)#
-       for (i in 1:lp)#
-          {#
-          endInt <- (q[i]-mu[i])/sigma[i]#
-         cdf[i] <- integrate(function(x) #
-                 dGT(x, mu = 0, sigma = 1, nu = nu[i], tau = tau[i]), -Inf, endInt)$value#
-         if(endInt>0&&cdf<0.001) cdf[i] <- 1  # MS and BR 7-10-11    #
-          }    #
-         if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf #
-         if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) #
-         cdf    #
- }#
-#-------------------------
-pGT <- function(q, mu=0, sigma=1, nu=3, tau=1.5, lower.tail = TRUE, log.p = FALSE)#
- {  #
-         if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) #
-         if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))#
-         if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  #
-         lp <- pmax.int(length(q), length(mu), length(sigma), length(nu), length(tau))                                                                  #
-          q <- rep(q, length = lp)#
-      sigma <- rep(sigma, length = lp)#
-         mu <- rep(mu, length = lp)#
-         nu <- rep(nu, length = lp)#
-        tau <- rep(tau, length = lp)#
-        cdf <- rep(0, length = lp)#
-       for (i in 1:lp)#
-          {#
-          endInt <- (q[i]-mu[i])/sigma[i]#
-         cdf[i] <- integrate(function(x) #
-                 dGT(x, mu = 0, sigma = 1, nu = nu[i], tau = tau[i]), -Inf, endInt)$value#
-         if(endInt>0&&cdf<0.0001) cdf[i] <- 1  # MS and BR 7-10-11    #
-          }    #
-         if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf #
-         if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) #
-         cdf    #
- }
-pGT <- function(q, mu=0, sigma=1, nu=3, tau=1.5, lower.tail = TRUE, log.p = FALSE)#
- {  #
-         if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) #
-         if (any(nu <= 0))  stop(paste("nu must be positive", "\n", ""))#
-         if (any(tau < 0))  stop(paste("tau must be positive", "\n", ""))  #
-         lp <- pmax.int(length(q), length(mu), length(sigma), length(nu), length(tau))                                                                  #
-          q <- rep(q, length = lp)#
-      sigma <- rep(sigma, length = lp)#
-         mu <- rep(mu, length = lp)#
-         nu <- rep(nu, length = lp)#
-        tau <- rep(tau, length = lp)#
-        cdf <- rep(0, length = lp)#
-       for (i in 1:lp)#
-          {#
-          endInt <- (q[i]-mu[i])/sigma[i]#
-         cdf[i] <- integrate(function(x) #
-                 dGT(x, mu = 0, sigma = 1, nu = nu[i], tau = tau[i]), -Inf, endInt)$value#
-         if(endInt>0&&cdf<0.00001) cdf[i] <- 1  # MS and BR 7-10-11    #
-          }    #
-         if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf #
-         if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) #
-         cdf    #
- }#
-#------
- plot(pGT(200:430, mu=224, sigma=4, nu=3, tau=2, lower.tail=TRUE, log.p=FALSE))
-.Machine$double.eps
-.Machine$double.eps^0.25
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, log = log.p), -Inf, 10000)
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, ), -Inf, 10)
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, ), -Inf, 10000)
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, ), -Inf, 100)
-?integrate
-integrate(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, ), -Inf, Inf)
-int(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = nu[1], tau = tau[1], log = log.p), -Inf, 55)
-??integrate
-library(MASS)
-area(function(x) dGT(x, mu = 0, sigma = 1, #
-        nu = 1, tau = 1, ), -Inf, Inf)
-area(function(x) dGT(x, mu = 0, sigma = 1, nu = 1, tau = 1, ), -Inf, Inf)
-?area
-library(DistributionUtils)
-?IntegrateDens
-?integrateDens
-?safeIntegrate
-library(distEX)
-library(distEx)
-library(distrEx)
-?GLintegrate
-??split t transformation
-??"split t transformation"
-library(pracma)
-?romberg
-romberg(function(x) dGT(x, mu = 0, sigma = 1, nu = 1, tau = 1, ), -Inf, Inf)
-romberg(function(x) dGT(x, mu = 0, sigma = 1, nu = 1, tau = 1, ), -10, 30)
-romberg(function(x) dGT(x, mu = 0, sigma = 1, nu = 1, tau = 1, ), -10000, 30)
-?GLIntegrate
-library(Bolstad2)
-?Sintegral
-?sintegral
-ING
-PA2
-dPA
-dPA2
-library(DLM)
-library(dlm)
-?dlm
-Integrate
-dlmModSeas(4, dV = 3.2)
