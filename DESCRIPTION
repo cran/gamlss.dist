@@ -1,8 +1,8 @@
 Package: gamlss.dist
 Type: Package
 Title: Distributions to be used for GAMLSS modelling.
-Version: 4.1-6
-Date: 2012-08-14
+Version: 4.2-0
+Date: 2012-09-29
 Author: Mikis Stasinopoulos <d.stasinopoulos@londonmet.ac.uk>, Bob
         Rigby <r.rigby@londonmet.ac.uk> with contributions from
         Calliope Akantziliotou, Gillian Heller, Raydonal Ospina
@@ -14,6 +14,6 @@ Description: This package contains the distributions for GAMLSS
         modelling.
 License: GPL-2 | GPL-3
 URL: http://www.gamlss.org/
-Packaged: 2012-08-14 15:40:02 UTC; stasinom
+Packaged: 2012-09-29 10:44:20 UTC; stasinom
 Repository: CRAN
-Date/Publication: 2012-08-14 16:50:30
+Date/Publication: 2012-09-29 14:02:06

@@ -1,4 +1,4 @@
-#as a function of mean=ksi and sigma=tau=1/omega
+as.double#as a function of mean=ksi and sigma=tau=1/omega
 # Modified by Mikis Monday, March 21, 2005 
 # Modified by Bob 1/12/2004
 # Wednesday, October 27, 2004 at 14:34
@@ -33,13 +33,13 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
                 nu.dr = vstats$mu.eta,
                  dldm = function(y,mu,sigma,nu) 
                            {
-                      sigma <- ifelse(sigma>1000&nu>0, 1000, sigma )
+                      sigma <- ifelse(sigma>10000&nu>0, 10000, sigma )
                          ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma, nu=nu, what=1)
                        dldm <- (y-ty)/mu
                        dldm}, 
                d2ldm2 = function(y,mu,sigma,nu) 
                            {
-                     sigma <- ifelse(sigma>1000&nu>0, 1000, sigma )
+                     sigma <- ifelse(sigma>10000&nu>0, 10000, sigma )
                         ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma,nu=nu, what=1)
                       dldm <- (y-ty)/mu
                     d2ldm2 <- - dldm * dldm
@@ -48,7 +48,7 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
                            },
                  dldd = function(y,mu,sigma,nu) 
                            {
-                             sigma <- ifelse(sigma>1000&nu>0, 1000, sigma )
+                             sigma <- ifelse(sigma>10000&nu>0, 10000, sigma )
                         ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma,nu=nu, what=1)
                          c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
                       dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
@@ -57,7 +57,7 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
                             },
                d2ldd2 = function(y,mu,sigma,nu)
                             {
-                              sigma <- ifelse(sigma>1000&nu>0, 1000, sigma )
+                              sigma <- ifelse(sigma>10000&nu>0, 10000, sigma )
                         ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma,nu=nu, what=1)
                          c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
                       dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
@@ -69,7 +69,7 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
               #d2ldmdd = function() 0,
               d2ldmdd = function(y,mu,sigma,nu) 
                              {
-                               sigma <- ifelse(sigma>1000&nu>0, 1000, sigma )
+                               sigma <- ifelse(sigma>10000&nu>0, 10000, sigma )
                          ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma, nu=nu, what=1)
                        dldm <- (y-ty)/mu
                           c <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
@@ -79,7 +79,7 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
                     d2ldmdd
                               }, 
               d2ldmdv = function(y,mu,sigma,nu) {
-                sigma <- ifelse(sigma>1000&nu>0, 1000, sigma )
+                sigma <- ifelse(sigma>10000&nu>0, 10000, sigma )
                    ty <- gamlss.dist:::tofySICHEL(y=y, mu=mu, sigma=sigma, nu=nu, what=1)
                  dldm <- (y-ty)/mu
                  #calculates the dldv                 
@@ -174,9 +174,9 @@ tofySICHEL <- function (y, mu, sigma, nu, what=1)
        #cvec is  c=R_nu(1/sigma) where R_lambda(t)=K_{lambda+1}(t)/K_{lambda}(t) page 10
       alpha <- sqrt(1+2*sigma*(mu/cvec))/sigma # alpha^2=sigma^-2+(2*mu)/(c*sigma)
        lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu)) #R_nu(alpha) page 30
-     sumlty <- as.double(.C("tofysin_", as.single(y), as.single(mu), 
-                               as.single(sigma), as.single(nu), as.single(lbes),
-                               as.single(cvec), as.integer(length(y)),
+     sumlty <- as.double(.C("tofysin_", as.double(y), as.double(mu), 
+                               as.double(sigma), as.double(nu), as.double(lbes),
+                               as.double(cvec), as.integer(length(y)),
                                as.integer(max(y)+1), PACKAGE="gamlss.dist")[[what]])
    sumlty
    }
@@ -194,8 +194,8 @@ tofySICHEL <- function (y, mu, sigma, nu, what=1)
 #  cvec <- exp(log(besselK((1/sigma),nu+1))-log(besselK((1/sigma),nu)))
 # alpha <- sqrt(1+2*sigma*(mu/cvec))/sigma
 ## lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
-#sumlty <- as.double(.C("tofys_", as.single(y), as.single(mu), 
-#                   as.single(sigma), as.single(nu), as.single(lbes),
+#sumlty <- as.double(.C("tofys_", as.double(y), as.double(mu), 
+#                   as.double(sigma), as.double(nu), as.double(lbes),
 #                   as.integer(length(y)), as.integer(max(y)+1))[[2]])
 #sumlty<-tofySNN(y=y, mu=mu, sigma=sigma, nu=nu, bsum=TRUE)[,2]
 #browser()
@@ -218,15 +218,15 @@ dSICHEL<-function(x, mu=1, sigma=1, nu=-0.5, log=FALSE)
  alpha <- sqrt(1+2*sigma*(mu/cvec))/sigma
   lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
  #cat("mu, sigma and nu", mu[1], sigma[1], nu[1], "\n")
-sumlty <- as.double(.C("tofysin_", as.single(x), as.single(mu), 
-                               as.single(sigma), as.single(nu), as.single(lbes),
-                               as.single(cvec), as.integer(length(x)),
+sumlty <- as.double(.C("tofysin_", as.double(x), as.double(mu), 
+                               as.double(sigma), as.double(nu), as.double(lbes),
+                               as.double(cvec), as.integer(length(x)),
                                as.integer(max(x)+1), PACKAGE="gamlss.dist")[[2]])
 logfy <- -lgamma(x+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(besselK((1/sigma),nu))
   
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
-  if (length(sigma)>1) fy <- ifelse((sigma>1000)&(nu>0), dNBI(x, mu = mu, sigma= 1/nu, log = log) ,fy)
-        else fy <- if ((sigma>1000)&(nu>0)) dNBI(x, mu = mu, sigma= 1/nu, log = log)  
+  if (length(sigma)>1) fy <- ifelse((sigma>10000)&(nu>0), dNBI(x, mu = mu, sigma= 1/nu, log = log) ,fy)
+        else fy <- if ((sigma>10000)&(nu>0)) dNBI(x, mu = mu, sigma= 1/nu, log = log)  
                    else  fy
   fy
   }
@@ -285,10 +285,10 @@ pSICHEL <- function(q, mu=1, sigma=1, nu=-0.5, lower.tail = TRUE, log.p = FALSE)
       tynew1 <- (mu/cvec)*((1+2*sigma*(mu/cvec))^(-0.5))*exp(lbes)
       lpnew1 <- -nu*log(sigma*alpha)+log(besselK(alpha,nu))-
                      log(besselK(1/sigma,nu)) # need c tynew alpha lpnew  tynew1 lpnew1
-        cdf <- as.double(.C("cdfsichel_", as.single(q), as.single(mu), #
-                               as.single(sigma), as.single(nu), as.single(alpha),
-                               as.single(cvec), as.single(tynew1),
-                               as.single(lpnew1), as.integer(length(q)),
+        cdf <- as.double(.C("cdfsichel_", as.double(q), as.double(mu), #
+                               as.double(sigma), as.double(nu), as.double(alpha),
+                               as.double(cvec), as.double(tynew1),
+                               as.double(lpnew1), as.integer(length(q)),
                                as.integer(max(q)+1), PACKAGE="gamlss.dist" )[[1]])#
           if(lower.tail==TRUE) cdf <- cdf else cdf=1-cdf
           if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf)                                                                    

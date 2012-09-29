@@ -1,8 +1,7 @@
       subroutine TOFYS(y, smu, sig, snu, slbes, n, k )
       integer iy, n, k
-      real y(n), smu(n), sig(n), snu(n), slbes(n), tofyn(k), sumT, 
-     1      salpha
-      
+      double precision y(n), smu(n), sig(n), snu(n), slbes(n),
+     +  tofyn(k), sumT, salpha
       do 100 i = 1, n
       iy = y(i)+1
       tofyn(1) = smu(i)*((1+2*sig(i)*smu(i))**(-0.5))*exp(slbes(i)) 

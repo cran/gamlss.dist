@@ -1,8 +1,8 @@
       subroutine CDFSICHEL(y, mu, sigma, nu, alpha, c, tynew1, 
      + lpnew1, n, k )
       integer iy, n, k
-      real y(n), mu(n), sigma(n), nu(n), alpha(n), c(n), 
-     +    tynew1(n), lpnew1(n), tynew(k), lpnew(k), cdf 
+      double precision y(n), mu(n), sigma(n), nu(n), alpha(n), 
+     +    tynew1(n), lpnew1(n), tynew(k), lpnew(k), cdf, c(n) 
       do 100 i = 1, n
       iy = y(i)+1 
        tynew(1) = tynew1(i)

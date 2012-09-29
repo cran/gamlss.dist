@@ -1,4 +1,4 @@
-# as a function of mean=ksi and sigma=tau=1/omega
+as.double# as a function of mean=ksi and sigma=tau=1/omega
 # Modified by Mikis Monday, March 21, 2005 
 # Modified by Bob 1/12/2004
 # Wednesday, October 27, 2004 at 14:34
@@ -150,8 +150,8 @@ tofyS <- function (y, mu, sigma, nu, what=1)
          nu <- rep(nu, length = ly) 
       alpha <- sqrt(1+2*sigma*mu)/sigma
        lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
-     sumlty <- as.double(.C("tofys_", as.single(y), as.single(mu), 
-                               as.single(sigma), as.single(nu), as.single(lbes),  
+     sumlty <- as.double(.C("tofys_", as.double(y), as.double(mu), 
+                               as.double(sigma), as.double(nu), as.double(lbes),  
                                as.integer(length(y)),as.integer(max(y)+1), PACKAGE="gamlss.dist")[[what]])
    sumlty
    }
@@ -168,8 +168,8 @@ dSI<-function(x, mu=0.5, sigma=0.02, nu=-0.5, log=FALSE)
     nu <- rep(nu, length = ly) 
  alpha <- sqrt(1+2*sigma*mu)/sigma
   lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
-sumlty <- as.double(.C("tofys_", as.single(x), as.single(mu), 
-                   as.single(sigma), as.single(nu), as.single(lbes),
+sumlty <- as.double(.C("tofys_", as.double(x), as.double(mu), 
+                   as.double(sigma), as.double(nu), as.double(lbes),
                    as.integer(length(x)), as.integer(max(x)+1), PACKAGE="gamlss.dist")[[2]])
 logfy <- -lgamma(x+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(besselK((1/sigma),nu))
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy

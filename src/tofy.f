@@ -1,6 +1,6 @@
       subroutine TOFY(y, smu, sig, n, k )
       integer iy, n, k
-      real y(n), smu(n), sig(n),  tofyn(k), sumT 
+      double precision y(n), smu(n), sig(n),  tofyn(k), sumT 
       do 10 i = 1, n
       iy = y(i)+1
       tofyn(1) = smu(i)*((1+2*sig(i)*smu(i))**(-0.5))

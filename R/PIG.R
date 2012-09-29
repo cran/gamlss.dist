@@ -22,7 +22,7 @@ PIG <- function (mu.link = "log", sigma.link = "log")
                 mu.dr = mstats$mu.eta, 
              sigma.dr = dstats$mu.eta, 
                  dldm = function(y,mu,sigma) {
-               ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
+               ty <- as.double(.C("tofy_", as.double(y), as.double(mu), as.double(sigma),
                                   as.integer(length(y)),as.integer(max(y)+1),  
                                   PACKAGE="gamlss.dist")[[1]])
               dldm <- (y-ty)/mu
@@ -30,7 +30,7 @@ PIG <- function (mu.link = "log", sigma.link = "log")
                                     }, 
                d2ldm2 = function(y,mu,sigma) { 
                                     #d2ldm2 <- eval.parent(quote(-dldp*dldp))
-                         ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
+                         ty <- as.double(.C("tofy_", as.double(y), as.double(mu), as.double(sigma),
                                    as.integer(length(y)),as.integer(max(y)+1), PACKAGE="gamlss.dist")[[1]])
                        dldm <- (y-ty)/mu
                      d2ldm2 <- -dldm*dldm
@@ -38,7 +38,7 @@ PIG <- function (mu.link = "log", sigma.link = "log")
                      d2ldm2
                                     },
                  dldd = function(y,mu,sigma) {
-              ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
+              ty <- as.double(.C("tofy_", as.double(y), as.double(mu), as.double(sigma),
                               as.integer(length(y)),as.integer(max(y)+1),
                               PACKAGE="gamlss.dist")[[1]])
              dldd <- ((ty*(1+sigma*mu)/mu)-(1+sigma*y))/(sigma^2)
@@ -46,7 +46,7 @@ PIG <- function (mu.link = "log", sigma.link = "log")
                                     },
                d2ldd2 = function(y,mu,sigma){
                                     #d2ldd2 <- eval.parent(quote(-dldp*dldp))
-                       ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
+                       ty <- as.double(.C("tofy_", as.double(y), as.double(mu), as.double(sigma),
                               as.integer(length(y)),as.integer(max(y)+1),PACKAGE="gamlss.dist")[[1]])
                      dldd <- ((ty*(1+sigma*mu)/mu)-(1+sigma*y))/(sigma^2)
                    d2ldd2 <- -dldd*dldd
@@ -54,7 +54,7 @@ PIG <- function (mu.link = "log", sigma.link = "log")
                    d2ldd2
                                    },
               d2ldmdd = function(y,mu,sigma) {
-             ty <- as.double(.C("tofy_", as.single(y), as.single(mu), as.single(sigma),
+             ty <- as.double(.C("tofy_", as.double(y), as.double(mu), as.double(sigma),
                                   as.integer(length(y)),as.integer(max(y)+1),  
                                   PACKAGE="gamlss.dist")[[1]])
                       dldm <- (y-ty)/mu
@@ -114,7 +114,7 @@ dPIG<-function(x, mu = 0.5, sigma = 0.02 , log = FALSE)
           ly <- length(x)                                                                    
       nsigma <- rep(sigma, length = ly)
          nmu <- rep(mu, length = ly)
-      sumlty <- as.double(.C("tofy_", as.single(x), as.single(nmu),as.single(nsigma),as.integer(ly),
+      sumlty <- as.double(.C("tofy_", as.double(x), as.double(nmu),as.double(nsigma),as.integer(ly),
                           as.integer(max(x)+1),PACKAGE="gamlss.dist")[[2]])
        logfy <- -lgamma(x+1)+(1-sqrt(1+2*sigma*mu))/sigma +sumlty
           if(log==FALSE) fy <- exp(logfy) else fy <- logfy
