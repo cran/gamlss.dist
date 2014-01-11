@@ -83,7 +83,7 @@ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for lo
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
 Stasinopoulos D. M. Rigby R. A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).  
+Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.org/}).  
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
@@ -103,7 +103,8 @@ fx<-dGB2(seq(0.01, 20, length=200), mu=5 ,sigma=2, nu=1, tau=1)
 lines(seq(0.01,20,length=200),fx)
 integrate(function(x) x*dGB2(x=x, mu=5, sigma=2, nu=1, tau=1), 0, Inf)
 mean(y)
-curve(dGB2(x, mu=5 ,sigma=2, nu=1, tau=1), 0.01, 20, main = "The GB2  density mu=5, sigma=2, nu=1, tau=4")
+curve(dGB2(x, mu=5 ,sigma=2, nu=1, tau=1), 0.01, 20, 
+            main = "The GB2  density mu=5, sigma=2, nu=1, tau=4")
 }
 \keyword{distribution}
 \keyword{ regression}

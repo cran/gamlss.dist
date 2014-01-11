@@ -7,9 +7,9 @@
      1           (1-snu(i))) 
       sumT = 0
       do 110 j = 2, iy 
-      dum = 1+(1/(smu(i)*sig(i)*(1-snu(i))))    
-      tofyn(j) =  ((j-1)+smu(i)*snu(i)+(1/(sig(i)*(1-snu(i))))-
-     1             (smu(i)*snu(i)*(j-1))/tofyn(j-1))/dum
+      dum = 1+1/(smu(i)*sig(i)*(1-snu(i)))
+      tofyn(j) =  (y(i)+smu(i)*snu(i)+(1/(sig(i)*(1-snu(i))))-
+     1             (smu(i)*snu(i)*y(i))/tofyn(j-1))/dum
  110     sumT = sumT+log(tofyn(j-1))      
       y(i) = tofyn(iy)
  100  smu(i) = sumT      

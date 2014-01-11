@@ -78,7 +78,7 @@ given by setting \eqn{\alpha_1=\mu-\sigma/\nu}{a1=mu-(sigma/nu)}, \eqn{\alpha_2=
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
 Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).
+Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.org/}).
  
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
@@ -94,7 +94,7 @@ on the parameter  values. The \code{RS()} and \code{CG()} algorithms are not app
 \seealso{  \code{\link{gamlss.family}}}
 
 \examples{
-RGE()# gives information about the default links for the reverse generalized extreme family distribution 
+RGE()# default links for the reverse generalized extreme family distribution 
 newdata<-rRGE(100,mu=0,sigma=1,nu=5) # generates 100 random observations
 # library(gamlss)
 # gamlss(newdata~1, family=RGE, method=mixed(5,50)) # difficult to converse 

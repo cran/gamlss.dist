@@ -10,6 +10,20 @@
 # the add link functions are 
 # (1) lofshifted needing one parameters the left shift
 # (2)logitshift.5 needing two parameters the left and rirght shift
+# logit, 
+# probit, 
+# cauchit, 
+# cloglog, 
+# identity, 
+# log, 
+# sqrt, 
+# "1/mu^2, 
+# logshiftto1,
+# logshiftto2
+# own
+# inverse
+
+
  make.link.gamlss<-function (link) 
 {
 if (is.character(link) && length(grep("^power", link) > 0)) 
@@ -91,7 +105,13 @@ if (is.character(link) && length(grep("^power", link) > 0))
        linkinv <- function(eta) 1/eta^0.5
         mu.eta <- function(eta) -1/(2 * eta^1.5)
       valideta <- function(eta) all(eta > 0)
-     }, logshiftto1 = 
+     }, "mu^2" = 
+    {
+       linkfun <- function(mu)  mu^2
+       linkinv <- function(eta) eta^0.5
+        mu.eta <- function(eta)  0.5 * (eta^-0.5)
+      valideta <- function(eta) all(eta > 0)
+     },logshiftto1 = 
      {    # renamed Thursday, March 27, 2008 MS Saturday, February 19, 2005   
        linkfun <- function(mu)  log(mu-1+0.00001)
        linkinv <- function(eta) 1+pmax(.Machine$double.eps, exp(eta)) 
@@ -103,7 +123,15 @@ if (is.character(link) && length(grep("^power", link) > 0))
        linkinv <- function(eta) 2+pmax(.Machine$double.eps, exp(eta)) 
         mu.eta <- function(eta) pmax(.Machine$double.eps, exp(eta))
       valideta <- function(eta) TRUE   
-     },   #logitshift.5 = { # MS Saturday, February 19, 2005 depreciated 
+     },
+        logshiftto0  =
+     {
+       linkfun <- function(mu) { log(mu - 1e-05)}
+       linkinv <- function(eta){ 1e-05 + pmax(.Machine$double.eps, exp(eta))}
+        mu.eta <- function(eta) pmax(.Machine$double.eps, exp(eta))
+      valideta <- function(eta) TRUE
+     }, 
+       #logitshift.5 = { # MS Saturday, February 19, 2005 depreciated 
        #linkfun <- function(mu, shift = par )           
        #                  log((mu-shift[1])/(shift[2]-mu))
        #linkinv <- function(eta,  shift = par) 

@@ -94,7 +94,7 @@ BCT <- function (mu.link="identity", sigma.link="log", nu.link ="identity", tau.
             class = c("gamlss.family","family"))
 }
 #-----------------------------------------------------------------  
-dBCT <- function(x, mu=5, sigma=0.1, nu=1, tau=2, log=FALSE)
+dBCT <- dBCTo <- function(x, mu=5, sigma=0.1, nu=1, tau=2, log=FALSE)
  {
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -112,7 +112,7 @@ dBCT <- function(x, mu=5, sigma=0.1, nu=1, tau=2, log=FALSE)
        ft
   }    
 #-----------------------------------------------------------------  
-pBCT <- function(q, mu=5, sigma=0.1, nu=1, tau=2, lower.tail = TRUE, log.p = FALSE)
+pBCT <- pBCTo <- function(q, mu=5, sigma=0.1, nu=1, tau=2, lower.tail = TRUE, log.p = FALSE)
  {  
           if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -130,7 +130,7 @@ pBCT <- function(q, mu=5, sigma=0.1, nu=1, tau=2, lower.tail = TRUE, log.p = FAL
          FYy     
  }
 #-----------------------------------------------------------------  
-qBCT <- function(p, mu=5, sigma=0.1, nu=1, tau=2, lower.tail = TRUE, log.p = FALSE)
+qBCT <- qBCTo <- function(p, mu=5, sigma=0.1, nu=1, tau=2, lower.tail = TRUE, log.p = FALSE)
  { 
     if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -151,7 +151,7 @@ qBCT <- function(p, mu=5, sigma=0.1, nu=1, tau=2, lower.tail = TRUE, log.p = FAL
        ya
  }
 #-----------------------------------------------------------------  
-rBCT <- function(n, mu=5, sigma=0.1, nu=1, tau=2)
+rBCT <- rBCTo <- function(n, mu=5, sigma=0.1, nu=1, tau=2)
   {
     if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
@@ -293,7 +293,7 @@ BCTo <- function (mu.link="log", sigma.link="log", nu.link ="identity", tau.link
     tstats <- checklink("tau.link", "Box Cox t ",substitute(tau.link), 
                          c("inverse", "log", "identity", "own")) 
     structure(
-          list(family = c("BCT",  "Box-Cox t"),
+          list(family = c("BCTo",  "Box-Cox-o t"),
            parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE, tau=TRUE), 
                 nopar = 4, 
                  type = "Continuous",

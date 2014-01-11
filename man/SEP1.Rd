@@ -112,7 +112,7 @@ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for lo
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
 Stasinopoulos D. M. Rigby R. A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}).  
+Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.org/}).  
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
@@ -124,7 +124,8 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \seealso{ \code{\link{gamlss.family}}, \code{\link{SEP}}}
 \examples{
 SEP1() 
-curve(dSEP4(x, mu=5 ,sigma=1, nu=2, tau=1.5), -2, 10, main = "The SEP4  density mu=5 ,sigma=1, nu=1, tau=1.5")
+curve(dSEP4(x, mu=5 ,sigma=1, nu=2, tau=1.5), -2, 10, 
+          main = "The SEP4  density mu=5 ,sigma=1, nu=1, tau=1.5")
 # library(gamlss)
 #y<- rSEP4(100, mu=5, sigma=1, nu=2, tau=1.5);hist(y)
 #m1<-gamlss(y~1, family=SEP1, n.cyc=50)

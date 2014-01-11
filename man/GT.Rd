@@ -72,7 +72,7 @@ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for lo
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
 Stasinopoulos D. M. Rigby R. A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.com/}). 
+Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.org/}). 
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
@@ -87,7 +87,8 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 GT()   # 
 y<- rGT(200, mu=5, sigma=1, nu=1, tau=4)
 hist(y)
-curve(dGT(x, mu=5 ,sigma=2,nu=1, tau=4), -2, 11, main = "The GT  density mu=5 ,sigma=1, nu=1, tau=4")
+curve(dGT(x, mu=5 ,sigma=2,nu=1, tau=4), -2, 11, 
+      main = "The GT  density mu=5 ,sigma=1, nu=1, tau=4")
 # library(gamlss)
 # m1<-gamlss(y~1, family=GT) 
 }
