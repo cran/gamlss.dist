@@ -150,9 +150,8 @@ tofyS <- function (y, mu, sigma, nu, what=1)
          nu <- rep(nu, length = ly) 
       alpha <- sqrt(1+2*sigma*mu)/sigma
        lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
-     sumlty <- as.double(.C("tofys_", as.double(y), as.double(mu), 
-                               as.double(sigma), as.double(nu), as.double(lbes),  
-                               as.integer(length(y)),as.integer(max(y)+1), PACKAGE="gamlss.dist")[[what]])
+     sumlty <- as.double(.C("tofySI1", as.double(y), as.double(mu),as.double(sigma), as.double(nu),  
+                            as.double(lbes),ans=double(ly), as.integer(ly), as.integer(max(y)+1), PACKAGE="gamlss.dist")$ans)
    sumlty
    }
 #----------------------------------------------------------------------------------------
@@ -168,9 +167,8 @@ dSI<-function(x, mu=0.5, sigma=0.02, nu=-0.5, log=FALSE)
     nu <- rep(nu, length = ly) 
  alpha <- sqrt(1+2*sigma*mu)/sigma
   lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
-sumlty <- as.double(.C("tofys_", as.double(x), as.double(mu), 
-                   as.double(sigma), as.double(nu), as.double(lbes),
-                   as.integer(length(x)), as.integer(max(x)+1), PACKAGE="gamlss.dist")[[2]])
+sumlty <- as.double(.C("tofySI2", as.double(x), as.double(mu), as.double(sigma), as.double(nu), 
+                       as.double(lbes), ans=double(ly),  as.integer(ly),as.integer(max(x)+1), PACKAGE="gamlss.dist")$ans)
 logfy <- -lgamma(x+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(besselK((1/sigma),nu))
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
   fy

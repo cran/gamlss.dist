@@ -23,7 +23,7 @@ qSICHEL(p, mu=1, sigma=1, nu=-0.5,  lower.tail = TRUE,
         log.p = FALSE, max.value = 10000)        
 rSICHEL(n, mu=1, sigma=1, nu=-0.5, max.value = 10000)
 VSICHEL(obj)
-tofySICHEL(y, mu, sigma, nu, what = 1)
+tofySICHEL(y, mu, sigma, nu)
 }
 
 
@@ -44,8 +44,6 @@ tofySICHEL(y, mu, sigma, nu, what = 1)
   \item{max.value}{a constant, set to the default value of 10000 for how far the algorithm  should look for q}
   \item{obj}{a fitted Sichel gamlss model}
   \item{y}{the y variable,  the \code{tofySICHEL()} should not be used on its own.}
-  \item{what}{ takes values 1 and 2.}
-    
 }
 \details{
 The probability function of the Sichel distribution is given by
@@ -83,7 +81,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 
 }
-\author{Rigby, R. A.,  Stasinopoulos D. M. and Akantziliotou C. }
+\author{Rigby, R. A.,  Stasinopoulos D. M.,  Akantziliotou C and Marco Enea. }
 \note{The mean of the above Sichel distribution is \eqn{\mu}{mu} and the variance is 
 \eqn{\mu^2 \left[\frac{2\sigma (\nu+1)}{c} + \frac{1}{c^2}-1\right]}{mu^2 *( 2*sigma*(nu+1)/c + (1/c^2)-1 )}
 }  

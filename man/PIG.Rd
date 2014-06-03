@@ -65,7 +65,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}. 
  
  }
-\author{Mikis Stasinopoulos ans Bob Rigby}
+\author{Mikis Stasinopoulos, Bob Rigby and Marco Enea}
 
 
 \seealso{ \code{\link{gamlss.family}},  \code{\link{NBI}}, \code{\link{NBII}}, 

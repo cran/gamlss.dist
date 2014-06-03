@@ -8,6 +8,7 @@ export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
        ST1, dST1, pST1, qST1, rST1,
        ST2, dST2, pST2, qST2, rST2,
        ST3, dST3, pST3, qST3, rST3,
+       ST3C, dST3C, pST3C, qST3C, rST3C,
        SST, dSST, pSST, qSST, rSST,
        ST4, dST4, pST4, qST4, rST4,
        ST5, dST5, pST5, qST5, rST5,
@@ -102,6 +103,7 @@ export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGo, BCCGuntr,
 export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family,
        checklink, make.link.gamlss, show.link)
 
+importFrom(MASS)
 # documented but unexported methods
 
 S3method(gamlss.family, default)

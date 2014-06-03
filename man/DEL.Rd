@@ -72,7 +72,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 Wimmer, G. and Altmann, G (1999). \emph{Thesaurus of univariate discrete probability distributions} . Stamn Verlag, Essen, Germany 
 
 }
-\author{Rigby, R. A. and  Stasinopoulos D. M. }
+\author{Rigby, R. A.,  Stasinopoulos D. M. and Marco Enea}
 \note{ The
 mean of \eqn{Y} is given by \eqn{E(Y)=\mu}{E(Y)=mu} and the variance by \eqn{V(Y)=\mu+\mu^2 \sigma \left( 1-\nu\right)^2}{V(Y)=mu+mu^2*sigma*(1-nu)^2}.
  }
