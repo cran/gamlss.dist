@@ -146,7 +146,7 @@ dDEL<-function(x, mu=1, sigma=1, nu=.5, log=FALSE)
     mu <- rep(mu, length = ly)   
     nu <- rep(nu, length = ly) 
  logpy0 <- -mu*nu-(1/sigma)*(log(1+mu*sigma*(1-nu)))
-   S <- tofyDEL(x, mu, sigma, nu, what=2)
+   S <- tofyDEL2(x, mu, sigma, nu)
   # S <- tofyDELPORT(x, mu, sigma, nu)[,2]
  logfy <-  logpy0-lgamma(x+1)+S
  if(log==FALSE) fy <- exp(logfy) else fy <- logfy
@@ -158,22 +158,54 @@ dDEL<-function(x, mu=1, sigma=1, nu=.5, log=FALSE)
   fy
   }
 #----------------------------------------------------------------------------------------
-tofyDEL <- function (y, mu, sigma, nu, what=1)
-   {
-  ly <- max(length(y),length(mu),length(sigma),length(nu)) 
-  y <- rep(y, length = ly)    
-  sigma <- rep(sigma, length = ly)
-  mu <- rep(mu, length = ly)   
-  nu <- rep(nu, length = ly) 
-  sumlty <- as.double(.C(ifelse(what==1,"tofydel1","tofydel2"), 
-              as.double(y), as.double(mu), 
-              as.double(sigma), as.double(nu), 
-              ans=double(ly), as.integer(length(y)),
-              as.integer(max(y)+1), PACKAGE="gamlss.dist")$ans)
-  
-  sumlty
-   }
-#---------------------------------------------------------------------------------------
+# tofyDEL <- function (y, mu, sigma, nu, what=1)
+#    {
+#   ly <- max(length(y),length(mu),length(sigma),length(nu)) 
+#   y <- rep(y, length = ly)    
+#   sigma <- rep(sigma, length = ly)
+#   mu <- rep(mu, length = ly)   
+#   nu <- rep(nu, length = ly) 
+#   sumlty <- as.double(.C(ifelse(what==1,"tofydel1","tofydel2"), 
+#               as.double(y), as.double(mu), 
+#               as.double(sigma), as.double(nu), 
+#               ans=double(ly), as.integer(length(y)),
+#               as.integer(max(y)+1), PACKAGE="gamlss.dist")$ans)
+#   
+#   sumlty
+#    }
+#-------------------------------------------------------------------------------
+ tofyDEL1 <- function (y, mu, sigma, nu)
+ {
+   ly <- max(length(y),length(mu),length(sigma),length(nu)) 
+   y <- rep(y, length = ly)    
+   sigma <- rep(sigma, length = ly)
+   mu <- rep(mu, length = ly)   
+   nu <- rep(nu, length = ly) 
+   sumlty <- as.double(.C("tofydel1", 
+                          as.double(y), as.double(mu), 
+                          as.double(sigma), as.double(nu), 
+                          ans=double(ly), as.integer(length(y)),
+                          as.integer(max(y)+1), PACKAGE="gamlss.dist")$ans)
+   
+   sumlty
+ }
+#-------------------------------------------------------------------------------
+ tofyDEL2 <- function (y, mu, sigma, nu)
+ {
+   ly <- max(length(y),length(mu),length(sigma),length(nu)) 
+   y <- rep(y, length = ly)    
+   sigma <- rep(sigma, length = ly)
+   mu <- rep(mu, length = ly)   
+   nu <- rep(nu, length = ly) 
+   sumlty <- as.double(.C("tofydel2", 
+                          as.double(y), as.double(mu), 
+                          as.double(sigma), as.double(nu), 
+                          ans=double(ly), as.integer(length(y)),
+                          as.integer(max(y)+1), PACKAGE="gamlss.dist")$ans)
+   
+   sumlty
+ }
+ #-------------------------------------------------------------------------------
 # tofyDELPORT <- function (y, mu, sigma, nu, what=1) 
 #   {
 #         ly <- max(length(y),length(mu),length(sigma),length(nu)) 

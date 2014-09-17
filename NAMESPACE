@@ -97,13 +97,14 @@ export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGo, BCCGuntr,
       MN5, dMN5, pMN5, qMN5, rMN5,
       MULTIN, fittedMN,
       hazardFun, gen.hazard,
-      Family, Family.d, Family.p, Family.q, Family.r, gen.Family
+      Family, Family.d, Family.p, Family.q, Family.r, gen.Family,
+      flexDist
 )
 # needed for gamlss family
 export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family,
        checklink, make.link.gamlss, show.link)
 
-importFrom(MASS)
+import(MASS)
 # documented but unexported methods
 
 S3method(gamlss.family, default)
