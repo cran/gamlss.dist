@@ -118,16 +118,18 @@ rZAGA <- function(n, mu=1, sigma=1, nu=0.1, ...)
   }
    
 #----------------------------------------------------------------------------------------
-plotZAGA <- function( mu =5 , sigma=1, nu = 0.1, from = 0, to=10, n = 101, ...)
- {
+plotZAGA <- function( mu =5 , sigma=1, nu = 0.1, from = 0, to=10, n = 101, main=NULL, ...)
+{
   y = seq(from=0.001, to=to, length.out=n )
   pdf<- dZAGA(y, mu = mu ,sigma = sigma, nu = nu) 
   pr0<-c(dZAGA(0, mu=mu ,sigma=sigma,  nu=nu))
   po<-c(0)
-  plot(pdf~y, main="Zero adjusted GA", ylim=c(0,max(pdf,pr0)), type="l")
+  if (is.null(main)) main = "Zero Adj. Gamma"
+  plot(pdf~y, main=main, ylim=c(0,max(pdf,pr0)), type="l", ...)
   points(po,pr0,type="h")
   points(po,pr0,type="p", col="blue")
- }
+}
+
 #----------------------------------------------------------------------------------------
 meanZAGA <- function(obj)
   {

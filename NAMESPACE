@@ -41,7 +41,8 @@ export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
        ZABB, dZABB, pZABB, qZABB, rZABB,
        ZIPIG, dZIPIG, pZIPIG, qZIPIG, rZIPIG,
        SN1, dSN1, pSN1, qSN1, rSN1,
-       SN2, dSN2, pSN2, qSN2, rSN2)
+       SN2, dSN2, pSN2, qSN2, rSN2,
+       DPO, dDPO, pDPO, qDPO, rDPO, get_C)
 # original distibutions
 export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGo, BCCGuntr,
        dBCCGo, pBCCGo, qBCCGo, rBCCGo,

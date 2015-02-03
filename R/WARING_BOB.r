@@ -90,6 +90,8 @@ rWARING<- function(n, mu=2, sigma=2)
      n <- ceiling(n)
      p <- runif(n)
      r <- qWARING(p, mu=mu, sigma=sigma)
+
+
      r
 }
 
@@ -119,25 +121,25 @@ WARING<-function (mu.link = "log", sigma.link = "log")
           d2ldm2
         },
         dldd = function(y, mu, sigma){ 
-          dldd <- (1/sigma^2)*(-1+(1/(sigma+1))-mu*harmonic(y+(mu/sigma)-1)+
-		  (mu+1)*harmonic(y+((mu+1)/sigma)+1)-(mu+1)*harmonic((mu+1)/sigma)+
-		  mu*(-digamma(1)+digamma(mu/sigma)))
+          dldd <- (1/sigma^2)*(-1+(1/(sigma+1))-mu*digamma(y+(mu/sigma))+
+		  (mu+1)*digamma(y+((mu+1)/sigma)+2)-(mu+1)*digamma(((mu+1)/sigma)+1)+
+		  mu*digamma(mu/sigma))
           dldd                      
         },
         d2ldd2 = function(y, mu, sigma){
-          dldd <- (1/sigma^2)*(-1+(1/(sigma+1))-mu*harmonic(y+(mu/sigma)-1)+
-		  (mu+1)*harmonic(y+((mu+1)/sigma)+1)-(1+mu)*harmonic((mu+1)/sigma)+
-		  mu*(-digamma(1)+digamma(mu/sigma)))
+          dldd <- (1/sigma^2)*(-1+(1/(sigma+1))-mu*digamma(y+(mu/sigma))+
+		  (mu+1)*digamma(y+((mu+1)/sigma)+2)-(mu+1)*digamma(((mu+1)/sigma)+1)+
+		  mu*digamma(mu/sigma))
           d2ldd2 <- -dldd*dldd
           d2ldd2
         },
         d2ldmdd = function(y, mu, sigma){
           dldm <- (1/sigma)*(digamma((mu/sigma) + y) - digamma(y+((mu+1)/sigma)+2) - 
                   digamma(mu/sigma) + digamma((mu+sigma+1)/sigma))
-          dldd <- (1/sigma^2)*(-1+(1/(sigma+1))-mu*harmonic(y+(mu/sigma)-1)+
-		  (mu+1)*harmonic(y+((mu+1)/sigma)+1)-(1+mu)*harmonic((mu+1)/sigma)+
-		  mu*(-digamma(1)+digamma(mu/sigma)))
-          d2ldmdd <- -dldm*dldd
+          dldd <- (1/sigma^2)*(-1+(1/(sigma+1))-mu*digamma(y+(mu/sigma))+
+		  (mu+1)*digamma(y+((mu+1)/sigma)+2)-(mu+1)*digamma(((mu+1)/sigma)+1)+
+		  mu*digamma(mu/sigma))
+         d2ldmdd <- -dldm*dldd
           d2ldmdd
         },
         G.dev.incr = function(y, mu, sigma, ...) -2 * dWARING(y, mu, sigma, log = TRUE),

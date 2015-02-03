@@ -29,5 +29,5 @@ void tocdfSIbis(double *y, double *mu, double *sigma, double *nu, double *ans, i
 void tofySICHEL1(double *y, double *mu,double *sigma, double *nu, double *lbes, double *cvec, double *ans, int *ny, int *maxy);
 void tofySICHEL2(double *y, double *mu,double *sigma, double *nu, double *lbes, double *cvec, double *ans, int *ny, int *maxy);
 void cdfSICHEL(double *y, double *mu, double *sigma, double *nu, double *ans, int *ny);
-
+void dDPOgetC5_C(double *mu, double *sigma, int *lmu, int *ly, double *ans);
 #endif /* tofyHead */
