@@ -106,6 +106,8 @@ export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family,
        checklink, make.link.gamlss, show.link)
 
 import(MASS)
+import(graphics)
+import(stats)
 # documented but unexported methods
 
 S3method(gamlss.family, default)

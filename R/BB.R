@@ -100,7 +100,7 @@ pBB <- function(q, mu = 0.5, sigma = 1, bd = 10, lower.tail = TRUE, log.p = FALS
       cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
       if (length(sigma)>1) cdf2 <- ifelse(sigma>0.0001, cdf, 
                                           pBI(q, mu = mu, bd=bd, lower.tail=lower.tail, log.p = log.p) )
-      else cdf2 <- if (sigma<0.0001) qBI(q, mu = mu, bd=bd, lower.tail=lower.tail, log.p = log.p)
+      else cdf2 <- if (sigma<0.0001) pBI(q, mu = mu, bd=bd, lower.tail=lower.tail, log.p = log.p)
                    else cdf
       cdf2
   }

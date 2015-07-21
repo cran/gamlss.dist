@@ -80,7 +80,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \author{Bob Rigby \email{r.rigby@londonmet.ac.uk} and Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} }
 
 
-\section{Warning}{The qSHASH and rSHASH are slow since they are relying on golden section for finding the quantiles} 
+\section{Warning}{The qGT and rGT are slow since they are relying on optimization for finding the quantiles} 
 
 \seealso{ \code{\link{gamlss.family}}, \code{\link{JSU}}, \code{\link{BCT}}}
 \examples{
