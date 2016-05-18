@@ -112,7 +112,7 @@ EGB2 <- function (mu.link="identity", sigma.link="identity", nu.link ="log", tau
            -2*dEGB2(y,mu,sigma,nu,tau,log=TRUE)
                         } ,                     
          rqres = expression(   
-               rqres(pfun="pGB2", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)) ,
+               rqres(pfun="pEGB2", type="Continuous", y=y, mu=mu, sigma=sigma, nu=nu, tau=tau)) ,
     mu.initial = expression(mu <- (y+mean(y))/2), 
     sigma.initial = expression(sigma <- rep(0.1, length(y))), 
     nu.initial = expression(nu <- rep(1, length(y))), 

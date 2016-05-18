@@ -104,7 +104,7 @@ export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGo, BCCGuntr,
 # needed for gamlss family
 export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family,
        checklink, make.link.gamlss, show.link)
-
+importFrom("methods", "is")
 import(MASS)
 import(graphics)
 import(stats)
