@@ -84,7 +84,7 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
  
 }
-\author{Bob Rigby \email{r.rigby@londonmet.ac.uk}, Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} and Kalliope Akantziliotou }
+\author{Bob Rigby, Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org} and Kalliope Akantziliotou }
 
 
 \note{This distribution is very difficult to fit because the y values depends

@@ -16,7 +16,7 @@ distribution function, quantile function and random
 generation for the generalized beta type 2 distribution.   
 }
 \usage{
-EGB2(mu.link = "identity", sigma.link = "identity", nu.link = "log", 
+EGB2(mu.link = "identity", sigma.link = "log", nu.link = "log", 
       tau.link = "log")
 dEGB2(x, mu = 0, sigma = 1, nu = 1, tau = 0.5, log = FALSE)
 pEGB2(q, mu = 0, sigma = 1, nu = 1, tau = 0.5, lower.tail = TRUE, 
@@ -72,7 +72,7 @@ Accompanying documentation in the current GAMLSS  help files, (see also  \url{ht
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 }
-\author{Bob Rigby \email{r.rigby@londonmet.ac.uk} and Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk} }
+\author{Bob Rigby and Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org} }
 
 
 

@@ -56,7 +56,7 @@ Accompanying documentation in the current GAMLSS  help files, (see also  \url{ht
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
  }
-\author{Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}, Bob Rigby \email{r.rigby@londonmet.ac.uk} and Calliope Akantziliotou}
+\author{Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org}, Bob Rigby  and Calliope Akantziliotou}
 \note{\eqn{\mu}{mu} is the mean and \eqn{(\mu+\sigma \mu^2)^{0.5}}{(mu+sigma*mu^2)^0.5} is the standard deviation of the Negative Binomial 
 type I distribution (so \eqn{\sigma}{sigma} is the dispersion parameter in the usual GLM for the negative binomial type I distribution)}
 

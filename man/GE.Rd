@@ -38,7 +38,7 @@ for \eqn{y>=0} and \eqn{mu>0}.
 }
 \value{
 returns a gamlss.family object which can be used to fit a Geometric distribution in the \code{gamlss()} function.}
-\author{Bob Rigby \email{r.rigby@londonmet.ac.uk}, Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}, Fiona McElduff \email{F.Mcelduff@londonmet.ac.uk} and Kalliope Akantziliotou
+\author{Bob Rigby, Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org}, Fiona McElduff and Kalliope Akantziliotou
 }
 \references{
 Rigby, R. A. and Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), \emph{Appl. Statist.}, 54, part 3, pp 507--554. 

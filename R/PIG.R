@@ -65,7 +65,7 @@ PIG <- function (mu.link = "log", sigma.link = "log")
                     d2ldmdd
                                     },
               
-           G.dev.incr  = function(y,mu,sigma,pw=1,..) -2*dPIG(y, mu, sigma, log=TRUE),
+           G.dev.incr  = function(y,mu,sigma,pw=1,...) -2*dPIG(y, mu, sigma, log=TRUE),
                 rqres = expression(
                   rqres(pfun="pPIG", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma)
                                    ), 

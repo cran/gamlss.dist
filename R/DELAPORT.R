@@ -118,7 +118,7 @@
                d2ldv2 <- -dldv*dldv
                d2ldv2
                        } ,
-          G.dev.incr  = function(y,mu,sigma,nu, pw=1,..) -2*dDEL(y, mu, sigma, nu, log=TRUE),
+          G.dev.incr  = function(y,mu,sigma,nu, pw=1,...) -2*dDEL(y, mu, sigma, nu, log=TRUE),
                 rqres = expression(
                  rqres(pfun="pDEL", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma, nu=nu)
                                    ),  #

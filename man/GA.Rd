@@ -58,7 +58,7 @@ Accompanying documentation in the current GAMLSS  help files, (see also  \url{ht
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 }
-\author{Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}, Bob Rigby \email{r.rigby@londonmet.ac.uk} and Calliope Akantziliotou }
+\author{Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org}, Bob Rigby and Calliope Akantziliotou }
 
 \note{ \eqn{\mu}{mu} is the mean of the distribution in  \code{GA}.  In the function \code{GA}, \eqn{\sigma}{sigma} is the square root of the 
 usual dispersion parameter for a GLM gamma model. Hence  \eqn{\sigma \mu}{sigma*mu} is the standard deviation of the distribution defined in \code{GA}.  }

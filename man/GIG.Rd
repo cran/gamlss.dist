@@ -66,8 +66,8 @@ Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location s
 Jorgensen B. (1982) Statistical properties of the generalized inverse Gaussian distribution, Series: Lecture notes in statistics; 9, New York : Springer-Verlag. 
 
 }
-\author{Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}, Bob Rigby 
-        \email{r.rigby@londonmet.ac.uk} and Nicoleta Motpan}
+\author{Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org}, Bob Rigby 
+        and Nicoleta Motpan}
 
 \seealso{ \code{\link{gamlss.family}}, \code{\link{IG}}}
 

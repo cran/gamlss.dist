@@ -116,7 +116,7 @@ SICHEL <-function (mu.link ="log", sigma.link="log", nu.link="identity")
                d2ldv2 <- ifelse(d2ldv2 < -1e-15, d2ldv2,-1e-15)  
                d2ldv2
                                   } ,
-          G.dev.incr  = function(y,mu,sigma,nu, pw=1,..) -2*dSICHEL(y, mu, sigma, nu, log=TRUE),
+          G.dev.incr  = function(y,mu,sigma,nu, pw=1,...) -2*dSICHEL(y, mu, sigma, nu, log=TRUE),
                 rqres = expression(    
                         rqres(pfun="pSICHEL", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma, nu=nu)
                                   ), 

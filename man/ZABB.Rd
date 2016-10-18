@@ -86,7 +86,7 @@ Rigby, R. A.  and Stasinopoulos D. M. (2010) The gamlss.family distributions, (d
 
 }
 
-\author{Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}, Bob Rigby \email{r.rigby@londonmet.ac.uk} }
+\author{Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org}, Bob Rigby}
 
 
 

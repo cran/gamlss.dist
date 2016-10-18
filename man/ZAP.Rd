@@ -56,8 +56,7 @@ Rigby, R. A.  and Stasinopoulos D. M. (2010) The gamlss.family distributions, (d
 \url{http://www.gamlss.org/}) 
 }
 \author{
-Mikis Stasinopoulos \email{d.stasinopoulos@londonmet.ac.uk}, Bob Rigby \email{r.rigby@londonmet.ac.uk}
-}
+Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org}, Bob Rigby}
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
