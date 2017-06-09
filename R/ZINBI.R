@@ -1,4 +1,5 @@
-# 30/4/10  corrected
+# 30/4/10corrected
+# 28/2/17 the q function is corrected thanks to Prof. Cajo J.F. ter Braak 
 # ---------------------------------------------------------------------------------------
 # zero inflated negative binomial type I (with probability y=0 is nu) 01/03/10
 # ---------------------------------------------------------------------------------------
@@ -127,7 +128,7 @@ qZINBI <- function(p, mu = 1, sigma = 1, nu = 0.3, lower.tail = TRUE, log.p = FA
           if (any(p < 0) | any(p > 1))  stop(paste("p must be between 0 and 1", "\n", ""))    
           if (log.p == TRUE) p <- exp(p)   else p <- p
           if (lower.tail == TRUE)  p <- p  else p <- 1 - p
-          pnew <- (p-nu)/(1-nu)
+          pnew <- (p-nu)/(1-nu)-(1e-7)# added 28-2-17
           pnew <- ifelse((pnew > 0 ),pnew, 0)
           q <- qNBI(pnew, mu = mu, sigma=sigma)           
           q

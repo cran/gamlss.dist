@@ -123,7 +123,7 @@ DPO1 <- function (mu.link = "log", sigma.link = "log")
                d2ldd2 = function(y,mu,sigma) {# eval.parent(quote(-dldp*dldp))
                      dldd <-       -(0.5/sigma) + (mu/(sigma^2)) -
                                     (y*log(mu)/(sigma^2)) - (y/(sigma^2)) +
-                       (y*ifelse(y==0,1,log(y)))/(sigma^2)  +# approx:
+                                    (y*ifelse(y==0,1,log(y)))/(sigma^2)  +# approx:
                                     (1+(sigma-1)/(12*mu)+(sigma-1)*sigma/(12*mu^2))*
                                     (-12*mu^2*(mu-2*sigma+1))/
                                     (12*mu^2+(sigma-1)*mu-sigma^2+sigma)^2
@@ -155,7 +155,7 @@ DPO1 <- function (mu.link = "log", sigma.link = "log")
 get_C <- function(x, mu, sigma)
 { 
   maxV <- max(max(x)*3, 500)
-  y <- 0:maxV
+  #y <- 0:maxV
   ly <- max(length(x),length(mu),length(sigma)) 
   theC <- .C("dDPOgetC5_C",as.double(mu),as.double(sigma),as.integer(ly),as.integer(maxV+1),ans=double(ly))$ans
   log(theC)          
@@ -169,11 +169,11 @@ dDPO <- function(x, mu = 1, sigma = 1, log = FALSE)
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
   ly <- max(length(x),length(mu),length(sigma)) 
-  x <- rep(x, length = ly)      
+      x <- rep(x, length = ly)      
   sigma <- rep(sigma, length = ly)
-  mu <- rep(mu, length = ly) 
-  maxV <- max(max(x)*3,500)
-  y <- 0:maxV
+     mu <- rep(mu, length = ly) 
+  # maxV <- max(max(x)*3,500)
+  #y <- 0:maxV
   #theC <- .C("dDPOgetC5_C",as.double(mu),as.double(sigma),as.integer(ly),as.integer(maxV+1),ans=double(ly))$ans
   logofx <- ifelse(x==0,1,log(x))
   lh <- -0.5*log(sigma)-(mu/sigma)-lgamma(x+1)+x*logofx-x+
@@ -195,7 +195,7 @@ pDPO<-function(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
   sigma <- rep(sigma, length = ly)
   mu <- rep(mu, length = ly) 
   maxV <- max(max(q)*3,500)
-  y <- 0:maxV
+  #y <- 0:maxV
   den <- unlist(lapply(1:ly,function(x)
     .C("dDPOgetC5_C",as.double(mu[x]),as.double(sigma[x]),as.integer(1),as.integer(q[x]+1),ans=double(1))$ans))
   num <- .C("dDPOgetC5_C",as.double(mu),as.double(sigma),as.integer(ly),as.integer(maxV+1),ans=double(ly))$ans;

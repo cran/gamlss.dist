@@ -47,6 +47,10 @@ Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how 
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R. \emph{Journal of Statistical Software}, Vol. 23, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
 
+Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+\emph{Flexible Regression and Smoothing: Using GAMLSS in R},  Chapman and Hall/CRC. 
+
+
 }
 \note{
 For the function \code{IGAMMA()}, \emph{mu} is the mode of the Inverse Gamma distribution.

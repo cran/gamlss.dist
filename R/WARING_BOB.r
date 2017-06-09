@@ -13,8 +13,9 @@ dWARING<-function (x, mu=2, sigma=2, log = FALSE)
         stop(paste("x must be >=0", "\n", ""))
     b <- 1+(1/sigma)
     n <- mu*(b-1)
-    fx <- beta(n+x, b+1)/beta(n,b)
-    if (log==TRUE) fx <- lbeta(n+x, b+1)-lbeta(n,b)
+    # fx <- beta(n+x, b+1)/beta(n,b)
+    fx <- lbeta(n+x, b+1)-lbeta(n,b)
+    fx <- if(log) fx else exp(fx) 
     fx
 }
 
@@ -118,6 +119,7 @@ WARING<-function (mu.link = "log", sigma.link = "log")
           dldm <- (1/sigma)*(digamma((mu/sigma) + y) - digamma(y+((mu+1)/sigma)+2) - 
                   digamma(mu/sigma) + digamma((mu+sigma+1)/sigma))
           d2ldm2 <- -dldm*dldm
+          d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15) 
           d2ldm2
         },
         dldd = function(y, mu, sigma){ 
@@ -131,6 +133,7 @@ WARING<-function (mu.link = "log", sigma.link = "log")
 		  (mu+1)*digamma(y+((mu+1)/sigma)+2)-(mu+1)*digamma(((mu+1)/sigma)+1)+
 		  mu*digamma(mu/sigma))
           d2ldd2 <- -dldd*dldd
+          d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15) 
           d2ldd2
         },
         d2ldmdd = function(y, mu, sigma){
@@ -140,7 +143,8 @@ WARING<-function (mu.link = "log", sigma.link = "log")
 		  (mu+1)*digamma(y+((mu+1)/sigma)+2)-(mu+1)*digamma(((mu+1)/sigma)+1)+
 		  mu*digamma(mu/sigma))
          d2ldmdd <- -dldm*dldd
-          d2ldmdd
+         d2ldmdd <- ifelse(d2ldmdd < -1e-15, d2ldmdd,-1e-15) 
+         d2ldmdd
         },
         G.dev.incr = function(y, mu, sigma, ...) -2 * dWARING(y, mu, sigma, log = TRUE),
         rqres = expression(rqres(pfun = "pWARING",

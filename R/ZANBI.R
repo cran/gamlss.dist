@@ -30,14 +30,15 @@ ZANBI = function (mu.link = "log", sigma.link = "log", nu.link = "logit")
                   dldm = function(y,mu,sigma,nu) 
                              {
                              dldm0 <- NBI()$dldm(y,mu,sigma) + dNBI(0,mu,sigma)*NBI()$dldm(0,mu,sigma)/(1-dNBI(0,mu,sigma))
-                             dldm <- ifelse(y==0, 0 , dldm0)
-                             dldm
+                              dldm <- ifelse(y==0, 0 , dldm0)
+                              dldm
                              }, 
-               d2ldm2 = function(y,mu,sigma,nu) {dldm0 <- NBI()$dldm(y,mu,sigma) + dNBI(0,mu,sigma)*NBI()$dldm(0,mu,sigma)/(1-dNBI(0,mu,sigma))
-                         dldm <- ifelse(y==0, 0 , dldm0)
-                        d2ldm2 <- -dldm*dldm
-                         d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15)    
-                        d2ldm2},
+               d2ldm2 = function(y,mu,sigma,nu) {
+                            dldm0 <-  NBI()$dldm(y,mu,sigma) + dNBI(0,mu,sigma)*NBI()$dldm(0,mu,sigma)/(1-dNBI(0,mu,sigma))
+                             dldm <- ifelse(y==0, 0 , dldm0)
+                           d2ldm2 <- -dldm*dldm
+                          md2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15)    
+                         d2ldm2},
                  dldd = function(y,mu,sigma,nu) 
                             {
                             sigma <- ifelse(sigma<0.000001, 0.000001, sigma )
@@ -54,11 +55,13 @@ ZANBI = function (mu.link = "log", sigma.link = "log", nu.link = "logit")
                        d2ldd2 <- ifelse(d2ldd2 < -1e-10, d2ldd2,-1e-10) 
                        d2ldd2
                            }, 
-                 dldv = function(y,mu,sigma,nu) {dldv <- ifelse(y==0, 1/nu, -1/(1-nu))
+                 dldv = function(y,mu,sigma,nu) {
+                         dldv <- ifelse(y==0, 1/nu, -1/(1-nu))
                          dldv}, 
-               d2ldv2 = function(y,mu,sigma,nu) {d2ldv2 <- -1/(nu*(1-nu))
-              d2ldv2 <- ifelse(d2ldv2 < -1e-15, d2ldv2,-1e-15)  
-              d2ldv2},
+               d2ldv2 = function(y,mu,sigma,nu) {
+                       d2ldv2 <- -1/(nu*(1-nu))
+                       d2ldv2 <- ifelse(d2ldv2 < -1e-15, d2ldv2,-1e-15)  
+                       d2ldv2},
         d2ldmdd = function(y,mu,sigma,nu) {
                         sigma <- ifelse(sigma<0.000001, 0.000001, sigma )
                          dldm0 <- NBI()$dldm(y,mu,sigma) + dNBI(0,mu,sigma)*NBI()$dldm(0,mu,sigma)/(1-dNBI(0,mu,sigma))

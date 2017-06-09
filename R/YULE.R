@@ -1,7 +1,46 @@
 #---------------------------#
 #---- YULE DISTRIBUTION ----#
 #---------------------------#
-
+#------------------------------------------------------------------
+#Fitting function
+YULE<-function (mu.link = "log")
+{
+  mstats <- checklink(which.link="mu.link", 
+                      which.dist="Yule", link=substitute(mu.link),
+                      link.List="log")
+  #One of these for each parameter to specify which link to use.
+  
+  structure(list(family = c("YULE", "Yule"),      
+                 parameters = list(mu = TRUE),              
+                 nopar = 1,                        
+                 type = "Discrete",               
+                 mu.link = as.character(substitute(mu.link)),
+                 mu.linkfun = mstats$linkfun,
+                 mu.linkinv = mstats$linkinv,
+                 mu.dr = mstats$mu.eta,
+                 dldm = function(y, mu){
+                   lambda <- (mu+1)/mu
+                   dldm <- (digamma(lambda+1) - digamma(lambda+y+2)+(1/lambda))*(-1/(mu^2))
+                   dldm
+                   #browser()
+                 },                                     
+                 d2ldm2 = function(y, mu){
+                   # d2ldm2 <- 1/(mu*(mu-1))
+                   lambda <- (mu+1)/mu
+                   dldm <- (digamma(lambda+1) - digamma(lambda+y+2)+(1/lambda))*(-1/(mu^2))
+                   d2ldm2 <- -dldm^2
+                   d2ldm2 
+                 },
+                 G.dev.incr = function(y, mu, ...) 
+                   -2 * dYULE(y, mu = mu, log = TRUE),                
+                 rqres = expression(rqres(pfun = "pYULE", type = "Discrete", ymin = 0, y = y, mu = mu)),
+                 mu.initial = expression(mu <- rep(mean(y), length(y))),            
+                 mu.valid = function(mu) all(mu > 0) ,
+                 y.valid = function(y) all(y >=0)),        
+            class = c("gamlss.family", "family"))
+}
+#------------------------------------------------------------------
+# pdf
 dYULE<-function (x, mu = 2, log = FALSE)
 {
     if (any(mu < 0))
@@ -15,7 +54,7 @@ dYULE<-function (x, mu = 2, log = FALSE)
     if (log==FALSE) logfx <- exp(logfx)
     logfx
 }
-
+#------------------------------------------------------------------
 #Cumulative density function
 pYULE<-function (q, mu = 2, lower.tail = TRUE, log.p = FALSE)
 {
@@ -83,40 +122,3 @@ rYULE<- function(n, mu=2)
      r
 }
 
-#Distribution function
-YULE<-function (mu.link = "log")
-{
-    mstats <- checklink(which.link="mu.link", 
-    which.dist="Yule", link=substitute(mu.link),
-     link.List="log")
-    #One of these for each parameter to specify which link to use.
-
-structure(list(family = c("YULE", "Yule"),      
-        parameters = list(mu = TRUE),              
-        nopar = 1,                        
-        type = "Discrete",               
-        mu.link = as.character(substitute(mu.link)),
-        mu.linkfun = mstats$linkfun,
-        mu.linkinv = mstats$linkinv,
-        mu.dr = mstats$mu.eta,
-        dldm = function(y, mu){
-         lambda <- (mu+1)/mu
-         dldm <- (digamma(lambda+1) - digamma(lambda+y+2)+(1/lambda))*(-1/(mu^2))
-         dldm
-          #browser()
-        },                                     
-        d2ldm2 = function(y, mu){
-         # d2ldm2 <- 1/(mu*(mu-1))
-           lambda <- (mu+1)/mu
-           dldm <- (digamma(lambda+1) - digamma(lambda+y+2)+(1/lambda))*(-1/(mu^2))
-           d2ldm2 <- -dldm^2
-          d2ldm2 
-        },
-        G.dev.incr = function(y, mu, ...) 
-            -2 * dYULE(y, mu = mu, log = TRUE),                
-        rqres = expression(rqres(pfun = "pYULE", type = "Discrete", ymin = 0, y = y, mu = mu)),
-        mu.initial = expression(mu <- rep(mean(y), length(y))),            
-        mu.valid = function(mu) all(mu > 0) ,
-        y.valid = function(y) all(y >=0)),        
-        class = c("gamlss.family", "family"))
-}

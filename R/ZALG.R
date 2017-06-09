@@ -1,6 +1,6 @@
 ZALG <- function (mu.link = "logit", sigma.link = "logit")
 {
-    mstats <- checklink("sigma.link", "ZALG", substitute(sigma.link), 
+    mstats <- checklink("mu.link", "ZALG", substitute(sigma.link), 
                            c("logit", "probit", "cloglog", "cauchit", "log", "own"))  
     dstats <- checklink("sigma.link", "ZALG", substitute(sigma.link), 
                            c("logit", "probit", "cloglog", "cauchit", "log", "own"))   

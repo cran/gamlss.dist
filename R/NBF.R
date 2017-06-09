@@ -98,13 +98,13 @@ NBF <- function (mu.link="log", sigma.link="log", nu.link ="identity")
     class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------
-dNBF<-function(x, mu=0, sigma=1, nu=2, log=FALSE)
+dNBF<-function(x, mu=1, sigma=1, nu=2, log=FALSE)
 {  
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
   #browser()
-  mu1 <- mu
+     mu1 <- mu
   sigma1 <- sigma*mu^(nu-2)
   if (length(sigma1)>1) 
        fy <- ifelse(sigma1>0.0001, dnbinom(x, size=1/sigma1, mu = mu1, log = log), dPO(x, mu = mu1, log = log) )
@@ -114,12 +114,12 @@ dNBF<-function(x, mu=0, sigma=1, nu=2, log=FALSE)
   fy
 }
 #---------------------------------------------------------------------------------------- 
-pNBF <- function(q, mu=0, sigma=1, nu=2, lower.tail = TRUE, log.p = FALSE)
+pNBF <- function(q, mu=1, sigma=1, nu=2, lower.tail = TRUE, log.p = FALSE)
 { 
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(q < 0) )  stop(paste("q must be >=0", "\n", ""))
-  mu1 <- mu
+     mu1 <- mu
   sigma1 <- sigma*mu^(nu-2)
   if (length(sigma1)>1) cdf <- ifelse(sigma1>0.0001, pnbinom(q, size=1/sigma1, mu=mu1, lower.tail=lower.tail,log.p=log.p), 
                                       ppois(q, lambda = mu1, lower.tail = lower.tail, log.p = log.p) )
@@ -128,12 +128,12 @@ pNBF <- function(q, mu=0, sigma=1, nu=2, lower.tail = TRUE, log.p = FALSE)
   cdf
 }
 #----------------------------------------------------------------------------------------
-qNBF <- function(p, mu=0, sigma=1, nu=2, lower.tail = TRUE, log.p = FALSE)
+qNBF <- function(p, mu=1, sigma=1, nu=2, lower.tail = TRUE, log.p = FALSE)
 { 
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(p < 0) | any(p > 1))  stop(paste("p must be between 0 and 1", "\n", ""))   
-  mu1 <- mu
+     mu1 <- mu
   sigma1 <- sigma*mu^(nu-2)
   if (length(sigma1)>1) q <- ifelse(sigma1>0.0001,  qnbinom(p, size=1/sigma1, mu=mu1, lower.tail=lower.tail, log.p=log.p), 
                                     qpois(p, lambda = mu1, lower.tail = lower.tail, log.p = log.p) )
@@ -142,7 +142,7 @@ qNBF <- function(p, mu=0, sigma=1, nu=2, lower.tail = TRUE, log.p = FALSE)
   q
 }
 #----------------------------------------------------------------------
-rNBF <- function(n, mu=0, sigma=1, nu=2)
+rNBF <- function(n, mu=1, sigma=1, nu=2)
 {
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 

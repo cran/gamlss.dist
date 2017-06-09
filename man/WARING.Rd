@@ -43,6 +43,9 @@ Returns a \code{gamlss.family} object which can be used to fit a Waring distribu
 }
 \references{ 
 Wimmer, G. and Altmann, G. (1999) \emph{Thesaurus of univariate discrete probability distributions.} Stamm.
+
+Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+\emph{Flexible Regression and Smoothing: Using GAMLSS in R},  Chapman and Hall/CRC.
 }
 \author{
 Fiona McElduff, Bob Rigby and Mikis Stasinopoulos.

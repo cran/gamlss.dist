@@ -124,7 +124,8 @@ pZIPIG <- function(q, mu = 1, sigma = 1, nu = 0.3, lower.tail = TRUE, log.p = FA
          cdf
    }
 #------------------------------------------------------------------------------------------
-qZIPIG <- function(p, mu = 1, sigma = 1, nu = 0.3, lower.tail = TRUE, log.p = FALSE)
+qZIPIG <- function(p, mu = 1, sigma = 1, nu = 0.3, lower.tail = TRUE, log.p = FALSE,
+                   max.value = 10000)
   {      
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
           if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", ""))
@@ -135,17 +136,17 @@ qZIPIG <- function(p, mu = 1, sigma = 1, nu = 0.3, lower.tail = TRUE, log.p = FA
           if (lower.tail == TRUE)  p <- p  else p <- 1 - p
           pnew <- (p-nu)/(1-nu)-1e-10
           pnew <- ifelse((pnew > 0 ),pnew, 0)
-          if (length(sigma)>1) q <- ifelse(sigma>0.0001,  qPIG(pnew, mu = mu, sigma=sigma, lower.tail=T, log.p = F), 
+          if (length(sigma)>1) q <- ifelse(sigma>0.0001,  qPIG(pnew, mu = mu, sigma=sigma, lower.tail=TRUE, log.p = FALSE, max.value = max.value), 
                                           qpois(pnew, lambda = mu) )
           else q <- if (sigma<0.0001) qpois(pnew, lambda = mu)
-                   else qPIG(pnew, mu = mu, sigma=sigma, lower.tail=T, log.p = F)
+                   else qPIG(pnew, mu = mu, sigma=sigma, lower.tail=TRUE, log.p = FALSE, max.value = max.value)
            # q2 <- suppressWarnings(ifelse((pnew > 0 ), q, 0))
 #          suppressWarnings(q <- ifelse((pnew > 0 ), qpois(pnew, lambda = mu, ), 0))
           q
    }
 #------------------------------------------------------------------------------------------
-rZIPIG <- function(n, mu = 1, sigma = 1, nu = 0.3)
-  { 
+rZIPIG <- function(n, mu = 1, sigma = 1, nu = 0.3, max.value = 10000)
+  {
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
           if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
           if (any(nu <= 0)|any(nu >= 1))  #In this parametrization  nu = alpha

@@ -108,7 +108,7 @@ PIG <- function (mu.link = "log", sigma.link = "log")
 # result
 #}
 #-----------------------------------------------------------------------------------------
-dPIG<-function(x, mu = 0.5, sigma = 0.02 , log = FALSE)
+dPIG<-function(x, mu = 1, sigma = 1 , log = FALSE)
  { 
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
           if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
@@ -124,7 +124,7 @@ dPIG<-function(x, mu = 0.5, sigma = 0.02 , log = FALSE)
           fy
   }
 ##-----------------------------------------------------------------------------------------  
-pPIG <- function(q, mu=0.5, sigma=0.02, lower.tail = TRUE, log.p = FALSE)
+pPIG <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
   {     
   ## function to calculate the cdf
   ## function to calculate the cdf
@@ -141,7 +141,7 @@ pPIG <- function(q, mu=0.5, sigma=0.02, lower.tail = TRUE, log.p = FALSE)
   cdf
    }
 ##-----------------------------------------------------------------------------------------
-qPIG <- function(p, mu = 0.5, sigma = 0.02,  lower.tail = TRUE, log.p = FALSE, 
+qPIG <- function(p, mu = 1, sigma = 1,  lower.tail = TRUE, log.p = FALSE, 
                  max.value = 10000)
   {      
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
@@ -170,14 +170,14 @@ qPIG <- function(p, mu = 0.5, sigma = 0.02,  lower.tail = TRUE, log.p = FALSE,
           QQQ   
    }
 ##-----------------------------------------------------------------------------------------
-rPIG <- function(n, mu = 0.5, sigma = 0.02)
+rPIG <- function(n, mu = 1, sigma = 1,  max.value = 10000)
   { 
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
           if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
           if (any(n <= 0))  stop(paste("n must be a positive integer", "\n", ""))  
           n <- ceiling(n)
           p <- runif(n)
-          r <- qPIG(p, mu=mu, sigma=sigma)
+          r <- qPIG(p, mu=mu, sigma=sigma,  max.value = max.value)
           r
   }
 ##-----------------------------------------------------------------------------------------

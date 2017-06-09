@@ -38,6 +38,7 @@
                        ty  <- exp(logty)
                       dldm <- (y-ty)/mu
                     d2ldm2 <- - dldm * dldm
+                    d2ldm2 <- ifelse(d2ldm2 < -1e-15, d2ldm2,-1e-15) 
                     d2ldm2
                         },
                  dldd = function(y,mu,sigma,nu) 
@@ -59,6 +60,7 @@
                      nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "sigma", delta=0.01)
                    dldd <- as.vector(attr(nd, "gradient"))
                  d2ldd2 <- -dldd*dldd
+                 d2ldd2 <- ifelse(d2ldd2 < -1e-15, d2ldd2,-1e-15) 
                  d2ldd2
                         },
               #d2ldmdd = function() 0,
@@ -75,6 +77,7 @@
                      #  dcdd <- (c*sigma*(2*nu+1)+1-c*c)/(sigma*sigma)   
                      #  dldd <- (((ty*(c+sigma*mu)/mu) - (sigma*y)-c)/(sigma^2))+dcdd*(ty-y)/c
                     d2ldmdd <- -dldm *dldd
+                    d2ldmdd <- ifelse(d2ldmdd < -1e-15, d2ldmdd,-1e-15) 
                     d2ldmdd
                        }, 
               d2ldmdv = function(y,mu,sigma,nu) 
@@ -88,6 +91,7 @@
                  dldv <- as.vector(attr(nd, "gradient"))
                 #calculates the d2ldmdv
               d2ldmdv <- -dldm *dldv
+              d2ldmdv <- ifelse(d2ldmdv < -1e-15, d2ldmdv,-1e-15) 
               d2ldmdv
                        }, 
               d2ldddv = function(y,mu,sigma,nu) 
@@ -103,6 +107,7 @@
                  dldv <- as.vector(attr(nd, "gradient"))
                 #calculates the d2ldddv 
               d2ldddv <- -dldd *dldv
+              d2ldddv <- ifelse(d2ldddv < -1e-15, d2ldddv,-1e-15) 
               d2ldddv
                        },               
                  dldv = function(y,mu,sigma,nu) 
@@ -116,6 +121,7 @@
                    nd <- numeric.deriv(dDEL(y, mu, sigma, nu, log=TRUE), "nu", delta=0.01)
                  dldv <- as.vector(attr(nd, "gradient"))
                d2ldv2 <- -dldv*dldv
+               d2ldv2 <- ifelse(d2ldv2 < -1e-15, d2ldv2,-1e-15) 
                d2ldv2
                        } ,
           G.dev.incr  = function(y,mu,sigma,nu, pw=1,...) -2*dDEL(y, mu, sigma, nu, log=TRUE),
