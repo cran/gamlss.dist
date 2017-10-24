@@ -35,7 +35,7 @@ PE2 <- function (mu.link="identity", sigma.link="log", nu.link ="log")
                                z <- (y-mu)/sigma
                            dldm <- (sign(z)*nu*(abs(z)^(nu-1)))/sigma
                          d2ldm2 <- -(nu*nu*gamma(2-(1/nu))*gamma(1/nu))/(sigma^2) 
-                         d2ldm2 <- if (any(nu<1.05)) -dldm*dldm else d2ldm2
+                         d2ldm2 <- ifelse(nu<1.05, -dldm*dldm, d2ldm2)
                          d2ldm2
                                    },
                  dldd = function(y,mu,sigma,nu) {

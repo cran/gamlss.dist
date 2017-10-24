@@ -179,7 +179,8 @@ pSI <- function(q, mu=0.5, sigma=0.02, nu=-0.5, lower.tail = TRUE, log.p = FALSE
   #--------------------------------------------------
   tocdfS <- function (y, mu, sigma, nu, bsum=TRUE, ...)
   {
-      ly <- length(y)       
+      ly <- max(length(q),length(mu), length(sigma)) 
+       q <- rep(q, length = ly)     
    sigma <- rep(sigma, length = ly)
       mu <- rep(mu, length = ly)   
       nu <- rep(nu, length = ly) 

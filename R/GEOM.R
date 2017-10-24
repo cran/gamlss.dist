@@ -8,13 +8,6 @@ dGEOM<-function (x, mu = 2, log = FALSE)
         stop(paste("mu must be > 0)", "\n", ""))
     if (any(x < 0))
         stop(paste("x must be >=0", "\n", ""))
-  #     lx <- max(length(x), length(mu))
-  #     mu <- rep(mu, length = lx)
-  #     fy <- dgeom(x = x, prob = mu, log = log)
-  # fy #logfx
-  #   logfx <- x*log(mu/(mu+1)) + log(1/(mu+1))
-  #   if (log==FALSE) logfx <- exp(logfx)
-  #   logfx
     lx <- max(length(x), length(mu))
     mu <- rep(mu, length = lx) 
    prob <- 1/(mu+1)
@@ -29,12 +22,6 @@ pGEOM<-function (q, mu = 2, lower.tail = TRUE, log.p = FALSE)
         stop(paste("mu must be > 0", "\n", ""))
     if (any(q < 0))
         stop(paste("q must be >=0", "\n", ""))
-   # # cdf<- cdf[s2]
-   #   cdf <- 1-(mu/(mu+1))^(q+1)  
-   #   cdf <- if (log.p==FALSE) cdf else log(cdf)
-   #   cdf <- if (lower.tail == TRUE) cdf   else  1 - cdf
-   #  if (log.p == TRUE) cdf<-log(cdf)
-   #  cdf
      ly <- max(length(q), length(mu))
       q <- rep(q, length = ly)
      mu <- rep(mu, length = ly)

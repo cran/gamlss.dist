@@ -25,6 +25,7 @@ extern void c_st3_pst3(void *, void *, void *, void *, void *, void *, void *, v
 extern void c_st3_qst3(void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void cdfSICHEL(void *, void *, void *, void *, void *, void *);
 extern void dDPOgetC5_C(void *, void *, void *, void *, void *);
+extern void getBI_C2(void *, void *, void *, void *, void *);
 extern void tocdf(void *, void *, void *, void *, void *);
 extern void tofydel1(void *, void *, void *, void *, void *, void *, void *);
 extern void tofydel2(void *, void *, void *, void *, void *, void *, void *);
@@ -55,6 +56,7 @@ static const R_CMethodDef CEntries[] = {
   {"c_st3_qst3",    (DL_FUNC) &c_st3_qst3,    9},
   {"cdfSICHEL",     (DL_FUNC) &cdfSICHEL,     6},
   {"dDPOgetC5_C",   (DL_FUNC) &dDPOgetC5_C,   5},
+  {"getBI_C2",      (DL_FUNC) &getBI_C2,      5},
   {"tocdf",         (DL_FUNC) &tocdf,         5},
   {"tofydel1",      (DL_FUNC) &tofydel1,      7},
   {"tofydel2",      (DL_FUNC) &tofydel2,      7},

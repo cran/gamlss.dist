@@ -40,7 +40,7 @@ PE <- function (mu.link="identity", sigma.link="log", nu.link ="log")
                            dldm <- (sign(z)*nu)/(2*sigma*abs(z)) 
                            dldm <- dldm*((abs(z/c))^nu) 
                          d2ldm2 <- -(nu*nu*gamma(2-(1/nu))*gamma(3/nu))/((sigma*gamma(1/nu))^2) 
-                         d2ldm2 <- if (any(nu<1.05)) -dldm*dldm else d2ldm2
+                         d2ldm2 <- ifelse(nu<1.05, -dldm*dldm, d2ldm2)
                                    },
                  dldd = function(y,mu,sigma,nu) {
                           log.c <- 0.5*(-(2/nu)*log(2)+lgamma(1/nu)-lgamma(3/nu))

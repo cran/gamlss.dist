@@ -40,7 +40,8 @@ as.family(object)
   Box-Cox Power Exponential    \tab \code{\link{BCPE}()}    \tab  4  \cr
   Box-Cox-t                    \tab \code{\link{BCT}()}     \tab  4  \cr
   Delaport                     \tab \code{\link{DEL}()}     \tab  3  \cr
-  Double Poisson               \tab \code{\link{DPO}()}     \tab  3  \cr
+  Double Poisson               \tab \code{\link{DPO}()}     \tab  2  \cr
+  Double binomial              \tab \code{\link{DBI}()}     \tab  2  \cr
   Exponential                  \tab \code{\link{EXP}()}     \tab  1  \cr
   Exponential Gaussian         \tab \code{\link{exGAUS}()}  \tab  3  \cr
   Exponential generalized Beta type 2 \tab \code{\link{EGB2}()} \tab  4  \cr

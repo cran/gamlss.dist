@@ -8,7 +8,7 @@ ZAGA <- function (mu.link ="log", sigma.link="log", nu.link ="logit")
     dstats <- checklink("sigma.link", "ZAIG", substitute(sigma.link), c("inverse", "log", "identity", "own"))
     vstats <- checklink("nu.link", "ZAIG", substitute(nu.link),  c("logit", "probit", "cloglog", "cauchit", "log", "own"))
     structure(
-          list(family = c("ZAGA", "Zero adjusted GA"),
+          list(family = c("ZAGA", "Zero Adjusted GA"),
            parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE), 
                 nopar = 3, 
                  type = "Mixed",

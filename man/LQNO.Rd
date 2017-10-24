@@ -9,7 +9,7 @@
 Normal distribution with a specific mean and variance relationship for fitting a GAMLSS
 model}
 \description{
-The function \code{LQNO()} defines a normal distribution family, which has a specific  mean and variance relationship. The distribution can be used in a GAMLSS fitting using the function gamlss(). The mean of LQNO is equal to \code{mu}. The variance is equal to \code{mu*(1+sigma*mu)}  so the standard deviation is \code{sqrt(mu*(1+sigma*mu))}. The function is found usefull in modelling  small RNA sequencing experiments. The functions \code{dLQNO}, \code{pLQNO}, \code{qLQNO} and \code{rLQNO} define the density, distribution function, quantile function (inverse cdf) and random generation for the \code{LQNO()} parametrization of the normal distribution.
+The function \code{LQNO()} defines a normal distribution family, which has a specific  mean and variance relationship. The distribution can be used in a GAMLSS fitting using the function gamlss(). The mean of LQNO is equal to \code{mu}. The variance is equal to \code{mu*(1+sigma*mu)}  so the standard deviation is \code{sqrt(mu*(1+sigma*mu))}. The function is found useful in modelling  small RNA sequencing experiments. The functions \code{dLQNO}, \code{pLQNO}, \code{qLQNO} and \code{rLQNO} define the density, distribution function, quantile function (inverse cdf) and random generation for the \code{LQNO()} parametrization of the normal distribution.
 }
 \usage{
 LQNO(mu.link = "log", sigma.link = "log")
@@ -20,8 +20,8 @@ rLQNO(n, mu = 1, sigma = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{mu.link}{\code{mu} link function with \code{"log"} as defauld}
-  \item{sigma.link}{\code{mu} link function with \code{"log"} as defauld}
+  \item{mu.link}{\code{mu} link function with \code{"log"} as default}
+  \item{sigma.link}{\code{mu} link function with \code{"log"} as default}
   \item{x,q}{vector of quantiles}
   \item{mu}{vector of location parameter values}
   \item{sigma}{vector of scale parameter values}
@@ -37,17 +37,21 @@ logical; if \code{TRUE}, probabilities \code{p} are given as \code{log(p)}}
 The function \code{LQNO} returns a \code{gamlss.family} object which can be used to fit this specific form of the  normal distribution family in the gamlss() function.
 }
 \references{
-	Argyropoulos C, Etheridge A, Sakhanenko N, Galas D. (2017) Modeling bias and variation in the stochastic processes of small RNA sequencing. Nucleic Acids Research }
+Argyropoulos C, Etheridge A, Sakhanenko N, Galas D. (2017) Modeling bias and
+variation in the stochastic processes of small RNA sequencing. \emph{Nucleic Acids Res.}
+2017 Mar 27. doi: 10.1093/nar/gkx199. [Epub ahead of print] PubMed PMID:
+28369495.
+}
 
 \author{Christos Argyropoulos}
 
-\note{The \code{mu} parameters must be positive so for the relatioship \code{Var(Y) = mu*(1+sigma*mu)} to be valid.}
+\note{The \code{mu} parameters must be positive so for the relationship \code{Var(Y) = mu*(1+sigma*mu)} to be valid.}
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{\code{\link{NO}},\code{\link{NO2}}, \code{\link{NOF}}}
 \examples{
 LQNO()# gives information about the default links for the normal distribution
-# a comarison of different Normal models
+# a comparison of different Normal models
 #m1 <- gamlss(y~pb(x), sigma.fo=~pb(x), data=abdom,  family=NO(mu.link="log"))
 #m2 <- gamlss(y~pb(x), sigma.fo=~pb(x), data=abdom, family=LQNO)
 #m3 <- gamlss(y~pb(x), sigma.fo=~pb(x), data=abdom, family=NOF(mu.link="log"))

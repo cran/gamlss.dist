@@ -11,7 +11,7 @@ ZANBI = function (mu.link = "log", sigma.link = "log", nu.link = "logit")
     vstats <- checklink("nu.link", "ZANBI", substitute(nu.link), 
         c("logit", "probit", "cloglog", "cauchit", "log", "own"))
 
-    structure(list(family = c("ZANBI", "Zero altered negative binomial type I"),
+    structure(list(family = c("ZANBI", "Zero Altered Negative binomial type I"),
                parameters = list(mu = TRUE, sigma = TRUE, nu = TRUE),
                     nopar = 3,
                      type = "Discrete",
@@ -103,6 +103,11 @@ dZANBI<-function(x, mu = 1, sigma = 1, nu = 0.3, log = FALSE)
         if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
         if (any(nu <= 0)|any(nu >= 1))  stop(paste("nu must be between 0 and 1 ", "\n", ""))
         if (any(x < 0) )  stop(paste("x must be >=0", "\n", "")) 
+           ly <- max(length(x),length(mu),length(sigma),length(nu)) 
+            x <- rep(x, length = ly)      
+        sigma <- rep(sigma, length = ly)
+           mu <- rep(mu, length = ly)   
+           nu <- rep(nu, length = ly) 
           fy0 <- dNBI(0, mu = mu, sigma=sigma, log = T)
            fy <- dNBI(x, mu = mu, sigma=sigma, log = T)                   
           logfy <- rep(0, length(x))
@@ -118,6 +123,11 @@ pZANBI <- function(q, mu = 1, sigma = 1, nu = 0.3, lower.tail = TRUE, log.p = FA
         if (any(nu <= 0)|any(nu >= 1))  #In this parametrization  nu = alpha
                     stop(paste("nu must be between 0 and 1 ", "\n", ""))
         if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))
+           ly <- max(length(q),length(mu),length(sigma),length(nu)) 
+            q <- rep(q, length = ly)      
+        sigma <- rep(sigma, length = ly)
+           mu <- rep(mu, length = ly)   
+           nu <- rep(nu, length = ly) 
          cdf0 <- pNBI(0, mu = mu, sigma=sigma)
          cdf1 <- pNBI(q, mu = mu, sigma=sigma)                   
          cdf3 <- nu+((1-nu)*(cdf1-cdf0)/(1-cdf0))
@@ -136,11 +146,16 @@ qZANBI <- function(p, mu = 1, sigma = 1, nu = 0.3, lower.tail = TRUE, log.p = FA
           if (any(p < 0) | any(p > 1))  stop(paste("p must be between 0 and 1", "\n", ""))    
           if (log.p == TRUE) p <- exp(p)   else p <- p
           if (lower.tail == TRUE)  p <- p  else p <- 1 - p
-          pnew <- (p-nu)/(1-nu)-1e-10
-          cdf0 <- pNBI(0, mu = mu, sigma=sigma)                   
+             ly <- max(length(p),length(mu),length(sigma),length(nu)) 
+              p <- rep(p, length = ly)      
+          sigma <- rep(sigma, length = ly)
+             mu <- rep(mu, length = ly)   
+             nu <- rep(nu, length = ly) 
+           pnew <- (p-nu)/(1-nu)-1e-10
+           cdf0 <- pNBI(0, mu = mu, sigma=sigma)                   
           pnew2 <- cdf0*(1-pnew) + pnew           
           pnew2 <- ifelse((pnew2 > 0 ),pnew2, 0)
-          q <- qNBI(pnew2, mu = mu, sigma=sigma)                   
+              q <- qNBI(pnew2, mu = mu, sigma=sigma)                   
           q
    }
 #------------------------------------------------------------------------------------------

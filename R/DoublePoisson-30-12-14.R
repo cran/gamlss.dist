@@ -139,7 +139,7 @@ DPO1 <- function (mu.link = "log", sigma.link = "log")
                rqres = expression(
                           rqres(pfun="pDPO", type="Discrete", ymin=0, y=y, mu=mu, sigma=sigma)
                                  ), 
-            mu.initial = expression(mu <-  (y+mean(y))/2),
+            mu.initial = expression({mu <- (y + 0.5)/(bd + 1)}),
          sigma.initial = expression(
                       sigma <- rep(1,length(y))),
               mu.valid = function(mu) all(mu > 0) , 
@@ -190,15 +190,15 @@ pDPO<-function(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(q < 0) )  stop(paste("q must be >=0", "\n", ""))  
-  ly <- max(length(q),length(mu),length(sigma)) 
-  q <- rep(q, length = ly)      
-  sigma <- rep(sigma, length = ly)
-  mu <- rep(mu, length = ly) 
-  maxV <- max(max(q)*3,500)
+      ly <- max(length(q),length(mu),length(sigma)) 
+       q <- rep(q, length = ly)      
+   sigma <- rep(sigma, length = ly)
+      mu <- rep(mu, length = ly) 
+    maxV <- max(max(q)*3,500)
   #y <- 0:maxV
   den <- unlist(lapply(1:ly,function(x)
-    .C("dDPOgetC5_C",as.double(mu[x]),as.double(sigma[x]),as.integer(1),as.integer(q[x]+1),ans=double(1))$ans))
-  num <- .C("dDPOgetC5_C",as.double(mu),as.double(sigma),as.integer(ly),as.integer(maxV+1),ans=double(ly))$ans;
+         .C("dDPOgetC5_C",as.double(mu[x]),as.double(sigma[x]),as.integer(1), as.integer(q[x]+1),ans=double(1 ))$ans))
+  num <- .C("dDPOgetC5_C",as.double(mu),   as.double(sigma),   as.integer(ly),as.integer(maxV+1),ans=double(ly))$ans;
   cdf <- num/den
   cdf <- if(lower.tail==TRUE) cdf else 1-cdf
   cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
@@ -214,11 +214,14 @@ qDPO <- function(p, mu=1, sigma=1,  lower.tail = TRUE, log.p = FALSE,
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(p < 0) | any(p > 1.0001))  stop(paste("p must be between 0 and 1", "\n", "")) 
   if (log.p==TRUE) p <- exp(p) else p <- p
-  if (lower.tail==TRUE) p <- p else p <- 1-p    
-  ly <- length(p)                                                       
-  QQQ <- rep(0,ly)                         
+  if (lower.tail==TRUE) p <- p else p <- 1-p 
+      ly <- max(length(p),length(mu),length(sigma)) 
+       p <- rep(p, length = ly)      
+   sigma <- rep(sigma, length = ly)
+      mu <- rep(mu, length = ly)                                                     
+     QQQ <- rep(0,ly)                         
   nsigma <- rep(sigma, length = ly)
-  nmu <- rep(mu, length = ly)                
+     nmu <- rep(mu, length = ly)                
   for (i in seq(along=p))                                                          
   {
     cumpro <- 0                                                                         
@@ -227,7 +230,7 @@ qDPO <- function(p, mu=1, sigma=1,  lower.tail = TRUE, log.p = FALSE,
     {  
       for (j in seq(from = 0, to = max.value))
       {
-        cumpro <-  pDPO(j, mu = nmu[i], sigma = nsigma[i], log.p = FALSE) 
+        cumpro <-  pDPO(j, mu = mu[i], sigma = sigma[i], log.p = FALSE) 
         # else  cumpro+dSICHEL(j, mu = nmu[i], sigma = nsigma[i], nu = nnu[i], log = FALSE)# the above is faster 
         QQQ[i] <- j 
         if  (p[i] <= cumpro ) break 

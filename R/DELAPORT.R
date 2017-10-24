@@ -146,14 +146,14 @@ dDEL<-function(x, mu=1, sigma=1, nu=.5, log=FALSE)
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
    if (any(nu <= 0) | any(nu >= 1))  stop(paste("nu must be between 0 and 1", "\n", "")) 
    if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
- ly <- max(length(x),length(mu),length(sigma),length(nu)) 
+    ly <- max(length(x),length(mu),length(sigma),length(nu)) 
      x <- rep(x, length = ly)      
  sigma <- rep(sigma, length = ly)
     mu <- rep(mu, length = ly)   
     nu <- rep(nu, length = ly) 
- logpy0 <- -mu*nu-(1/sigma)*(log(1+mu*sigma*(1-nu)))
-   S <- tofyDEL2(x, mu, sigma, nu)
-  # S <- tofyDELPORT(x, mu, sigma, nu)[,2]
+logpy0 <- -mu*nu-(1/sigma)*(log(1+mu*sigma*(1-nu)))
+     S <- tofyDEL2(x, mu, sigma, nu)
+   # S <- tofyDELPORT(x, mu, sigma, nu)[,2]
  logfy <-  logpy0-lgamma(x+1)+S
  if(log==FALSE) fy <- exp(logfy) else fy <- logfy
  
