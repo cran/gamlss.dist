@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # MS + BR last change Thursday, April 13, 2006
-NBF <- function (mu.link="log", sigma.link="log", nu.link ="identity")
+NBF <- function (mu.link="log", sigma.link="log", nu.link ="log")
 {
   mstats <- checklink("mu.link", "NB Family", substitute(mu.link), c("inverse", "log", "identity"))
   dstats <- checklink("sigma.link", "NB Family", substitute(sigma.link), c("inverse", "log", "identity"))

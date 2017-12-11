@@ -19,7 +19,7 @@ The functions \code{dNBF}, \code{pNBF}, \code{qNBF} and \code{rNBF} define the d
 The functions \code{dZINBF}, \code{pZINBF}, \code{qZINBF} and \code{rZINBF} define the density, distribution function, quantile function and random generation for the zero inflated negative binomial family, \code{ZINBF()}, distribution a four parameter distribution.
 }
 \usage{
-NBF(mu.link = "log", sigma.link = "log", nu.link = "identity")
+NBF(mu.link = "log", sigma.link = "log", nu.link = "log")
 
 dNBF(x, mu = 1, sigma = 1, nu = 2, log = FALSE)
 
