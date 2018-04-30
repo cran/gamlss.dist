@@ -2,6 +2,8 @@
 \alias{NET}
 \alias{dNET}
 \alias{pNET}
+\alias{qNET}
+\alias{rNET}
 
 \title{Normal Exponential t distribution (NET) for fitting a GAMLSS}
 \description{
@@ -10,21 +12,30 @@ GAMLSS fitting using the function \code{gamlss()}.  The functions \code{dNET},
 \code{pNET} define the density and  distribution function the NET distribution. 
 }
 \usage{
-NET(mu.link = "identity", sigma.link = "log")
-pNET(q, mu = 0, sigma = 1, nu = 1.5, tau = 2)
-dNET(x, mu = 0, sigma = 1, nu = 1.5, tau = 2, log = FALSE)
+NET(mu.link = "identity", sigma.link = "log", nu.link ="identity",
+      tau.link = "identity")
+pNET(q, mu=0, sigma=1, nu=1.5, tau=2,  lower.tail = TRUE, log.p = FALSE)
+dNET(x, mu=0, sigma=1, nu=1.5, tau=2, log=FALSE)
+qNET(p, mu=0, sigma=1, nu=1.5, tau=2,  lower.tail = TRUE, log.p = FALSE)
+rNET(n,  mu=0, sigma=1, nu=1.5, tau=2)
+
 }
 
 \arguments{
   \item{mu.link}{Defines the \code{mu.link}, with "identity" link as the default for the \code{mu} parameter. Other links are "inverse", "log" and "own" }
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter. Other links are "inverse", "identity" and "own"}
+  \item{nu.link}{Defines the \code{nu.link}, and because nu is fixed we use  "identity" link}
+   \item{tau.link}{Defines the \code{tau.link}, and because tau is fixed we use  "identity" link}
   \item{x,q}{vector of quantiles}
-  \
+  \item{p}{vector of probabilities}
+  \item{n}{number of observations.}
   \item{mu}{vector of location parameter values }
   \item{sigma}{vector of scale parameter values}
   \item{nu}{vector of \code{nu} parameter values}
   \item{tau}{vector of \code{tau} parameter values}
-   \item{log}{ logical; if TRUE, probabilities p are given as log(p).}
+  \item{log, log.p}{logical; if TRUE, probabilities p are given as log(p).}
+  \item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x],
+          otherwise, P[X > x] }
 }
 \details{
 The NET distribution was introduced by Rigby and Stasinopoulos (1994) as a robust distribution for a response

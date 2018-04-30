@@ -70,40 +70,28 @@ pZAGA <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
     cdf
    }
 #---------------------------------------------------------------------------------------- 
-qZAGA <- function(p, mu=1, sigma=1,  nu=0.1, lower.tail = TRUE, log.p = FALSE, 
-                upper.limit = mu+10*sqrt(sigma^2*mu^2))
-  { 
-    #---function--------------------------------------------   
-       h1 <- function(q)
-       { 
-     pZAGA(q , mu = mu[i], sigma = sigma[i], nu = nu[i]) - p[i]  
-       }
-     #-----------------------------------------------------------------
-     #-----------------------------------------------------------------
-    if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
-    if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", ""))
-    if (any(nu < 0)|any(nu > 1))  stop(paste("nu must be between 0 and 1", "\n", ""))     
-    if (log.p==TRUE) p <- exp(p) else p <- p
-    if (lower.tail==TRUE) p <- p else p <- 1-p
-    if (any(p < 0)|any(p >= 1))  stop(paste("p must be between 0 and 1", "\n", ""))     
-        # lp <- length(p) 
-         lp <- max(length(p),length(mu),length(sigma),length(nu)) 
-      sigma <- rep(sigma, length = lp)
-          p <- rep(p, length = lp)
-         mu <- rep(mu, length = lp)
-         nu <- rep(nu, length = lp)
-      upper <- rep(upper.limit, length = lp )
-      lower <- rep(0, length = lp )
-          q <- rep(0,lp)    
-         for (i in seq(along=p))
-          {
-           q[i] <- if (nu[i]>=p[i]) 0
-                   else  uniroot(h1, c(lower[i], upper[i]))$root                
-          if (q[i]>=upper[i]) warning("q is at the upper limit, increase the upper.limit")
-         # if (q[i]<=lower[i]) warning("q is at the lower limit, decrease the lower.limit")
-          }                                                                               
-    q
-   }
+qZAGA <- function (p, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, 
+                   log.p = FALSE) 
+{
+  # perform checks and preparations
+  if (any(mu <= 0)) stop(paste("mu must be positive", "\n", ""))
+  if (any(sigma <= 0)) stop(paste("sigma must be positive", "\n", ""))
+  if (any(nu < 0) | any(nu > 1)) stop(paste("nu must be between 0 and 1", "\n", ""))
+  if (log.p == TRUE) p <- exp(p)
+     else p <- p
+  if (lower.tail == TRUE) 
+    p <- p
+  else p <- 1 - p
+  if (any(p < 0) | any(p >= 1)) stop(paste("p must be between 0 and 1", "\n", ""))
+  if(!(length(nu) %in% c(1, length(p)))) stop(paste("nu is of length", length(nu), "\n", "Must be of lenght 1 or length(p) =", length(p)))
+  # handle zero quantiles
+  which_zero <- which(p <= nu)
+  if(length(nu) == 1) 
+    p[which_zero] <- nu
+  else p[which_zero] <- nu[which_zero] 
+  # compute quantiles
+  return( qgamma((p-nu)/(1-nu), shape = 1/sigma^2, scale = mu * sigma^2) )
+}
 #-----------------------------------------------------------------------------------------
 rZAGA <- function(n, mu=1, sigma=1, nu=0.1, ...)
   { 
