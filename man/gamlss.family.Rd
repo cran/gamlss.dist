@@ -59,6 +59,7 @@ as.family(object)
   Johnson's SU                 \tab \code{\link{JSU}()}     \tab  4  \cr   
   Logarithmic                  \tab \code{\link{LG}()}      \tab  1  \cr
   Logistic                     \tab \code{\link{LO}()}      \tab  2  \cr
+  Logit-Normal                 \tab \code{\link{LOGITNO}()} \tab  2  \cr
   log-Normal                   \tab \code{\link{LOGNO}()}   \tab  2  \cr
   log-Normal  (Box-Cox)        \tab \code{\link{LNO}()}     \tab  3 (1 fixed)  \cr
   Negative Binomial type I     \tab \code{\link{NBI}()}     \tab  2  \cr
@@ -86,6 +87,7 @@ as.family(object)
   Shash  original 2            \tab \code{\link{SHASH}()}   \tab  4  \cr
   Sichel  (original)           \tab \code{\link{SI}()}      \tab  3  \cr
   Sichel  (mu as the maen)     \tab \code{\link{SICHEL}()}  \tab  3  \cr
+  Simplex                      \tab \code{\link{SIMPLEX}()} \tab  2  \cr
   Skew t  type 1               \tab \code{\link{ST1}()}     \tab  3  \cr 
   Skew t  type 2               \tab \code{\link{ST2}()}     \tab  3  \cr 
   Skew t  type 3               \tab \code{\link{ST3}()}     \tab  3  \cr 

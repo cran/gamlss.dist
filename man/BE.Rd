@@ -11,12 +11,12 @@
 \alias{rBEo}
 
 
-\title{ The beta distribution for fitting a GAMLSS}
+\title{The beta distribution for fitting a GAMLSS}
 \description{
 The functions \code{BE()} and \code{BEo()} define the beta distribution, a two parameter distribution, for a 
 \code{gamlss.family} object to be used in GAMLSS fitting 
 using the function \code{gamlss()}. \code{BE()} has  mean equal to the parameter \code{mu}
-and \code{sigma} as scale parameter, see below. \code{BE()} is the original parameterizations  of the beta distribution as in \code{dbeta()} with 
+and \code{sigma} as scale parameter, see below. \code{BEo()} is the original parameterizations  of the beta distribution as in \code{dbeta()} with 
 \code{shape1}=mu and \code{shape2}=sigma. 
 The functions \code{dBE} and \code{dBEo}, \code{pBE} and \code{pBEo}, \code{qBE} and \code{qBEo}  and finally \code{rBE} and \code{rBE}  
 define the density, distribution function, quantile function and random
@@ -50,7 +50,7 @@ qBEo(p, mu = 0.5, sigma = 0.2, lower.tail = TRUE, log.p = FALSE)
 }
 \details{
 
-The original beta distributions distribution is given as 
+The original beta distribution is given as 
  \deqn{f(y|\alpha,\beta)=\frac{1}{B(\alpha, \beta)} y^{\alpha-1}(1-y)^{\beta-1}}{f(y|a,b)=1/(Beta(a,b)) y^(a-1)(1-y)^(b-1)} 
 for \eqn{y=(0,1)}{y=(0,1)}, \eqn{\alpha>0} and \eqn{\beta>0}. In the \code{gamlss} implementation of \code{BEo} 
 \eqn{\alpha=\mu} and \eqn{\beta>\sigma}.   The reparametrization in the function \code{BE()} is 
@@ -59,7 +59,7 @@ for \eqn{y=(0,1)}{y=(0,1)}, \eqn{\alpha>0} and \eqn{\beta>0}. In the \code{gamls
  The expected value of y is \eqn{\mu}{mu} and the variance is \eqn{\sigma^2\mu*(1-\mu)}{sigma^2*mu*(1-mu)}. 
 }
 \value{
- returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function. 
+ \code{BE()} and \code{BEo()} return a \code{gamlss.family} object which can be used to fit a beta distribution in the \code{gamlss()} function. 
 }
 \references{Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
@@ -79,9 +79,9 @@ Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2
 \note{Note that for \code{BE}, \code{mu} is the mean and \code{sigma} a scale parameter contributing to the variance of y}
 
 
-\seealso{  \code{\link{gamlss.family}}, \code{\link{BEINF}} }
+\seealso{  \code{\link{gamlss.family}}, \code{\link{BE}}, \code{\link{LOGITNO}}, \code{\link{GB1}}, \code{\link{BEINF}} }
 \examples{
-BE()# gives information about the default links for the normal distribution
+BE()# gives information about the default links for the beta distribution
 dat1<-rBE(100, mu=.3, sigma=.5)
 hist(dat1)        
 #library(gamlss)
