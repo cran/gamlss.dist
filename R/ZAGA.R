@@ -43,7 +43,9 @@ ZAGA <- function (mu.link ="log", sigma.link="log", nu.link ="logit")
               mu.valid = function(mu) TRUE , 
            sigma.valid = function(sigma)  all(sigma > 0),
               nu.valid = function(nu) all(nu > 0) && all(nu < 1), 
-               y.valid = function(y)  all(y>=0)
+               y.valid = function(y)  all(y>=0),
+                  mean = function(mu, sigma, nu) (1 - nu) * mu,
+              variance = function(mu, sigma, nu) (1 - nu) * mu^2 * (sigma^2 + nu)
           ),
             class = c("gamlss.family","family"))
 }

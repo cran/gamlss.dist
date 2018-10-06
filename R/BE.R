@@ -59,7 +59,9 @@ BE <- function (mu.link = "logit", sigma.link = "logit")
         sigma.initial = expression({sigma <- rep(0.5,length(y))}) ,
              mu.valid = function(mu) all(mu > 0 & mu < 1) , 
           sigma.valid = function(sigma)  all(sigma > 0 & sigma < 1), 
-              y.valid = function(y)  all(y > 0 & y < 1)
+              y.valid = function(y)  all(y > 0 & y < 1),
+                 mean = function(mu, sigma) mu,
+             variance = function(mu, sigma) sigma^2 * mu * (1 - mu)
           ),
                 class = c("gamlss.family","family"))
 }

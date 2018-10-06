@@ -49,15 +49,18 @@ PARETO2 <- function (mu.link = "log", sigma.link = "log")
           d2ldmdd <- -(1/(mu*sigma+mu*sigma^2))
        d2ldmdd 
         },
-        G.dev.incr = function(y, mu, sigma, ...) -2 * 
+     G.dev.incr = function(y, mu, sigma, ...) -2 * 
             dPARETO2(y, mu, sigma, log = TRUE), 
-        rqres = expression(rqres(pfun = "pPARETO2", 
-            type = "Continuous", y = y, mu = mu, sigma = sigma)), 
-        mu.initial = expression({mu <- (y + mean(y))/2}), 
-        sigma.initial = expression({sigma <- rep(sd(y), length(y))}), 
-        mu.valid = function(mu) all(mu > 0), 
-        sigma.valid = function(sigma) all(sigma > 0), 
-        y.valid = function(y) TRUE), 
+          rqres = expression(rqres(pfun = "pPARETO2", 
+           type = "Continuous", y = y, mu = mu, sigma = sigma)), 
+     mu.initial = expression({mu <- (y + mean(y))/2}), 
+  sigma.initial = expression({sigma <- rep(sd(y), length(y))}), 
+       mu.valid = function(mu) all(mu > 0), 
+    sigma.valid = function(sigma) all(sigma > 0), 
+        y.valid = function(y) TRUE,
+           mean = function(mu, sigma) ifelse(sigma < 1, (mu*sigma) / (1-sigma), Inf),
+     variance = function(mu, sigma) ifelse(sigma < 0.5, (sigma^2 * mu^2) / ((1-sigma)^2 * (1-2*sigma)), Inf)
+        ), 
         class = c("gamlss.family", "family"))
 }
 #-------------------------------------------------------------------------------

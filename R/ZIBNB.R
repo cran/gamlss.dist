@@ -80,7 +80,6 @@ ZIBNB <-function (mu.link ="log", sigma.link="log", nu.link="log", tau.link = "l
                  d2ldt2},
               d2ldmdd = function(y,mu,sigma,nu, tau) #1
                       {
-            
                   dldm0 <- (1-tau)*((tau+(1-tau)*dBNB(0,mu,sigma,nu))^(-1))*dBNB(0,mu,sigma,nu)*BNB()$dldm(0,mu,sigma,nu)
                    dldm <- ifelse(y==0, dldm0, BNB()$dldm(y,mu,sigma,nu))             
                   dldd0 <- (1-tau)*((tau+(1-tau)*dBNB(0,mu,sigma,nu))^(-1))*dBNB(0,mu,sigma,nu)*BNB()$dldd(0,mu,sigma,nu)

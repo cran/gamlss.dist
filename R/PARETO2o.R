@@ -109,14 +109,16 @@ PARETO2o <- function (mu.link = "log", sigma.link = "log")
               d2ldmdd <- -dldm*dldd
               d2ldmdd 
               },
-        G.dev.incr = function(y, mu, sigma, ...) -2 * 
+     G.dev.incr = function(y, mu, sigma, ...) -2 * 
             dPARETO2o(y, mu, sigma, log = TRUE), 
-        rqres = expression(rqres(pfun = "pPARETO2o", 
-            type = "Continuous", y = y, mu = mu, sigma = sigma)), 
-        mu.initial = expression({mu <- rep(mean(y), length(y))}), 
-        sigma.initial = expression({sigma <- rep(sd(y), length(y))}), 
-        mu.valid = function(mu) all(mu > 0), 
-        sigma.valid = function(sigma) all(sigma > 0), 
-        y.valid = function(y) TRUE), 
-        class = c("gamlss.family", "family"))
+          rqres = expression(rqres(pfun = "pPARETO2o", 
+           type = "Continuous", y = y, mu = mu, sigma = sigma)), 
+     mu.initial = expression({mu <- rep(mean(y), length(y))}), 
+  sigma.initial = expression({sigma <- rep(sd(y), length(y))}), 
+       mu.valid = function(mu) all(mu > 0), 
+    sigma.valid = function(sigma) all(sigma > 0), 
+        y.valid = function(y) TRUE,
+           mean = function(mu, sigma) ifelse(sigma > 1, mu / (sigma-1), Inf),
+       variance = function(mu, sigma) ifelse(sigma > 2, (sigma * mu^2) / ((sigma-1)^2 * (sigma-2)), Inf)), 
+          class = c("gamlss.family", "family"))
 }

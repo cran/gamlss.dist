@@ -85,7 +85,13 @@ GG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
           mu.valid = function(mu) all(mu > 0), 
        sigma.valid = function(sigma)  all(sigma > 0),
           nu.valid = function(nu) TRUE , 
-           y.valid = function(y) all(y>0)
+           y.valid = function(y) all(y>0),
+              mean = function(mu, sigma, nu) ifelse(nu > 0 | (nu < 0 & sigma^2 * abs(nu) < 1),
+                                           (mu * gamma(1/(sigma^2*nu^2) + 1/nu)) / ((1/(sigma^2*nu^2))^(1/nu) * gamma(1/(sigma^2*nu^2))),
+                                           Inf),
+          variance = function(mu, sigma, nu) ifelse(nu > 0 | (nu < 0 & sigma^2 * abs(nu) < 0.5),
+                                               (mu^2 / ((1/(sigma^2*nu^2))^(2/nu) * (gamma(1/(sigma^2*nu^2)))^2)) * (gamma(1/(sigma^2*nu^2) + 2/nu) * gamma(1/(sigma^2*nu^2)) - (gamma(1/(sigma^2*nu^2) + 1/nu))^2),
+                                               Inf)
           ),
             class = c("gamlss.family","family"))
 }

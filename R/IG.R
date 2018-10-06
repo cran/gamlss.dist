@@ -28,9 +28,11 @@ IG <-function (mu.link = "log", sigma.link = "log")
          sigma.initial = expression(sigma <- sd(y)/(mean(y))^1.5 ), 
               mu.valid = function(mu) all(mu > 0), 
            sigma.valid = function(sigma)  all(sigma > 0), 
-               y.valid = function(y)  all(y > 0)
+               y.valid = function(y)  all(y > 0),
+                  mean = function(mu, sigma) mu,
+              variance = function(mu, sigma) sigma^2 * mu^3
             ),
-            class = c("gamlss.family","family"))
+                 class = c("gamlss.family","family"))
 }
 #----------------------------------------------------------------------------------------  
 dIG<-function(x, mu = 1, sigma = 1, log=FALSE)

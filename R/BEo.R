@@ -49,7 +49,9 @@ BEo <- function (mu.link = "log", sigma.link = "log")
         sigma.initial = expression({sigma <- rep(2,length(y))}) ,
              mu.valid = function(mu) all(mu > 0 & mu < 1) , 
           sigma.valid = function(sigma)  all(sigma > 0 & sigma < 1), 
-              y.valid = function(y)  all(y > 0 & y < 1)
+              y.valid = function(y)  all(y > 0 & y < 1),
+                 mean = function(mu, sigma) mu/(mu+sigma),
+             variance = function(mu, sigma) (mu*sigma)/((mu+sigma)^2 *(mu+sigma+1))
           ),
                 class = c("gamlss.family","family"))
 }

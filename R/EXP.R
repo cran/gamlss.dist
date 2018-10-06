@@ -17,7 +17,9 @@ EXP <- function (mu.link ="log")
                 rqres = expression(rqres(pfun="pEXP", type="Continuous", y=y, mu=mu)), 
            mu.initial = expression(mu <- (y+mean(y))/2),
              mu.valid = function(mu) all(mu > 0) ,  
-              y.valid = function(y) all(y > 0)
+              y.valid = function(y) all(y > 0),
+                 mean = function(mu) mu,
+             variance = function(mu) mu^2
           ),
             class = c("gamlss.family","family"))
 }

@@ -34,7 +34,9 @@ LOGNO <- function (mu.link="identity", sigma.link="log")
          sigma.initial = expression({sigma <- rep(sd(log(y)),length(y)) }),  
               mu.valid = function(mu) all(mu > 0), 
            sigma.valid = function(sigma)  all(sigma > 0),
-               y.valid = function(y)  all(y > 0)
+               y.valid = function(y)  all(y > 0),
+                  mean = function(mu, sigma) exp((mu+sigma^2)/2),
+              variance = function(mu, sigma) exp(2*mu+sigma^1)*(exp(sigma^2+2))
           ),
             class = c("gamlss.family","family"))
 }

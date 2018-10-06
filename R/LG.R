@@ -22,7 +22,10 @@ LG <- function (mu.link = "logit")
                 rqres = expression(rqres(pfun="pLG", type="Discrete", ymin=1, y=y, mu=mu)), 
             mu.initial =expression({mu <- 0.9 } ),
               mu.valid = function(mu) all(mu > 0  & mu < 1), 
-               y.valid = function(y)  all(y > 0) 
+               y.valid = function(y)  all(y > 0),
+                  mean = function(mu) -(log(1-mu))^-1 * mu * (1-mu)^-1,
+              variance = function(mu) -(log(1-mu))^-1 * mu * (1+(log(1-mu))^-1 * mu) * (1-mu)^-2
+          
           ),
             class = c("gamlss.family","family"))
 }

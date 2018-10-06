@@ -15,10 +15,10 @@ generation for the the Johnson's Su distribution.
 }
 \usage{
 JSU(mu.link = "identity", sigma.link = "log", nu.link = "identity", tau.link = "log")
-dJSU(x, mu = 0, sigma = 1, nu = 1, tau = 0.5, log = FALSE)
-pJSU(q, mu = 0, sigma = 1, nu = 1, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
-qJSU(p, mu = 0, sigma = 1, nu = 0, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
-rJSU(n, mu = 0, sigma = 1, nu = 0, tau = 0.5)
+dJSU(x, mu = 0, sigma = 1, nu = 1, tau = 1, log = FALSE)
+pJSU(q, mu = 0, sigma = 1, nu = 1, tau = 1, lower.tail = TRUE, log.p = FALSE)
+qJSU(p, mu = 0, sigma = 1, nu = 1, tau = 1, lower.tail = TRUE, log.p = FALSE)
+rJSU(n, mu = 0, sigma = 1, nu = 1, tau = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

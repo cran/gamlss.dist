@@ -66,7 +66,7 @@ rZISICHEL(n, mu = 1, sigma = 1, nu = -0.5, tau = 0.1,
 \arguments{
   \item{mu.link}{ Defines the \code{mu.link}, with "log" link as the default for the \code{mu} parameter}
   \item{sigma.link}{Defines the  \code{sigma.link}, with "log" link as the default for the \code{sigma} parameter}
-  \item{nu.link}{ Defines the \code{nu.link}, with "identity" link as the default for the \code{nuu} parameter }
+  \item{nu.link}{ Defines the \code{nu.link}, with "identity" link as the default for the \code{nu} parameter }
     \item{tau.link}{Defines the \code{tau.link}, with "logit" link as the default for the \code{tau} parameter }
   \item{x}{ vector of (non-negative integer) quantiles}
   \item{mu}{vector of positive \code{mu}}

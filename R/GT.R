@@ -175,7 +175,9 @@ GT <- function (mu.link="identity", sigma.link="log", nu.link ="log", tau.link="
            sigma.valid = function(sigma)  all(sigma > 0),
               nu.valid = function(nu) all(nu > 0), 
              tau.valid = function(tau) all(tau > 0), 
-               y.valid = function(y)  TRUE
+               y.valid = function(y)  TRUE,
+                  mean = function(mu, sigma, nu, tau) ifelse(nu*tau > 1, mu, NaN),
+              variance = function(mu, sigma, nu, tau) ifelse(nu*tau > 2, (sigma^2 * nu^(2/tau) * beta(3*tau^-1, nu-2*tau^-1))/beta(tau^-1,nu), Inf)
           ),
             class = c("gamlss.family","family"))
 }

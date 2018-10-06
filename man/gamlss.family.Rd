@@ -40,6 +40,7 @@ as.family(object)
   Box-Cox Power Exponential    \tab \code{\link{BCPE}()}    \tab  4  \cr
   Box-Cox-t                    \tab \code{\link{BCT}()}     \tab  4  \cr
   Delaport                     \tab \code{\link{DEL}()}     \tab  3  \cr
+  Discrete Burr XII            \tab \code{\link{DBURR12}()} \tab  3  \cr
   Double Poisson               \tab \code{\link{DPO}()}     \tab  2  \cr
   Double binomial              \tab \code{\link{DBI}()}     \tab  2  \cr
   Exponential                  \tab \code{\link{EXP}()}     \tab  1  \cr

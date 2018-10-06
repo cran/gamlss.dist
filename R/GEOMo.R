@@ -75,6 +75,9 @@ structure(list(family = c("GEOMo", "Geometric original"),
                             ymin = 0, y = y, mu = mu)),   
         mu.initial = expression(mu <- rep(.5, length(y))),            
         mu.valid = function(mu) all(mu > 0) && all(mu < 1),   
-        y.valid = function(y) all(y >=0)),      
+        y.valid = function(y) all(y >=0),
+        mean = function(mu) (1-mu) * mu^-1,
+        variance = function(mu) (1-mu) * mu^-2
+        ),      
         class = c("gamlss.family", "family"))
 }

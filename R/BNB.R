@@ -82,8 +82,9 @@ BNB <-function (mu.link ="log", sigma.link="log", nu.link="log")
                     n <- (mu*nu)/sigma
                     k <- 1/nu
                  dldv <- -(1/nu^2)*digamma(y+k) + (mu/sigma)*digamma(y+n) -
-                         (1/nu^2)*digamma(m+k)+(mu/sigma)*digamma(n+m)+
-                         (1/nu^2)*digamma(k)-(mu/sigma)*digamma(n)
+                      (1/nu^2)*digamma(m+k)+(mu/sigma)*digamma(n+m)+
+                      (1/nu^2)*digamma(k)-(mu/sigma)*digamma(n) -
+                      ((mu/sigma)-(1/nu^2))*digamma(y+n+m+k)
                d2ldv2 <- -dldv*dldv
                d2ldv2 <- ifelse(d2ldv2 < -1e-15, d2ldv2,-1e-15)  
                     d2ldv2},
@@ -107,8 +108,9 @@ BNB <-function (mu.link ="log", sigma.link="log", nu.link="log")
              dldm <- (nu/sigma)*digamma(y+n) +  (nu/sigma)*digamma(n+m)-
                       (nu/sigma)*digamma(n) -  (nu/sigma)*digamma(y+n+m+k) 
              dldv <- -(1/nu^2)*digamma(y+k) + (mu/sigma)*digamma(y+n) -
-                      (1/nu^2)*digamma(m+k)+(mu/sigma)*digamma(n+m)+
-                      (1/nu^2)*digamma(k)-(mu/sigma)*digamma(n)
+                     (1/nu^2)*digamma(m+k)+(mu/sigma)*digamma(n+m)+
+                     (1/nu^2)*digamma(k)-(mu/sigma)*digamma(n) -
+                      ((mu/sigma)-(1/nu^2))*digamma(y+n+m+k)
           d2ldmdv <- -dldm *dldv
           d2ldmdv}, 
           d2ldddv = function(y,mu,sigma,nu)#------------------------------- 
@@ -120,8 +122,9 @@ BNB <-function (mu.link ="log", sigma.link="log", nu.link="log")
                     (1/sigma^2)*(mu*nu+1)*digamma(n+m)+(mu*nu/sigma^2)*digamma(n)+
                     (1/sigma^2)*digamma(m)+(1/sigma^2)*(mu*nu+1)*digamma(y+n+m+k)  
             dldv <- -(1/nu^2)*digamma(y+k) + (mu/sigma)*digamma(y+n) -
-                    (1/nu^2)*digamma(m+k)+(mu/sigma)*digamma(n+m)+
-                    (1/nu^2)*digamma(k)-(mu/sigma)*digamma(n)      
+                     (1/nu^2)*digamma(m+k)+(mu/sigma)*digamma(n+m)+
+                      (1/nu^2)*digamma(k)-(mu/sigma)*digamma(n) -
+                      ((mu/sigma)-(1/nu^2))*digamma(y+n+m+k)     
               d2ldddv <- -dldd *dldv
               d2ldddv
                                  },               
