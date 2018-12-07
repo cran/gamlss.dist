@@ -41,7 +41,15 @@ ZAZIPF <- function (mu.link = "log", sigma.link = "logit")
    sigma.initial = expression(sigma <-rep(0.1, length(y))), 
       mu.valid = function(mu) all(mu > 0),
    sigma.valid = function(sigma)  all(sigma > 0 & sigma < 1), 
-       y.valid = function(y)  all(y >= 0)
+       y.valid = function(y)  all(y >= 0),
+          mean = function(mu, sigma) {
+                         b <- zetaP(mu) / zetaP(mu + 1)
+                         return(ifelse(mu > 1, b * (1 - sigma), Inf))
+                  },
+      variance = function(mu, sigma) {
+                         b <- zetaP(mu) / zetaP(mu + 1)
+                         return( ifelse(mu > 2, (1 - sigma) * (zetaP(mu - 1) / zetaP(mu + 1)) - (1 - sigma)^2 * b^2, Inf) )
+                  }
           ),
             class = c("gamlss.family","family"))
 }

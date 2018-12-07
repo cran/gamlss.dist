@@ -160,23 +160,26 @@ pDBI<-function(q, mu = .5, sigma = 1, bd=2, lower.tail = TRUE, log.p = FALSE)
   sigma <- rep(sigma, length = ly)
      mu <- rep(mu, length = ly) 
      bd <- rep(bd, length = ly)  
-     ly <- length(q)
-    FFF <- rep(0,ly)
- nsigma <- rep(sigma, length = ly)
-    nmu <- rep(mu, length = ly)
-     nbd <- rep(bd, length = ly)
-     j <- seq(along=q)
-     for (i in j)
-     {
-       y.y <- q[i]
-        nn <- bd[i]
-        mm <- mu[i]
-      nsig <- sigma[i]
-    allval <- seq(0,y.y)
-    pdfall <- dDBI(allval, mu = mm, sigma = nsig, bd = nn, log = FALSE)
-    FFF[i] <- sum(pdfall)
-     }
-       cdf <- FFF
+ #     ly <- length(q)
+ #    FFF <- rep(0,ly)
+ # nsigma <- rep(sigma, length = ly)
+ #    nmu <- rep(mu, length = ly)
+ #     nbd <- rep(bd, length = ly)
+ #     j <- seq(along=q)
+ #     for (i in j)
+ #     {
+ #       y.y <- q[i]
+ #        nn <- bd[i]
+ #        mm <- mu[i]
+ #      nsig <- sigma[i]
+ #    allval <- seq(0,y.y)
+ #    pdfall <- dDBI(allval, mu = mm, sigma = nsig, bd = nn, log = FALSE)
+ #    FFF[i] <- sum(pdfall)
+ #     }
+      # cdf <- FFF
+        fn <- function(q, mu, sigma, bd) sum(dDBI(0:q, mu=mu, sigma=sigma, bd=bd))
+      Vcdf <- Vectorize(fn)
+       cdf <- Vcdf(q=q, mu=mu, sigma=sigma, bd=bd)     
        cdf <- if(lower.tail==TRUE) cdf else 1-cdf
        cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
   cdf

@@ -49,18 +49,21 @@ pLG <- function(q, mu = 0.5, lower.tail = TRUE, log.p = FALSE)
         ly <- max(length(q),length(mu)) 
          q <- rep(q, length = ly)      
         mu <- rep(mu, length = ly)   
-       FFF <- rep(0,ly)                         
+#       FFF <- rep(0,ly)                         
        nmu <- rep(mu, length = ly)                                                       
-         j <- seq(along=q) 
-   for (i in j)                                                          
-      {                                                                 
-        y.y <- q[i]                                                                                      
-         mm <- nmu[i]                                      
-     allval <- seq(1,y.y)
-     pdfall <- dLG(allval, mu = mm, log = FALSE)
-     FFF[i] <- sum(pdfall)                                             
-      }  
-      cdf <- FFF
+#         j <- seq(along=q) 
+   # for (i in j)                                                          
+   #    {                                                                 
+   #      y.y <- q[i]                                                                                      
+   #       mm <- nmu[i]                                      
+   #   allval <- seq(1,y.y)
+   #   pdfall <- dLG(allval, mu = mm, log = FALSE)
+   #   FFF[i] <- sum(pdfall)                                             
+   # } 
+       fn <- function(q, mu) sum(dLG(1:q, mu=mu))
+     Vcdf <- Vectorize(fn)
+      cdf <- Vcdf(q=q, mu=mu)   
+#      cdf <- FFF
       cdf <- if(lower.tail==TRUE) cdf else 1-cdf
       cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
       cdf

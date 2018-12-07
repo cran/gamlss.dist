@@ -45,7 +45,9 @@ NBI <- function (mu.link = "log", sigma.link = "log")
                       sigma <- rep( max( ((var(y)-mean(y))/(mean(y)^2)),0.1),length(y))),
               mu.valid = function(mu) all(mu > 0) , 
            sigma.valid = function(sigma)  all(sigma > 0), 
-               y.valid = function(y)  all(y >= 0)
+               y.valid = function(y)  all(y >= 0),
+                  mean = function(mu, sigma) mu,
+              variance = function(mu, sigma) mu + sigma * mu^2
           ),
             class = c("gamlss.family","family"))
 }

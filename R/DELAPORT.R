@@ -135,7 +135,9 @@
               mu.valid = function(mu) all(mu > 0) , 
            sigma.valid = function(sigma)  all(sigma > 0), 
               nu.valid = function(nu) all(nu > 0) && all(nu < 1),    
-               y.valid = function(y)  all(y >= 0)
+               y.valid = function(y)  all(y >= 0),
+                  mean = function(mu, sigma, nu) mu,
+              variance = function(mu, sigma, nu) mu + mu^2 * sigma * (1 - nu)^2
           ),
             class = c("gamlss.family","family"))
 }
@@ -253,23 +255,14 @@ pDEL <- function(q, mu = 1, sigma = 1, nu = .5, lower.tail = TRUE, log.p = FALSE
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
    if (any(nu <= 0) | any(nu >= 1))  stop(paste("nu must be between 0 and 1", "\n", "")) 
    if (any(q < 0) )  stop(paste("q must be >=0", "\n", ""))    
-        ly <- length(q)                                                       
-       FFF <- rep(0,ly)                         
-    nsigma <- rep(sigma, length = ly)
-       nmu <- rep(mu, length = ly) 
-       nnu <- rep(nu, length = ly)                                                        
-         j <- seq(along=q) 
-   for (i in j)                                                          
-      {                                                                 
-        y.y <- q[i]                                                   
-         nn <- nnu[i]                                                  
-         mm <- nmu[i]
-       nsig <- nsigma[i]                                                     
-     allval <- seq(0,y.y)
-     pdfall <- dDEL(allval, mu = mm, sigma = nsig, nu = nn, log = FALSE)
-     FFF[i] <- sum(pdfall)                                             
-      }  
-      cdf <- FFF
+       ly <- max(length(q),length(mu),length(sigma),length(nu)) 
+        q <- rep(q, length = ly)      
+    sigma <- rep(sigma, length = ly)
+       mu <- rep(mu, length = ly)   
+       nu <- rep(nu, length = ly) 
+       fn <- function(q, mu, sigma, nu) sum(dDEL(0:q, mu=mu, sigma=sigma, nu=nu))
+     Vcdf <- Vectorize(fn)
+      cdf <- Vcdf(q=q, mu=mu, sigma=sigma, nu=nu) 
       cdf <- if(lower.tail==TRUE) cdf else 1-cdf
       cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
       cdf

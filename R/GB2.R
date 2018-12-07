@@ -122,7 +122,9 @@ GB2 <- function (mu.link="log", sigma.link="log", nu.link ="log", tau.link="log"
    sigma.valid = function(sigma)  TRUE,
       nu.valid = function(nu) all(nu > 0), 
      tau.valid = function(tau) all(tau > 0), 
-       y.valid = function(y)  TRUE
+       y.valid = function(y)  TRUE,
+          mean = function(mu, sigma, nu, tau) ifelse(tau > 1/sigma, mu * beta(nu + 1/sigma, tau - 1/sigma) / beta(nu,tau), Inf),
+      variance = function(mu, sigma, nu, tau) ifelse(tau > 2/sigma, mu^2 * (beta(nu + 2/sigma,tau - 2/sigma) * beta(nu,tau) - (beta(nu + 1/sigma, tau - 1/sigma))^2) / (beta(nu, tau))^2, Inf)
           ),
             class = c("gamlss.family","family"))
 }

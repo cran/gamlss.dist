@@ -35,7 +35,9 @@ ZIPF <- function (mu.link = "log")
          rqres = expression(rqres(pfun="pZIPF", type="Discrete", ymin=1, y=y, mu=mu)), 
          mu.initial =expression({mu <- rep(.1,length(y)) } ),
          mu.valid = function(mu) all(mu > 0), 
-         y.valid = function(y)  all(y >= 1) 
+         y.valid = function(y)  all(y >= 1),
+            mean = function(mu) ifelse(mu > 1, zetaP(mu) / zetaP(mu +1), Inf),
+        variance = function(mu) ifelse(mu > 2, (zetaP(mu + 1) * zetaP(mu - 1) - (zetaP(mu))^2) / (zetaP(mu + 1))^2, Inf)
     ),
     class = c("gamlss.family","family"))
 }

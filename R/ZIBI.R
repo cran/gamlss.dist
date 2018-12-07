@@ -48,6 +48,8 @@ mu.initial = expression(mu <- rep(0.5,length(y))),         #(((y + 0.5)/(bd +1))
       mu.valid = function(mu) all(mu > 0 & mu < 1),
    sigma.valid = function(sigma)  all(sigma > 0 & sigma < 1), 
        y.valid = function(y)  all(y >= 0)
+           ,mean = function(bd, mu, sigma) (1 - sigma) * bd * mu,
+       variance = function(bd, mu, sigma) (1 - sigma) * bd * mu * (1 - mu + bd * mu * sigma)
           ),
             class = c("gamlss.family","family"))
 }

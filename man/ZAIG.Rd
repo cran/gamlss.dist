@@ -25,8 +25,7 @@ generation for the \code{ZAIG} parameterization of the zero adjusted Inverse Gau
 ZAIG(mu.link = "log", sigma.link = "log", nu.link = "logit")
 dZAIG(x, mu = 1, sigma = 1, nu = 0.1, log = FALSE)
 pZAIG(q, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
-qZAIG(p, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE, 
-     upper.limit = mu + 10 * sqrt(sigma^2 * mu^3))
+qZAIG(p, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
 rZAIG(n, mu = 1, sigma = 1, nu = 0.1, ...)
 plotZAIG(mu = 5, sigma = 1, nu = 0.1, from = 0, to = 10, n = 101, ...)
 meanZAIG(obj)
@@ -43,8 +42,6 @@ meanZAIG(obj)
   \item{log, log.p}{ logical; if TRUE, probabilities p are given as log(p).}
   \item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x],
           otherwise, P[X > x] }
-  \item{upper.limit}{the argument \code{upper.limit} sets the upper limit in the golden section search for q, 
-           the default is 10 time its standard deviation}
   \item{p}{vector of probabilities. }
   \item{n}{ number of observations. If \code{length(n) > 1}, the length is
           taken to be the number required}  

@@ -93,7 +93,9 @@ NBF <- function (mu.link="log", sigma.link="log", nu.link ="log")
          mu.valid = function(mu) all(mu > 0) , 
          sigma.valid = function(sigma)  all(sigma > 0), 
          nu.valid = function(nu) all(nu > 0), # maybe it should be TRUE
-         y.valid = function(y)  all(y >= 0)
+         y.valid = function(y)  all(y >= 0),
+            mean = function(mu, sigma, nu) mu,
+        variance = function(mu, sigma, nu) mu + sigma * mu^(nu)
     ),
     class = c("gamlss.family","family"))
 }

@@ -52,9 +52,8 @@ pIG <- function(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
       lq <- length(q)                                                                    
    sigma <- rep(sigma, length = lq)
       mu <- rep(mu, length = lq)           
-
     cdf1 <- pnorm(((q/mu)-1)/(sigma*sqrt(q))) 
-    lcdf2 <- (2/(mu*sigma^2))+pnorm((-((q/mu)+1))/(sigma*sqrt(q)),log.p=TRUE)
+   lcdf2 <- (2/(mu*sigma^2))+pnorm((-((q/mu)+1))/(sigma*sqrt(q)),log.p=TRUE)
      cdf <- cdf1+ exp(lcdf2)
     if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf 
     if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 

@@ -40,7 +40,15 @@ ZAP <- function (mu.link = "log", sigma.link = "logit")
    sigma.initial = expression(sigma <-rep(0.3, length(y))), 
       mu.valid = function(mu) all(mu > 0) , 
    sigma.valid = function(sigma)  all(sigma > 0 & sigma < 1), 
-       y.valid = function(y)  all(y >= 0)
+       y.valid = function(y)  all(y >= 0),
+          mean = function(mu, sigma) {
+                         c <- (1 - sigma) / (1- exp(-mu))
+                         return( c * mu )
+                  },
+      variance = function(mu, sigma, nu) {
+                         c <- (1 - sigma) / (1- exp(-mu))
+                         return(c * mu + c * mu^2 - c^2 * mu^2 )
+                  } 
           ),
             class = c("gamlss.family","family"))
 }

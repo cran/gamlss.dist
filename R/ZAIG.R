@@ -42,9 +42,7 @@ ZAIG <- function (mu.link ="log", sigma.link="log", nu.link ="logit")
               mu.valid = function(mu) TRUE , 
            sigma.valid = function(sigma)  all(sigma > 0),
               nu.valid = function(nu) all(nu > 0) && all(nu < 1), 
-               y.valid = function(y)  all(y>=0),
-                  mean = function(mu, sigma, nu) (1 - nu) * mu,
-              variance = function(mu, sigma, nu) (1 - nu) * mu^2 * (nu+mu*sigma^2)
+               y.valid = function(y)  all(y>=0)
           ),
             class = c("gamlss.family","family"))
 }
@@ -82,43 +80,33 @@ pZAIG <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
     cdf
    }
 #---------------------------------------------------------------------------------------- 
-qZAIG <- function(p, mu=1, sigma=1,  nu=0.1, lower.tail = TRUE, log.p = FALSE, 
-                upper.limit = mu+10*sqrt(sigma^2*mu^3))
+qZAIG <- function(p, mu=1, sigma=1,  nu=0.1, lower.tail = TRUE, log.p = FALSE)
   { 
-    #---function--------------------------------------------   
-       h1 <- function(q)
-       { 
-     pZAIG(q , mu = mu[i], sigma = sigma[i], nu = nu[i]) - p[i]  
-       }
-     #-----------------------------------------------------------------
-     #-----------------------------------------------------------------
-    if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
-    if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", ""))
-    if (any(nu < 0)|any(nu > 1))  stop(paste("nu must be between 0 and 1", "\n", ""))     
-    if (log.p==TRUE) p <- exp(p) else p <- p
-    if (lower.tail==TRUE) p <- p else p <- 1-p
-    if (any(p < 0)|any(p >= 1))  stop(paste("p must be between 0 and 1", "\n", ""))     
-    #     lp <- length(p) 
-         lp <- max(length(p),length(mu),length(sigma),length(nu)) 
-          p <- rep(p, length = lp)
-      sigma <- rep(sigma, length = lp)
-         mu <- rep(mu, length = lp)
-         nu <- rep(nu, length = lp)
-      upper <- rep(upper.limit, length = lp )
-      lower <- rep(0, length = lp )
-          q <- rep(0,lp)    
-         for (i in seq(along=p))
-          {
-           q[i] <- if (nu[i]>=p[i]) 0
-                   else  { tryCatch( uniroot(h1, c(lower[i], upper[i]))$root,
-                        warning = function(w) {warning(as.character(w))},
-                        error = function(e){warning("increasing the upper limit of q function","\n")	
-                     res <- uniroot(h1, c(lower[i], upper[i]+20))$root
-                     return(res)
-                     })}        
-          #if (q[i]>=upper[i]) warning("q is at the upper limit, increase the upper.limit")
-          }                                                                               
-    q
+   
+#-----------------------------------------------------------------
+#-----------------------------------------------------------------
+if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
+if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", ""))
+if (any(nu < 0)|any(nu > 1))  stop(paste("nu must be between 0 and 1", "\n", ""))     
+if (log.p==TRUE) p <- exp(p) else p <- p
+if (lower.tail==TRUE) p <- p else p <- 1-p
+if (any(p < 0)|any(p >= 1))  stop(paste("p must be between 0 and 1", "\n", ""))     
+      lp <- max(length(p),length(mu),length(sigma),length(nu)) 
+       p <- rep(p, length = lp)
+   sigma <- rep(sigma, length = lp)
+      mu <- rep(mu, length = lp)
+      nu <- rep(nu, length = lp)
+       q <- rep(0,lp)    
+    p_nu <- ifelse((p - nu)/(1 - nu) <= 0, 0.5, (p - nu)/(1 - nu))
+       q <- ifelse((p > nu), qIG(p_nu, mu=mu, sigma=sigma), 0)
+       # compute quantiles
+if (lower.tail == TRUE) 
+  q <- q
+else q <- 1 - q
+if (log.p == FALSE) 
+  q <- q
+else q <- log(q)
+q
    }
 #-----------------------------------------------------------------------------------------
 rZAIG <- function(n, mu=1, sigma=1, nu=0.1, ...)

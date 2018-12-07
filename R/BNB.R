@@ -140,7 +140,9 @@ BNB <-function (mu.link ="log", sigma.link="log", nu.link="log")
               mu.valid = function(mu) all(mu > 0) , 
            sigma.valid = function(sigma)  all(sigma > 0), 
               nu.valid = function(nu) TRUE,  
-               y.valid = function(y)  all(y >= 0)
+               y.valid = function(y)  all(y >= 0),
+                  mean = function(mu, sigma, nu) mu,
+              variance = function(mu, sigma, nu) ifelse(sigma < 1, mu * (1 + mu * nu) * (1 + sigma / nu) / (1 - sigma), Inf)
           ),
             class = c("gamlss.family","family"))
 }
@@ -179,25 +181,12 @@ pBNB <- function(q, mu = 1, sigma = 1, nu = 1, lower.tail = TRUE, log.p = FALSE)
   sigma <- rep(sigma, length = ly)
      mu <- rep(mu, length = ly)   
      nu <- rep(nu, length = ly) 
-    FFF <- rep(0,ly)                         
- nsigma <- rep(sigma, length = ly)
-    nmu <- rep(mu, length = ly) 
-    nnu <- rep(nu, length = ly)                                                        
-      j <- seq(along=q) 
-  for (i in j)                                                          
-  {                                                                 
-     y.y <- q[i]                                                   
-      nn <- nnu[i]                                                  
-      mm <- nmu[i]
-    nsig <- nsigma[i]                                                     
-  allval <- seq(0,y.y)
-  pdfall <- dBNB(allval, mu = mm, sigma = nsig, nu = nn, log = FALSE)
-  FFF[i] <- sum(pdfall)                                             
-  }  
-     cdf <- FFF
-     cdf <- if(lower.tail==TRUE) cdf else 1-cdf
-     cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
-     cdf
+     fn <- function(q, mu, sigma, nu) sum(dBNB(0:q, mu=mu, sigma=sigma, nu=nu))
+   Vcdf <- Vectorize(fn)
+    cdf <- Vcdf(q=q, mu=mu, sigma=sigma, nu=nu)
+    cdf <- if(lower.tail==TRUE) cdf else 1-cdf
+    cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
+    cdf
 }
 #----------------------------------------------------------------------------------------
 qBNB <- function(p, mu=1, sigma=1, nu=1,  lower.tail = TRUE, log.p = FALSE,  

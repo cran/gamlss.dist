@@ -54,7 +54,7 @@ The original beta distribution is given as
  \deqn{f(y|\alpha,\beta)=\frac{1}{B(\alpha, \beta)} y^{\alpha-1}(1-y)^{\beta-1}}{f(y|a,b)=1/(Beta(a,b)) y^(a-1)(1-y)^(b-1)} 
 for \eqn{y=(0,1)}{y=(0,1)}, \eqn{\alpha>0} and \eqn{\beta>0}. In the \code{gamlss} implementation of \code{BEo} 
 \eqn{\alpha=\mu} and \eqn{\beta>\sigma}.   The reparametrization in the function \code{BE()} is 
- \eqn{\mu=\frac{\alpha}{\alpha+\beta}}{mu=a/(a+b)} and  \eqn{\sigma=\frac{1}{\alpha+\beta+1}}{sigma=1/(a+b+1)}
+ \eqn{\mu=\frac{\alpha}{\alpha+\beta}}{mu=a/(a+b)} and  \eqn{\sigma=(\frac{1}{\alpha+\beta+1)^{1/2}}}{sigma=(1/(a+b+1))^0.5}
  for \eqn{\mu=(0,1)}{mu=(0,1)} and \eqn{\sigma=(0,1)}{sigma=(0,1)}.
  The expected value of y is \eqn{\mu}{mu} and the variance is \eqn{\sigma^2\mu*(1-\mu)}{sigma^2*mu*(1-mu)}. 
 }

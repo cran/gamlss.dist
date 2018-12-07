@@ -48,7 +48,9 @@ BB <- function (mu.link = "logit", sigma.link = "log")
          sigma.initial = expression (sigma <- rep(1,length(y))),
               mu.valid = function(mu) all(mu > 0) && all(mu < 1), 
            sigma.valid = function(sigma)  all(sigma > 0), 
-               y.valid = function(y)  all(y >= 0)
+               y.valid = function(y)  all(y >= 0), 
+                  mean = function(bd, mu, sigma) bd * mu,
+              variance = function(bd, mu, sigma) bd * mu * (1 - mu) * (1 + sigma* (bd - 1) / (1 + sigma))
           ),
             class = c("gamlss.family","family"))
 }
@@ -88,24 +90,27 @@ pBB <- function(q, mu = 0.5, sigma = 1, bd = 10, lower.tail = TRUE, log.p = FALS
          q <- rep(q, length = ly)      
      sigma <- rep(sigma, length = ly)
         mu <- rep(mu, length = ly)   
-        bd <- rep(bd, length = ly)       
+        bd <- rep(bd, length = ly)   
       # ly <- length(q)                                                       
-       FFF <- rep(0,ly)                         
-    nsigma <- rep(sigma, length = ly)
-       nmu <- rep(mu, length = ly) 
-       nbd <- rep(bd, length = ly)                                                         
-         j <- seq(along=q) 
-   for (i in j)                                                          
-      {                                                                 
-        y.y <- q[i]                                                   
-         nn <- nbd[i]                                                  
-         mm <- nmu[i]
-       nsig <- nsigma[i]                                                     
-     allval <- seq(0,y.y)
-     pdfall <- dBB(allval, mu = mm, sigma = nsig, bd = nn, log = FALSE)
-     FFF[i] <- sum(pdfall)                                             
-      }  
-      cdf <- FFF
+   #     FFF <- rep(0,ly)                         
+   #  nsigma <- rep(sigma, length = ly)
+   #     nmu <- rep(mu, length = ly) 
+   #     nbd <- rep(bd, length = ly)                                                         
+   #       j <- seq(along=q) 
+   # for (i in j)                                                          
+   #    {                                                                 
+   #      y.y <- q[i]                                                   
+   #       nn <- nbd[i]                                                  
+   #       mm <- nmu[i]
+   #     nsig <- nsigma[i]                                                     
+   #   allval <- seq(0,y.y)
+   #   pdfall <- dBB(allval, mu = mm, sigma = nsig, bd = nn, log = FALSE)
+   #   FFF[i] <- sum(pdfall)                                             
+   # }  
+   #       
+       fn <- function(q, mu, sigma, bd) sum(dBB(0:q, mu=mu, sigma=sigma, bd=bd))
+     Vcdf <- Vectorize(fn)
+      cdf <- Vcdf(q=q, mu=mu, sigma=sigma, bd=bd)
       cdf <- if(lower.tail==TRUE) cdf else 1-cdf
       cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
       if (length(sigma)>1) cdf2 <- ifelse(sigma>0.0001, cdf, 

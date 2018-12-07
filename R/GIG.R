@@ -112,7 +112,27 @@ GIG <- function (mu.link="log", sigma.link="log", nu.link ="identity")
           mu.valid = function(mu) TRUE , 
        sigma.valid = function(sigma)  all(sigma > 0),
           nu.valid = function(nu) TRUE , 
-           y.valid = function(y) all(y>0)
+           y.valid = function(y) all(y>0),
+              mean = function(mu, sigma, nu) mu,
+          variance = function(mu, sigma, nu) {
+                                                t          <- 1 / sigma^2 
+                                                lambda1    <- nu + 1
+                                                lambda2    <- nu
+                                                integrand1 <- function(x) { 
+                                                  x^(lambda1-1) * exp(-0.5*t*(x+1/x)) 
+                                                }
+                                                integrand2 <- function(x) { 
+                                                  x^(lambda2-1) * exp(-0.5*t*(x+1/x)) 
+                                                }
+                                                K1     <- integrate(integrand1,0,Inf)$value*0.5
+                                                K2     <- integrate(integrand2,0,Inf)$value*0.5
+                                                
+                                                b      <- K1 / K2
+                                                
+                                                return(
+                                                       mu^2 * ( (2*sigma^2 * (nu + 1)) / b + b^(-2) - 1 )
+                                                      )
+                                              }
           ),
             class = c("gamlss.family","family"))
 }

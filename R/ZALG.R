@@ -35,7 +35,15 @@ ZALG <- function (mu.link = "logit", sigma.link = "logit")
    sigma.initial = expression(sigma <-rep(0.3, length(y))), 
       mu.valid = function(mu) all(mu > 0  & mu < 1),
    sigma.valid = function(sigma)  all(sigma > 0 & sigma < 1), 
-       y.valid = function(y)  all(y >= 0)
+       y.valid = function(y)  all(y >= 0),
+          mean = function(mu, sigma) {
+                          alpha <- - 1 / log(1 - mu)
+                          return((1 - sigma) * alpha * mu / (1 - mu))
+                  }, 
+      variance = function(mu, sigma, nu) {
+                          alpha <- - 1 / log(1 - mu)
+                          return((1 - sigma) * alpha * mu * (1 - (1 - sigma) * alpha * mu) / (1 - mu)^2)
+                  }
           ),
             class = c("gamlss.family","family"))
 }

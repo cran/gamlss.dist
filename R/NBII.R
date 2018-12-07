@@ -1,5 +1,6 @@
 # RAR, MS, KA
 # last change Dec 2004
+# JL added moments, Nov 2018
 
 #------------------------------------------------------------------------------------------
  NBII <-function (mu.link ="log", sigma.link="log") 
@@ -69,7 +70,9 @@
                                sigma <- rep( max(((var(y)/mean(y))-1),0.1), length(y))),
               mu.valid = function(mu) all(mu > 0)  , 
            sigma.valid = function(sigma)  all(sigma > 0), 
-               y.valid = function(y)  all(y >= 0)
+               y.valid = function(y)  all(y >= 0),
+                  mean = function(mu,sigma) mu,
+              variance = function(mu, sigma) mu + sigma * mu
           ),
             class = c("gamlss.family","family"))
 }

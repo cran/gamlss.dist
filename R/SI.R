@@ -108,7 +108,20 @@ SI <-function (mu.link ="log", sigma.link="log", nu.link="identity")
               mu.valid = function(mu) all(mu > 0) , 
            sigma.valid = function(sigma)  all(sigma > 0), 
               nu.valid = function(nu) TRUE,  
-               y.valid = function(y)  all(y >= 0)
+               y.valid = function(y)  all(y >= 0),
+                  mean = function(mu, sigma, nu) {
+                                  K1       <- besselK(1 / sigma, nu + 1)
+                                  K2       <- besselK(1 / sigma, nu )
+                                  b        <- K1 / K2
+                                  return(mu * b)
+                          },
+              variance = function(mu, sigma, nu) {
+                                  K1       <- besselK(1 / sigma, nu + 1)
+                                  K2       <- besselK(1 / sigma, nu )
+                                  b        <- K1 / K2
+                                  g        <- 2 * sigma * (nu+1) / b + 1 / b^2 - 1
+                                  return(b * mu + b^2 * mu^2 * g)
+                          }
           ),
             class = c("gamlss.family","family"))
 }

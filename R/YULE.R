@@ -61,19 +61,15 @@ dYULE<-function (x, mu = 2, log = FALSE)
 #Cumulative density function
 pYULE<-function (q, mu = 2, lower.tail = TRUE, log.p = FALSE)
 {
-    if (any(mu < 0))
-        stop(paste("mu must be > 0", "\n", ""))
-    if (any(q < 0))
-        stop(paste("q must be >=0", "\n", ""))
-    ly <- max(length(q), length(mu))
-     q <- rep(q, length = ly)
-    mu <- rep(mu, length = ly)
-    #s1<- seq(0, max(q))
-    #cdf<- cumsum(dYUL(s1, mu=mu))
-    #s2<-match(q,s1, nomatch=0)
-    #cdf<- cdf[s2]
-    cdf <- 1-((gamma(2+(1/mu))*gamma(2+q))/
-           gamma(3+(1/mu)+q))
+    if (any(mu < 0)) stop(paste("mu must be > 0", "\n", ""))
+    if (any(q < 0)) stop(paste("q must be >=0", "\n", ""))
+       ly <- max(length(q), length(mu))
+        q <- rep(q, length = ly)
+       mu <- rep(mu, length = ly)
+     # cdf1 <- 1-((gamma(2+(1/mu))*gamma(2+q))/gamma(3+(1/mu)+q))
+       fn <- function(q, mu) sum(dYULE(0:q, mu=mu))
+       Vcdf <- Vectorize(fn)
+       cdf <- Vcdf(q=q, mu=mu)  
     if (lower.tail == TRUE) 
         cdf <- cdf
     else cdf = 1 - cdf
