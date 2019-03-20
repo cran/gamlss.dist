@@ -122,16 +122,31 @@ rZAIG <- function(n, mu=1, sigma=1, nu=0.1, ...)
   }
    
 #----------------------------------------------------------------------------------------
-plotZAIG <- function( mu =5 , sigma=1, nu = 0.1, from = 0, to=10, n = 101, ...)
- {
-  y = seq(from=0.001, to=to, length.out=n )
-  pdf<- dZAIG(y, mu = mu ,sigma = sigma, nu = nu) 
-  pr0<-c(dZAIG(0, mu=mu ,sigma=sigma,  nu=nu))
-  po<-c(0)
-  plot(pdf~y, main="Zero adjusted IG", ylim=c(0,max(pdf,pr0)), type="l")
-  points(po,pr0,type="h")
-  points(po,pr0,type="p", col="blue")
- }
+# plotZAIG <- function( mu =5 , sigma=1, nu = 0.1, from = 0, to=10, n = 101, ...)
+#  {
+#   y = seq(from=0.001, to=to, length.out=n )
+#   pdf<- dZAIG(y, mu = mu ,sigma = sigma, nu = nu) 
+#   pr0<-c(dZAIG(0, mu=mu ,sigma=sigma,  nu=nu))
+#   po<-c(0)
+#   plot(pdf~y, main="Zero adjusted IG", ylim=c(0,max(pdf,pr0)), type="l")
+#   points(po,pr0,type="h")
+#   points(po,pr0,type="p", col="blue")
+# }
+plotZAIG<-function (mu = 5, sigma = 1, nu = 0.1, from = 0, to = 10, n = 101, 
+                    main = NULL, ...) 
+{
+    y <- seq(from = 0.001, to = to, length.out = n)
+  pdf <- dZAIG(y, mu = mu, sigma = sigma, nu = nu)
+  pr0 <- c(dZAIG(0, mu = mu, sigma = sigma, nu = nu))
+  po <- c(0)
+  if (is.null(main)) 
+    main = "Zero adjusted IG"
+  plot(pdf ~ y, main = main, ylim = c(0, max(pdf, pr0)), 
+       type = "l", ...)
+  points(po, pr0, type = "h")
+  points(po, pr0, type = "p", col = "blue")
+}
+
 #----------------------------------------------------------------------------------------
 meanZAIG <- function(obj)
   {

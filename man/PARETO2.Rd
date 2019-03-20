@@ -9,19 +9,46 @@
 \alias{pPARETO2o}
 \alias{qPARETO2o}
 \alias{rPARETO2o}
+\alias{PARETO}
+\alias{dPARETO}
+\alias{pPARETO}
+\alias{qPARETO}
+\alias{rPARETO}
+\alias{PARETO1}
+\alias{dPARETO1}
+\alias{pPARETO1}
+\alias{qPARETO1}
+\alias{rPARETO1}
+
 \title{
-Pareto Type 2 distribution for fitting a GAMLSS
-}
+Pareto distributions for fitting in GAMLSS}
 \description{
-The functions \code{PARETO2()} and  \code{PARETO2o()} define the Pareto Type 2 distribution, a two parameter distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}.
+The functions \code{PARETO()} defines the one parameter Pareto distribution for \code{y>1}.
+
+The functions \code{PARETO1()} defines the one parameter Pareto distribution for \code{y>0}.
+
+The functions \code{PARETO2()} and  \code{PARETO2o()} define the Pareto Type 2 distribution, for \code{y>0}, a two parameter distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}.
 The parameters are  \code{mu} and \code{sigma} in both functions but the parameterasation different.  The \code{mu} is identical for both \code{PARETO2()} and  \code{PARETO2o()}. The \code{sigma} in  \code{PARETO2o()} is the inverse of the \code{sigma} in code{PARETO2()} and coresponse to the usual parameter \code{alpha} of the Patreto distribution. The functions \code{dPARETO2}, \code{pPARETO2}, \code{qPARETO2} and \code{rPARETO2} define the density, distribution function, quantile function and random generation for the \code{PARETO2} parameterization of the Pareto type 2 distribution while the functions \code{dPARETO2o}, \code{pPARETO2o}, \code{qPARETO2o} and \code{rPARETO2o} define the density, distribution function, quantile function and random generation for the original \code{PARETO2o} parameterization of the Pareto type 2 distribution
 }
 \usage{
+PARETO(mu.link = "log")
+dPARETO(x, mu = 1, log = FALSE)
+pPARETO(q, mu = 1, lower.tail = TRUE, log.p = FALSE)
+qPARETO(p, mu = 1, lower.tail = TRUE, log.p = FALSE)
+rPARETO(n, mu = 1)
+
+PARETO1(mu.link = "log")
+dPARETO1(x, mu = 1, log = FALSE)
+pPARETO1(q, mu = 1, lower.tail = TRUE, log.p = FALSE)
+qPARETO1(p, mu = 1, lower.tail = TRUE, log.p = FALSE)
+rPARETO1(n, mu = 1)
+
 PARETO2(mu.link = "log", sigma.link = "log")
 dPARETO2(x, mu = 1, sigma = 0.5, log = FALSE)
 pPARETO2(q, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
 qPARETO2(p, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
 rPARETO2(n, mu = 1, sigma = 0.5)
+
 PARETO2o(mu.link = "log", sigma.link = "log")
 dPARETO2o(x, mu = 1, sigma = 0.5, log = FALSE)
 pPARETO2o(q, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
@@ -41,10 +68,16 @@ rPARETO2o(n, mu = 1, sigma = 0.5)
   \item{n}{number of observations. If \code{length(n) > 1}, the length is taken to be the number required}
 }
 \details{
-The parameterization of the Pareto Type 2 distribution in the function \code{PA2} is:
+The parameterization of the one parameter Pareto distribution in the function \code{PARETO} is:
+
+\deqn{f(y|\mu) = \mu y^{\mu+1}}{f(y|mu) = (mu) y^(mu+1)}
+
+for \eqn{y>1} and \eqn{mu>0}.
+
+The parameterization of the Pareto Type 2 distribution in the function \code{PARETO2} is:
 
 \deqn{f(y|\mu, \sigma) = \frac{1}{\sigma} \mu^{\frac{1}{\sigma}} \, (y+mu)^{-\frac{1
-}{sigma+1}}}{f(y|mu, sigma) = (1/sigma) mu^(1/sigma) (y+mu)^(-(1/sigma+1))}
+}{sigma+1}}}{f(y | mu, sigma) = (1/sigma) mu^(1/sigma) (y+mu)^(-(1/sigma+1))}
 
 for \eqn{y>=0}, \eqn{mu>0} and \eqn{sigma>0}.
 }

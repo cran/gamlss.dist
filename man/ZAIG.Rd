@@ -27,7 +27,8 @@ dZAIG(x, mu = 1, sigma = 1, nu = 0.1, log = FALSE)
 pZAIG(q, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
 qZAIG(p, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
 rZAIG(n, mu = 1, sigma = 1, nu = 0.1, ...)
-plotZAIG(mu = 5, sigma = 1, nu = 0.1, from = 0, to = 10, n = 101, ...)
+plotZAIG(mu = 5, sigma = 1, nu = 0.1, from = 0, to = 10, n = 101, 
+         main = NULL,...)
 meanZAIG(obj)
 }
 
@@ -47,7 +48,8 @@ meanZAIG(obj)
           taken to be the number required}  
   \item{from}{where to start plotting the distribution from}
   \item{to}{up to  where to plot the distribution  }
-  \item{obj}{ a fitted \code{BEINF} object}              
+  \item{obj}{ a fitted \code{BEINF} object} 
+  \item{main}{for title in the plot}   
   \item{\dots}{\code{\dots} can be used to pass the uppr.limit argument to \code{qIG}  }       
   
   

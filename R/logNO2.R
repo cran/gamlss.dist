@@ -25,7 +25,7 @@ LOGNO2 <-function (mu.link ="log", sigma.link="log")
                  	      dldm <- (1/sigma^2)*(log(y)-log(mu))/mu #(log(y)-log(mu))/((sigma^2)*mu) 
                           dldm
                            },
-               d2ldm2 = function(mu, sigma)-(1/(sigma^2)*(mu^2)),
+               d2ldm2 = function(mu, sigma) -1/((sigma^2)*(mu^2)),
                  dldd = function(y,mu,sigma) {
                  	           dldd <- (1/(sigma^3))*((log(y)-log(mu))^2-sigma^2)
                               dldd}, 

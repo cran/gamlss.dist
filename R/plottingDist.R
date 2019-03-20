@@ -18,23 +18,23 @@
 # 8   count_3_33() three parameters count with 3x3 plot
 #-----------------------------------------------------
 # FUNCTIONS FOR CONTINUOUS family DISTIBUTIONS -inf +inf
-# 9    contR_2_12   
-# 10   contR3_3_11
-# 11   contR4_4_13
+# 9    contR_2_12()   
+# 10   contR_3_11()
+# 11   contR_4_13()
 #-------------------------------------------------------------------
 # FUNCTIONS FOR CONTINUOUS family DISTIBUTIONS 0 +inf
-# 12   contRplus_2_11
-# 13   contRplus_3_13
-# 14   contRplus_4_33
+# 12   contRplus_2_11()
+# 13   contRplus_3_13()
+# 14   contRplus_4_33()
 #-------------------------------------------------------------------
 # FUNCTIONS FOR DISCRETE BINOMIAL
-# 15 binom_1_31
-# 16 binom_2_33
-# 17 binim_3_33
+# 15 binom_1_31()
+# 16 binom_2_33()
+# 17 binom_3_33()
 #-------------------------------------------------------------------
 # FUNCTIONS FOR CONTINUOUS family DISTIBUTIONS 0 1
-# 18 contR01_2_13
-# 19 contR01_4_33
+# 18 contR01_2_13()
+# 19 contR01_4_33()
 #------------------------------------------------------------------
 #-----------------------------------------------------------------------
 # putting text around a graph
@@ -90,7 +90,7 @@ count_1_31 <- function(family = PO,
                            mu = c(1,2,5), 
                          miny = 0, 
                          maxy = 10, 
-                   cex.y.axis = 1.2, 
+                   cex.axis = 1.2, 
                       cex.all = 1.5)
 {
   #--------------------------------------------------------
@@ -113,23 +113,23 @@ count_1_31 <- function(family = PO,
   #1
   fy <- eval(parse(text=paste0("d",fname,"(y,mu[1])")))
   plot(y,fy,type="h",ylab="f(y)",lwd=1.5,xaxt="n",ylim=c(0,1.2*max(fy)),
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[1]),"  ")),bty="n",
          cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
-  mtexti(fname, 3 , off=.5, cex=1.5 )
+  mtexti(fname, 3 , off=.5, cex=(cex.all+0.02) )
   #2
   fy <- eval(parse(text=paste0("d",fname,"(y,mu[2])")))
   plot(y,fy,type="h",ylab="f(y)",lwd=1.5,xaxt="n",yaxt="n",ylim=c(0,1.2*max(fy)),
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[2]),"  ")),bty="n",
          cex=cex.all)
-  axis(4,cex.axis=cex.y.axis)
+  axis(4,cex.axis=cex.axis)
   mtexti("f(y)", 2, 0.6,cex=cex.all)  
   #3
   fy <- eval(parse(text=paste0("d",fname,"(y,mu[3])")))
   plot(y,fy,type="h",ylab="f(y)",lwd=1.5,ylim=c(0,1.2*max(fy)),
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[3]),"  ")),bty="n",
          cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
@@ -146,7 +146,7 @@ count_1_31 <- function(family = PO,
 ###################################################################
 # four plots
 count_1_22 <- function(family=PO, mu=c(1,2,5,10), miny=0, 
-                     maxy=20, cex.y.axis=1.2, cex.all=1.5)
+                     maxy=20, cex.axis=1.2, cex.all=1.5)
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -173,23 +173,23 @@ count_1_22 <- function(family=PO, mu=c(1,2,5,10), miny=0,
   #1
   #fy <- eval(parse(text=paste0("d",family,"(y,mu[1])")))
   plot(y,fy1,type="h",ylab="f(y)",lwd=1.5, xaxt="n", ylim=c(0,1.1*mm),
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[1]),"  ")),bty="n",
          cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all) 
-  mtexti(fname, 3 , off=.5, cex=1.5, xpos=21 )
+  mtexti(fname, 3 , off=.5, cex=(cex.all+0.02), xpos=21 )
   #2
   fy <- eval(parse(text=paste0("d",fname,"(y,mu[2])")))
   plot(y,fy2,type="h",ylab="f(y)",lwd=1.5,xaxt="n",yaxt="n", ylim=c(0,1.1*mm),
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[2]),"  ")),bty="n",
          cex=cex.all)
-  # axis(4,cex.axis=cex.y.axis)
+  # axis(4,cex.axis=cex.axis)
   #mtexti("f(y)", 2, 0.6,cex=cex.all)  
   #3
   fy <- eval(parse(text=paste0("d",fname,"(y,mu[3])")))
   plot(y,fy3,type="h",ylab="f(y)",lwd=1.5, ylim=c(0,1.1*mm),yaxt="n",
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[3]),"  ")),bty="n",
          cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
@@ -197,10 +197,10 @@ count_1_22 <- function(family=PO, mu=c(1,2,5,10), miny=0,
   #4
   fy <- eval(parse(text=paste0("d",fname,"(y,mu[4])")))
   plot(y,fy4,type="h",ylab="f(y)",lwd=1.5,yaxt="n",  ylim=c(0,1.1*mm),
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[4]),"  ")),bty="n",
          cex=cex.all)
-  axis(4,cex.axis=cex.y.axis)
+  axis(4,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all)
   par(op)
 }
@@ -215,7 +215,8 @@ count_1_22 <- function(family=PO, mu=c(1,2,5,10), miny=0,
 #### Discrete count, 2 parameters
 #------------------------------------------------------------------
 # a 3 mu  by 2 sigma  table 
-count_2_32 <- function(family=NBI, mu= c(0.5, 1,5), sigma = c(.1, 2), miny=0, maxy=10, cex.y.axis=1.5, cex.all=1.5 )
+count_2_32 <- function(family=NBI, mu= c(0.5, 1,5), sigma = c(.1, 2), miny=0,
+                       maxy=10, cex.axis=1.5, cex.all=1.5 )
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -244,11 +245,11 @@ count_2_32 <- function(family=NBI, mu= c(0.5, 1,5), sigma = c(.1, 2), miny=0, ma
   maxy <- 1.2*max(fy1,fy2)
   #1,1
   j=1
-  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex=cex.all,
-       cex.axis=cex.y.axis)
-  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
-  mtexti("f(y)", 2, 0.6,cex=cex.all)
-  mtexti(fname, 3 , off=.5, cex=1.5, xpos=10 )
+  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy), cex=cex.all,
+       cex.axis=cex.axis)
+  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3, cex=cex.all)
+  mtexti("f(y)", 2, 0.6, cex=cex.all)
+  mtexti(fname, 3 , off=.5, cex=(cex.all+0.02), xpos=10 )
   #1,2
   i=1
   j=2
@@ -268,7 +269,7 @@ count_2_32 <- function(family=NBI, mu= c(0.5, 1,5), sigma = c(.1, 2), miny=0, ma
   j=2
   plot(y,fy2,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy))
   mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(4,cex.axis=cex.all)
+  axis(4,cex.axis=cex.axis)
   ### Row 3
   i=3
   fy1 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1]",")")))
@@ -276,15 +277,15 @@ count_2_32 <- function(family=NBI, mu= c(0.5, 1,5), sigma = c(.1, 2), miny=0, ma
   maxy <- 1.2*max(fy1,fy2)
   #3,1
   j=1
-  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.y.axis)
+  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.axis)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
-  axis(1,cex.axis=cex.all)
+  axis(1, cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all) 
   #3,2
   j=2
-  plot(y,fy2,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy))
+  plot(y,fy2,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy), cex.axis=cex.axis)
   mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(1,cex.axis=cex.all)
+  axis(1,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all)
   par(op)
 }
@@ -295,11 +296,11 @@ count_2_32 <- function(family=NBI, mu= c(0.5, 1,5), sigma = c(.1, 2), miny=0, ma
 # FUNCTION 5
 #----------------------------------------------------------------------=
 ### Discrete count, 2 parameter reverse 3 sigma x 2 mu 
-# disc2_32R()
+# count_2_32R()
 ###################################################################
 # a 3 mu  by 2 sigma  table 
 count_2_32R <- function(family=NBI, mu= c(1,2), sigma=c(0.1,1,2), miny=0, 
-                   maxy=10, cex.y.axis=1.5, cex.all=1.5 )
+                   maxy=10, cex.axis=1.5, cex.all=1.5 )
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -329,10 +330,10 @@ count_2_32R <- function(family=NBI, mu= c(1,2), sigma=c(0.1,1,2), miny=0,
   #1,1
   j=1
   plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex=cex.all,
-       cex.axis=cex.y.axis)
+       cex.axis=cex.axis)
   mtexti(bquote(paste(mu," = ",.(mu[j]))),3,cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
-  mtexti(fname, 3 , off=.5, cex=1.5, xpos=10 )
+  mtexti(fname, 3 , off=.5, cex=(cex.all+0.02), xpos=10 )
   #1,2
   i=1
   j=2
@@ -352,7 +353,7 @@ count_2_32R <- function(family=NBI, mu= c(1,2), sigma=c(0.1,1,2), miny=0,
   j=2
   plot(y,fy2,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy))
   mtexti(bquote(paste(sigma," = ",.(sigma[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(4,cex.axis=cex.all)
+  axis(4,cex.axis=cex.axis)
   ### Row 3
   i=3
   fy1 <- eval(parse(text=paste0("d",fname,"(y,mu[1],sigma[i]",")")))
@@ -360,15 +361,15 @@ count_2_32R <- function(family=NBI, mu= c(1,2), sigma=c(0.1,1,2), miny=0,
   maxy <- 1.2*max(fy1,fy2)
   #3,1
   j=1
-  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.y.axis)
+  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.axis)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
-  axis(1,cex.axis=cex.all)
+  axis(1,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all) 
   #3,2
   j=2
   plot(y,fy2,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy))
   mtexti(bquote(paste(sigma," = ",.(sigma[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(1,cex.axis=cex.all)
+  axis(1,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all)
   par(op)
 }
@@ -382,7 +383,8 @@ count_2_32R <- function(family=NBI, mu= c(1,2), sigma=c(0.1,1,2), miny=0,
 #### Discrete count, 2 parameters
 #------------------------------------------------------------------
 # a 3 mu  by 3 sigma  table 
-count_2_33 <- function(family=NBI, mu= c(0.1,1, 2), sigma = c(0.5, 1, 2), miny=0, maxy=10, cex.y.axis=1.5, cex.all=1.5 )
+count_2_33 <- function(family=NBI, mu= c(0.1,1, 2), sigma = c(0.5, 1, 2), 
+                       miny=0, maxy=10, cex.axis=1.5, cex.all=1.5 )
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -415,16 +417,16 @@ count_2_33 <- function(family=NBI, mu= c(0.1,1, 2), sigma = c(0.5, 1, 2), miny=0
   #1,1
   j=1
   plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex=cex.all,
-       cex.axis=cex.y.axis)
+       cex.axis=cex.axis)
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
-  mtexti("f(y)", 2, 0.6,cex=cex.all)
+  mtexti("f(y)", 2, 0.6, cex=cex.all)
   #----------
   #1,2
   i=1
   j=2
   plot(y,fy2,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy))
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
-  mtexti(fname, 3 ,off=.5, cex=1.5 )
+  mtexti(fname, 3 ,off=.5, cex=cex.all+0.02 )
   #mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=.6,srt=90)
   #-----------
   #1,3
@@ -456,7 +458,7 @@ count_2_33 <- function(family=NBI, mu= c(0.1,1, 2), sigma = c(0.5, 1, 2), miny=0
   j=3
   plot(y,fy3,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy))
   mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(4,cex.axis=cex.all)
+  axis(4,cex.axis=cex.axis)
   #----------------------------------------
   ### Row 3
   i=3
@@ -466,22 +468,22 @@ count_2_33 <- function(family=NBI, mu= c(0.1,1, 2), sigma = c(0.5, 1, 2), miny=0
   maxy <- 1.2*max(fy1,fy2, fy3)
   #3,1
   j=1
-  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.y.axis)
+  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.axis)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
-  axis(1,cex.axis=cex.all)
+  axis(1,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all) 
   #3,2
   j=2
   plot(y,fy2,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy))
   #mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(1,cex.axis=cex.all)
+  axis(1,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all)
   
   #3,3
   j=3
   plot(y,fy3,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy))
   mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(1,cex.axis=cex.all)
+  axis(1,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all)
   par(op)
 }
@@ -494,8 +496,9 @@ count_2_33 <- function(family=NBI, mu= c(0.1,1, 2), sigma = c(0.5, 1, 2), miny=0
 ### Discrete, 3 parameter 3 mu x 2 sigma  plus nu superimposed
 # disc3_32()
 ###################################################################
-count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1), nu=c(-0.5,0.5),
-                  miny=0, maxy=10, cex.y.axis=1.5, cex.all=1.5,
+count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1), 
+                       nu=c(-0.5,0.5),
+                  miny=0, maxy=10, cex.axis=1.5, cex.all=1.5,
                   cols=c("darkgray", "black"), spacing = 0.2 )
 {
   #--------------------------------------------------------
@@ -515,8 +518,8 @@ count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1), nu=c(-0.5,
   #--------------------------------------------------------- 
        op <- par(omi=rep(1.0, 4), mar=c(0,0,0,0), mfrow=c(3,2))
         y <- miny:maxy
-  cex.axis.discrete.3 <- cex.y.axis
-  cex.axis.discrete.2 <- cex.all
+  # cex.axis <- cex.axis
+  # cex.all <- cex.all
   ### Row 1
   i=1
   fy11 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1],nu[1]",")")))
@@ -526,19 +529,19 @@ count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1), nu=c(-0.5,
   maxy <- 1.2*max(fy11,fy12,fy21,fy22)
   #1,1
   j=1
-  plot(y,fy11,type="h",xaxt="n",ylim=c(0,maxy),cex=cex.axis.discrete.3,
-       cex.axis=cex.axis.discrete.2, col=cols[1])
+  plot(y,fy11,type="h",xaxt="n",ylim=c(0,maxy), cex=cex.all,
+       cex.axis=cex.axis, col=cols[1])
   lines(y+spacing,fy12,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.axis.discrete.3)
-  mtexti("f(y)", 2, 0.6,cex=cex.axis.discrete.3)
-  mtexti(fname, 3, off=.5, cex=1.5, xpos=10)
+  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
+  mtexti("f(y)", 2, 0.6,cex=cex.all)
+  mtexti(fname, 3, off=.5, cex=cex.all, xpos=10)
   #1,2
   i=1
   j=2
-  plot(y,fy21,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
+  plot(y,fy21,type="h",xaxt="n", yaxt="n", ylim=c(0,maxy), col=cols[1])
   lines(y+spacing,fy22,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.axis.discrete.3)
-  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=.6,srt=90)
+  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
+  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=.6,srt=90)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
   legend("topright",legend=as.expression(ex.leg),
          lty=1:2,col=cols[1:2],lwd=2,cex=1.2)
@@ -556,15 +559,15 @@ count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1), nu=c(-0.5,
   j=1
   plot(y,fy11,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy12,type="h",lty=2,col=cols[2])
-  mtexti("f(y)", 2, 0.6,cex=cex.axis.discrete.3)
+  mtexti("f(y)", 2, 0.6, cex=cex.all)
 
 
   #2,2
   j=2
   plot(y,fy21,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy22,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=0.6,srt=90)
-  axis(4,cex.axis=cex.axis.discrete.3)
+  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
+  axis(4,cex.axis=cex.axis)
 
 
   ### Row 3
@@ -577,19 +580,19 @@ count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1), nu=c(-0.5,
 
   #3,1
   j=1
-  plot(y,fy11,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.axis.discrete.2,col=cols[1])
+  plot(y,fy11,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.axis,col=cols[1])
   lines(y+spacing,fy12,type="h",lty=2,col=cols[2])
-  mtexti("f(y)", 2, 0.6,cex=cex.axis.discrete.3)
-  axis(1,cex.axis=cex.axis.discrete.3)
-  mtexti("y", 1, 0.6,cex=cex.axis.discrete.3)
+  mtexti("f(y)", 2, 0.6,cex=cex.all)
+  axis(1,cex.axis=cex.axis)
+  mtexti("y", 1, 0.6,cex=cex.all)
 
   #3,2
   j=2
   plot(y,fy21,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy22,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=0.6,srt=90)
-  axis(1,cex.axis=cex.axis.discrete.3)
-  mtexti("y", 1, 0.6,cex=cex.axis.discrete.3)
+  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
+  axis(1,cex.axis=cex.axis)
+  mtexti("y", 1, 0.6,cex=cex.all)
   par(op)
 }
 #-----------------------------------------------------------------
@@ -599,10 +602,10 @@ count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1), nu=c(-0.5,
 #----------------------------------------------------------------------=
 ###################################################################
 ### Discrete, 3 parameter 3 mu x 3 sigma  plus nu superimposed
-# disc3_33 ()
+# count_3_33()
 ###################################################################
 count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0.5,0.5,1),
-                     miny=0, maxy=10, cex.y.axis=1.5, cex.all=1.5,
+                     miny=0, maxy=10, cex.axis=1.5, cex.all=1.5,
                      cols=c("darkgray", "black"), spacing = 0.3 )
 {
   #--------------------------------------------------------
@@ -622,8 +625,8 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
   #--------------------------------------------------------- 
   op <- par(omi=rep(1.0, 4), mar=c(0,0,0,0), mfrow=c(3,3))
   y <- miny:maxy
-  cex.axis.discrete.3 <- cex.y.axis
-  cex.axis.discrete.2 <- cex.all
+  # cex.axis <- cex.axis
+  # cex.all <- cex.all
   ### Row 1
   i=1
   fy111 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1],nu[1]",")")))
@@ -633,31 +636,30 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
   fy131 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[3],nu[1]",")")))
   fy132 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[3],nu[2]",")")))
   maxy <- 1.2*max(fy111,fy112,fy121,fy122,fy131, fy132)
-  
   #1,1 nu 1 2
   j=1
-  plot(y,fy111,type="h",xaxt="n",ylim=c(0,maxy),cex=cex.axis.discrete.3,
-       cex.axis=cex.axis.discrete.2, col=cols[1])
+  plot(y,fy111,type="h",xaxt="n",ylim=c(0,maxy),cex=cex.axis,
+       cex.axis=cex.axis, col=cols[1])
   lines(y+spacing,fy112,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.axis.discrete.3)
-  mtexti("f(y)", 2, 0.6,cex=cex.axis.discrete.3)
+  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
+  mtexti("f(y)", 2, 0.6, cex=cex.all)
   #1,2 nu 1 2
   i=1
   j=2
   plot(y,fy121,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy122,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.axis.discrete.3)
-  mtexti(fname, 3 ,off=.5, cex=1.5 )
+  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
+  mtexti(fname, 3 ,off=.5, cex=cex.all )
   #1,3 nu 1 2
   i=1
   j=3
   plot(y,fy131,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy132,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.axis.discrete.3)
-  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=.6,srt=90)
+  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
+  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=.6,srt=90)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
   legend("topright",legend=as.expression(ex.leg),
-         lty=1:2,col=cols[1:2],lwd=2,cex=1.2)
+         lty=1:2,col=cols[1:2],lwd=2,cex=cex.all)
   ### Row 2
   i=2
   fy211 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1],nu[1]",")")))
@@ -669,9 +671,9 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
   maxy <- 1.2*max(fy211,fy212,fy221,fy222,fy221,fy232)
   #2,1 nu 1,2 
   j=1
-  plot(y,fy211,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
+  plot(y,fy211,type="h",xaxt="n", yaxt="n", ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy212,type="h",lty=2,col=cols[2])
-  mtexti("f(y)", 2, 0.6,cex=cex.axis.discrete.3)
+  mtexti("f(y)", 2, 0.6,cex=cex.all)
   #2,2 nu 1,2 
   j=2
   plot(y,fy221,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
@@ -680,8 +682,8 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
   j=3
   plot(y,fy231,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy232,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=0.6,srt=90)
-  axis(4,cex.axis=cex.axis.discrete.3)
+  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
+  axis(4,cex.axis=cex.axis)
   ### Row 3
   i=3
   fy311 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1],nu[1]",")")))
@@ -694,27 +696,27 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
   
   #3,1  nu 1,2 
   j=1
-  plot(y,fy311,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.axis.discrete.2,col=cols[1])
+  plot(y,fy311,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.axis,col=cols[1])
   lines(y+spacing,fy312,type="h",lty=2,col=cols[2])
-  mtexti("f(y)", 2, 0.6,cex=cex.axis.discrete.3)
-  axis(1,cex.axis=cex.axis.discrete.3)
-  mtexti("y", 1, 0.6,cex=cex.axis.discrete.3)
+  mtexti("f(y)", 2, 0.6,cex=cex.all)
+  axis(1,cex.axis=cex.axis)
+  mtexti("y", 1, 0.6,cex=cex.all)
   
   #3,2 nu 1,2 
   j=2
   plot(y,fy321,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy322,type="h",lty=2,col=cols[2])
-  # mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=0.6,srt=90)
-  # axis(1,cex.axis=cex.axis.discrete.3)
-  # mtexti("y", 1, 0.6,cex=cex.axis.discrete.3)
+  # mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis,off=0.6,srt=90)
+  # axis(1,cex.axis=cex.axis)
+  # mtexti("y", 1, 0.6,cex=cex.axis)
   
   #3,3 nu 1,2 
   j=2
   plot(y,fy331,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy332,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=0.6,srt=90)
-  axis(1,cex.axis=cex.axis.discrete.3)
-  mtexti("y", 1, 0.6,cex=cex.axis.discrete.3)
+  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
+  axis(1,cex.axis=cex.axis)
+  mtexti("y", 1, 0.6,cex=cex.all)
   par(op)
 }
 
@@ -726,8 +728,10 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
 #------------------------------------------------------------------------
 # Continuous 2 parameters -Inf +Inf  
 #------------------------------------------------------------------------
-contR_2_12 <- function(family="NO", mu=c(0,-1,1), sigma=c(1,0.5,2), cols=c(1,2,3), 
-                   ltype = c(1,2,3), maxy=7, no.points=201, y.axis.lim=1.1 )
+contR_2_12 <- function(family="NO", mu=c(0,-1,1), sigma=c(1,0.5,2), 
+                       cols=c(gray(.1),gray(.2),gray(.3)), 
+                   ltype = c(1,2,3), maxy=7, no.points=201, y.axis.lim=1.1, 
+                   cex.axis=1.5, cex.all=1.5 )
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -747,7 +751,6 @@ contR_2_12 <- function(family="NO", mu=c(0,-1,1), sigma=c(1,0.5,2), cols=c(1,2,3
   op <- par(omi=rep(1.0, 4), mar=c(0,0,0,0), mfrow=c(1,2))
   #mu=vector of length 3
   #sigma= vector of length 3
-  
   y<-seq(-maxy,maxy,length=no.points)
   
   pdf11 <- paste0("d",fname,"(y,mu[1],1)")
@@ -767,29 +770,29 @@ contR_2_12 <- function(family="NO", mu=c(0,-1,1), sigma=c(1,0.5,2), cols=c(1,2,3
   ylabel <- "f(y)"
   #1
   plot(fy11~y, type="l", col=cols[1],
-       ylab="", xlab="y",lty=ltype[1], lwd=2, ylim =c(0,maxfy))
+       ylab="", xlab="y",lty=ltype[1], lwd=2, ylim =c(0,maxfy), cex.axis=cex.axis)
   lines(fy12~y, col=cols[2], lty=ltype[2], lwd=2)
   lines(fy13~y, col=cols[3], lty=ltype[3], lwd=2)
   ex.leg <- c(bquote(paste(mu," = ",.(mu[1]))),bquote(paste(mu," = ",.(mu[2]))),bquote(paste(mu," = ",.(mu[3]))))
   legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1)
+         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
   
-  mtexti( ylabel, 2, 0.6,cex=1.2)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(bquote(paste(sigma," = 1")),3, cex=1)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(sigma," = 1")),3, cex=cex.all)
 
-  mtexti(fname, 3 , off=.5, cex=1.2, xpos=8 )
+  mtexti(fname, 3 , off=.5, cex=cex.all, xpos=8 )
   #2
   plot(fy21~y, type="l", col=cols[1],
-       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
+       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy), cex.axis=cex.axis)
   lines(fy22~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy23~y, col=cols[3],lty=ltype[3],lwd=2)
   ex.leg <- c(bquote(paste(sigma," = ",.(sigma[1]))),bquote(paste(sigma," = ",.(sigma[2]))),
               bquote(paste(sigma," = ",.(sigma[3]))))
   legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(bquote(paste(mu," = 0")),3,cex=1)
+         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(mu," = 0")),3,cex=cex.all)
   par(op)
 }
 
@@ -803,8 +806,8 @@ contR_2_12 <- function(family="NO", mu=c(0,-1,1), sigma=c(1,0.5,2), cols=c(1,2,3
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
 contR_3_11 <- function(family="PE", mu=0, sigma=1, nu=c(1,2,3), 
-                   cols=c(1,2,3), maxy=7, no.points=201, 
-                   ltype = c(1,2,3), y.axis.lim=1.1)
+                       cols=c(gray(.1),gray(.2),gray(.3)), maxy=7, no.points=201, 
+                   ltype = c(1,2,3), y.axis.lim=1.1, cex.axis=1.5, cex.all=1.5)
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -834,18 +837,20 @@ contR_3_11 <- function(family="PE", mu=0, sigma=1, nu=c(1,2,3),
   maxfy <- y.axis.lim*max(fy11,fy12,fy13)
  ylabel <- "f(y)"
   #1
+ 
   plot(fy11~y, type="l", col=cols[1],
-       ylab="", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
+       ylab="", xlab="y",lty=ltype[1],lwd=2,
+       ylim=c(0,maxfy), cex.axis=cex.axis)
   lines(fy12~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy13~y, col=cols[3],lty=ltype[3],lwd=2)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
   legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1)
-  mtexti( ylabel, 2, 0.6,cex=1.2)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(fname, 3 , off=.7, cex=1.2)
+         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(fname, 3 , off=.7, cex=cex.all)
   # mtexti(paste0("mu = ",mu),3, cex=1)
-  mtexti(bquote(paste(mu," = ",.(mu)," , ",sigma," = ",.(sigma))),3,cex=1)
+  mtexti(bquote(paste(mu," = ",.(mu)," , ",sigma," = ",.(sigma))),3,cex=cex.all)
   # bquote(paste0(bquote(paste0("mu = ",mu))), ", sigma =",sigma))
   par(op)
 }
@@ -858,8 +863,9 @@ contR_3_11 <- function(family="PE", mu=0, sigma=1, nu=c(1,2,3),
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
 contR_4_13 <- function(family="SEP3", mu=0, sigma=1,  nu=c(0.5,1,2), 
-                   tau=c(1,2,5),  cols=c(1,2,3), maxy=7, 
-                   no.points=201, ltype = c(1,2,3), y.axis.lim=1.1)
+                   tau=c(1,2,5),  cols=c(gray(.1),gray(.2),gray(.3)), maxy=7, 
+                   no.points=201, ltype = c(1,2,3), 
+                   y.axis.lim=1.1, cex.axis=1.5, cex.all=1.5)
 {
 #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -907,39 +913,40 @@ contR_4_13 <- function(family="SEP3", mu=0, sigma=1,  nu=c(0.5,1,2),
   ylabel <-"f(x)"
   #1
   plot(fy11~y, type="l", col=cols[1],
-       ylab="", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
+       ylab="", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy),
+       cex.axis=cex.axis)
   lines(fy12~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy13~y, col=cols[3],lty=ltype[3],lwd=2)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
   legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1)
+         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
   
-  mtexti( ylabel, 2, 0.6,cex=1.2)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(bquote(paste(tau," = ",.(tau[1]))),3, cex=1)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(tau," = ",.(tau[1]))),3, cex=cex.all)
   #2
   plot(fy21~y, type="l", col=cols[1],
-       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
+       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy), cex.axis=cex.axis)
   lines(fy22~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy23~y, col=cols[3],lty=ltype[3],lwd=2)
   # ex.leg <- c(bquote(paste(sigma," = ",.(sigma[1]))),bquote(paste(sigma," = ",.(sigma[2]))),
   #             bquote(paste(sigma," = ",.(sigma[3]))))
   # legend("topleft",legend=as.expression(ex.leg),
   #       lty=1:3, col=cols[1:3], lwd=2, cex=1)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(bquote(paste(tau," = ",.(tau[2]))),3, cex=1)
-  mtexti(fname, 3 , off=.7, cex=1.5)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(tau," = ",.(tau[2]))),3, cex=cex.all)
+  mtexti(fname, 3 , off=.7, cex=cex.all+0.02)
   #3
   plot(fy31~y, type="l", col=cols[1],
-       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
+       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy), cex.axis=cex.axis)
   lines(fy32~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy33~y, col=cols[3],lty=ltype[3],lwd=2)
   # ex.leg <- c(bquote(paste(sigma," = ",.(sigma[1]))),bquote(paste(sigma," = ",.(sigma[2]))),
   #             bquote(paste(sigma," = ",.(sigma[3]))))
   # legend("topleft",legend=as.expression(ex.leg),
   #        lty=1:3, col=cols[1:3], lwd=2, cex=1)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(bquote(paste(tau," = ",.(tau[3]))),3, cex=1)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(tau," = ",.(tau[3]))),3, cex=cex.all)
   par(op)
 }
 #-----------------------------------------------------------------------
@@ -951,8 +958,10 @@ contR_4_13 <- function(family="SEP3", mu=0, sigma=1,  nu=c(0.5,1,2),
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
 contRplus_2_11 <- function(family=GA, mu=1, sigma=c(.1,.6,1), 
-                   cols=c(1,2,3), maxy=4, no.points=201, 
-                   y.axis.lim=1.1, ltype = c(1,2,3))
+                           cols=c(gray(.1),gray(.2),gray(.3)), 
+                           maxy=4, no.points=201, 
+                   y.axis.lim=1.1, ltype = c(1,2,3),
+                   cex.axis=1.5, cex.all=1.5)
 {
   #--------------------------------------------------------
    fname <- if (is.name(family)) as.character(family)
@@ -983,17 +992,17 @@ contRplus_2_11 <- function(family=GA, mu=1, sigma=c(.1,.6,1),
   ylabel <- "f(y)"
   #1
   plot(fy11~y, type="l", col=cols[1],
-       ylab="", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
+       ylab="", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy), cex.axis=cex.axis)
   lines(fy12~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy13~y, col=cols[3],lty=ltype[3],lwd=2)
   ex.leg <- c(bquote(paste(sigma," = ",.(sigma[1]))),bquote(paste(sigma," = ",.(sigma[2]))),bquote(paste(sigma," = ",.(sigma[3]))))
   legend("topright",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1)
-  mtexti( ylabel, 2, 0.6,cex=1.2)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(fname, 3 , off=.7, cex=1.2)
+         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(fname, 3 , off=.7, cex=cex.all)
   # mtexti(paste0("mu = ",mu),3, cex=1)
-  mtexti(bquote(paste(mu," = ",.(mu))),3,cex=1)
+  mtexti(bquote(paste(mu," = ",.(mu))),3,cex=cex.all)
   par(op)
 }
 #-----------------------------------------------------------------------
@@ -1004,9 +1013,12 @@ contRplus_2_11 <- function(family=GA, mu=1, sigma=c(.1,.6,1),
 #----------------------------------------------------------------------=
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
-contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),  nu=c(-2,0,4), 
-                   cols=c(1,2,3), maxy=4, ltype = c(1,2,3),
-                   no.points=201, y.axis.lim=1.1)
+contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5), 
+                    nu=c(-2,0,4), 
+                    cols=c(gray(.1),gray(.2),gray(.3)), 
+                    maxy=4, ltype = c(1,2,3),
+                   no.points=201, y.axis.lim=1.1,
+                   cex.axis=1.5, cex.all=1.5)
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -1052,7 +1064,7 @@ contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),  nu=c(-
   maxfy= y.axis.lim*max(fy11,fy12,fy13,fy21,fy22,fy23,fy31,fy32,fy33)
   ylabel <-"f(x)"
   #1
-  plot(fy11~y, type="l", col=cols[1],
+  plot(fy11~y, type="l", col=cols[1], cex.axis=cex.axis,
        ylab="", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
   lines(fy12~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy13~y, col=cols[3],lty=ltype[3],lwd=2)
@@ -1060,20 +1072,20 @@ contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),  nu=c(-
   # legend("topleft",legend=as.expression(ex.leg),
   #        lty=ltype, col=cols[1:3], lwd=2, cex=1)
   
-  mtexti( ylabel, 2, 0.6,cex=1.2)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3, cex=1)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3, cex=cex.all)
   #2
   plot(fy21~y, type="l", col=cols[1],
-       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
+       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy), cex.axis=cex.axis)
   lines(fy22~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy23~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(bquote(paste(sigma," = ",.(sigma[2]))),3, cex=1)
-  mtexti(fname, 3 , off=.7, cex=1.5)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(sigma," = ",.(sigma[2]))),3, cex=cex.all)
+  mtexti(fname, 3 , off=.7, cex=(cex.all+0.02))
   #3
   plot(fy31~y, type="l", col=cols[1],
-       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
+       yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy),cex.axis=cex.axis)
   lines(fy32~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy33~y, col=cols[3],lty=ltype[3],lwd=2)
   # ex.leg <- c(bquote(paste(sigma," = ",.(sigma[1]))),bquote(paste(sigma," = ",.(sigma[2]))),
@@ -1082,9 +1094,9 @@ contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),  nu=c(-
   #        lty=1:3, col=cols[1:3], lwd=2, cex=1)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
   legend("topright",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1)
-  mtexti("y", 1, 0.6,cex=1.2)
-  mtexti(bquote(paste(sigma," = ",.(sigma[3]))),3, cex=1)
+         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(sigma," = ",.(sigma[3]))),3, cex=cex.all)
   par(op)
 }
 #--------------------------------------------------------------------------
@@ -1092,10 +1104,12 @@ contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),  nu=c(-
 # FUNCTION 14
 #----------------------------------------------------------------------=
 #--------------------------------------------------------------------------
-contRplus_4_33 <- function(family=BCT, mu=1, sigma = c(0.15,0.2,0.5), nu=c(-4,0,2), 
-                       tau=c(100, 5, 1),
-                       cols=c(1,2,3), maxy=4, ltype = c(1,2,3),
-                       no.points=201, y.axis.lim=1.1)
+contRplus_4_33 <- function(family=BCT, mu=1, sigma = c(0.15,0.2,0.5), 
+                           nu=c(-4,0,2), tau=c(100, 5, 1),
+                       cols=c(gray(.1),gray(.2),gray(.3)), 
+                       maxy=4, ltype = c(1,2,3),
+                       no.points=201, y.axis.lim=1.1,
+                       cex.axis=1.5, cex.all=1.5)
 {
   #--------------------------------------------------------
    fname <- if (is.name(family)) as.character(family)
@@ -1161,71 +1175,67 @@ contRplus_4_33 <- function(family=BCT, mu=1, sigma = c(0.15,0.2,0.5), nu=c(-4,0,
 
   # 1 1 
   plot(fy111~y, type="l", xaxt="n",  col=cols[1], ylab="", xlab="", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow1))
+       lwd=2, ylim=c(0,maxyrow1), cex.axis=cex.axis)
   lines(fy112~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy113~y, col=cols[3],lty=ltype[3],lwd=2)
   
-  mtexti( ylabel, 2, 0.6,cex=1.2)
-  mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3, cex=1)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3, cex=cex.all)
   # 1 2 
   plot(fy121~y, type="l", xaxt="n", yaxt="n", col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow1))
+       lwd=2, ylim=c(0,maxyrow1), cex.axis=cex.axis)
   lines(fy122~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy123~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti(bquote(paste(sigma," = ",.(sigma[2]))),3, cex=1)
-  mtexti(fname, 3 , off=.7, cex=1.5)
+  mtexti(bquote(paste(sigma," = ",.(sigma[2]))),3, cex=cex.all)
+  mtexti(fname, 3 , off=.7, cex=cex.all+0.02)
   # 1 3
   plot(fy131~y, type="l",  xaxt="n", yaxt="n", col=cols[1], ylab="", xlab="y", 
        lty=ltype[1], lwd=2, ylim=c(0,maxyrow1))
   lines(fy132~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy133~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti(bquote(paste(sigma," = ",.(sigma[3]))),3, cex=1)
+  mtexti(bquote(paste(sigma," = ",.(sigma[3]))),3, cex=cex.all)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
   legend("topright",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1)
-  mtexti(bquote(paste(tau," = ",.(tau[1]))),4, cex=1)
+         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  mtexti(bquote(paste(tau," = ",.(tau[1]))),4, cex=cex.all)
   # 2 1 
   plot(fy211~y, type="l", xaxt="n", col=cols[1], ylab="", xlab="", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow2))
+       lwd=2, ylim=c(0,maxyrow2), cex.axis=cex.axis)
   lines(fy212~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy213~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti( ylabel, 2, 0.6,cex=1.2)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
   # 2 2 
   plot(fy221~y, type="l", xaxt="n", yaxt="n",col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow2))
+       lwd=2, ylim=c(0,maxyrow2), cex.axis=cex.axis)
   lines(fy222~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy223~y, col=cols[3],lty=ltype[3],lwd=2)
   # 2 3
   plot(fy231~y, type="l",  xaxt="n",yaxt="n",col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow2))
+       lwd=2, ylim=c(0,maxyrow2),  cex.axis=cex.axis)
   lines(fy232~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy233~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti(bquote(paste(tau," = ",.(tau[2]))),4, cex=1)
+  mtexti(bquote(paste(tau," = ",.(tau[2]))),4, cex=cex.all)
   # 3 1
   plot(fy311~y, type="l",  col=cols[1], ylab="", xlab="", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow3))
+       lwd=2, ylim=c(0,maxyrow3), cex.axis=cex.axis)
   lines(fy312~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy313~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti( ylabel, 2, 0.6,cex=1.2)
-  mtexti("y", 1, 0.6, cex=1.2)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti("y", 1, 0.6, cex=cex.all)
   # 2 2 
   plot(fy321~y, type="l",  yaxt="n",col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow3))
+       lwd=2, ylim=c(0,maxyrow3), cex.axis=cex.axis)
   lines(fy322~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy323~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti("y", 1, 0.6, cex=1.2)
+  mtexti("y", 1, 0.6, cex=cex.all)
   # 2 3
   plot(fy331~y, type="l",yaxt="n",col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow3))
+       lwd=2, ylim=c(0,maxyrow3), cex.axis=cex.axis)
   lines(fy232~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy233~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti("y", 1, 0.6, cex=1.2)
-  mtexti(bquote(paste(tau," = ",.(tau[3]))),4, cex=1)
-  
-    
-  
-#mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3,cex=cex.axis.discrete.3)
-  
+  mtexti("y", 1, 0.6, cex=cex.all)
+  mtexti(bquote(paste(tau," = ",.(tau[3]))),4, cex=cex.all)
+#mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3,cex=cex.axis)
   par(op)
 }
 
@@ -1234,7 +1244,9 @@ contRplus_4_33 <- function(family=BCT, mu=1, sigma = c(0.15,0.2,0.5), nu=c(-4,0,
 #-----------------------------------------------------------------------
 # FUNCTION 15
 #----------------------------------------------------------------------=
-binom_1_31 <- function(family=BI, mu=c(0.1,.5,.7), bd=NULL, miny=0, maxy=20, cex.y.axis=1.2, cex.all=1.5)
+binom_1_31 <- function(family=BI, mu=c(0.1,.5,.7), bd=NULL, 
+                       miny=0, maxy=20, cex.axis=1.2, 
+                       cex.all=1.5)
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -1257,7 +1269,7 @@ binom_1_31 <- function(family=BI, mu=c(0.1,.5,.7), bd=NULL, miny=0, maxy=20, cex
   #1
   fy <- eval(parse(text=paste0("d",fname,"(y,mu[1], bd=bd)")))
   plot(y,fy,type="h",ylab="f(y)",lwd=1.5,xaxt="n",ylim=c(0,1.2*max(fy)),
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[1]),"  ")),bty="n",
          cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
@@ -1265,15 +1277,15 @@ binom_1_31 <- function(family=BI, mu=c(0.1,.5,.7), bd=NULL, miny=0, maxy=20, cex
   #2
   fy <-eval(parse(text=paste0("d",fname,"(y,mu[2], bd=bd)")))
   plot(y,fy,type="h",ylab="f(y)",lwd=1.5,xaxt="n",yaxt="n",ylim=c(0,1.2*max(fy)),
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[2]),"  ")),bty="n",
          cex=cex.all)
-  axis(4,cex.axis=cex.y.axis)
+  axis(4,cex.axis=cex.axis)
   mtexti("f(y)", 2, 0.6,cex=cex.all)  
   #3
   fy <- eval(parse(text=paste0("d",fname,"(y,mu[3], bd=bd)")))
   plot(y,fy,type="h",ylab="f(y)",lwd=1.5,ylim=c(0,1.2*max(fy)),
-       cex.axis=cex.y.axis, cex=cex.all)
+       cex.axis=cex.axis, cex=cex.all)
   legend("topright",legend=bquote(paste(mu," = ",.(mu[3]),"  ")),bty="n",
          cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
@@ -1285,7 +1297,7 @@ binom_1_31 <- function(family=BI, mu=c(0.1,.5,.7), bd=NULL, miny=0, maxy=20, cex
 # FUNCTION 16
 #----------------------------------------------------------------------=
 #----------------------------------------------------------------------
-binom_2_33 <- function(family=BB, mu= c(0.1,.5, .8), sigma = c(0.5, 1, 2), bd=NULL, miny=0, maxy=10, cex.y.axis=1.5, cex.all=1.5 )
+binom_2_33 <- function(family=BB, mu= c(0.1,.5, .8), sigma = c(0.5, 1, 2), bd=NULL, miny=0, maxy=10, cex.axis=1.5, cex.all=1.5 )
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -1318,7 +1330,7 @@ binom_2_33 <- function(family=BB, mu= c(0.1,.5, .8), sigma = c(0.5, 1, 2), bd=NU
   #1,1
   j=1
   plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex=cex.all,
-       cex.axis=cex.y.axis)
+       cex.axis=cex.axis)
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
   #----------
@@ -1327,7 +1339,7 @@ binom_2_33 <- function(family=BB, mu= c(0.1,.5, .8), sigma = c(0.5, 1, 2), bd=NU
   j=2
   plot(y,fy2,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy))
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
-  mtexti(fname, 3 ,off=.5, cex=1.5 )
+  mtexti(fname, 3 ,off=.5, cex=cex.all+0.02 )
   #mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=.6,srt=90)
   #-----------
   #1,3
@@ -1359,7 +1371,7 @@ binom_2_33 <- function(family=BB, mu= c(0.1,.5, .8), sigma = c(0.5, 1, 2), bd=NU
   j=3
   plot(y,fy3,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy))
   mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(4,cex.axis=cex.all)
+  axis(4,cex.axis=cex.axis)
   #----------------------------------------
   ### Row 3
   i=3
@@ -1369,22 +1381,22 @@ binom_2_33 <- function(family=BB, mu= c(0.1,.5, .8), sigma = c(0.5, 1, 2), bd=NU
   maxy <- 1.2*max(fy1,fy2, fy3)
   #3,1
   j=1
-  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.y.axis)
+  plot(y,fy1,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.axis)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
-  axis(1,cex.axis=cex.all)
+  axis(1,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all) 
   #3,2
   j=2
   plot(y,fy2,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy))
   #mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(1,cex.axis=cex.all)
+  axis(1,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all)
   
   #3,3
   j=3
   plot(y,fy3,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy))
   mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
-  axis(1,cex.axis=cex.all)
+  axis(1,cex.axis=cex.axis)
   mtexti("y", 1, 0.6,cex=cex.all)
   par(op)
 }
@@ -1395,7 +1407,7 @@ binom_2_33 <- function(family=BB, mu= c(0.1,.5, .8), sigma = c(0.5, 1, 2), bd=NU
 #-----------------------------------------------------------------------
 binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2), 
                      nu=c(0.01,0.3), bd = NULL,
-                     miny=0, maxy=10, cex.y.axis=1.5, cex.all=1.5,
+                     miny=0, maxy=10, cex.axis=1.5, cex.all=1.5,
                      cols=c("darkgray", "black"), spacing = 0.3 )
 {
   #--------------------------------------------------------
@@ -1416,8 +1428,8 @@ binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2),
   op <- par(omi=rep(1.0, 4), mar=c(0,0,0,0), mfrow=c(3,3))
   bd <- if (is.null(bd))  maxy else bd
   y <-0:bd
-  cex.axis.discrete.3 <- cex.y.axis
-  cex.axis.discrete.2 <- cex.all
+  cex.axis <- cex.axis
+  cex.all <- cex.all
   ### Row 1
   i=1
   fy111 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1],nu[1], bd=bd",")")))
@@ -1430,28 +1442,31 @@ binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2),
   
   #1,1 nu 1 2
   j=1
-  plot(y,fy111,type="h",xaxt="n",ylim=c(0,maxy),cex=cex.axis.discrete.3,
-       cex.axis=cex.axis.discrete.2, col=cols[1])
+  plot(y,fy111,type="h",xaxt="n",ylim=c(0,maxy),
+       cex=cex.all,
+       col=cols[1], cex.axis=cex.axis)
   lines(y+spacing,fy112,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.axis.discrete.3)
-  mtexti("f(y)", 2, 0.6,cex=cex.axis.discrete.3)
+  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
+  mtexti("f(y)", 2, 0.6,cex=cex.all)
   #1,2 nu 1 2
   i=1
   j=2
-  plot(y,fy121,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
+  plot(y,fy121,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1],
+       cex=cex.all,cex.axis=cex.axis)
   lines(y+spacing,fy122,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.axis.discrete.3)
-  mtexti(fname, 3 ,off=.5, cex=1.5 )
+  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
+  mtexti(fname, 3 ,off=.5, cex=cex.all+0.02 )
   #1,3 nu 1 2
   i=1
   j=3
-  plot(y,fy131,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
+  plot(y,fy131,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1],
+       cex=cex.all,cex.axis=cex.axis)
   lines(y+spacing,fy132,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.axis.discrete.3)
-  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=.6,srt=90)
+  mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
+  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=.6,srt=90)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
   legend("topright",legend=as.expression(ex.leg),
-         lty=1:2,col=cols[1:2],lwd=2,cex=1.2)
+         lty=1:2,col=cols[1:2],lwd=2,cex=cex.all)
   ### Row 2
   i=2
   fy211 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1],nu[1], bd=bd",")")))
@@ -1463,19 +1478,22 @@ binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2),
   maxy <- 1.2*max(fy211,fy212,fy221,fy222,fy221,fy232)
   #2,1 nu 1,2 
   j=1
-  plot(y,fy211,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
+  plot(y,fy211,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1],
+       cex=cex.all,cex.axis=cex.axis)
   lines(y+spacing,fy212,type="h",lty=2,col=cols[2])
-  mtexti("f(y)", 2, 0.6,cex=cex.axis.discrete.3)
+  mtexti("f(y)", 2, 0.6,cex=cex.all)
   #2,2 nu 1,2 
   j=2
-  plot(y,fy221,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
+  plot(y,fy221,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1],  cex=cex.all,
+              cex.axis=cex.axis)
   lines(y+spacing,fy222,type="h",lty=2,col=cols[2])
   #2,2 nu 1,2 
   j=3
-  plot(y,fy231,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1])
+  plot(y,fy231,type="h",xaxt="n", yaxt="n",ylim=c(0,maxy),col=cols[1],
+       cex=cex.all,cex.axis=cex.axis)
   lines(y+spacing,fy232,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=0.6,srt=90)
-  axis(4,cex.axis=cex.axis.discrete.3)
+  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
+  axis(4,cex.axis=cex.axis)
   ### Row 3
   i=3
   fy311 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1],nu[1], bd=bd",")")))
@@ -1489,27 +1507,27 @@ binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2),
   
   #3,1  nu 1,2 
   j=1
-  plot(y,fy311,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.axis.discrete.2,col=cols[1])
+  plot(y,fy311,type="h",xaxt="n",ylim=c(0,maxy),cex.axis=cex.all,col=cols[1],
+       cex=cex.all,cex.axis=cex.axis)
   lines(y+spacing,fy312,type="h",lty=2,col=cols[2])
-  mtexti("f(y)", 2, 0.6,cex=cex.axis.discrete.3)
-  axis(1,cex.axis=cex.axis.discrete.3)
-  mtexti("y", 1, 0.6,cex=cex.axis.discrete.3)
-  
+  mtexti("f(y)", 2, 0.6,cex=cex.all)
+  axis(1,cex.axis=cex.axis)
+  mtexti("y", 1, 0.6,cex=cex.all)
   #3,2 nu 1,2 
   j=2
   plot(y,fy321,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy),col=cols[1])
   lines(y+spacing,fy322,type="h",lty=2,col=cols[2])
-  # mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=0.6,srt=90)
-  # axis(1,cex.axis=cex.axis.discrete.3)
-  # mtexti("y", 1, 0.6,cex=cex.axis.discrete.3)
+  # mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis,off=0.6,srt=90)
+  # axis(1,cex.axis=cex.axis)
+  # mtexti("y", 1, 0.6,cex=cex.axis)
   
   #3,3 nu 1,2 
   j=2
-  plot(y,fy331,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy),col=cols[1])
+  plot(y,fy331,type="h",xaxt="n",yaxt="n",ylim=c(0,maxy),col=cols[1], cex.axis=cex.axis)
   lines(y+spacing,fy332,type="h",lty=2,col=cols[2])
-  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.axis.discrete.3,off=0.6,srt=90)
-  axis(1,cex.axis=cex.axis.discrete.3)
-  mtexti("y", 1, 0.6,cex=cex.axis.discrete.3)
+  mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=0.6,srt=90)
+  axis(1,cex.axis=cex.axis)
+  mtexti("y", 1, 0.6,cex=cex.all)
   par(op)
 }
 
@@ -1524,9 +1542,11 @@ binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2),
 #-----------------------------------------------------------------------
 
 #------------------------------------------------------------------------
-contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8), cols=c(1,2,3), 
-                   ltype = c(1,2,3), maxy=7, no.points=201, y.axis.lim=1.1, maxYlim=10,
-                   cex.axis=1.2  )
+contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8), 
+                         cols=c(gray(.1),gray(.2),gray(.3)), 
+                         ltype = c(1,2,3), maxy=7, no.points=201, 
+                         y.axis.lim=1.1, maxYlim=10,
+                         cex.axis=1.5, cex.all=1.5  )
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -1575,30 +1595,30 @@ contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8), 
   maxfy <- min(maxfy, maxYlim)
   ylabel <- "f(y)"
   #1
-  plot(fy11~y, type="l", col=cols[1],
+  plot(fy11~y, type="l", col=cols[1], cex=cex.all,
        ylab="", xlab="y",lty=ltype[1], lwd=2, ylim =c(0,maxfy), cex.axis=cex.axis)
   lines(fy12~y, col=cols[2], lty=ltype[2], lwd=2)
   lines(fy13~y, col=cols[3], lty=ltype[3], lwd=2)
   ex.leg <- c(bquote(paste(mu," = ",.(mu[1]))),bquote(paste(mu," = ",.(mu[2]))),bquote(paste(mu," = ",.(mu[3]))))
   legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1.5)
+         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
   
-  mtexti( ylabel, 2, 0.6,cex=1.5)
-  mtexti("y", 1, 0.6,cex=1.5)
-  mtexti(bquote(paste(sigma," = ",.(sigma[1]))), 3, cex=1.5)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(sigma," = ",.(sigma[1]))), 3, cex=cex.all)
   
-  mtexti(fname, 3 , off=.5, cex=1.2, xpos=8 )
+  mtexti(fname, 3 , off=.5, cex=cex.all+0.02, xpos=8 )
   #2
-  plot(fy21~y, type="l", col=cols[1],
+  plot(fy21~y, type="l", col=cols[1], cex=cex.all,
        yaxt="n", xlab="y",lty=ltype[1],lwd=2, ylim=c(0,maxfy), cex.axis=cex.axis)
   lines(fy22~y, col=cols[2],lty=ltype[2], lwd=2)
   lines(fy23~y, col=cols[3],lty=ltype[3] ,lwd=2)
   ex.leg <- c(bquote(paste(mu," = ",.(mu[1]))),bquote(paste(mu," = ",.(mu[2]))),bquote(paste(mu," = ",.(mu[3]))))
-  legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1.5)
+  # legend("topleft",legend=as.expression(ex.leg),
+  #        lty=ltype, col=cols[1:3], lwd=2, cex=1.5)
   
-  mtexti("y", 1, 0.6,cex=1.5)
-  mtexti(bquote(paste(sigma," = ",.(sigma[2]))), 3, cex=1.5)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(sigma," = ",.(sigma[2]))), 3, cex=cex.all)
   
   #3
   plot(fy31~y, type="l", col=cols[1], yaxt="n",
@@ -1606,11 +1626,11 @@ contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8), 
   lines(fy32~y, col=cols[2], lty=ltype[2], lwd=2)
   lines(fy33~y, col=cols[3], lty=ltype[3], lwd=2)
   ex.leg <- c(bquote(paste(mu," = ",.(mu[1]))),bquote(paste(mu," = ",.(mu[2]))),bquote(paste(mu," = ",.(mu[3]))))
-  legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1.5)
+  # legend("topleft",legend=as.expression(ex.leg),
+  #        lty=ltype, col=cols[1:3], lwd=2, cex=1.5)
   
-  mtexti("y", 1, 0.6,cex=1.5)
-  mtexti(bquote(paste(sigma," = ",.(sigma[3]))), 3, cex=1.5)
+  mtexti("y", 1, 0.6,cex=cex.all)
+  mtexti(bquote(paste(sigma," = ",.(sigma[3]))), 3, cex=cex.all)
   par(op)
 }
 
@@ -1626,11 +1646,11 @@ contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8), 
 #-----------------------------------------------------------------------
 
 contR01_4_33 <- function(family=GB1, mu=c(0.5), sigma = c(0.2,0.5,0.7), 
-                        nu = c(1,2,5), 
-                       tau=c(0.5, 1, 2),
-                       cols=c(1,2,3,4,5,6), 
-                      maxy=.999, ltype = c(1,2,3),
-                       no.points=201, y.axis.lim=1.1, maxYlim=10)
+                        nu = c(1,2,5), tau=c(0.5, 1, 2),
+                       cols=c(gray(.1),gray(.2),gray(.3)), 
+                      maxy=0.999, ltype = c(1,2,3),
+                       no.points=201, y.axis.lim=1.1, 
+                      maxYlim=10,   cex.axis=1.5, cex.all=1.5)
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -1698,70 +1718,71 @@ contR01_4_33 <- function(family=GB1, mu=c(0.5), sigma = c(0.2,0.5,0.7),
   ylabel <-"f(x)"
   # 1 1 
   plot(fy111~y, type="l", xaxt="n",  col=cols[1], ylab="", xlab="", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow1))
+       lwd=2, ylim=c(0,maxyrow1), cex.axis=cex.axis, cex=cex.all)
   lines(fy112~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy113~y, col=cols[3],lty=ltype[3],lwd=2)
   
-  mtexti( ylabel, 2, 0.6,cex=1.2)
-  mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3, cex=1)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3, cex=cex.all)
   # 1 2 
   plot(fy121~y, type="l", xaxt="n", yaxt="n", col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow1))
+       lwd=2, ylim=c(0,maxyrow1), cex.axis=cex.axis, cex=cex.all)
   lines(fy122~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy123~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti(bquote(paste(sigma," = ",.(sigma[2]))),3, cex=1)
-  mtexti(fname, 3 , off=.7, cex=1.5)
+  mtexti(bquote(paste(sigma," = ",.(sigma[2]))),3, cex=cex.all)
+  mtexti(fname, 3 , off=.7, cex=cex.all+0.02)
   # 1 3
   plot(fy131~y, type="l",  xaxt="n", yaxt="n", col=cols[1], ylab="", xlab="y", 
-       lty=ltype[1], lwd=2, ylim=c(0,maxyrow1))
+       lty=ltype[1], lwd=2, ylim=c(0,maxyrow1), cex.axis=cex.axis, cex=cex.all)
   lines(fy132~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy133~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti(bquote(paste(sigma," = ",.(sigma[3]))),3, cex=1)
+  mtexti(bquote(paste(sigma," = ",.(sigma[3]))),3, cex=cex.all)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
   legend("topright",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=1)
-  mtexti(bquote(paste(tau," = ",.(tau[1]))),4, cex=1)
+         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  mtexti(bquote(paste(tau," = ",.(tau[1]))),4,cex=cex.all)
   # 2 1 
   plot(fy211~y, type="l", xaxt="n", col=cols[1], ylab="", xlab="", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow2))
+       lwd=2, ylim=c(0,maxyrow2), cex.axis=cex.axis, cex=cex.all)
   lines(fy212~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy213~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti( ylabel, 2, 0.6,cex=1.2)
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
   # 2 2 
   plot(fy221~y, type="l", xaxt="n", yaxt="n",col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow2))
+       lwd=2, ylim=c(0,maxyrow2), cex.axis=cex.axis, cex=cex.all)
   lines(fy222~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy223~y, col=cols[3],lty=ltype[3],lwd=2)
   # 2 3
   plot(fy231~y, type="l",  xaxt="n",yaxt="n",col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow2))
+       lwd=2, ylim=c(0,maxyrow2), cex.axis=cex.axis, cex=cex.all)
   lines(fy232~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy233~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti(bquote(paste(tau," = ",.(tau[2]))),4, cex=1)
+  mtexti(bquote(paste(tau," = ",.(tau[2]))),4, cex=cex.all)
   # 3 1
   plot(fy311~y, type="l",  col=cols[1], ylab="", xlab="", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow3))
+       lwd=2, ylim=c(0,maxyrow3), cex.axis=cex.axis, cex=cex.all)
   lines(fy312~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy313~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti( ylabel, 2, 0.6,cex=1.2)
-  mtexti("y", 1, 0.6, cex=1.2)
-  # 2 2 
-  plot(fy321~y, type="l",  yaxt="n",col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow3))
+  mtexti( ylabel, 2, 0.6,cex=cex.all)
+  mtexti("y", 1, 0.6, cex=cex.all)
+  # 3 2 
+  plot(fy321~y, type="l", xaxt="n", yaxt="n",col=cols[1], ylab="", xlab="y", lty=ltype[1],
+       lwd=2, ylim=c(0,maxyrow3), cex.axis=cex.axis, cex=cex.all)
   lines(fy322~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy323~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti("y", 1, 0.6, cex=1.2)
-  # 2 3
+  #axis(1,cex.axis=cex.axis)
+  mtexti("y", 1, 0.6, cex=cex.all)
+  # 3 3
   plot(fy331~y, type="l",yaxt="n",col=cols[1], ylab="", xlab="y", lty=ltype[1],
-       lwd=2, ylim=c(0,maxyrow3))
+       lwd=2, ylim=c(0,maxyrow3), cex.axis=cex.axis, cex=cex.all)
   lines(fy232~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy233~y, col=cols[3],lty=ltype[3],lwd=2)
-  mtexti("y", 1, 0.6, cex=1.2)
-  mtexti(bquote(paste(tau," = ",.(tau[3]))),4, cex=1)
+  mtexti("y", 1, 0.6, cex=cex.all)
+  mtexti(bquote(paste(tau," = ",.(tau[3]))),4,cex=cex.all)
   
   
   
-  #mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3,cex=cex.axis.discrete.3)
+  #mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3,cex=cex.axis)
   
   par(op)
 }
