@@ -80,7 +80,7 @@ mtexti <- function(text, side, off = 0.25,
 ###################################################################
 # Gillian's one parameter discrete
 ### Discrete count, 1 parameter 3 figures 3x1
-# disc1_3("PO")
+# count_1_31("PO")
 ###################################################################
 #-----------------------------------------------------------------------
 # FUNCTION 2
@@ -142,7 +142,7 @@ count_1_31 <- function(family = PO,
 #----------------------------------------------------------------------=
 # Gillian's one parameter discrete
 ### Discrete count, 1 parameter   2x2 figures
-# disc1_22()
+# count_1_22()
 ###################################################################
 # four plots
 count_1_22 <- function(family=PO, mu=c(1,2,5,10), miny=0, 
@@ -207,7 +207,7 @@ count_1_22 <- function(family=PO, mu=c(1,2,5,10), miny=0,
 ###################################################################
 ###################################################################
 ### Discrete count, 2 parameter 3 mu x 2 sigma 
-# disc2_32()
+# count_2_32()
 ###################################################################
 #-----------------------------------------------------------------------
 # FUNCTION 4
@@ -375,12 +375,13 @@ count_2_32R <- function(family=NBI, mu= c(1,2), sigma=c(0.1,1,2), miny=0,
 }
 ###################################################################
 ### Discrete, 2 parameter 3 mu x 3 sigma 
-# disc2_33()
+# count_2_33()
 ###################################################################
 #-----------------------------------------------------------------------
 # FUNCTION 6
 #----------------------------------------------------------------------=
 #### Discrete count, 2 parameters
+# count_2_33()
 #------------------------------------------------------------------
 # a 3 mu  by 3 sigma  table 
 count_2_33 <- function(family=NBI, mu= c(0.1,1, 2), sigma = c(0.5, 1, 2), 
@@ -494,14 +495,17 @@ count_2_33 <- function(family=NBI, mu= c(0.1,1, 2), sigma = c(0.5, 1, 2),
 #-----------------------------------------------------------------------
 ###################################################################
 ### Discrete, 3 parameter 3 mu x 2 sigma  plus nu superimposed
-# disc3_32()
+# count_3_32()
 ###################################################################
 count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1), 
                        nu=c(-0.5,0.5),
                   miny=0, maxy=10, cex.axis=1.5, cex.all=1.5,
-                  cols=c("darkgray", "black"), spacing = 0.2 )
+                  cols=c("darkgray", "black"), spacing = 0.2,
+                  legend.cex=1, legend.x="topright",
+                  legend.where=c("left","right"))
 {
   #--------------------------------------------------------
+  legend.where <- match.arg(legend.where)
   fname <- if (is.name(family)) as.character(family)
   else if (is.character(family)) family
   else if (is.call(family)) as.character(family[[1]])
@@ -535,6 +539,9 @@ count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1),
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
   mtexti(fname, 3, off=.5, cex=cex.all, xpos=10)
+  ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
+  if (legend.where=="left") legend(legend.x,legend=as.expression(ex.leg),
+         lty=1:2,col=cols[1:2], lwd=2, cex=legend.cex)
   #1,2
   i=1
   j=2
@@ -543,8 +550,8 @@ count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1),
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
   mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=.6,srt=90)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
-  legend("topright",legend=as.expression(ex.leg),
-         lty=1:2,col=cols[1:2],lwd=2,cex=1.2)
+  if (legend.where=="right") legend(legend.x,legend=as.expression(ex.leg),
+                                   lty=1:2,col=cols[1:2], lwd=2, cex=legend.cex)
 
   ### Row 2
   i=2
@@ -606,9 +613,12 @@ count_3_32 <- function(family=SICHEL, mu=c(1,5,10), sigma = c(0.5,1),
 ###################################################################
 count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0.5,0.5,1),
                      miny=0, maxy=10, cex.axis=1.5, cex.all=1.5,
-                     cols=c("darkgray", "black"), spacing = 0.3 )
+                     cols=c("darkgray", "black"), spacing = 0.3,
+                     legend.cex=1, legend.x="topright",
+                     legend.where=c("left","right", "center"))
 {
   #--------------------------------------------------------
+  legend.where <- match.arg(legend.where) 
   fname <- if (is.name(family)) as.character(family)
   else if (is.character(family)) family
   else if (is.call(family)) as.character(family[[1]])
@@ -643,6 +653,9 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
   lines(y+spacing,fy112,type="h",lty=2,col=cols[2])
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
   mtexti("f(y)", 2, 0.6, cex=cex.all)
+  ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
+  if (legend.where=="left") legend(legend.x,legend=as.expression(ex.leg),
+                            lty=1:2,col=cols[1:2],lwd=2,cex=legend.cex)
   #1,2 nu 1 2
   i=1
   j=2
@@ -650,6 +663,9 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
   lines(y+spacing,fy122,type="h",lty=2,col=cols[2])
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
   mtexti(fname, 3 ,off=.5, cex=cex.all )
+  ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
+  if (legend.where=="center") legend(legend.x,legend=as.expression(ex.leg),
+         lty=1:2,col=cols[1:2],lwd=2,cex=legend.cex)
   #1,3 nu 1 2
   i=1
   j=3
@@ -658,8 +674,8 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
   mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=.6,srt=90)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
-  legend("topright",legend=as.expression(ex.leg),
-         lty=1:2,col=cols[1:2],lwd=2,cex=cex.all)
+  if (legend.where=="right") legend(legend.x,legend=as.expression(ex.leg),
+                                     lty=1:2,col=cols[1:2],lwd=2,cex=legend.cex)
   ### Row 2
   i=2
   fy211 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1],nu[1]",")")))
@@ -727,11 +743,12 @@ count_3_33 <- function(family=SICHEL, mu= c(1,5,10), sigma = c(0.5,1,2), nu=c(-0
 #----------------------------------------------------------------------=
 #------------------------------------------------------------------------
 # Continuous 2 parameters -Inf +Inf  
+# contR_2_12() 
 #------------------------------------------------------------------------
 contR_2_12 <- function(family="NO", mu=c(0,-1,1), sigma=c(1,0.5,2), 
                        cols=c(gray(.1),gray(.2),gray(.3)), 
                    ltype = c(1,2,3), maxy=7, no.points=201, y.axis.lim=1.1, 
-                   cex.axis=1.5, cex.all=1.5 )
+                   cex.axis=1.5, cex.all=1.5, legend.cex=1, legend.x="topleft" )
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -774,8 +791,8 @@ contR_2_12 <- function(family="NO", mu=c(0,-1,1), sigma=c(1,0.5,2),
   lines(fy12~y, col=cols[2], lty=ltype[2], lwd=2)
   lines(fy13~y, col=cols[3], lty=ltype[3], lwd=2)
   ex.leg <- c(bquote(paste(mu," = ",.(mu[1]))),bquote(paste(mu," = ",.(mu[2]))),bquote(paste(mu," = ",.(mu[3]))))
-  legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  legend(legend.x,legend=as.expression(ex.leg),
+         lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   
   mtexti( ylabel, 2, 0.6,cex=cex.all)
   mtexti("y", 1, 0.6,cex=cex.all)
@@ -789,8 +806,8 @@ contR_2_12 <- function(family="NO", mu=c(0,-1,1), sigma=c(1,0.5,2),
   lines(fy23~y, col=cols[3],lty=ltype[3],lwd=2)
   ex.leg <- c(bquote(paste(sigma," = ",.(sigma[1]))),bquote(paste(sigma," = ",.(sigma[2]))),
               bquote(paste(sigma," = ",.(sigma[3]))))
-  legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  legend(legend.x,legend=as.expression(ex.leg),
+         lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   mtexti("y", 1, 0.6,cex=cex.all)
   mtexti(bquote(paste(mu," = 0")),3,cex=cex.all)
   par(op)
@@ -804,10 +821,12 @@ contR_2_12 <- function(family="NO", mu=c(0,-1,1), sigma=c(1,0.5,2),
 # FUNCTION 10
 #----------------------------------------------------------------------=
 #-----------------------------------------------------------------------
+# contR_3_11()
 #-----------------------------------------------------------------------
 contR_3_11 <- function(family="PE", mu=0, sigma=1, nu=c(1,2,3), 
                        cols=c(gray(.1),gray(.2),gray(.3)), maxy=7, no.points=201, 
-                   ltype = c(1,2,3), y.axis.lim=1.1, cex.axis=1.5, cex.all=1.5)
+                   ltype = c(1,2,3), y.axis.lim=1.1, cex.axis=1.5, cex.all=1.5,
+                   legend.cex=1, legend.x="topleft")
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -844,8 +863,8 @@ contR_3_11 <- function(family="PE", mu=0, sigma=1, nu=c(1,2,3),
   lines(fy12~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy13~y, col=cols[3],lty=ltype[3],lwd=2)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
-  legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  legend(legend.x,legend=as.expression(ex.leg),
+         lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   mtexti( ylabel, 2, 0.6,cex=cex.all)
   mtexti("y", 1, 0.6,cex=cex.all)
   mtexti(fname, 3 , off=.7, cex=cex.all)
@@ -861,13 +880,18 @@ contR_3_11 <- function(family="PE", mu=0, sigma=1, nu=c(1,2,3),
 # FUNCTION 11
 #----------------------------------------------------------------------=
 #-----------------------------------------------------------------------
+#  contR_4_13()
+#  contR_4_13( legend.cex=1.13, legend.where="right", legend.x="topright")
 #-----------------------------------------------------------------------
 contR_4_13 <- function(family="SEP3", mu=0, sigma=1,  nu=c(0.5,1,2), 
                    tau=c(1,2,5),  cols=c(gray(.1),gray(.2),gray(.3)), maxy=7, 
                    no.points=201, ltype = c(1,2,3), 
-                   y.axis.lim=1.1, cex.axis=1.5, cex.all=1.5)
+                   y.axis.lim=1.1, cex.axis=1.5, cex.all=1.5, 
+                   legend.cex=1, legend.x="topleft", 
+                   legend.where=c("left","right") )
 {
 #--------------------------------------------------------
+  legend.where <- match.arg(legend.where)
   fname <- if (is.name(family)) as.character(family)
          else if (is.character(family)) family
          else if (is.call(family)) as.character(family[[1]])
@@ -910,7 +934,7 @@ contR_4_13 <- function(family="SEP3", mu=0, sigma=1,  nu=c(0.5,1,2),
   
   
   maxfy= y.axis.lim*max(fy11,fy12,fy13,fy21,fy22,fy23,fy31,fy32,fy33)
-  ylabel <-"f(x)"
+  ylabel <-"f(y)"
   #1
   plot(fy11~y, type="l", col=cols[1],
        ylab="", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy),
@@ -918,8 +942,8 @@ contR_4_13 <- function(family="SEP3", mu=0, sigma=1,  nu=c(0.5,1,2),
   lines(fy12~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy13~y, col=cols[3],lty=ltype[3],lwd=2)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
-  legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+ if (legend.where=="left") legend(legend.x,legend=as.expression(ex.leg),
+         lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   
   mtexti( ylabel, 2, 0.6,cex=cex.all)
   mtexti("y", 1, 0.6,cex=cex.all)
@@ -943,8 +967,8 @@ contR_4_13 <- function(family="SEP3", mu=0, sigma=1,  nu=c(0.5,1,2),
   lines(fy33~y, col=cols[3],lty=ltype[3],lwd=2)
   # ex.leg <- c(bquote(paste(sigma," = ",.(sigma[1]))),bquote(paste(sigma," = ",.(sigma[2]))),
   #             bquote(paste(sigma," = ",.(sigma[3]))))
-  # legend("topleft",legend=as.expression(ex.leg),
-  #        lty=1:3, col=cols[1:3], lwd=2, cex=1)
+  if (legend.where=="right") legend(legend.x,legend=as.expression(ex.leg),
+                                   lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   mtexti("y", 1, 0.6,cex=cex.all)
   mtexti(bquote(paste(tau," = ",.(tau[3]))),3, cex=cex.all)
   par(op)
@@ -956,12 +980,15 @@ contR_4_13 <- function(family="SEP3", mu=0, sigma=1,  nu=c(0.5,1,2),
 # FUNCTION 12
 #----------------------------------------------------------------------=
 #-----------------------------------------------------------------------
+# contRplus_2_11()
 #-----------------------------------------------------------------------
 contRplus_2_11 <- function(family=GA, mu=1, sigma=c(.1,.6,1), 
                            cols=c(gray(.1),gray(.2),gray(.3)), 
                            maxy=4, no.points=201, 
                    y.axis.lim=1.1, ltype = c(1,2,3),
-                   cex.axis=1.5, cex.all=1.5)
+                   cex.axis=1.5, cex.all=1.5,
+                   legend.cex=1, legend.x="topright"
+                   )
 {
   #--------------------------------------------------------
    fname <- if (is.name(family)) as.character(family)
@@ -996,8 +1023,8 @@ contRplus_2_11 <- function(family=GA, mu=1, sigma=c(.1,.6,1),
   lines(fy12~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy13~y, col=cols[3],lty=ltype[3],lwd=2)
   ex.leg <- c(bquote(paste(sigma," = ",.(sigma[1]))),bquote(paste(sigma," = ",.(sigma[2]))),bquote(paste(sigma," = ",.(sigma[3]))))
-  legend("topright",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  legend(legend.x,legend=as.expression(ex.leg),
+         lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   mtexti( ylabel, 2, 0.6,cex=cex.all)
   mtexti("y", 1, 0.6,cex=cex.all)
   mtexti(fname, 3 , off=.7, cex=cex.all)
@@ -1012,13 +1039,16 @@ contRplus_2_11 <- function(family=GA, mu=1, sigma=c(.1,.6,1),
 # FUNCTION 13
 #----------------------------------------------------------------------=
 #-----------------------------------------------------------------------
+# contRplus_3_13()
 #-----------------------------------------------------------------------
 contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5), 
                     nu=c(-2,0,4), 
                     cols=c(gray(.1),gray(.2),gray(.3)), 
                     maxy=4, ltype = c(1,2,3),
                    no.points=201, y.axis.lim=1.1,
-                   cex.axis=1.5, cex.all=1.5)
+                   cex.axis=1.5, cex.all=1.5,
+                   legend.cex=1, legend.x="topright",
+                   legend.where=c("left","right"))
 {
   #--------------------------------------------------------
   fname <- if (is.name(family)) as.character(family)
@@ -1027,6 +1057,7 @@ contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),
   else if (is.function(family)) deparse(substitute(family))
   else if (is(family, "gamlss.family"))  family$family[1]
   else stop("the family must be a character or a gamlss.family name")
+  legend.where <- match.arg(legend.where)
   fam1 <- eval(parse(text=fname)) # the family to output
   fam <- as.gamlss.family(family) # this is created so I can get things
   dorfun <- paste("d",fname,sep="") # say dNO
@@ -1062,7 +1093,7 @@ contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),
   
   
   maxfy= y.axis.lim*max(fy11,fy12,fy13,fy21,fy22,fy23,fy31,fy32,fy33)
-  ylabel <-"f(x)"
+  ylabel <-"f(y)"
   #1
   plot(fy11~y, type="l", col=cols[1], cex.axis=cex.axis,
        ylab="", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy))
@@ -1075,6 +1106,9 @@ contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),
   mtexti( ylabel, 2, 0.6,cex=cex.all)
   mtexti("y", 1, 0.6,cex=cex.all)
   mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3, cex=cex.all)
+  ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
+  if (legend.where=="left") legend(legend.x, legend=as.expression(ex.leg),
+                                    lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   #2
   plot(fy21~y, type="l", col=cols[1],
        yaxt="n", xlab="y",lty=ltype[1],lwd=2,ylim=c(0,maxfy), cex.axis=cex.axis)
@@ -1093,8 +1127,8 @@ contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),
   # legend("topleft",legend=as.expression(ex.leg),
   #        lty=1:3, col=cols[1:3], lwd=2, cex=1)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
-  legend("topright",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  if (legend.where=="right") legend(legend.x, legend=as.expression(ex.leg),
+         lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   mtexti("y", 1, 0.6,cex=cex.all)
   mtexti(bquote(paste(sigma," = ",.(sigma[3]))),3, cex=cex.all)
   par(op)
@@ -1102,16 +1136,20 @@ contRplus_3_13 <- function(family="BCCG", mu=1, sigma=c(0.15, 0.2, 0.5),
 #--------------------------------------------------------------------------
 #-----------------------------------------------------------------------
 # FUNCTION 14
-#----------------------------------------------------------------------=
+#----------------------------------------------------------------------=# #
+# contRplus_4_33(legend.x="topleft') 
 #--------------------------------------------------------------------------
 contRplus_4_33 <- function(family=BCT, mu=1, sigma = c(0.15,0.2,0.5), 
                            nu=c(-4,0,2), tau=c(100, 5, 1),
                        cols=c(gray(.1),gray(.2),gray(.3)), 
                        maxy=4, ltype = c(1,2,3),
                        no.points=201, y.axis.lim=1.1,
-                       cex.axis=1.5, cex.all=1.5)
+                       cex.axis=1.5, cex.all=1.5,
+                       legend.cex=1, legend.x="topright",
+                       legend.where=c("left","right"))
 {
   #--------------------------------------------------------
+  legend.where <- match.arg(legend.where)
    fname <- if (is.name(family)) as.character(family)
        else if (is.character(family)) family
        else if (is.call(family)) as.character(family[[1]])
@@ -1171,14 +1209,16 @@ contRplus_4_33 <- function(family=BCT, mu=1, sigma = c(0.15,0.2,0.5),
   fy333 <- eval(parse(text=paste0("d",fname,"(y,mu,sigma[3],nu[3]",",tau[3])")))
   maxyrow3 <- y.axis.lim*max(fy311 ,fy312,fy313, fy321,fy322,fy323, fy331, fy332,fy333)  
   
-  ylabel <-"f(x)"
+  ylabel <-"f(y)"
 
   # 1 1 
   plot(fy111~y, type="l", xaxt="n",  col=cols[1], ylab="", xlab="", lty=ltype[1],
        lwd=2, ylim=c(0,maxyrow1), cex.axis=cex.axis)
   lines(fy112~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy113~y, col=cols[3],lty=ltype[3],lwd=2)
-  
+  ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
+  if (legend.where=="left") legend(legend.x,legend=as.expression(ex.leg),
+                                    lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   mtexti( ylabel, 2, 0.6,cex=cex.all)
   mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3, cex=cex.all)
   # 1 2 
@@ -1195,8 +1235,8 @@ contRplus_4_33 <- function(family=BCT, mu=1, sigma = c(0.15,0.2,0.5),
   lines(fy133~y, col=cols[3],lty=ltype[3],lwd=2)
   mtexti(bquote(paste(sigma," = ",.(sigma[3]))),3, cex=cex.all)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
-  legend("topright",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  if (legend.where=="right") legend(legend.x, legend=as.expression(ex.leg),
+         lty=ltype, col=cols[1:3], lwd=2, cex=legend.cex)
   mtexti(bquote(paste(tau," = ",.(tau[1]))),4, cex=cex.all)
   # 2 1 
   plot(fy211~y, type="l", xaxt="n", col=cols[1], ylab="", xlab="", lty=ltype[1],
@@ -1235,6 +1275,7 @@ contRplus_4_33 <- function(family=BCT, mu=1, sigma = c(0.15,0.2,0.5),
   lines(fy233~y, col=cols[3],lty=ltype[3],lwd=2)
   mtexti("y", 1, 0.6, cex=cex.all)
   mtexti(bquote(paste(tau," = ",.(tau[3]))),4, cex=cex.all)
+  
 #mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3,cex=cex.axis)
   par(op)
 }
@@ -1243,6 +1284,7 @@ contRplus_4_33 <- function(family=BCT, mu=1, sigma = c(0.15,0.2,0.5),
 #-----------------------------------------------------------------
 #-----------------------------------------------------------------------
 # FUNCTION 15
+# binom_1_31()
 #----------------------------------------------------------------------=
 binom_1_31 <- function(family=BI, mu=c(0.1,.5,.7), bd=NULL, 
                        miny=0, maxy=20, cex.axis=1.2, 
@@ -1296,6 +1338,7 @@ binom_1_31 <- function(family=BI, mu=c(0.1,.5,.7), bd=NULL,
 #-----------------------------------------------------------------------
 # FUNCTION 16
 #----------------------------------------------------------------------=
+# binom_2_33() 
 #----------------------------------------------------------------------
 binom_2_33 <- function(family=BB, mu= c(0.1,.5, .8), sigma = c(0.5, 1, 2), bd=NULL, miny=0, maxy=10, cex.axis=1.5, cex.all=1.5 )
 {
@@ -1408,9 +1451,12 @@ binom_2_33 <- function(family=BB, mu= c(0.1,.5, .8), sigma = c(0.5, 1, 2), bd=NU
 binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2), 
                      nu=c(0.01,0.3), bd = NULL,
                      miny=0, maxy=10, cex.axis=1.5, cex.all=1.5,
-                     cols=c("darkgray", "black"), spacing = 0.3 )
+                     cols=c("darkgray", "black"), spacing = 0.3,
+                     legend.cex=1, legend.x="topright",
+                     legend.where=c("left","right", "center"))
 {
   #--------------------------------------------------------
+  legend.where <- match.arg(legend.where)
   fname <- if (is.name(family)) as.character(family)
   else if (is.character(family)) family
   else if (is.call(family)) as.character(family[[1]])
@@ -1448,6 +1494,9 @@ binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2),
   lines(y+spacing,fy112,type="h",lty=2,col=cols[2])
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
   mtexti("f(y)", 2, 0.6,cex=cex.all)
+  ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
+  if (legend.where=="left") legend(legend.x,legend=as.expression(ex.leg),
+                                   lty=1:2,col=cols[1:2],lwd=2, cex=legend.cex)
   #1,2 nu 1 2
   i=1
   j=2
@@ -1456,6 +1505,9 @@ binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2),
   lines(y+spacing,fy122,type="h",lty=2,col=cols[2])
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
   mtexti(fname, 3 ,off=.5, cex=cex.all+0.02 )
+  ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
+  if (legend.where=="center") legend(legend.x,legend=as.expression(ex.leg),
+                                    lty=1:2,col=cols[1:2],lwd=2, cex=legend.cex)
   #1,3 nu 1 2
   i=1
   j=3
@@ -1465,8 +1517,8 @@ binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2),
   mtexti(bquote(paste(sigma," = ",.(sigma[j]))),3,cex=cex.all)
   mtexti(bquote(paste(mu," = ",.(mu[i]))),4,cex=cex.all,off=.6,srt=90)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))))
-  legend("topright",legend=as.expression(ex.leg),
-         lty=1:2,col=cols[1:2],lwd=2,cex=cex.all)
+  if (legend.where=="right") legend(legend.x,legend=as.expression(ex.leg),
+         lty=1:2,col=cols[1:2],lwd=2, cex=legend.cex)
   ### Row 2
   i=2
   fy211 <- eval(parse(text=paste0("d",fname,"(y,mu[i],sigma[1],nu[1], bd=bd",")")))
@@ -1540,15 +1592,18 @@ binom_3_33 <- function(family=ZIBB, mu= c(.1,.5,.8), sigma = c(0.5,1,2),
 # FUNCTION 18
 #----------------------------------------------------------------------=
 #-----------------------------------------------------------------------
-
+# contR01_2_13()
 #------------------------------------------------------------------------
 contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8), 
                          cols=c(gray(.1),gray(.2),gray(.3)), 
                          ltype = c(1,2,3), maxy=7, no.points=201, 
                          y.axis.lim=1.1, maxYlim=10,
-                         cex.axis=1.5, cex.all=1.5  )
+                         cex.axis=1.5, cex.all=1.5,
+                         legend.cex=1, legend.x="topright",
+                         legend.where=c("left","right", "center"))
 {
   #--------------------------------------------------------
+  legend.where <- match.arg(legend.where)
   fname <- if (is.name(family)) as.character(family)
   else if (is.character(family)) family
   else if (is.call(family)) as.character(family[[1]])
@@ -1590,7 +1645,6 @@ contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8),
   pdf33 <- paste0("d",fname,"(y,mu[3],sigma[3])")
    fy33 <- eval(parse(text=pdf33))
   
-  
   maxfy=y.axis.lim*max(fy11,fy12,fy13,fy21,fy22,fy23, fy31, fy32, fy33)
   maxfy <- min(maxfy, maxYlim)
   ylabel <- "f(y)"
@@ -1600,9 +1654,8 @@ contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8),
   lines(fy12~y, col=cols[2], lty=ltype[2], lwd=2)
   lines(fy13~y, col=cols[3], lty=ltype[3], lwd=2)
   ex.leg <- c(bquote(paste(mu," = ",.(mu[1]))),bquote(paste(mu," = ",.(mu[2]))),bquote(paste(mu," = ",.(mu[3]))))
-  legend("topleft",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
-  
+  if (legend.where=="left") legend(legend.x,legend=as.expression(ex.leg),
+                          lty=1:3,col=cols[1:3],lwd=2, cex=legend.cex)
   mtexti( ylabel, 2, 0.6,cex=cex.all)
   mtexti("y", 1, 0.6,cex=cex.all)
   mtexti(bquote(paste(sigma," = ",.(sigma[1]))), 3, cex=cex.all)
@@ -1614,8 +1667,8 @@ contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8),
   lines(fy22~y, col=cols[2],lty=ltype[2], lwd=2)
   lines(fy23~y, col=cols[3],lty=ltype[3] ,lwd=2)
   ex.leg <- c(bquote(paste(mu," = ",.(mu[1]))),bquote(paste(mu," = ",.(mu[2]))),bquote(paste(mu," = ",.(mu[3]))))
-  # legend("topleft",legend=as.expression(ex.leg),
-  #        lty=ltype, col=cols[1:3], lwd=2, cex=1.5)
+  if (legend.where=="center") legend(legend.x,legend=as.expression(ex.leg),
+                   lty=1:3,col=cols[1:3],lwd=2, cex=legend.cex)
   
   mtexti("y", 1, 0.6,cex=cex.all)
   mtexti(bquote(paste(sigma," = ",.(sigma[2]))), 3, cex=cex.all)
@@ -1626,6 +1679,8 @@ contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8),
   lines(fy32~y, col=cols[2], lty=ltype[2], lwd=2)
   lines(fy33~y, col=cols[3], lty=ltype[3], lwd=2)
   ex.leg <- c(bquote(paste(mu," = ",.(mu[1]))),bquote(paste(mu," = ",.(mu[2]))),bquote(paste(mu," = ",.(mu[3]))))
+  if (legend.where=="right") legend(legend.x,legend=as.expression(ex.leg),
+                    lty=1:3,col=cols[1:3],lwd=2, cex=legend.cex)
   # legend("topleft",legend=as.expression(ex.leg),
   #        lty=ltype, col=cols[1:3], lwd=2, cex=1.5)
   
@@ -1634,6 +1689,7 @@ contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8),
   par(op)
 }
 
+#contR01_4_33("GB1", mu=0.5, sigma=c(0.2,0.4,0.6), nu=c(0.5,1,2), tau=c(0.5,1,2), maxYlim=10,cex.axis=1.4, cex.all=1.4)
 #contR2("NO",c(1,2,3),c(1,2,3),6)
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
@@ -1644,15 +1700,18 @@ contR01_2_13 <- function(family="BE", mu=c(0.2, .5, .8), sigma=c(0.2, 0.5, .8),
 # FUNCTION 19
 #----------------------------------------------------------------------=
 #-----------------------------------------------------------------------
-
+# contR01_4_33()
 contR01_4_33 <- function(family=GB1, mu=c(0.5), sigma = c(0.2,0.5,0.7), 
                         nu = c(1,2,5), tau=c(0.5, 1, 2),
                        cols=c(gray(.1),gray(.2),gray(.3)), 
                       maxy=0.999, ltype = c(1,2,3),
                        no.points=201, y.axis.lim=1.1, 
-                      maxYlim=10,   cex.axis=1.5, cex.all=1.5)
+                      maxYlim=10,   cex.axis=1.5, cex.all=1.5,
+                      legend.cex=1, legend.x="topright",
+                      legend.where=c("left","right", "center"))
 {
   #--------------------------------------------------------
+legend.where <- match.arg(legend.where)
   fname <- if (is.name(family)) as.character(family)
   else if (is.character(family)) family
   else if (is.call(family)) as.character(family[[1]])
@@ -1660,9 +1719,9 @@ contR01_4_33 <- function(family=GB1, mu=c(0.5), sigma = c(0.2,0.5,0.7),
   else if (is(family, "gamlss.family"))  family$family[1]
   else stop("the family must be a character or a gamlss.family name")
   fam1 <- eval(parse(text=fname)) # the family to output
-  fam <- as.gamlss.family(family) # this is created so I can get things
-  dorfun <- paste("d",fname,sep="") # say dNO
-  nopar <- fam$nopar # or fam1$nopar
+   fam <- as.gamlss.family(family) # this is created so I can get things
+dorfun <- paste("d",fname,sep="") # say dNO
+ nopar <- fam$nopar # or fam1$nopar
   type <- fam$type
   if (type!="Continuous") stop("This plot is design for continuous distributions")
   if (!(nopar==4)) stop("This plot is design for four parameter continuous distributions")
@@ -1715,13 +1774,15 @@ contR01_4_33 <- function(family=GB1, mu=c(0.5), sigma = c(0.2,0.5,0.7),
   maxYval <- max(fy311 ,fy312,fy313, fy321,fy322,fy323, fy331, fy332,fy333)
   maxyrow3 <- if (maxYval> maxYlim) maxYlim else maxYval
   #maxyrow3 <- y.axis.lim*max(fy311 ,fy312,fy313, fy321,fy322,fy323, fy331, fy332,fy333)  
-  ylabel <-"f(x)"
+  ylabel <-"f(y)"
   # 1 1 
   plot(fy111~y, type="l", xaxt="n",  col=cols[1], ylab="", xlab="", lty=ltype[1],
        lwd=2, ylim=c(0,maxyrow1), cex.axis=cex.axis, cex=cex.all)
   lines(fy112~y, col=cols[2],lty=ltype[2],lwd=2)
   lines(fy113~y, col=cols[3],lty=ltype[3],lwd=2)
-  
+  ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
+  if (legend.where=="left") legend(legend.x, legend=as.expression(ex.leg),
+                                   lty=1:3,col=cols[1:3],lwd=2, cex=legend.cex)
   mtexti( ylabel, 2, 0.6,cex=cex.all)
   mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3, cex=cex.all)
   # 1 2 
@@ -1731,6 +1792,8 @@ contR01_4_33 <- function(family=GB1, mu=c(0.5), sigma = c(0.2,0.5,0.7),
   lines(fy123~y, col=cols[3],lty=ltype[3],lwd=2)
   mtexti(bquote(paste(sigma," = ",.(sigma[2]))),3, cex=cex.all)
   mtexti(fname, 3 , off=.7, cex=cex.all+0.02)
+  if (legend.where=="center") legend(legend.x,legend=as.expression(ex.leg),
+                                   lty=1:3,col=cols[1:3],lwd=2, cex=legend.cex)
   # 1 3
   plot(fy131~y, type="l",  xaxt="n", yaxt="n", col=cols[1], ylab="", xlab="y", 
        lty=ltype[1], lwd=2, ylim=c(0,maxyrow1), cex.axis=cex.axis, cex=cex.all)
@@ -1738,8 +1801,8 @@ contR01_4_33 <- function(family=GB1, mu=c(0.5), sigma = c(0.2,0.5,0.7),
   lines(fy133~y, col=cols[3],lty=ltype[3],lwd=2)
   mtexti(bquote(paste(sigma," = ",.(sigma[3]))),3, cex=cex.all)
   ex.leg <- c(bquote(paste(nu," = ",.(nu[1]))),bquote(paste(nu," = ",.(nu[2]))),bquote(paste(nu," = ",.(nu[3]))))
-  legend("topright",legend=as.expression(ex.leg),
-         lty=ltype, col=cols[1:3], lwd=2, cex=cex.all)
+  if (legend.where=="right") legend(legend.x,legend=as.expression(ex.leg),
+                                   lty=1:3,col=cols[1:3],lwd=2, cex=legend.cex)
   mtexti(bquote(paste(tau," = ",.(tau[1]))),4,cex=cex.all)
   # 2 1 
   plot(fy211~y, type="l", xaxt="n", col=cols[1], ylab="", xlab="", lty=ltype[1],
@@ -1779,11 +1842,7 @@ contR01_4_33 <- function(family=GB1, mu=c(0.5), sigma = c(0.2,0.5,0.7),
   lines(fy233~y, col=cols[3],lty=ltype[3],lwd=2)
   mtexti("y", 1, 0.6, cex=cex.all)
   mtexti(bquote(paste(tau," = ",.(tau[3]))),4,cex=cex.all)
-  
-  
-  
   #mtexti(bquote(paste(sigma," = ",.(sigma[1]))),3,cex=cex.axis)
-  
   par(op)
 }
 

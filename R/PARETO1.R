@@ -1,16 +1,18 @@
-# the PARETO one parameter distribution
-# y>1 mu>0
+############################################
+#  MIKIS STASINOPOULOS #####################
+# the PARETO one parameter distribution#####
+#######     y>0 AND mu>0       #############
 #------------------------------------------------------------
 # the fitting function
 #-------------------------------------------------------------
 PARETO1 <- function (mu.link = "log") 
 {
-  mstats <- checklink("mu.link", "PARETO", substitute(mu.link),c("inverse", "log", "sqrt", "identity")) 
+  mstats <- checklink("mu.link", "PARETO1", substitute(mu.link),c("inverse", "log", "sqrt", "identity")) 
   structure(
-    list(   family = c("PARETO1", "Pareto one parameter"),
+    list(   family = c("PARETO1", "Pareto one Y>0"),
         parameters = list(mu = TRUE),
              nopar = 1, 
-              type = "Discrete", 
+              type = "Continuous", 
            mu.link = as.character(substitute(mu.link)), 
         mu.linkfun = mstats$linkfun, 
         mu.linkinv = mstats$linkinv, 

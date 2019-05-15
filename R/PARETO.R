@@ -1,6 +1,7 @@
-
+# ONE PARAMETER PARETO Y>1
 # the PARETO one parameter distribution
 # y>1 mu>0
+# MIKIS STASINOPOULOS
 #------------------------------------------------------------
 # the fitting function
 #-------------------------------------------------------------
@@ -8,10 +9,10 @@ PARETO <- function (mu.link = "log")
 {
   mstats <- checklink("mu.link", "PARETO", substitute(mu.link),c("inverse", "log", "sqrt", "identity")) 
   structure(
-    list(    family = c("PARETO", "Pareto distribution"),
+    list(    family = c("PARETO", "Pareto 1 Y>1"),
          parameters = list(mu = TRUE),
               nopar = 1, 
-               type = "Discrete", 
+               type = "Continuous", 
             mu.link = as.character(substitute(mu.link)), 
          mu.linkfun = mstats$linkfun, 
          mu.linkinv = mstats$linkinv, 

@@ -19,13 +19,20 @@
 \alias{pPARETO1}
 \alias{qPARETO1}
 \alias{rPARETO1}
-
+\alias{PARETO1o}
+\alias{dPARETO1o}
+\alias{pPARETO1o}
+\alias{qPARETO1o}
+\alias{rPARETO1o}
 \title{
 Pareto distributions for fitting in GAMLSS}
 \description{
+
 The functions \code{PARETO()} defines the one parameter Pareto distribution for \code{y>1}.
 
 The functions \code{PARETO1()} defines the one parameter Pareto distribution for \code{y>0}.
+
+The functions \code{PARETOo1()} defines the one parameter Pareto distribution for \code{y>mu} therefor requires \code{mu} to be fixed.
 
 The functions \code{PARETO2()} and  \code{PARETO2o()} define the Pareto Type 2 distribution, for \code{y>0}, a two parameter distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}.
 The parameters are  \code{mu} and \code{sigma} in both functions but the parameterasation different.  The \code{mu} is identical for both \code{PARETO2()} and  \code{PARETO2o()}. The \code{sigma} in  \code{PARETO2o()} is the inverse of the \code{sigma} in code{PARETO2()} and coresponse to the usual parameter \code{alpha} of the Patreto distribution. The functions \code{dPARETO2}, \code{pPARETO2}, \code{qPARETO2} and \code{rPARETO2} define the density, distribution function, quantile function and random generation for the \code{PARETO2} parameterization of the Pareto type 2 distribution while the functions \code{dPARETO2o}, \code{pPARETO2o}, \code{qPARETO2o} and \code{rPARETO2o} define the density, distribution function, quantile function and random generation for the original \code{PARETO2o} parameterization of the Pareto type 2 distribution
@@ -42,6 +49,12 @@ dPARETO1(x, mu = 1, log = FALSE)
 pPARETO1(q, mu = 1, lower.tail = TRUE, log.p = FALSE)
 qPARETO1(p, mu = 1, lower.tail = TRUE, log.p = FALSE)
 rPARETO1(n, mu = 1)
+
+PARETO1o(mu.link = "log", sigma.link = "log")
+dPARETO1o(x, mu = 1, sigma = 0.5, log = FALSE)
+pPARETO1o(q, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
+qPARETO1o(p, mu = 1, sigma = 0.5, lower.tail = TRUE, log.p = FALSE)
+rPARETO1o(n, mu = 1, sigma = 0.5)
 
 PARETO2(mu.link = "log", sigma.link = "log")
 dPARETO2(x, mu = 1, sigma = 0.5, log = FALSE)
