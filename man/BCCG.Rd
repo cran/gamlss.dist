@@ -80,8 +80,9 @@ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for lo
 Rigby, R.A. Stasinopoulos, D.M. (2006).   Using the Box-Cox \emph{t} distribution in GAMLSS to mode skewnees and  and kurtosis.
 to appear in \emph{Statistical Modelling}.
 
-Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.org/}).
+Rigby, R. A., Stasinopoulos, D. M.,  Heller, G. Z.,  and De Bastiani, F. (2019)
+	\emph{Distributions for modeling location, scale, and shape: Using GAMLSS in R}, Chapman and Hall/CRC. An older version can be found in \url{http://www.gamlss.com/}.
+
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
@@ -91,7 +92,7 @@ Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2
 
 
 }
-\author{ Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org}, Bob Rigby and Kalliope Akantziliotou}
+\author{ Mikis Stasinopoulos, Bob Rigby and Kalliope Akantziliotou}
 \note{\eqn{\mu}{mu} is the median of the distribution \eqn{\sigma}{sigma} is approximately the coefficient of variation (for small values of \eqn{\sigma}{sigma}), 
  and \eqn{\nu}{nu} controls the skewness.
  

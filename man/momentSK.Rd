@@ -141,8 +141,7 @@ The function \code{theoCentileSK} for a given \code{gamlss.family}  produces:
 }
 \references{
 Rigby, R. A., Stasinopoulos, D. M.,  Heller, G. Z.,  and De Bastiani, F. (2019)
-	Distributions for modelling location, scale, and shape: Using GAMLSS in R,
-	in the print. An older version can be found in \url{http://www.gamlss.org/}.
+	Distributions for modeling location, scale, and shape: Using GAMLSS in R, Chapman and Hall/CRC. An older version can be found in \url{http://www.gamlss.com/}.
 }
 \author{
 Mikis Stasinopoulos, Bobert Rigby, Gillain Heller and Fernanda De Bastiani. 

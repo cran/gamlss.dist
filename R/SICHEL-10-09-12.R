@@ -233,8 +233,8 @@ sumlty <- as.double(.C("tofySICHEL2", as.double(x), as.double(mu),
 logfy <- -lgamma(x+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(besselK((1/sigma),nu))
   
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
-  if (length(sigma)>1) fy <- ifelse((sigma>10000)&(nu>0), dNBI(x, mu = mu, sigma= 1/nu, log = log) ,fy)
-        else fy <- if ((sigma>10000)&(nu>0)) dNBI(x, mu = mu, sigma= 1/nu, log = log)  
+  if (length(sigma)>1) fy <- ifelse((sigma>10000)&(nu>0), dNBI(x, mu = mu, sigma= abs(1/nu), log = log) ,fy)
+        else fy <- if ((sigma>10000)&(nu>0)) dNBI(x, mu = mu, sigma= abs(1/nu), log = log)  
                    else  fy
   fy
   }

@@ -56,8 +56,9 @@ Anscombe, F. J. (1950) Sampling theory of the negative bimomial and logarithmic 
 Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
-Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{http://www.gamlss.org/}).  
+Rigby, R. A., Stasinopoulos, D. M.,  Heller, G. Z.,  and De Bastiani, F. (2019)
+	Distributions for modeling location, scale, and shape: Using GAMLSS in R, Chapman and Hall/CRC. An older version can be found in \url{http://www.gamlss.com/}.
+
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 \emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
@@ -66,7 +67,7 @@ Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2
 \emph{Flexible Regression and Smoothing: Using GAMLSS in R},  Chapman and Hall/CRC. 
 
  }
-\author{Mikis Stasinopoulos \email{mikis.stasinopoulos@gamlss.org}, Bob Rigby  and Calliope Akantziliotou}
+\author{Mikis Stasinopoulos, Bob Rigby  and Calliope Akantziliotou}
 \note{\eqn{\mu}{mu} is the mean and \eqn{(\mu+\sigma \mu^2)^{0.5}}{(mu+sigma*mu^2)^0.5} is the standard deviation of the Negative Binomial 
 type I distribution (so \eqn{\sigma}{sigma} is the dispersion parameter in the usual GLM for the negative binomial type I distribution)}
 
