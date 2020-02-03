@@ -1,4 +1,4 @@
-fa309952fcd0c57a2121d2d80c629a37 *DESCRIPTION
+0960e987babed416864ac36022386fe9 *DESCRIPTION
 ff544a36eec65d207439cd1d1678bbf5 *NAMESPACE
 084aafff40df0342bd5dbacfca2a236e *R/BB.R
 7cbe7a00d2eb8fd8b42e26d493a74bd2 *R/BCCG.R
@@ -18,7 +18,7 @@ ca8c3fa54892b6dd5839d607b4ec34e5 *R/DoubleBinomial.R
 d1ce27304526c1dc648360c38645779e *R/DoublePoisson-30-12-14.R
 b91f32617f2e929b8a09787885a7359f *R/EGB2.R
 1c6c83b0463ab6fb8b508da3ce488507 *R/EXP.R
-2fd0d9633412166b14840be6e6114000 *R/Functions_for_SK_in_gamlss.R
+567d5ac1f0234625effe589778f80d4d *R/Functions_for_SK_in_gamlss.R
 38181eeea2bac61a44863be1f544d3ff *R/GA.R
 602aaaf0b54e3a75857413e2c3afb83f *R/GAF.R
 e7b3d1d7aee650c368193be3abd8a5aa *R/GB1.R
@@ -62,7 +62,7 @@ d6b4af43600a50116f67e5e38ee66052 *R/PIG.R
 e8514b34fe3347796f5e60594664000a *R/RGE.R
 cad5f6a79878725e9a5472a776deab53 *R/SEP.R
 4f85cd56515be12cc52c369ec280c43a *R/SEP1.R
-d733f961e7544510861e1d94fb2e8ace *R/SEP2.R
+5ed774ff674e2c52e31fe948b627a24e *R/SEP2.R
 d9c84f9e893e30f4c5d0f4f229b09da6 *R/SEP3.R
 a35932d1b087d7a6e96d1249828f0bbe *R/SEP4.R
 78cd99b8432c4091ae99c02de268ed67 *R/SHASH.R
@@ -121,7 +121,7 @@ f080f76a6ce2addb48586c174fcd9ba8 *R/make-link-gamlss.R
 d3ecba2d6fa35b23aaf9a0b3350b8d36 *R/multin-23-09-12.R
 48f67f2575c15fc67a71b4ea83ccb27b *R/plottingDist.R
 329a72e45f35508ae9bc8302e6b2eed4 *R/po.r
-1c49b0191942f7118e2877c05ba24198 *build/partial.rdb
+334d74dc3dfe39c50e3dc28e876792bf *build/partial.rdb
 2fca4539c76587cd1a79adf9bcacb331 *inst/doc/CentileSkewKurt.RData
 1a03dee687725b032ca93cbf2b636c35 *inst/doc/Distributions-2010.pdf
 5f7282be0d460dbfec2fd2738ccefcdc *inst/doc/MomentSkewKurt1.RData
@@ -182,7 +182,7 @@ c5175db2165bd9d8be81b3e0b0c11766 *man/SICHEL.Rd
 2b6dca6f72755c4cf584d9517dd22752 *man/SIMPLEX.Rd
 b5166c6555aac84a135474b48fbe800a *man/SN1.Rd
 b712d839f18e01c9ad2cd7574964aa81 *man/SN2.Rd
-f69297bb0f2b9e0edb075ac27d4da215 *man/ST1.Rd
+1804c63ff48fe5b6175f814e323a82aa *man/ST1.Rd
 243a4e59692f0bee37d9d937fce13a8c *man/TF.Rd
 d914fee1554656381047e2088030fbd5 *man/WARING.Rd
 3313e9bf72e4ab32bdd999b51df4381a *man/WEI.Rd
@@ -207,7 +207,7 @@ e00c0360cb91adefa1a1cc4af79890f2 *man/gamlss.family.Rd
 96a8d0a1dfea20aaebc46f31a9bfe1bb *man/gen.Family.Rd
 e17688521ca0a44567998846d0bf4eb8 *man/hazardFun.Rd
 61c791dae1503430c15cbfe577b8bbf5 *man/make.link.gamlss.Rd
-161defc94aa9c571be280124d32f536d *man/momentSK.Rd
+f4c701d826cf386e358b904da919203d *man/momentSK.Rd
 089a5ffedad0184d3b33e9457f45ab14 *src/ST3.c
 363cba0ff4389b0c1465c3ad31c648bd *src/ST3.h
 bd46e66c162bd49e2ef288e360f5c30f *src/cdfSICHEL.c

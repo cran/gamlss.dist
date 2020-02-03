@@ -46,10 +46,10 @@ The  functions \code{momentSK()}, \code{centileSK()},  \code{centileSkew()} and 
 The function \code{checkMomentSK()} can be use to check (a) whether the moment skewness and kurtosis of a fitted model are modelled adequantly (the residuals of the model are used). (b)  whether a given sample display skewness or kurtosis. 
 }
 \usage{
-momentSK(x)
-centileSK(x, cent = c(1, 25))
-centileSkew(x, cent = 1)
-centileKurt(x, cent = 1)
+momentSK(x,  weights=NULL)
+centileSK(x, cent = c(1, 25), weights=NULL)
+centileSkew(x, cent = 1, weights=NULL)
+centileKurt(x, cent = 1, weights=NULL)
 
 theoCentileSK(fam = "NO", p = 0.01, ...)
 plotCentileSK(fam = "NO", plotting = c("skew", "kurt", "standKurt"), 
@@ -71,6 +71,7 @@ checkCentileSK(x, type = c("central", "tail"), add = FALSE,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{data vector or gamlss model}
+  \item{weights}{prior weights for the x}
   \item{cent}{the centile required}
   \item{type}{For centile skewness and kurtosis only whether "central" (default) or "tail")}
   \item{fam}{A gamlss distribution family}

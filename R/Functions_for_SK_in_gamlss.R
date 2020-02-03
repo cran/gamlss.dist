@@ -3,14 +3,14 @@
 #require(gamlss)
 # functions for skewness and kurtosis 
 # created by Mikis Stasinopoulos on the 3-2-19
-#  1)       momentSK()  : sample moment skewness and kurtosis (now includes Jarque-Bera test)
+#  1)        momentSK() : sample moment skewness and kurtosis (now includes Jarque-Bera test)
 #  2)       centileSK() : sample centile skewness and kurtosis
 #  3)     centileSkew() : sample centile skewness only
 #  4)     centileKurt() : sample centile kurtosis only
 #  5)   theoCentileSK() : theorericalcentile skewness and kurtosis
-#  6)  plotCentileSK()  : plotting theoretical  skewness and kurtosis as function of p
+#  6)   plotCentileSK() : plotting theoretical  skewness and kurtosis as function of p
 #  7)    SKmoment_col() : plotting moment SK in colour 
-#  8)    SKmoment_gray() : plotting moment SK in gray  
+#  8)   SKmoment_gray() : plotting moment SK in gray  
 #  9)    SKmomentBoth() : plotting moment SK in gray for S -1 to 1   
 # 10)   SKcentile_col() : plotting centile SK in colour 
 # 11)  SKcentile_gray() : plotting centile SK in gray
@@ -22,21 +22,32 @@
 #-----------------------------------------------------------------
 # SAMPLE moment skewness + kurtosis
 # moment skewness and kurtosis estimation   
-momentSK <- function(x)
+momentSK <- function(x, weights=NULL)
 {
-  if (any(is.na(x)))  warning("NA's have been removed from x")
-      x <- x[!is.na(x)]
-  n.obs <- length(x) 
-    m.1 <- mean(x)
-    m.2 <- sum((x-m.1)^2)/n.obs  
-    m.3 <- sum((x-m.1)^3)/n.obs 
-    m.4 <- sum((x-m.1)^4)/n.obs 
+if (any(is.na(x)))  warning("NA's will be removed from x")  
+if (!length(weights)) weights <- rep(1, length(x))
+      i <- is.na(weights) | weights == 0 | is.na(x) 
+if (any(i)) 
+{
+      x <- x[!i]
+weights <- weights[!i]
+}
+      g <- weights/sum(weights) 
+     m.1 <- sum(g*x)
+     m.2 <- sum(g*(x-m.1)^2)
+     m.3 <- sum(g*(x-m.1)^3)
+     m.4 <- sum(g*(x-m.1)^4)      
+   n.obs <- sum(weights)# length(x) 
+    #m.1 <- mean(x)
+    #m.2 <- sum((x-m.1)^2)/n.obs  
+    #m.3 <- sum((x-m.1)^3)/n.obs 
+    #m.4 <- sum((x-m.1)^4)/n.obs 
 gamma.1 <- m.3/(m.2^(1.5)) # skew = gamma_1 =sqrt(beta_1)
  beta.1 <- gamma.1^2
  beta.2 <- m.4/(m.2^2)     # kurt = beta_2
 # excess kurtosis
 gamma.2 <- (beta.2-3)         # ekurt = gamma_2  
-  # transformed skewness and kurtosis, see Jones and Pewey (2009), page 5, Figure 2
+# transformed skewness and kurtosis, see Jones and Pewey (2009), page 5, Figure 2
   tskew <- gamma.1/(1+abs(gamma.1))
   tkurt <- gamma.2/(1+abs(gamma.2)) 
   #Jarque_bera_test = gamma_1/(6/n)+gamma_2
@@ -57,34 +68,76 @@ jarque.bera.test = (n.obs/6)*beta.1+(n.obs/24)*gamma.2^2)
 # FUNCTION 2 
 #-----------------------------------------------------------------
 # SAMPLE centile skewness + kurtosis
-centileSK <- function(x, cent=c(1, 25))
+centileSK <- function(x, cent=c(1, 25), weights=NULL)
 {
-  if (any(is.na(x)))  warning("NA's have been removed from x")
-                   x <- x[!is.na(x)]
+# local function -----------------------------------------
+  quantileW <- function (y, weights = NULL, probs = c(0, 0.25, 0.5, 0.75, 1)) 
+  {
+    if (!length(weights)) 
+      return(quantile(y, probs = probs))
+    if (any(probs < 0 | probs > 1)) 
+      stop("Probabilities must be between 0 and 1 inclusive")
+    i <- is.na(weights) | weights == 0
+    if (any(i)) 
+    {
+      y <- y[!i]
+      weights <- weights[!i]
+    }
+       ysort <- unique(sort(y))
+    weights1 <- tapply(weights, y, sum)
+        cumu <- cumsum(weights1)
+           x <- ysort
+         wts <- weights1
+           n <- sum(wts)
+       order <- 1 + (n - 1) * probs
+         low <- pmax(floor(order), 1)
+        high <- pmin(low + 1, n)
+       order <- order%%1
+        allq <- approx(cumsum(wts), x, xout = c(low, high), method = "constant", 
+                   f = 1, rule = 2)$y
+           k <- length(probs)
+   quantiles <- (1 - order) * allq[1:k] + order * allq[-(1:k)]
+        nams <- paste(format(round(probs * 100, 
+                               if (length(probs) > 1) 2 - log10(diff(range(probs))) else 2)), "%", sep = "")
+    names(quantiles) <- nams
+    return(quantiles)  
+  }
+#-------------------------------------------------------------
+# the main function starts here   
+#-------------------------------------------------------------
+if (any(is.na(x)))  warning("NA's will be removed from x")  
+if (!length(weights)) weights <- rep(1, length(x))
+       i <- is.na(weights) | weights == 0 | is.na(x) 
+if (any(i)) 
+  {   x <- x[!i]
+weights <- weights[!i]
+  }
+# if (any(is.na(x)))  warning("NA's have been removed from x")
+#                    x <- x[!is.na(x)]
 #   centiles for
 #       1%  cent[1]
 #       25% cent[2]
 #       50% cent[3]
 #       75% cent[4] and
 #       99% cent[5]
-                 Cent <- quantile(x,
+            Cent <- quantileW(x, weights=weights,
                          probs=c(cent[1]/100, cent[2]/100, 0.5, 1-(cent[2]/100),1-(cent[1]/100)))
-                S0.01 <- ((Cent[1]+Cent[5])/2 -Cent[3])/((Cent[5]-Cent[1])/2)
-         names(S0.01) <- ""
+           S0.01 <- ((Cent[1]+Cent[5])/2 -Cent[3])/((Cent[5]-Cent[1])/2)
+    names(S0.01) <- ""
                 S0.25 <- ((Cent[2]+Cent[4])/2 -Cent[3])/((Cent[4]-Cent[2])/2)
-        names(S0.25 ) <- ""
+   names(S0.25 ) <- ""
                tS0.01 <- S0.01/(1+abs(S0.01))# transformed
-        names(tS0.01) <- ""
+   names(tS0.01) <- ""
                tS0.25 <- S0.25/(1+abs(S0.25))# transformed
-        names(tS0.25) <- ""
+   names(tS0.25) <- ""
                 K0.01 <- (Cent[5]-Cent[1])/(Cent[4]-Cent[2])
-         names(K0.01) <- ""
+    names(K0.01) <- ""
                sK0.01 <- K0.01/3.449 # standarised kurtosis
-        names(sK0.01) <- ""
+   names(sK0.01) <- ""
              ex.K0.01 <- K0.01-3.449 # excess kurtosis fro plots
-      names(ex.K0.01) <- ""
+ names(ex.K0.01) <- ""
              tr.K0.01 <- ex.K0.01/(1+abs(ex.K0.01))
-      names(tr.K0.01) <- ""
+ names(tr.K0.01) <- ""
   list(      S0.25 = S0.25,
              S0.01 = S0.01,
        trans.S0.25 = tS0.25,
@@ -96,16 +149,58 @@ centileSK <- function(x, cent=c(1, 25))
 }
 #--------------------------------------------------------------
 #--------------------------------------------------------------
-#-----------------------------------------------------------------
+#--------------------------------------------------------------
 # FUNCTION 3 
-#-----------------------------------------------------------------
+#--------------------------------------------------------------
 # SAMPLE centile skewness 
- centileSkew <- function(x, cent=1)
+centileSkew <- function(x, cent=1, weights=NULL)
  {
-   if (cent > 50) stop("cent should be less than 50") 
-   if (any(is.na(x)))  warning("NA's have been removed from x")
-       x <- x[!is.na(x)]  
-   quant <- quantile(x,  probs=c(cent/100, 0.25, 0.5, 0.75, 1-(cent/100)))
+# local function -----------------------------------------
+quantileW <- function (y, weights = NULL, probs = c(0, 0.25, 0.5, 0.75, 1)) 
+ {
+  if (!length(weights)) 
+    return(quantile(y, probs = probs))
+  if (any(probs < 0 | probs > 1)) 
+    stop("Probabilities must be between 0 and 1 inclusive")
+     i <- is.na(weights) | weights == 0
+  if (any(i)) 
+     {
+         y <- y[!i]
+   weights <- weights[!i]
+     }
+     ysort <- unique(sort(y))
+  weights1 <- tapply(weights, y, sum)
+      cumu <- cumsum(weights1)
+         x <- ysort
+       wts <- weights1
+         n <- sum(wts)
+     order <- 1 + (n - 1) * probs
+       low <- pmax(floor(order), 1)
+      high <- pmin(low + 1, n)
+     order <- order%%1
+      allq <- approx(cumsum(wts), x, xout = c(low, high), method = "constant", 
+                    f = 1, rule = 2)$y
+         k <- length(probs)
+ quantiles <- (1 - order) * allq[1:k] + order * allq[-(1:k)]
+      nams <- paste(format(round(probs * 100, 
+                                if (length(probs) > 1) 2 - log10(diff(range(probs))) else 2)), "%", sep = "")
+     names(quantiles) <- nams
+     return(quantiles)  
+  }
+#-------------------------------------------------------------
+# the main function starts here   
+#-------------------------------------------------------------   
+  if (cent > 50) stop("cent should be less than 50") 
+  if (!length(weights)) weights <- rep(1, length(x))
+  if (any(is.na(x)))  warning("NA's will be removed from x")  
+  if (!length(weights)) weights <- rep(1, length(x))
+     i <- is.na(weights) | weights == 0 | is.na(x) 
+  if (any(i)) 
+   {    x <- x[!i]
+  weights <- weights[!i]
+   }
+   quant <- quantileW(x,  probs=c(cent/100, 0.25, 0.5, 0.75, 1-(cent/100)),
+                      weights=weights)
 #   #eval(parse(text=eval(paste(paste0("S",cent[1]/100), "<-((quant[1]+quant[5])/2 -quant[3])/((quant[5]-quant[1])/2)"))))
    Sp<- ((quant[1]+quant[5])/2 -quant[3])/((quant[5]-quant[1])/2)
    names(Sp ) <- ""
@@ -128,18 +223,60 @@ centileSK <- function(x, cent=c(1, 25))
 #         teKp = tKp)
 }
 #--------------------------------------------------------------
- #--------------------------------------------------------------
- #-----------------------------------------------------------------
- # FUNCTION 4 
- #-----------------------------------------------------------------
- #--------------------------------------------------------------
- # SAMPLE centile  kurtosis
- centileKurt <- function(x, cent=1)
+#--------------------------------------------------------------
+#--------------------------------------------------------------
+# FUNCTION 4 
+#--------------------------------------------------------------
+#--------------------------------------------------------------
+# SAMPLE centile  kurtosis
+centileKurt <- function(x, cent=1, weights=NULL)
  {
-   if (cent > 50) stop("cent should be less than 50") 
-   if (any(is.na(x)))  warning("NA's have been removed from x")
-   x <- x[!is.na(x)]  
-   quant <- quantile(x,  probs=c(cent/100, 0.25, 0.5, 0.75, 1-(cent/100)))
+# local function -----------------------------------------
+quantileW <- function (y, weights = NULL, probs = c(0, 0.25, 0.5, 0.75, 1)) 
+ {
+    if (!length(weights)) 
+      return(quantile(y, probs = probs))
+    if (any(probs < 0 | probs > 1)) 
+      stop("Probabilities must be between 0 and 1 inclusive")
+    i <- is.na(weights) | weights == 0
+    if (any(i)) 
+    {
+        y <- y[!i]
+  weights <- weights[!i]
+    }
+    ysort <- unique(sort(y))
+ weights1 <- tapply(weights, y, sum)
+     cumu <- cumsum(weights1)
+        x <- ysort
+      wts <- weights1
+        n <- sum(wts)
+    order <- 1 + (n - 1) * probs
+      low <- pmax(floor(order), 1)
+     high <- pmin(low + 1, n)
+    order <- order%%1
+     allq <- approx(cumsum(wts), x, xout = c(low, high), method = "constant", 
+                   f = 1, rule = 2)$y
+        k <- length(probs)
+quantiles <- (1 - order) * allq[1:k] + order * allq[-(1:k)]
+     nams <- paste(format(round(probs * 100, 
+               if (length(probs) > 1) 2 - log10(diff(range(probs))) else 2)), "%", sep = "")
+    names(quantiles) <- nams
+    return(quantiles)  
+}
+#-------------------------------------------------------------
+# the main function starts here   
+#-------------------------------------------------------------   
+if (cent > 50) stop("cent should be less than 50") 
+if (!length(weights)) weights <- rep(1, length(x))
+if (any(is.na(x)))  warning("NA's will be removed from x")  
+if (!length(weights)) weights <- rep(1, length(x))
+    i <- is.na(weights) | weights == 0 | is.na(x) 
+if (any(i)) 
+{      x <- x[!i]
+nweights <- weights[!i]
+}
+   quant <- quantileW(x,  probs=c(cent/100, 0.25, 0.5, 0.75, 1-(cent/100)), 
+                      weights=weights)
    #   #eval(parse(text=eval(paste(paste0("S",cent[1]/100), "<-((quant[1]+quant[5])/2 -quant[3])/((quant[5]-quant[1])/2)"))))
 #   Sp<- ((quant[1]+quant[5])/2 -quant[3])/((quant[5]-quant[1])/2)
 #   names(Sp ) <- ""
