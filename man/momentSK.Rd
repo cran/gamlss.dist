@@ -55,18 +55,18 @@ theoCentileSK(fam = "NO", p = 0.01, ...)
 plotCentileSK(fam = "NO", plotting = c("skew", "kurt", "standKurt"), 
              add = FALSE, col = 1, lty = 1, lwd = 1, ylim = NULL, ...)
              
-checkMomentSK(x, add = FALSE, bootstrap = TRUE, no.bootstrap = 99, 
+checkMomentSK(x, weights=NULL, add = FALSE, bootstrap = TRUE, no.bootstrap = 99, 
                col.bootstrap = "lightblue", pch.bootstrap = 21, 
                asCharacter = TRUE, col.point = "black", pch.point = 4, 
-               lwd.point = 2, cex.text = 1.5, col.text = "black", 
-               show.legend = TRUE) 
+               lwd.point = 2,  text.to.show = NULL, cex.text = 1.5, 
+               col.text = "black", show.legend = TRUE) 
                
-checkCentileSK(x, type = c("central", "tail"), add = FALSE, 
+checkCentileSK(x,weights=NULL, type = c("central", "tail"), add = FALSE, 
               bootstrap = TRUE, no.bootstrap = 99, 
               col.bootstrap = "lightblue", pch.bootstrap = 21, 
               asCharacter = TRUE, col.point = "black", pch.point = 4, 
-              lwd.point = 2, cex.text = 1.5, col.text = "black", 
-              show.legend = TRUE)
+              lwd.point = 2,  text.to.show = NULL, cex.text = 1.5, 
+              col.text = "black", show.legend = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -90,7 +90,8 @@ checkCentileSK(x, type = c("central", "tail"), add = FALSE,
   \item{asCharacter}{whether to plot the estimated  skewness and kurtosis measure as character or as point}
   \item{col.point}{the colour of the skewness and kurtosis measure}
   \item{pch.point}{the  point type  of the skewness and kurtosis measure}
-  \item{lwd.point}{the width of the plotted line}
+  \item{lwd.point}{the width of the plotted point}
+  \item{text.to.show}{to display text different from variable or model}
   \item{cex.text}{the size of the text}
   \item{col.text}{the colour of the text}
   \item{show.legend}{whether to show the legent}

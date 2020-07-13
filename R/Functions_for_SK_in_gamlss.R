@@ -26,13 +26,13 @@ momentSK <- function(x, weights=NULL)
 {
 if (any(is.na(x)))  warning("NA's will be removed from x")  
 if (!length(weights)) weights <- rep(1, length(x))
-      i <- is.na(weights) | weights == 0 | is.na(x) 
+       i <- is.na(weights) | weights == 0 | is.na(x) 
 if (any(i)) 
 {
-      x <- x[!i]
-weights <- weights[!i]
+       x <- x[!i]
+ weights <- weights[!i]
 }
-      g <- weights/sum(weights) 
+       g <- weights/sum(weights) 
      m.1 <- sum(g*x)
      m.2 <- sum(g*(x-m.1)^2)
      m.3 <- sum(g*(x-m.1)^3)
@@ -42,9 +42,9 @@ weights <- weights[!i]
     #m.2 <- sum((x-m.1)^2)/n.obs  
     #m.3 <- sum((x-m.1)^3)/n.obs 
     #m.4 <- sum((x-m.1)^4)/n.obs 
-gamma.1 <- m.3/(m.2^(1.5)) # skew = gamma_1 =sqrt(beta_1)
- beta.1 <- gamma.1^2
- beta.2 <- m.4/(m.2^2)     # kurt = beta_2
+ gamma.1 <- m.3/(m.2^(1.5)) # skew = gamma_1 =sqrt(beta_1)
+  beta.1 <- gamma.1^2
+  beta.2 <- m.4/(m.2^2)     # kurt = beta_2
 # excess kurtosis
 gamma.2 <- (beta.2-3)         # ekurt = gamma_2  
 # transformed skewness and kurtosis, see Jones and Pewey (2009), page 5, Figure 2
@@ -124,19 +124,19 @@ weights <- weights[!i]
                          probs=c(cent[1]/100, cent[2]/100, 0.5, 1-(cent[2]/100),1-(cent[1]/100)))
            S0.01 <- ((Cent[1]+Cent[5])/2 -Cent[3])/((Cent[5]-Cent[1])/2)
     names(S0.01) <- ""
-                S0.25 <- ((Cent[2]+Cent[4])/2 -Cent[3])/((Cent[4]-Cent[2])/2)
+           S0.25 <- ((Cent[2]+Cent[4])/2 -Cent[3])/((Cent[4]-Cent[2])/2)
    names(S0.25 ) <- ""
-               tS0.01 <- S0.01/(1+abs(S0.01))# transformed
+          tS0.01 <- S0.01/(1+abs(S0.01))# transformed
    names(tS0.01) <- ""
-               tS0.25 <- S0.25/(1+abs(S0.25))# transformed
+          tS0.25 <- S0.25/(1+abs(S0.25))# transformed
    names(tS0.25) <- ""
-                K0.01 <- (Cent[5]-Cent[1])/(Cent[4]-Cent[2])
+           K0.01 <- (Cent[5]-Cent[1])/(Cent[4]-Cent[2])
     names(K0.01) <- ""
-               sK0.01 <- K0.01/3.449 # standarised kurtosis
+          sK0.01 <- K0.01/3.449 # standarised kurtosis
    names(sK0.01) <- ""
-             ex.K0.01 <- K0.01-3.449 # excess kurtosis fro plots
+        ex.K0.01 <- K0.01-3.449 # excess kurtosis fro plots
  names(ex.K0.01) <- ""
-             tr.K0.01 <- ex.K0.01/(1+abs(ex.K0.01))
+        tr.K0.01 <- ex.K0.01/(1+abs(ex.K0.01))
  names(tr.K0.01) <- ""
   list(      S0.25 = S0.25,
              S0.01 = S0.01,
@@ -737,6 +737,7 @@ load(system.file("doc", "CentileSkewKurt.RData", package="gamlss.dist"))
 #--------------------------------------------------------------
 #--------------------------------------------------------------
 checkMomentSK <- function(x,
+                weights = NULL,          
                     add = FALSE,
               bootstrap = TRUE,
            no.bootstrap = 99,
@@ -746,8 +747,9 @@ checkMomentSK <- function(x,
               col.point = "black",
               pch.point = 4,
               lwd.point = 2,
+           text.to.show = NULL,
               cex.text  = 1.5,
-              col.text = "black",
+               col.text = "black",
             show.legend = TRUE
             )
 {
@@ -764,14 +766,12 @@ checkMomentSK <- function(x,
   CI95.2 <- function(x) CI95(-x)
   CI95.3 <- function(x) -CI95(-x)
   CI95.4 <- function(x) -CI95(x)
-#
-  #
+##############################################################################
 # function stats here
 # checking whether model ro get the residual otherwise data
 X <-  if (is(x,"gamlss")) resid(x)
   else x
 n <- length(X)
-
 if (add==FALSE)
   {
   SKmomentBoth(show.legend=show.legend)
@@ -790,19 +790,28 @@ if (bootstrap)
   {
     for (i in 1:no.bootstrap)
     {
-      x1 <- sample(X, replace = TRUE)
-      sk <-  momentSK(x1)
+      ind <- sample(n, n,  replace = TRUE)
+     # x1 <- sample(X, replace = TRUE)
+      sk <-  momentSK(X[ind], weights=weights[ind])
       points(sk$trans.mom.skew, sk$trans.mom.kurt,  pch=pch.bootstrap,
              col=col.bootstrap)
     }
   }
-    sk <-  momentSK(X)
-
-   if (asCharacter) text(sk$trans.mom.skew, sk$trans.mom.kurt, paste(substitute(x)),
-                         cex=cex.text, col=col.text)
+   sk <-  momentSK(X, weights=weights)
+   if (asCharacter)
+   {
+    if (is.null(text.to.show))
+      text(sk$trans.mom.skew, sk$trans.mom.kurt, paste(substitute(x)),
+           cex=cex.text, col=col.text)
+     else 
+       text(sk$trans.mom.skew, sk$trans.mom.kurt, text.to.show,
+            cex=cex.text, col=col.text)
+   }
    else points(sk$trans.mom.skew, sk$trans.mom.kurt, col=col.point, pch=pch.point,
                lwd=lwd.point)
-invisible(list(skewness=sk$skew, adj.skewness=sk$tskew, kurtosis=sk$kurt, sdj.kurtosis=sk$tkurt))
+invisible(list(skewness=sk$mom.skew, trans.skewness=sk$trans.mom.skew, 
+               kurtosis=sk$mom.kurt, excess.kurt=sk$excess.mom.kurt,
+               trans.kurtosis=sk$trans.mom.kurt, jarque.bera.test=sk$jarque.bera.test))
 }
 #--------------------------------------------------------------
 #--------------------------------------------------------------
@@ -820,6 +829,7 @@ invisible(list(skewness=sk$skew, adj.skewness=sk$tskew, kurtosis=sk$kurt, sdj.ku
 # # FUNCTION 14
 # #-----------------------------------------------------------------
 checkCentileSK <- function(x,
+                weights = NULL,        
                    type = c("central", "tail"),
                     add = FALSE,
               bootstrap = TRUE,
@@ -830,15 +840,17 @@ checkCentileSK <- function(x,
               col.point = "black",
               pch.point = 4,
               lwd.point = 2,
+           text.to.show = NULL,
               cex.text  = 1.5,
                col.text = "black",
-          show.legend = TRUE
+            show.legend = TRUE
           )
 {
   #############################################################
 type <- match.arg(type)
    X <-  if (is(x,"gamlss")) resid(x)
         else x
+   n <- length(X)
   if (add==FALSE) SKcentileBoth(type = type, show.legend=show.legend)
   abline(h=0, col="lightgray"); abline(v=0, col="lightgray")
   #---------------------------------------------------------
@@ -847,8 +859,11 @@ type <- match.arg(type)
   {
     for (i in 1:no.bootstrap)
     {
-      x1 <- sample(X, replace = TRUE)
-      sk <-  centileSK(x1)
+      ind <- sample(n, n,  replace = TRUE)
+      # x1 <- sample(X, replace = TRUE)
+      sk <-  centileSK(X[ind], weights=weights[ind])
+     # x1 <- sample(X, replace = TRUE)
+      #sk <-  centileSK(x1, weights=weights)
      if (type=="central")
      {
        points(sk$trans.S0.25,  sk$trans.K0.01,  pch=pch.bootstrap, col=col.bootstrap)
@@ -858,17 +873,33 @@ type <- match.arg(type)
       }
     }
   }
-    sk <-  centileSK(X)
+    sk <-  centileSK(X, weights=weights)
   if (type=="central"){
-    if (asCharacter)  text(sk$trans.S0.25,  sk$trans.K0.01, paste(substitute(x)),
-                           cex=cex.text, col=col.text )
+    if (asCharacter)
+     {
+      if (is.null(text.to.show))
+        text(sk$trans.S0.25, sk$trans.K0.01, paste(substitute(x)),
+             cex=cex.text, col=col.text)
+      else 
+        text(sk$trans.S0.25, sk$trans.K0.01, text.to.show,
+             cex=cex.text, col=col.text)
+     }
     else points(sk$trans.S0.25, sk$trans.K0.01, col=col.point, pch=pch.point,
                 lwd=lwd.point)
   } else {
-    if (asCharacter)  text(sk$trans.S0.01,  sk$trans.K0.01, paste(substitute(x)),
-                           cex=cex.text, col=col.text )
+    
+    if (asCharacter)
+    {
+      if (is.null(text.to.show))
+        text(sk$trans.S0.01, sk$trans.K0.01, paste(substitute(x)),
+             cex=cex.text, col=col.text)
+      else 
+        text(sk$trans.S0.01, sk$trans.K0.01, text.to.show,
+             cex=cex.text, col=col.text)
+    }
     else points(sk$trans.S0.01,  sk$trans.K0.01, col=col.point, pch=pch.point,
                 lwd=lwd.point)
-    }
-  invisible(list(skewness=sk$skew, adj.skewness=sk$tskew, kurtosis=sk$kurt, sdj.kurtosis=sk$tkurt))
+  }
+  invisible(list(skew0.25=sk$S0.25, skew0.01=sk$S0.01, tr.skew0.25=sk$trans.S0.25, 
+                 tr.skew0.01=sk$trans.S0.01, kurt0.01=sk$K0.01, tr.kurt0.01=sk$trans.K0.01))
 }
