@@ -26,7 +26,7 @@ momentSK <- function(x, weights=NULL)
 {
 if (any(is.na(x)))  warning("NA's will be removed from x")  
 if (!length(weights)) weights <- rep(1, length(x))
-       i <- is.na(weights) | weights == 0 | is.na(x) 
+       i <- is.na(weights) | weights == 0 | is.na(x) | is.infinite(x)
 if (any(i)) 
 {
        x <- x[!i]
@@ -77,7 +77,7 @@ centileSK <- function(x, cent=c(1, 25), weights=NULL)
       return(quantile(y, probs = probs))
     if (any(probs < 0 | probs > 1)) 
       stop("Probabilities must be between 0 and 1 inclusive")
-    i <- is.na(weights) | weights == 0
+    i <- is.na(weights) | weights == 0 | is.na(x) | is.infinite(x)
     if (any(i)) 
     {
       y <- y[!i]
@@ -418,8 +418,8 @@ SKmoment_col <- function()
                      lty=c(2,3,4,5,6,1), lwd=2 )
 }
 # #------------------------------------------------------------------
-# # use 
-# # SKmoment_col()
+# # 
+# # gamlss.dist:::SKmoment_col()
 # #------------------------------------------------------------------
 # #------------------------------------------------------------------
 # #-----------------------------------------------------------------
@@ -456,7 +456,7 @@ load(system.file("doc", "MomentSkewKurt1.RData", package="gamlss.dist"))
 }
 # #------------------------------------------------------------------
 # # use 
-# SKmoment_gray()
+# gamlss.dist:::SKmoment_gray()
 #-----------------------------------------------------------------
 # FUNCTION 9
 #-----------------------------------------------------------------
@@ -525,7 +525,7 @@ SKmomentBoth <- function(...,show.legend=TRUE)
 
 }
 # #-------------------------------------------------------------------
-# #SKmomentBoth()
+# gamlss.dist:::SKmomentBoth()
 # #------------------------------------------------------------------
 # #-----------------------------------------------------------------
 # # FUNCTION 10 
@@ -583,8 +583,8 @@ load(system.file("doc", "CentileSkewKurt.RData", package="gamlss.dist"))
 }
 # #--------------------------------------------------------------
 # #--------------------------------------------------------------
-# # SKcentile_col("central")
-# # SKcentile_col("tail")
+# # gamlss.dist:::SKcentile_col("central")
+# # gamlss.dist:::SKcentile_col("tail")
 # #--------------------------------------------------------------
 # #--------------------------------------------------------------
 # #-----------------------------------------------------------------
@@ -636,8 +636,8 @@ load(system.file("doc", "CentileSkewKurt.RData", package="gamlss.dist"))
 }
 # #--------------------------------------------------------------
 # #--------------------------------------------------------------
-# # SKcentile_gray("central")
-# # SKcentile_gray("tail")
+# # gamlss.dist:::SKcentile_gray("central")
+# # gamlss.dist:::SKcentile_gray("tail")
 # #--------------------------------------------------------------
 # #--------------------------------------------------------------
 # #--------------------------------------------------------------
@@ -727,8 +727,8 @@ load(system.file("doc", "CentileSkewKurt.RData", package="gamlss.dist"))
 }
 # #--------------------------------------------------------------
 # #--------------------------------------------------------------
-# # SKcentileBoth(type="central")
-# # SKcentileBoth(type="tail")
+# # gamlss.dist:::SKcentileBoth(type="central")
+# # gamlss.dist:::SKcentileBoth(type="tail")
 # #--------------------------------------------------------------
 # #--------------------------------------------------------------
 # #--------------------------------------------------------------

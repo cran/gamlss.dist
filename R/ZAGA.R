@@ -4,9 +4,9 @@
 # ---------------------------------------------------------------------------------------
 ZAGA <- function (mu.link ="log", sigma.link="log", nu.link ="logit")
 {
-    mstats <- checklink("mu.link", "ZAIG", substitute(mu.link), c("inverse", "log", "identity", "own"))
-    dstats <- checklink("sigma.link", "ZAIG", substitute(sigma.link), c("inverse", "log", "identity", "own"))
-    vstats <- checklink("nu.link", "ZAIG", substitute(nu.link),  c("logit", "probit", "cloglog", "cauchit", "log", "own"))
+    mstats <- checklink("mu.link", "ZAGA", substitute(mu.link), c("inverse", "log", "identity", "own"))
+    dstats <- checklink("sigma.link", "ZAGA", substitute(sigma.link), c("inverse", "log", "identity", "own"))
+    vstats <- checklink("nu.link", "ZAGA", substitute(nu.link),  c("logit", "probit", "cloglog", "cauchit", "log", "own"))
     structure(
           list(family = c("ZAGA", "Zero Adjusted GA"),
            parameters = list(mu=TRUE, sigma=TRUE, nu=TRUE), 
@@ -108,7 +108,8 @@ rZAGA <- function(n, mu=1, sigma=1, nu=0.1, ...)
   }
    
 #----------------------------------------------------------------------------------------
-plotZAGA <- function( mu =5 , sigma=1, nu = 0.1, from = 0, to=10, n = 101, main=NULL, ...)
+plotZAGA <- function( mu =5 , sigma=1, nu = 0.1, from = 0, to=10, n = 101, main=NULL,
+                      ...)
 {
   y = seq(from=0.001, to=to, length.out=n )
   pdf<- dZAGA(y, mu = mu ,sigma = sigma, nu = nu) 
@@ -116,7 +117,7 @@ plotZAGA <- function( mu =5 , sigma=1, nu = 0.1, from = 0, to=10, n = 101, main=
   po<-c(0)
   if (is.null(main)) main = "Zero Adj. Gamma"
   plot(pdf~y, main=main, ylim=c(0,max(pdf,pr0)), type="l", ...)
-  points(po,pr0,type="h")
+  points(po,pr0,type="h", ...)
   points(po,pr0,type="p", col="blue")
 }
 

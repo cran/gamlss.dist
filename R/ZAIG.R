@@ -143,7 +143,7 @@ plotZAIG<-function (mu = 5, sigma = 1, nu = 0.1, from = 0, to = 10, n = 101,
     main = "Zero adjusted IG"
   plot(pdf ~ y, main = main, ylim = c(0, max(pdf, pr0)), 
        type = "l", ...)
-  points(po, pr0, type = "h")
+  points(po, pr0, type = "h", ...)
   points(po, pr0, type = "p", col = "blue")
 }
 

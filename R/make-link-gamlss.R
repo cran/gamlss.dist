@@ -23,6 +23,9 @@
 # logshiftto2 - Slog
 # own
 # inverse
+# [-1,1]
+# [0,2]
+# [0,5]
 
 
  make.link.gamlss<-function (link) 
@@ -192,7 +195,34 @@ if (is.character(link) && length(grep("^power", link) > 0))
      res
    }
    valideta <- function(eta) TRUE
- }, 
+ }, "(0,5]" =
+   {  
+     linkfun <- function(mu)
+     {
+       delta <- 1e-10
+       shift <- c(0, 5+delta)
+       log((mu-shift[1])/(shift[2]-mu))
+     }
+     linkinv <- function(eta){
+       delta <- 1e-10
+       shift <- c(0, 5+delta)
+       thresh <- -log(.Machine$double.eps)
+       eta <- pmin(thresh, pmax(eta, -thresh))
+       (shift[2]*exp(eta)+shift[1])/(1+exp(eta))
+     }
+     mu.eta <- function(eta){
+       delta <- 1e-10
+       shift <- c(0, 5+delta)
+       thresh <- -log(.Machine$double.eps)
+       res <- rep(.Machine$souble.eps, length(eta))
+       res[abs(eta) < thresh] <- 
+         (shift[2]*exp(eta))/(1 + exp(eta))[abs(eta) < thresh] -
+         (exp(eta)*(shift[2]*exp(eta)+shift[1]))/
+         ((1 + exp(eta))^2)[abs(eta) < thresh]
+       res
+     }
+     valideta <- function(eta) TRUE
+   }, 
        #logitshift.5 = { # MS Saturday, February 19, 2005 depreciated 
        #linkfun <- function(mu, shift = par )           
        #                  log((mu-shift[1])/(shift[2]-mu))

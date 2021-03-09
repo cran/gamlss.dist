@@ -144,11 +144,14 @@ for \eqn{-\infty<y<\infty}{-Inf<y<Inf}, \eqn{-\infty<\mu<\infty}{-Inf<mu<Inf}, \
  \eqn{-\infty<\nu>\infty}{-Inf<nu<Inf} and \eqn{\tau>0}{tau>0}.   
 }
 \value{
-  \code{ST1()}, \code{ST2()}, \code{ST3()}, \code{ST4()} and \code{ST5()}  return a \code{gamlss.family} object 
+ The functions  \code{ST1()}, \code{ST2()}, \code{ST3()}, \code{ST4()} and \code{ST5()}  return a \code{gamlss.family} object 
     which can be used to fit the skew t type 1-5 distribution in the \code{gamlss()} function. 
-  \code{dST1()}, \code{dST2()}, \code{dST3()}, \code{dST4()} and \code{dST5()} give the density functions, 
-  \code{pST1()}, \code{pST2()}, \code{pST3()}, \code{pST4()} and \code{pST5()}  give the cumulative distribution  functions, 
-  \code{qST1()}, \code{qST2()}, \code{qST3()}, \code{qST4()} and \code{qST5()} give the quantile function, and 
+    
+The functions   \code{dST1()}, \code{dST2()}, \code{dST3()}, \code{dST4()} and \code{dST5()} give the density functions.
+
+The funcions   \code{pST1()}, \code{pST2()}, \code{pST3()}, \code{pST4()} and \code{pST5()}  give the cumulative distribution  functions.
+
+The functions  \code{qST1()}, \code{qST2()}, \code{qST3()}, \code{qST4()} and \code{qST5()} give the quantile function, and 
   \code{rST1()}, \code{rST2()}, \code{rST3()}, \code{rST4()} and \code{rST3()}  generates random deviates. 
 }
 \references{
@@ -167,11 +170,11 @@ Fernandez, C. and Steel, M. F. (1998) On Bayesian modeling of fat tails and skew
 Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion),  \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
 Rigby, R. A., Stasinopoulos, D. M.,  Heller, G. Z.,  and De Bastiani, F. (2019)
-	\emph{Distributions for modeling location, scale, and shape: Using GAMLSS in R}, Chapman and Hall/CRC. An older version can be found in \url{http://www.gamlss.com/}.
+	\emph{Distributions for modeling location, scale, and shape: Using GAMLSS in R}, Chapman and Hall/CRC. An older version can be found in \url{https://www.gamlss.com/}.
 
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
-\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{http://www.jstatsoft.org/v23/i07}.
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{https://www.jstatsoft.org/v23/i07}.
 
  }
 \author{Bob Rigby and Mikis Stasinopoulos  }
