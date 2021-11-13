@@ -96,6 +96,6 @@ rNBI <- function(n, mu = 1, sigma = 1)
           n <- ceiling(n)
           p <- runif(n)
           r <- qNBI(p, mu=mu, sigma=sigma)
-          r
+          as.integer(r)
   }
 #------------------------------------------------------------------------------------------

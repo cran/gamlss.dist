@@ -140,6 +140,6 @@ rPIG2 <- function(n, mu = 0.5, sigma = 0.02)
           n <- ceiling(n)
           p <- runif(n)
           r <- qPIG2(p, mu=mu, sigma=sigma)
-          r
+          as.integer(r)
   }
 ##-----------------------------------------------------------------------------------------

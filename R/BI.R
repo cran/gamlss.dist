@@ -61,6 +61,6 @@ rBI <- function(n, bd = 1, mu = 0.5)
   n <- ceiling(n)
   p <- runif(n)
   r <- qbinom(p, size = bd, prob = mu)
-  r
+  as.integer(r)
 }
 #-------------------------------------------------------------------------------------------

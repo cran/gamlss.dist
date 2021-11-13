@@ -126,10 +126,10 @@ weights <- weights[!i]
     names(S0.01) <- ""
            S0.25 <- ((Cent[2]+Cent[4])/2 -Cent[3])/((Cent[4]-Cent[2])/2)
    names(S0.25 ) <- ""
-          tS0.01 <- S0.01/(1+abs(S0.01))# transformed
-   names(tS0.01) <- ""
-          tS0.25 <- S0.25/(1+abs(S0.25))# transformed
-   names(tS0.25) <- ""
+   #        tS0.01 <- S0.01/(1+abs(S0.01))# transformed
+   # names(tS0.01) <- ""
+  #        tS0.25 <- S0.25/(1+abs(S0.25))# transformed
+   # names(tS0.25) <- ""
            K0.01 <- (Cent[5]-Cent[1])/(Cent[4]-Cent[2])
     names(K0.01) <- ""
           sK0.01 <- K0.01/3.449 # standarised kurtosis
@@ -140,8 +140,8 @@ weights <- weights[!i]
  names(tr.K0.01) <- ""
   list(      S0.25 = S0.25,
              S0.01 = S0.01,
-       trans.S0.25 = tS0.25,
-       trans.S0.01 = tS0.01,
+       # trans.S0.25 = tS0.25,
+       # trans.S0.01 = tS0.01,
              K0.01 = K0.01,
         standK0.01 = sK0.01,
          exc.K0.01 = ex.K0.01,  # excess
@@ -215,8 +215,8 @@ quantileW <- function (y, weights = NULL, probs = c(0, 0.25, 0.5, 0.75, 1))
 #   tKp <- ex.Kp/(1+abs(ex.Kp))
 #   names(tKp) <- ""           
    list(    p = cent/100,
-           Sp = Sp, 
-          tSp = tSp)
+           Sp = Sp) 
+#          tSp = tSp)
 #           Kp = Kp,
 #          sKp = sKp,
 #        ex.Kp = ex.Kp,  # excess 
@@ -291,8 +291,6 @@ nweights <- weights[!i]
       tKp <- ex.Kp/(1+abs(ex.Kp))
       names(tKp) <- ""           
    list(    p = cent/100,
-#            Sp = Sp, 
-#            tSp = tSp)
               Kp = Kp,
              sKp = sKp,
            ex.Kp = ex.Kp,  # excess 
@@ -301,7 +299,8 @@ nweights <- weights[!i]
  #-------------------------------------------------------------- 
 # Y <- rSST(1000, nu=.5, tau=5)
 # centileSK(Y)
-# centileSK(Y, 25)
+#  centileSkew(Y)
+# centileKurt(Y,25 )
 #--------------------------------------------------------------
 #-----------------------------------------------------------------
 # FUNCTION 5 
@@ -333,8 +332,8 @@ theoCentileSK <- function(fam="NO", p=0.01, ...)
 # plotting skewness or kurtosis as function of p
 #--------------------------------------------------------------
 plotCentileSK<-function(fam="NO", 
-                        plotting = c("skew", "kurt", "standKurt"),
-                        add=FALSE, col=1, lty=1,  lwd=1, 
+                  plotting = c("skew", "kurt", "standKurt"),
+                       add = FALSE, col = 1, lty = 1,  lwd = 1, 
                         ylim=NULL, ...)
 {
   plotting <- match.arg(plotting) 
@@ -866,10 +865,10 @@ type <- match.arg(type)
       #sk <-  centileSK(x1, weights=weights)
      if (type=="central")
      {
-       points(sk$trans.S0.25,  sk$trans.K0.01,  pch=pch.bootstrap, col=col.bootstrap)
+       points(sk$S0.25,  sk$trans.K0.01,  pch=pch.bootstrap, col=col.bootstrap)
      }
       else{
-        points(sk$trans.S0.01, sk$trans.K0.01,  pch=pch.bootstrap, col=col.bootstrap)
+        points(sk$S0.01, sk$trans.K0.01,  pch=pch.bootstrap, col=col.bootstrap)
       }
     }
   }
@@ -878,28 +877,28 @@ type <- match.arg(type)
     if (asCharacter)
      {
       if (is.null(text.to.show))
-        text(sk$trans.S0.25, sk$trans.K0.01, paste(substitute(x)),
+        text(sk$S0.25, sk$trans.K0.01, paste(substitute(x)),
              cex=cex.text, col=col.text)
       else 
-        text(sk$trans.S0.25, sk$trans.K0.01, text.to.show,
+        text(sk$S0.25, sk$trans.K0.01, text.to.show,
              cex=cex.text, col=col.text)
      }
-    else points(sk$trans.S0.25, sk$trans.K0.01, col=col.point, pch=pch.point,
+    else points(sk$S0.25, sk$trans.K0.01, col=col.point, pch=pch.point,
                 lwd=lwd.point)
   } else {
     
     if (asCharacter)
     {
       if (is.null(text.to.show))
-        text(sk$trans.S0.01, sk$trans.K0.01, paste(substitute(x)),
+        text(sk$S0.01, sk$trans.K0.01, paste(substitute(x)),
              cex=cex.text, col=col.text)
       else 
-        text(sk$trans.S0.01, sk$trans.K0.01, text.to.show,
+        text(sk$S0.01, sk$trans.K0.01, text.to.show,
              cex=cex.text, col=col.text)
     }
-    else points(sk$trans.S0.01,  sk$trans.K0.01, col=col.point, pch=pch.point,
+    else points(sk$S0.01,  sk$trans.K0.01, col=col.point, pch=pch.point,
                 lwd=lwd.point)
   }
-  invisible(list(skew0.25=sk$S0.25, skew0.01=sk$S0.01, tr.skew0.25=sk$trans.S0.25, 
+  invisible(list(skew0.25=sk$S0.25, skew0.01=sk$S0.01, tr.skew0.25=sk$S0.25, 
                  tr.skew0.01=sk$trans.S0.01, kurt0.01=sk$K0.01, tr.kurt0.01=sk$trans.K0.01))
 }

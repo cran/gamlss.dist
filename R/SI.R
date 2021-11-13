@@ -278,6 +278,6 @@ rSI <- function(n, mu=0.5, sigma=0.02, nu=-0.5)
           n <- ceiling(n)
           p <- runif(n)
           r <- qSI(p, mu=mu, sigma=sigma, nu=nu)
-          r
+          as.integer(r)
   }
 #----------------------------------------------------------------------------------------

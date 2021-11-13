@@ -133,6 +133,6 @@ rZABB <- function(n, mu = 0.5, sigma = 0.1, nu = 0.1, bd = 1)
           n <- ceiling(n)
           p <- runif(n)
           r <- qZABB(p, mu = mu, sigma = sigma, nu = nu, bd = bd)
-          r
+          as.integer(r)
   }
 #-----------------------------------------------------------------------------------------

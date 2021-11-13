@@ -118,7 +118,9 @@ BEINF <- function (mu.link = "logit", sigma.link = "logit",
    sigma.valid = function(sigma)  all(sigma > 0 & sigma < 1), 
       nu.valid = function(nu)  all(nu > 0) , 
      tau.valid = function(tau) all(tau > 0), 
-       y.valid = function(y)  all(y >= 0 & y <= 1)
+       y.valid = function(y)  all(y >= 0 & y <= 1),
+          mean = function(mu, sigma, nu, tau) (mu+tau)/(1+nu+tau),
+      variance = function(mu, sigma, nu, tau) (sigma^2 * mu *(1-mu)+mu^2+tau+((mu+tau)^2)*(1+nu+tau)^(-1))/(1+nu+tau)
           ),
             class = c("gamlss.family","family"))
 }

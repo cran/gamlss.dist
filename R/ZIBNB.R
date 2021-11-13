@@ -231,6 +231,6 @@ rZIBNB <- function(n, mu=1, sigma=1, nu=1, tau=0.1, max.value = 10000)
   n <- ceiling(n)
   p <- runif(n)
   r <- qZIBNB(p, mu=mu, sigma=sigma, nu=nu,, max.value = max.value)
-  r
+  as.integer(r)
 }
 #----------------------------------------------------------------------------------------

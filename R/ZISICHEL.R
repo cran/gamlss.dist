@@ -237,6 +237,6 @@ rZISICHEL <- function(n, mu=1, sigma=1, nu=-0.5, tau=0.1, max.value = 10000)
              n <- ceiling(n)
              p <- runif(n)
              r <- qZISICHEL(p, mu=mu, sigma=sigma, nu=nu,  max.value =  max.value)
-             r
+             as.integer(r)
   }
 #--------------------------------------------------------------------------------

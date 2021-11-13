@@ -76,18 +76,20 @@ truncation resulting from the condition \eqn{y>0}{y>0}. See Rigby and Stasinopou
 \references{ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
   
-Rigby, R.A. Stasinopoulos, D.M. (2006).   Using the Box-Cox \emph{t} distribution in GAMLSS to mode skewnees and  and kurtosis.
-to appear in \emph{Statistical Modelling}.
+Rigby, R.A. Stasinopoulos, D.M. (2006).   Using the Box-Cox \emph{t} distribution in GAMLSS to mode skewnees and  and kurtosis. \emph{Statistical Modelling} 6(3):200. \doi{10.1191/1471082X06st122oa}.
 
 Rigby, R. A., Stasinopoulos, D. M.,  Heller, G. Z.,  and De Bastiani, F. (2019)
-	\emph{Distributions for modeling location, scale, and shape: Using GAMLSS in R}, Chapman and Hall/CRC. An older version can be found in \url{https://www.gamlss.com/}.
+	\emph{Distributions for modeling location, scale, and shape: Using GAMLSS in R}, Chapman and Hall/CRC,  \doi{10.1201/9780429298547}.
+	An older version can be found in \url{https://www.gamlss.com/}.
 
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
-\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{https://www.jstatsoft.org/v23/i07}.  
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \doi{10.18637/jss.v023.i07}.  
 
-Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
-\emph{Flexible Regression and Smoothing: Using GAMLSS in R},  Chapman and Hall/CRC. 
+Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., 
+(2017) \emph{Flexible Regression and Smoothing: Using GAMLSS in R},  Chapman and Hall/CRC. \doi{10.1201/b21973}
+
+(see also  \url{https://www.gamlss.com/}).
 
 }
 

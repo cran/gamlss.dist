@@ -171,6 +171,6 @@ rZAPIG <- function(n, mu = 1, sigma = 1, nu = 0.3, max.value = 10000)
   n <- ceiling(n)
   p <- runif(n)
   r <- qZAPIG(p, mu=mu, sigma=sigma, nu=nu, max.value = max.value)
-  r
+  as.integer(r)
 }
 #------------------------------------------------------------------------------------------

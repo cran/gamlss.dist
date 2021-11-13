@@ -179,6 +179,6 @@ rZANBI <- function(n, mu = 1, sigma = 1, nu = 0.3)
   n <- ceiling(n)
   p <- runif(n)
   r <- qZANBI(p, mu=mu, sigma=sigma, nu=nu)
-  r
+  as.integer(r)
 }
 #------------------------------------------------------------------------------------------

@@ -106,6 +106,6 @@ rZALG <- function(n, mu = 0.5, sigma=0.1)
           n <- ceiling(n)
           p <- runif(n)
           r <- qZALG(p, mu = mu, sigma = sigma)
-          r
+          as.integer(r)
   }
 #-----------------------------------------------------------------------------------------

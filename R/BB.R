@@ -163,6 +163,6 @@ rBB <- function(n, mu = 0.5, sigma = 1, bd = 10, fast = FALSE )
           n <- ceiling(n)
           p <- runif(n)
           r <- qBB(p, mu=mu, sigma=sigma, bd=bd, fast=fast)
-          r
+          as.integer(r)
   }
 #-------------------------------------------------------------------------------------------

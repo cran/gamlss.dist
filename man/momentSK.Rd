@@ -111,23 +111,20 @@ The function \code{momentSK()} produce:
  The function \code{centileSK()} produces:
  \item{S0.25:}{sample centile central skewness}
  \item{S0.01:}{sample centile tail skewness}
- \item{trans.S0.25:}{sample centile transformed central skewness}
- \item{trans.S0.01:}{sample centile transformed tail skewness}
  \item{K0.01:}{sample centile kurtosis}
- \item{standK0.01:}{standardise centile kurtosis, (\code{K0.01/3.449})}
+ \item{standK0.01:}{standardised centile kurtosis, (\code{K0.01/3.449})}
  \item{exc.K0.01:}{excess centile kurtosis, (\code{K0.01-3.449})}
  \item{trans.K0.01:}{transfored excess centile kurtosis, (exc.K0.01/(1+abs(exc.K0.01))}
 
 The function \code{centileSkew()} for a given argument \code{p} produces:
  \item{p:}{the value determiming the centile skewness}
  \item{Sp:}{sample centile skewness at \code{p}}
- \item{tSp:}{sample transformed centile skewness at \code{p}}
  
 
 The function \code{centileKurt()} for a given argument \code{p} produces:
  \item{p}{the value determiming the centile kurtosis}
  \item{Kp}{sample  centile kurtosis at \code{p}}
- \item{sKp}{sample  standardise centile kurtosis at \code{p}}
+ \item{sKp}{sample  standardised centile kurtosis at \code{p}}
  \item{ex.Kp:}{sample excess centile kurtosis at \code{p}}
  \item{teKp:}{sample transformed excess centile kurtosis at \code{p}}
 
@@ -138,7 +135,7 @@ The function \code{theoCentileSK} for a given \code{gamlss.family}  produces:
  \item{S_0.25}{the central skewness of the distribution}
  \item{S_0.01:}{the tail skewness of the distribution}
  \item{K_0.01:}{the centile kurtosis of the distribution}
- \item{sK_0.01:}{the standardise centile kurtosis of the distribution}
+ \item{sK_0.01:}{the standardised centile kurtosis of the distribution}
 
 }
 \references{
@@ -146,13 +143,13 @@ Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for lo
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
 Rigby, R. A., Stasinopoulos, D. M.,  Heller, G. Z.,  and De Bastiani, F. (2019)
-	\emph{Distributions for modeling location, scale, and shape: Using GAMLSS in R}, Chapman and Hall/CRC. An older version can be found in \url{https://www.gamlss.com/}.
+	\emph{Distributions for modeling location, scale, and shape: Using GAMLSS in R}, Chapman and Hall/CRC, \doi{10.1201/9780429298547}. An older version can be found in \url{https://www.gamlss.com/}.
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
-\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{https://www.jstatsoft.org/v23/i07/}.
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \doi{10.18637/jss.v023.i07}.
 
 Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
-\emph{Flexible Regression and Smoothing: Using GAMLSS in R},  Chapman and Hall/CRC.  
+\emph{Flexible Regression and Smoothing: Using GAMLSS in R},  Chapman and Hall/CRC.  \doi{10.1201/b21973}
 
 (see also \url{https://www.gamlss.com/}).
 }

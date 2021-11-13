@@ -97,6 +97,6 @@ rZABI <- function(n, bd = 1, mu = 0.5, sigma=0.1)
           n <- ceiling(n)
           p <- runif(n)
           r <- qZABI(p, mu = mu, sigma = sigma, bd=bd)
-          r
+          as.integer(r)
   }
 #-----------------------------------------------------------------------------------------

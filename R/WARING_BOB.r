@@ -95,9 +95,7 @@ rWARING<- function(n, mu=2, sigma=2)
      n <- ceiling(n)
      p <- runif(n)
      r <- qWARING(p, mu=mu, sigma=sigma)
-
-
-     r
+     as.integer(r)
 }
 
 #GAMLSS

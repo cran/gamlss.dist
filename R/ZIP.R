@@ -118,6 +118,6 @@ rZIP <- function(n, mu=5, sigma=0.1)
           n <- ceiling(n)
           p <- runif(n)
           r <- qZIP(p, mu = mu, sigma = sigma)
-          r
+          as.integer(r)
   }
 #-----------------------------------------------------------------------------------------

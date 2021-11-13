@@ -57,6 +57,6 @@ rPO <- function(n, mu = 1)
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
           if (any(n <= 0))  stop(paste("n must be a positive integer", "\n", ""))  
           r <- rpois(n, lambda = mu)
-          r
+          as.integer(r)
   }
 #----------------------------------------------------------------------------------------

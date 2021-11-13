@@ -194,6 +194,6 @@ rDBURR12 <- function(n, mu = 5, sigma = 2, nu = 2)
   n <- ceiling(n)
   p <- runif(n)
   r <- qDBURR12(p, mu=mu, sigma=sigma, nu=nu )
-  r
+  as.integer(r)
 } 
 

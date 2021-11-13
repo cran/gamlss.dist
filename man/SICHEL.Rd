@@ -107,24 +107,25 @@ but treat
 Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
 \emph{Appl. Statist.}, \bold{54}, part 3, pp 507-554.
 
-Rigby, R. A., Stasinopoulos D. M. and Akantziliotou, C. (2006) Modelling the parameters of a family of mixed Poisson distributions including the Sichel and Delaptorte.
-Submitted for publication.
 
 Rigby, R. A., Stasinopoulos, D. M.,  Heller, G. Z.,  and De Bastiani, F. (2019)
-	Distributions for modeling location, scale, and shape: Using GAMLSS in R, Chapman and Hall/CRC. An older version can be found in \url{https://www.gamlss.com/}.
+	\emph{Distributions for modeling location, scale, and shape: Using GAMLSS in R}, Chapman and Hall/CRC, \doi{10.1201/9780429298547}. An older version can be found in \url{https://www.gamlss.com/}.
 
-Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2003) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  \url{https://www.gamlss.com/}).
-
+Rigby, R. A., Stasinopoulos, D. M., & Akantziliotou, C. (2008). A framework for modelling overdispersed count data, including the Poisson-shifted generalized inverse Gaussian distribution. \emph{Computational Statistics & Data Analysis}, 53(2), 381-393.
 
 Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
-\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \url{https://www.jstatsoft.org/v23/i07}.
+\emph{Journal of Statistical Software}, Vol. \bold{23}, Issue 7, Dec 2007, \doi{10.18637/jss.v023.i07}.
 
-Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017) \emph{Flexible Regression and Smoothing: Using GAMLSS in R},  Chapman and Hall/CRC. 
+Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+\emph{Flexible Regression and Smoothing: Using GAMLSS in R},  
+Chapman and Hall/CRC. \doi{10.1201/b21973}  
+
 
 Stein, G. Z., Zucchini, W. and Juritz, J. M. (1987). Parameter
 Estimation of the Sichel Distribution and its Multivariate Extension.
 \emph{Journal of American Statistical Association}, \bold{82}, 938-944.
+
+(see also \url{https://www.gamlss.com/}).
 }
 \author{Rigby, R. A.,  Stasinopoulos D. M.,  Akantziliotou C and Marco Enea. }
 \note{The mean of the above Sichel distribution is \eqn{\mu}{mu} and the variance is 

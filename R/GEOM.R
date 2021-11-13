@@ -55,7 +55,7 @@ rGEOM<- function(n, mu=2)
      n <- ceiling(n)
      p <- runif(n)
      r <- qGEOM(p, mu=mu)
-     r
+     as.integer(r)
 }
 
 #Distribution function

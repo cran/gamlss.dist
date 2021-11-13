@@ -112,6 +112,6 @@ rZAZIPF <- function(n, mu = 0.5, sigma=0.1, max.value = 10000)
           n <- ceiling(n)
           p <- runif(n)
           r <- qZAZIPF(p, mu = mu, sigma = sigma, max.value = 10000)
-          r
+          as.integer(r)
   }
 #-----------------------------------------------------------------------------------------

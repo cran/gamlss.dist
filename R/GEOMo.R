@@ -42,7 +42,7 @@ rGEOMo<- function(n, mu=.5)
      n <- ceiling(n)
      p <- runif(n)
      r <- qGEOMo(p, mu=mu)
-     r
+     as.integer(r)
 }
 #---------------------------------------------------------------------------
 #Distribution function

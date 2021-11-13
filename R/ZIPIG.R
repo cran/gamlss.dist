@@ -172,6 +172,6 @@ rZIPIG <- function(n, mu = 1, sigma = 1, nu = 0.3, max.value = 10000)
           n <- ceiling(n)
           p <- runif(n)
           r <- qZIPIG(p, mu=mu, sigma=sigma, nu=nu)
-          r
+          as.integer(r)
   }
 #------------------------------------------------------------------------------------------

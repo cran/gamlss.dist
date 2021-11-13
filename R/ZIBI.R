@@ -113,6 +113,6 @@ rZIBI <- function(n, bd = 1, mu = 0.5, sigma = 0.1)
           n <- ceiling(n)
           p <- runif(n)
           r <- qZIBI(p, bd = bd, mu = mu, sigma = sigma)
-          r
+          as.integer(r)
   }
 #-----------------------------------------------------------------------------------------
