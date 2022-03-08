@@ -2,8 +2,8 @@ Package: gamlss.dist
 Type: Package
 Title: Distributions for Generalized Additive Models for Location Scale
         and Shape
-Version: 6.0-1
-Date: 2021-11-13
+Version: 6.0-3
+Date: 2022-03-08
 Authors@R: c(person("Mikis", "Stasinopoulos", role = c("aut", "cre", "cph"), 
            email = "d.stasinopoulos@londonmet.ac.uk"),
            person("Robert", "Rigby", role = c("aut"), email = "r.rigby@londonmet.ac.uk"), 
@@ -25,7 +25,7 @@ Authors@R: c(person("Mikis", "Stasinopoulos", role = c("aut", "cre", "cph"),
 Description: A set of distributions  which can be used  for modelling the response variables in Generalized Additive Models for Location Scale and Shape, Rigby and Stasinopoulos (2005), <doi:10.1111/j.1467-9876.2005.00510.x>. The distributions can be continuous, discrete or mixed  distributions.  Extra distributions can be created, by transforming, any continuous distribution defined on the real line,  to  a distribution defined on ranges 0 to infinity  or  0 to 1,  by using a ''log'' or a ''logit' transformation respectively. 
 License: GPL-2 | GPL-3
 URL: https://www.gamlss.com/
-Depends: R (>= 2.15.0), MASS, graphics, stats, methods, grDevices
+Depends: R (>= 3.5.0), MASS, graphics, stats, methods, grDevices
 Repository: CRAN
 Author: Mikis Stasinopoulos [aut, cre, cph],
   Robert Rigby [aut],
@@ -45,5 +45,5 @@ Author: Mikis Stasinopoulos [aut, cre, cph],
   Stanislaus Stadlmann [ctb]
 Maintainer: Mikis Stasinopoulos <d.stasinopoulos@londonmet.ac.uk>
 NeedsCompilation: yes
-Packaged: 2021-11-13 10:34:32 UTC; dimitriosstasinopoulos
-Date/Publication: 2021-11-13 12:30:02 UTC
+Packaged: 2022-03-08 15:49:21 UTC; dimitriosstasinopoulos
+Date/Publication: 2022-03-08 16:40:07 UTC

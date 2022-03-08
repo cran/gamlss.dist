@@ -1,5 +1,5 @@
-e113fe39bb1dd080bed2b1b4efd72176 *DESCRIPTION
-ca5429449c1a766bc3cd246666460c4f *NAMESPACE
+9ba279baddcb599f70f19f78b8de5554 *DESCRIPTION
+73874f46bec0b575ed6a0d3005e49cc4 *NAMESPACE
 707d97c563413124d1e208c4bf61a61d *R/BB.R
 7cbe7a00d2eb8fd8b42e26d493a74bd2 *R/BCCG.R
 2cb09762ca37c186f09c54a1f014bfd8 *R/BCPE.R
@@ -18,7 +18,7 @@ d2803221fdf733e385bfa0fc643797d6 *R/BEINF1.R
 c162fc8ce3ddb9483fd82f1faf247312 *R/DoublePoisson-30-12-14.R
 b91f32617f2e929b8a09787885a7359f *R/EGB2.R
 1c6c83b0463ab6fb8b508da3ce488507 *R/EXP.R
-0eed6a7bf074abf2f89bcbcefe25919c *R/Functions_for_SK_in_gamlss.R
+1d0cfca8458d868bc85183d7015ea004 *R/Functions_for_SK_in_gamlss.R
 38181eeea2bac61a44863be1f544d3ff *R/GA.R
 602aaaf0b54e3a75857413e2c3afb83f *R/GAF.R
 e7b3d1d7aee650c368193be3abd8a5aa *R/GB1.R
@@ -27,7 +27,7 @@ c4dfbd8cc3f47115d61a011e2da3ff75 *R/GEOM.R
 578e103ef69416c803d16d1dc216ae63 *R/GEOMo.R
 ad9b44c398742509bf80d1e0fdce56b0 *R/GG.R
 e9b7cb10cd373effe332a29ba5b33a20 *R/GIG.R
-25340047f36a7b8913939672c39236a4 *R/GT.R
+4be8156c77ca69468ec2b450e31597d5 *R/GT.R
 2e8c9c4ddeb82d82824de876dd8694f8 *R/GU.R
 c2d22c433dbf40424cd7b034d7395381 *R/GeneralisedPareto.R
 d84ecce6438ba97649ed608f53dcd322 *R/GeneralisedPoisson.R
@@ -121,10 +121,9 @@ a0a297a51448de01ffb36222ba5012a9 *R/make-link-gamlss.R
 d3ecba2d6fa35b23aaf9a0b3350b8d36 *R/multin-23-09-12.R
 48f67f2575c15fc67a71b4ea83ccb27b *R/plottingDist.R
 1ae3e65c5ca8618a04c54a44fa5fc41b *R/po.r
-936e8e1acef5369578efb98089bad962 *build/partial.rdb
+4648c48c0c512842534c0aa04d055b8a *build/partial.rdb
 1a03dee687725b032ca93cbf2b636c35 *inst/Distributions-2010.pdf
 2fca4539c76587cd1a79adf9bcacb331 *inst/doc/CentileSkewKurt.RData
-1a03dee687725b032ca93cbf2b636c35 *inst/doc/Distributions-2010.pdf
 5f7282be0d460dbfec2fd2738ccefcdc *inst/doc/MomentSkewKurt1.RData
 e882fe21ba77966f052363855a339fc5 *man/BB.Rd
 2e020c4b54abe63065cbb82d18bbd6ba *man/BCCG.Rd

@@ -80,8 +80,8 @@ centileSK <- function(x, cent=c(1, 25), weights=NULL)
     i <- is.na(weights) | weights == 0 | is.na(x) | is.infinite(x)
     if (any(i)) 
     {
-      y <- y[!i]
-      weights <- weights[!i]
+           y <- y[!i]
+     weights <- weights[!i]
     }
        ysort <- unique(sort(y))
     weights1 <- tapply(weights, y, sum)

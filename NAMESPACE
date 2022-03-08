@@ -136,6 +136,7 @@ export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family,
 importFrom("methods", "is")
 import(MASS)
 import(graphics)
+importFrom("graphics", "lines")
 import(grDevices)
 import(stats)
 #importFrom("grDevices", "gray")
