@@ -41,7 +41,7 @@ rNOF(n, mu = 0, sigma = 1, nu = 0)
 \deqn{f(y|\mu,\sigma, \nu)=\frac{1}{\sqrt{2 \pi }\sigma \mu^{\nu/2}}\exp \left[-\frac{1}{2}\frac{(y-\mu)^2}{\sigma^2 \mu^\nu}\right]}{f(y|mu,sigma,nu)=(1/(sqrt(2*pi)*sigma*mu^(nu/2)))* exp(-0.5*((y-mu)^2/sigma^2*mu^nu))}
 
  for \eqn{y=(-\infty,\infty)}{y=(-Inf,Inf)}, \eqn{\mu=(-\infty,\infty)}{\mu=(-Inf,Inf)}, \eqn{\sigma>0} and 
- \eqn{\nu=(-\infty,+\infty)}{\nu=(-Inf,+Inf)}. 
+ \eqn{\nu=(-\infty,+\infty)}{\nu=(-Inf,+Inf)} see pp. 373-374 of Rigby et al. (2019). 
 }
 \value{
   returns a \code{gamlss.family} object which can be used to fit a normal distribution family 

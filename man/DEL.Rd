@@ -44,12 +44,13 @@ rDEL(n, mu=1, sigma=1, nu=0.5, max.value = 10000)
 The probability function of the Delaporte distribution is given by
 \deqn{f(y|\mu,\sigma,\nu)= \frac{e^{-\mu \nu}}{\Gamma(1/\sigma)}\left[ 1+\mu \sigma (1-\nu)\right]^{-1/\sigma} S }{f(y|mu,sigma,nu)=(exp(-mu*nu)/Gamma(1/sigma))*[1+mu*sigma*(1-nu)]^(-1/sigma) S} 
 where  
-\deqn{S=  \sum_{j=0}^{y} \left( \matrix{ y \cr j } \right) \frac{\mu^y \nu^{y-j}}{y!}\left[\mu + \frac{1}{\sigma(1-\nu)}\right]^{-j} \Gamma\left(\frac{1}{\sigma}+j\right)}{S=Sum(Per(y,j))*((mu^y)*(nu^{y-j})/y!) *[1+(1/(sigma*(1-nu)))]^j Gamma((1/sigma)*j)}
+\deqn{S=  \sum_{j=0}^{y} \left( { y \choose j } \right) \frac{\mu^y \nu^{y-j}}{y!}\left[\mu + \frac{1}{\sigma(1-\nu)}\right]^{-j} \Gamma\left(\frac{1}{\sigma}+j\right)}{S=Sum(Per(y,j))*((mu^y)*(nu^{y-j})/y!) *[1+(1/(sigma*(1-nu)))]^j Gamma((1/sigma)*j)}
 for \eqn{y=0,1,2,...,\infty}{y=0,1,2,...} 
 where  \eqn{\mu>0}{mu>0} , \eqn{\sigma>0}{\sigma>0} and \eqn{0 <
 \nu<1}{0<nu<1}.
  This distribution is a parametrization of the distribution given by Wimmer and Altmann (1999) p 515-516 where 
- \eqn{\alpha=\mu \nu}{a=mu*nu}, \eqn{k=1/\sigma}{1/sigma} and \eqn{\rho=[1+\mu\sigma(1-\nu)]^{-1}}{p=[1+mu*nu*(1-nu)]^(-1)} 
+ \eqn{\alpha=\mu \nu}{a=mu*nu}, \eqn{k=1/\sigma}{1/sigma} and \eqn{\rho=[1+\mu\sigma(1-\nu)]^{-1}}{p=[1+mu*nu*(1-nu)]^(-1)}. 
+For more details  see  pp 506-507 of Rigby \emph{et al.} (2019).     
   
 }
 \value{

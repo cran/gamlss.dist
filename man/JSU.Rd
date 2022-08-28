@@ -43,13 +43,18 @@ rJSU(n, mu = 0, sigma = 1, nu = 1, tau = 1)
 
   The probability density function of the Jonhson's SU distribution, (\code{JSU}), is defined as 
   
-\deqn{f(y|n,\mu,\sigma\,\nu,\tau)==\frac{1}{c \sigma} \frac{1}{\tau(z^2+1)^{\frac{1}{2}}} \frac{1}{\sqrt{2\pi}} \hspace{1mm} \exp{\left[ -\frac{1}{2} r^2 \right]}}{f(y|mu,sigma,nu,tau)=1/(c*sigma*2*pi)*(1/(tau*(z^2+1)^.5))exp(-.5r^2)}
+\deqn{f(y|\mu,\sigma\,\nu,\tau)=\frac{\tau}{c \sigma(s^2+1)^{\frac{1}{2}}\sqrt{2\pi}}  \hspace{1mm} \exp{\left[ -\frac{1}{2} z^2 \right]}}{f(y|mu,sigma,nu,tau)=1/(c*sigma*2*pi)*(1/(tau*(z^2+1)^.5))exp(-.5z^2)}
 
-for \eqn{ -\infty < y < \infty }{0<y<0}, \eqn{\mu=(-\infty,+\infty)}{mu=(-Inf,+Inf)}, 
-\eqn{\sigma>0}{sigma>0}, \eqn{\nu=(-\infty,+\infty)}{nu=(-Inf,+Inf)} and \eqn{\tau>0}{tau>0}. 
-where \eqn{r=-\nu+\frac{1}{\tau} \sinh^{-1}(z)}{r=-nu+sinh^-1(z)/tau}, \eqn{z = \frac{y-(\mu+c\sigma w^{\frac{1}{2}}\sinh{\Omega})}{c\sigma}}{z=(y-(mu+c*sigma*w^(.5) sinh(omega)))/(c*sigma)},
-\eqn{c = [ \frac{1}{2}(w-1)(w \cosh{2 \Omega} +1) ]^{\frac{1}{2}}}{c=(.5*(w-1)*(w*cosh(2*omega)+1))^(-.5)},
-\eqn{w=e^{\tau^2}}{w=exp{tau^2}} and \eqn{\Omega = -\nu\tau}{ omega= -nu*tau}.
+for \eqn{ -\infty < y < \infty }, \eqn{-\infty<\mu< \infty}{mu=(-Inf,+Inf)}, 
+\eqn{\sigma>0}{sigma>0}, \eqn{-\infty<\nu<\infty)}{nu=(-Inf,+Inf)} and \eqn{\tau>0}{tau>0} and  where 
+
+\deqn{z=-\nu+\tau \sinh^{-1}(s)}, 
+\deqn{s = \frac{y-\mu+c \sigma w^{\frac{1}{2}} \sinh(\nu/\tau)}{c\sigma}},
+
+\deqn{c =  \left\{ \frac{1}{2} (w-1) \left[w \cosh(2\nu/\tau) +1) \right] \right\}^{-\frac{1}{2}}} and 
+\deqn{w=e^{1/\tau^2}} see pp. 393-394 of Rigby et al. (2019).
+
+
 
 This is a reparameterization of the original Johnson Su distribution, Johnson (1954), 
 so the parameters \code{mu} and \code{sigma} are the mean and the standard deviation of the distribution.

@@ -35,7 +35,7 @@ rYULE(n, mu = 2)
 \details{
 The Yule distribution has density
 \deqn{P(Y=y|\mu) = (\mu^{-1}+1) B(y+1,\mu^{-1}+2)}{f(y|\mu)=(1/\mu+1) B(y+1, 1/\mu +2)}
-for \eqn{y=0,1,2,\ldots} and \eqn{mu>0}.  
+for \eqn{y=0,1,2,\ldots} and \eqn{\mu>0}, see pp 477-478 of Rigby et al. (2019).  
 
 }
 \value{

@@ -34,9 +34,9 @@ rWARING(n, mu = 2, sigma = 2)
   \item{max.value}{constant; generates a sequence of values for the cdf function.}
 }
 \details{
-The Waring distribution has density,
-\deqn{f(y|\mu, \sigma)= \frac{(1+\sigma)\,\Gamma(y+\frac{\mu}{\sigma})\,\Gamma(\frac{\mu+\sigma+1}{\sigma})}{\sigma \, \Gamma(y+\frac{\mu+1}{\sigma}+2)\,\Gamma(\frac{\mu}{\sigma})}}{f(y|mu, sigma)= ((1+sigma) Gamma(y+mu/sigma) Gamma((mu+sigma+1)/sigma))/(sigma Gamma(y+(mu+1)/sigma+2) Gamma(mu/sigma))}
-for \eqn{y=0,1,2,\ldots}, \eqn{mu>0} and \eqn{sigma>0}.  
+The Waring distribution, \code{WARING},  has density,
+\deqn{f(y|\mu, \sigma)= \frac{B(y+\mu \sigma^{-1}, \sigma^{-1}+2)}{B(\mu \sigma^{-1}, \sigma^{-1}+1)}}
+for \eqn{y=0,1,2,\ldots}, \eqn{\mu>0} and \eqn{\sigma>0} see  pp. 490-492  of Rigby \emph{et al}. (2019).  
 }
 \value{
 Returns a \code{gamlss.family} object which can be used to fit a Waring distribution in the \code{gamlss()} function.

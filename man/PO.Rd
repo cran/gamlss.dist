@@ -35,7 +35,7 @@ rPO(n, mu = 1)
 \details{
   Definition file for Poisson distribution. 
  \deqn{f(y|\mu)=\frac{e^{-\mu}\mu^y}{\Gamma(y+1)}}{f(y|\mu)=e^(-\mu)*\mu^y/\Gamma(y+1)}
- for \eqn{y=0,1,2,...} and \eqn{\mu>0}. 
+ for \eqn{y=0,1,2,...} and \eqn{\mu>0} see ee pp 476-477 of Rigby et al. (2019). 
 }
 \value{
   returns a \code{gamlss.family} object which can be used to fit a Poisson distribution in the \code{gamlss()} function.   

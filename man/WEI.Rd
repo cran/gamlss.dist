@@ -41,7 +41,7 @@ The parameterization of the function \code{WEI} is given by
  \deqn{f(y|\mu,\sigma)=\frac{\sigma y^{\sigma-1}}{\mu^\sigma}
 \hspace{1mm} \exp \left[ -\left(\frac{y }{\mu}\right)^{\sigma}
 \right] }{f(y|mu,sigma)= (sigma*y^(sigma-1)/mu^sigma)exp(-(y/mu)^sigma)}
- for \eqn{y>0}, \eqn{\mu>0} and \eqn{\sigma>0}.
+ for \eqn{y>0}, \eqn{\mu>0} and \eqn{\sigma>0} see pp. 435-436 of Rigby et al. (2019).
 The GAMLSS functions \code{dWEI}, \code{pWEI}, \code{qWEI}, and \code{rWEI} can be used to provide the pdf, the cdf, the quantiles and
 random generated numbers for the Weibull distribution with argument \code{mu}, and \code{sigma}.
 [See the GAMLSS function \code{WEI2} for a different parameterization of the Weibull.] 

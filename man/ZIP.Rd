@@ -40,7 +40,7 @@ a Zero inflated Poisson Distribution given by
 
  \deqn{f(y)=\sigma +(1-\sigma)e^{-\mu}}{sigma+(1-sigma)e^(-mu)} if (y=0)
  \deqn{f(y)=(1-\sigma)\frac{e^{-\mu} \mu^y}{y!}}{f(y)=(1-sigma)e^-mu mu^y/y!} if (y>0)
-for \eqn{y=0,1,...,}.
+for \eqn{y=0,1,...}  see  pp 498-500 of Rigby \emph{et al.} (2019).    .
 }
 \value{
   returns a \code{gamlss.family} object which can be used to fit a zero inflated poisson distribution in the \code{gamlss()} function.  

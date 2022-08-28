@@ -50,13 +50,25 @@ qBEo(p, mu = 0.5, sigma = 0.2, lower.tail = TRUE, log.p = FALSE)
 }
 \details{
 
-The original beta distribution is given as 
+The standard parametrization of the  beta distribution is given as:
  \deqn{f(y|\alpha,\beta)=\frac{1}{B(\alpha, \beta)} y^{\alpha-1}(1-y)^{\beta-1}}{f(y|a,b)=1/(Beta(a,b)) y^(a-1)(1-y)^(b-1)} 
-for \eqn{y=(0,1)}{y=(0,1)}, \eqn{\alpha>0} and \eqn{\beta>0}. In the \code{gamlss} implementation of \code{BEo} 
-\eqn{\alpha=\mu} and \eqn{\beta>\sigma}.   The reparametrization in the function \code{BE()} is 
- \eqn{\mu=\frac{\alpha}{\alpha+\beta}}{mu=a/(a+b)} and  \eqn{\sigma=(\frac{1}{\alpha+\beta+1)^{1/2}}}{sigma=(1/(a+b+1))^0.5}
- for \eqn{\mu=(0,1)}{mu=(0,1)} and \eqn{\sigma=(0,1)}{sigma=(0,1)}.
- The expected value of y is \eqn{\mu}{mu} and the variance is \eqn{\sigma^2\mu*(1-\mu)}{sigma^2*mu*(1-mu)}. 
+for \eqn{y=(0,1)}{y=(0,1)}, \eqn{\alpha>0} and \eqn{\beta>0}. 
+
+The first \code{gamlss} implementation the  beta distribution is called  \code{BEo}, and it is identical  to the standard parametrization  with  
+\eqn{\alpha=\mu} and \eqn{\beta = \sigma}, see pp. 460-461 of Rigby et al. (2019): 
+
+\deqn{f(y|\mu,\sigma)=\frac{1}{B(\mu, \sigma)} y^{\mu-1}(1-y)^{\sigma-1}}{f(y|mu,sigma)=1/(Beta(mu,sigma)) y^(mu-1)(1-y)^(sigma-1)} 
+
+for \eqn{y=(0,1)}{y=(0,1)}, \eqn{\mu>0} and \eqn{\sigma>0}.  The problem with this parametrization is that with mean \eqn{E(y)=\mu/(\mu+\sigma)} it is not  convenient for modelling the response y as function of the explanatory variables. The second parametrization, \code{BE}  see pp. 461-463 of Rigby et al. (2019), is using 
+\deqn{\mu=\frac{\alpha}{\alpha+\beta}}{mu=a/(a+b)}
+ \deqn{\sigma= \frac{1}{\alpha+\beta+1)^{1/2}} }{sigma=(1/(a+b+1))^0.5}
+(of the   standard parametrization) and it is more convenient because 
+\eqn{\mu} now is the mean with variance equal to \eqn{Var(y)=\sigma^2 \mu (1-\mu)}. Note however that \eqn{0<\mu<1} and \eqn{0<\sigma<1}. 
+
+
+%The re-parametrization in the function \code{BE()} is 
+% for \eqn{\mu=(0,1)}{mu=(0,1)} and \eqn{\sigma=(0,1)}{sigma=(0,1)}.
+% The expected value of y is \eqn{\mu}{mu} and the variance is \eqn{\sigma^2\mu*(1-\mu)}{sigma^2*mu*(1-mu)}. 
 }
 \value{
  \code{BE()} and \code{BEo()} return a \code{gamlss.family} object which can be used to fit a beta distribution in the \code{gamlss()} function. 

@@ -43,14 +43,17 @@ rGEOMo(n, mu = 0.5)
   \item{n}{number of observations. If \code{length(n) > 1}, the length is taken to be the number required}
 }
 \details{
-The parameterization of the original geometric distribution in the function \code{GE} is
-\deqn{f(y|\mu) = (1-\mu)^y\, \mu}{f(y|\mu) = (1-\mu)^y \mu}
-for \eqn{y>=0} and \eqn{\mu>0}.
+The parameterization of the original geometric distribution in the function
+\code{GEOM} is:
 
-The parameterization of the geometric distribution in the function \code{GEOM} is
 \deqn{f(y|\mu) = \mu^y/(\mu+1)^{y+1}}{f(y|\mu) = \mu^y/(\mu+1)^{y+1} }
-where
-for \eqn{y>=0} and \eqn{\mu>0}.
+for \eqn{y=0,1,2,3,...} and \eqn{\mu>0}, see pp 472-473 of Rigby et al. (2019).
+
+
+
+The parameterization of the original geometric distribution, \code{GEOMo}  is
+\deqn{f(y|\mu) = (1-\mu)^y\, \mu}{f(y|\mu) = (1-\mu)^y \mu}
+for eqn{y=0,1,2,3,...} and \eqn{\mu>0},   see pp 473-474 of Rigby et al. (2019).
 
 }
 \value{

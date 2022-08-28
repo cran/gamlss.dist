@@ -85,14 +85,31 @@ The parameterization of the one parameter Pareto distribution in the function \c
 
 \deqn{f(y|\mu) = \mu y^{\mu+1}}{f(y|mu) = (mu) y^(mu+1)}
 
-for \eqn{y>1} and \eqn{mu>0}.
+for \eqn{y>1} and \eqn{\mu>0}.
+
+
+The parameterization of the Pareto Type 1 original distribution in the function \code{PARETO1o} is:
+
+\deqn{f(y|\mu, \sigma) = \frac{\sigma \mu^{\sigma}}{y^{\sigma+1}}} 
+
+for \eqn{y>=0}, \eqn{\mu>0} and \eqn{\sigma>0} see pp. 430-431 of Rigby et al. (2019).
+
+The parameterization of the Pareto Type 2 original distribution in the function \code{PARETO2o} is:
+
+\deqn{f(y|\mu, \sigma) = \frac{\sigma \mu^{\sigma}}{(y+\mu)^{\sigma+1}}} 
+
+for \eqn{y>=0}, \eqn{\mu>0} and \eqn{\sigma>0} see pp. 432-433 of Rigby et al. (2019).
 
 The parameterization of the Pareto Type 2 distribution in the function \code{PARETO2} is:
 
-\deqn{f(y|\mu, \sigma) = \frac{1}{\sigma} \mu^{\frac{1}{\sigma}} \, (y+mu)^{-\frac{1
-}{sigma+1}}}{f(y | mu, sigma) = (1/sigma) mu^(1/sigma) (y+mu)^(-(1/sigma+1))}
+\deqn{f(y|\mu, \sigma) = \frac{1}{\sigma} \mu^{\frac{1}{\sigma}} \, (y+\mu)^{-\frac{1
+}{\sigma+1}}}{f(y | mu, sigma) = (1/sigma) mu^(1/sigma) (y+mu)^(-(1/sigma+1))}
 
-for \eqn{y>=0}, \eqn{mu>0} and \eqn{sigma>0}.
+for \eqn{y>=0}, \eqn{\mu>0} and \eqn{\sigma>0} see pp.433-434 The parameterization of the Pareto Type 1 original distribution in the function \code{PARETO1o} is:
+
+\deqn{f(y|\mu, \sigma) = \frac{\sigma \mu^{\sigma}}{y^{\sigma+1}}} 
+
+for \eqn{y>=0}, \eqn{\mu>0} and \eqn{\sigma>0} see pp. 430-431 of Rigby et al. (2019).
 }
 \value{
 returns a gamlss.family object which can be used to fit a Pareto type 2 distribution in the \code{gamlss()} function.

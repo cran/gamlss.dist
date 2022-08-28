@@ -61,10 +61,10 @@ meanBEOI(obj)
   \item{\dots}{ other graphical parameters for plotting}
 }
 \details{ The one-inflated beta distribution is given as
-\deqn{f(y)=\nu}{f(y)=nu} if \eqn{(y=1)}{(y=1)}
-\deqn{f(y|\mu,\sigma)=(1-\nu)\frac{\Gamma(\sigma)}{\Gamma(\mu \sigma)\Gamma((1-\mu) \sigma)} y^{\mu \sigma}(1-y)^{((1-\mu)\sigma)-1}}{f(y|mu,sigma)=(1-nu)*(Gamma(sigma)/Gamma(mu*sigma)*Gamma((1-mu)*sigma))*y^(mu*sigma-1)*(1-y)^(((1-mu)*sigma)-1)
+\deqn{f(y)=\nu \quad \textit{if} \quad y=1}
+\deqn{f(y|\mu,\sigma)=(1-\nu)\frac{\Gamma(\sigma)}{\Gamma(\mu \sigma)\Gamma((1-\mu) \sigma)} y^{\mu \sigma}(1-y)^{((1-\mu)\sigma)-1} \quad  \textit{otherwise}
 }
-if \eqn{y=(0,1)}{y=(0,1)}. The parameters satisfy \eqn{0<\mu<0}{0<mu<1}, \eqn{\sigma>0}{sigma>0} and \eqn{0<\nu< 1}{0<nu<1}.
+The parameters satisfy \eqn{0<\mu<0}{0<mu<1}, \eqn{\sigma>0}{sigma>0} and \eqn{0<\nu< 1}{0<nu<1}.
  
 Here \eqn{E(y)=\nu+(1-\nu)\mu}{E(y)=nu+(1-nu)*mu} and 
 \eqn{Var(y)=(1-\nu)\frac{\mu(1-\mu)}{\sigma+1}+\nu(1-\nu)(1-\mu)^2}{Var(y)=(1-nu)*(mu*(1-mu))/(sigma+1) + nu*(1-nu)*(1-mu)^2}. 

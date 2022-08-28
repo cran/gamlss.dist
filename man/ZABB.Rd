@@ -65,7 +65,7 @@ rZABB(n, mu = 0.5, sigma = 0.1, nu = 0.1, bd = 1)
           otherwise, P[X > x]}  
 }
 \details{
-For the definition of the distributions see   Rigby and Stasinopoulos (2010) below.
+The  definition of the zero adjusted beta binomial distribution, \code{ZABB} and  the the zero inflated beta binomial  distribution, \code{ZIBB}, are given in p. 527 and p. 528 of  of Rigby \emph{et al.} (2019), respectively.
 }
 \value{The functions \code{ZIBB} and \code{ZABB} return a \code{gamlss.family} object which can be used to fit a
 zero inflated or zero adjusted beta binomial distribution respectively in the \code{gamlss()} function.   }

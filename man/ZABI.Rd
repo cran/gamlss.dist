@@ -59,7 +59,7 @@ rZIBI(n, bd = 1, mu = 0.5, sigma = 0.1)
 }
 
 \details{
-For the definition of the distributions see   Rigby and Stasinopoulos (2010) below.
+The  definition of the zero adjusted binomial distribution, \code{ZABI} and  the the zero inflated binomial  distribution, \code{ZIBI}, are given in p. 526 and p. 527 of  of Rigby \emph{et al.} (2019), respectively.
 }
 
 

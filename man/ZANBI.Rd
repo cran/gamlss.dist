@@ -56,8 +56,7 @@ rZANBI(n, mu = 1, sigma = 1, nu = 0.3)
           otherwise, P[X > x]}  
 }
 \details{
-The  definition for the zero inflated Negative Binomial type I distribution and 
-for the zero adjusted Negative Binomial type I distribution is given in Rigby and Stasinopoulos (2010) below 
+The  definition of the zero adjusted Negative Binomial type I distribution, \code{ZANBI} and  the the zero inflated Negative Binomial type I distribution, \code{ZINBI}, are given in p. 512 and pp. 513-514 of  of Rigby \emph{et al.} (2019), respectively.
 }
 \value{
 The functions \code{ZINBI} and \code{ZANBI} return a \code{gamlss.family} object which can be used to fit a

@@ -34,9 +34,9 @@ rSIMPLEX(n = 1, mu = 0.5, sigma = 1)
           taken to be the number required}  
 }
 \details{
-The simplex distribution is given as 
- \deqn{f(y|\mu, \sigma)=\frac{1}{(2\pi \sigma^2 (y (1-y))^3)^{1/2}} exp(-\frac{1}{2\sigma^2} \frac{(y-\mu)^2}{y(1-y) \mu^2 (1-\mu)^2 } )}{f(y|mu,sigma) = 1/(2*pi*sigma^2*(y*(1-y))^3)^(1/2)  exp(-(1/(2*sigma^2)) * ((y-mu)^2)/(y*(1-y)*mu^2*(1-mu)^2))} 
-for y in (0,1), \eqn{0<\mu<1} and \eqn{\sigma>0}.  
+The simplex distribution,  \code{SIMPLEX}, is given as 
+ \deqn{f(y|\mu, \sigma) = \frac{1}{\left( 2 \pi \sigma^2 y^3 (1-y)^3\right)^{1/2}} \exp(-\frac{1}{2\sigma^2} \frac{(y-\mu)^2}{y(1-y) \mu^2 (1-\mu)^2 } )}{f(y|mu,sigma) = 1/(2*pi*sigma^2*(y*(1-y))^3)^(1/2)  exp(-(1/(2*sigma^2)) * ((y-mu)^2)/(y*(1-y)*mu^2*(1-mu)^2))} 
+for \eqn{0<y<1}, \eqn{0<\mu<1} and \eqn{\sigma>0} see p 464 of Rigby et al. (2019).  
  }	
  	
 \value{

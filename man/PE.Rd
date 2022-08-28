@@ -51,16 +51,17 @@ rPE2(n, mu = 0, sigma = 1, nu = 2)
           taken to be the number required}
 }
 \details{
-Power Exponential distribution (PE) is defined as 
-\deqn{f(y|\mu,\sigma,\nu)=\frac{\nu \exp[-(\frac{1}{2})|\frac{z}{c}|^{\nu}]}{\sigma c 2^{(1+1/\nu)}\Gamma(\frac{1}{\nu})}}{f(y|mu,sigma,nu)=(1/sigma)*(nu*exp(-0.5*|z/c|^nu))/(c*2^(1+1/nu)*Gamma(1/nu))}
-where \eqn{c=[2^{-2/\nu}\Gamma(1/\nu)/\Gamma(3/\nu) ]^{0.5}}{c=[2^(-2/nu)Gamma(1/nu)/Gamma(3/nu)]^0.5},
+Power Exponential distribution (PE) is defined as:
+
+\deqn{f(y|\mu,\sigma,\nu)=\frac{\nu \exp[- |z|^{\nu}]}{2 c \sigma  \Gamma(\frac{1}{\nu})}}{f(y|mu,sigma,nu)=(1/sigma)*(nu*exp(-0.5*|z/c|^nu))/(c*2^(1+1/nu)*Gamma(1/nu))}
+where  \eqn{z=(y-\mu)/ c \sigma}{z=(y-mu)/(c sigma)} and \eqn{c^2=\Gamma(1/\nu)\left[/\Gamma(3/\nu) \right]^{-1}}{c=[2^(-2/nu)Gamma(1/nu)/Gamma(3/nu)]^0.5},
 for \eqn{y=(-\infty,+\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,+\infty)}{\mu=(-Inf,+Inf)}, \eqn{\sigma>0} and \eqn{\nu>0}. 
 This parametrization was used by Nelson (1991) and ensures \eqn{\mu}{mu} is the mean and \eqn{\sigma}{sigma} is the standard deviation of y 
-(for all parameter values of \eqn{\mu}{mu}, \eqn{\sigma}{sigma} and \eqn{\nu}{nu} within the rages above)
+(for all parameter values of \eqn{\mu}{mu}, \eqn{\sigma}{sigma} and \eqn{\nu}{nu} within the ranges above), see p. 374 of Rigby et al. (2019)
 
 Thw Power Exponential distribution (PE2) is defined as 
 \deqn{f(y|\mu,\sigma,\nu)=\frac{\nu \exp[-\left|z\right|^\nu]} {2\sigma \Gamma\left(\frac{1}{\nu}\right)}}{f(y|mu,sigma,nu)=(nu *exp(-abs(z)^2))/(2*sigma*Gamma(1/nu))}
-
+see p. 376 of Rigby et al. (2019)
 }
 \value{
   returns a \code{gamlss.family} object which can be used to fit a Power Exponential distribution in the \code{gamlss()} function.   

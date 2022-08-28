@@ -18,14 +18,18 @@
 \title{Box-Cox Power Exponential distribution for fitting a GAMLSS}
 \description{
 This function defines the Box-Cox Power Exponential distribution, a four parameter distribution, for a \code{gamlss.family} object to be used for a  
-GAMLSS fitting using the function \code{gamlss()}.  The functions \code{dBCPE}, 
+GAMLSS fitting using the function \code{gamlss()}.  
+
+The functions \code{dBCPE}, 
 \code{pBCPE}, \code{qBCPE} and \code{rBCPE} define the density, distribution function, quantile function and random
 generation for the Box-Cox Power Exponential distribution. 
-The function \code{checkBCPE} can be used, typically when a BCPE model is fitted, to check whether there exit a turning point 
+
+The function \code{checkBCPE} (very old) can be used, typically when a BCPE model is fitted, to check whether there exit a turning point 
 of the distribution close to zero. It give the number of values of the response below their minimum turning point and also 
-the maximum probability of the lower tail below minimum turning point.   
- [The function \code{Biventer()} is the original version of the function suitable only 
-for the untruncated BCPE distribution.] See Rigby and Stasinopoulos (2003) for details.
+the maximum probability of the lower tail below minimum turning point.  
+
+ [The function \code{Biventer()} is the original version of the function suitable only for the untruncated BCPE distribution.] See Rigby and Stasinopoulos (2003) for details.
+ 
 The function \code{BCPEo} is identical to \code{BCPE} but with log link for mu.    
 }
 \usage{
@@ -75,7 +79,7 @@ checkBCPE(obj = NULL, mu = 10, sigma = 0.1, nu = 0.5, tau = 2,...)
 where \eqn{c = [ 2^{(-2/\tau)}\Gamma(1/\tau)/\Gamma(3/\tau)]^{0.5}}{c=[2^(-2 /tau)*Gamma(1/tau)/Gamma(3/tau)]^0.5},
 where if \eqn{\nu \neq 0}{nu!=0} then \eqn{z=[(y/\mu)^{\nu}-1]/(\nu \sigma)}{z=[(y/mu)^(nu)-1]/(nu*sigma)}
 else \eqn{z=\log(y/\mu)/\sigma}{z=log(y/mu)/sigma}, 
-for \eqn{y>0}{y>0}, \eqn{\mu>0}, \eqn{\sigma>0}, \eqn{\nu=(-\infty,+\infty)}{nu=(-Inf,+Inf)} and \eqn{\tau>0}. 
+for \eqn{y>0}{y>0}, \eqn{\mu>0}, \eqn{\sigma>0}, \eqn{\nu=(-\infty,+\infty)}{nu=(-Inf,+Inf)} and \eqn{\tau>0} see pp. 450-451 of Rigby et al. (2019).  
 
 The Box-Cox Power Exponential, \code{BCPE}, adjusts the above density \eqn{f(y|\mu,\sigma,\nu,\tau)}{f(y|mu,sigma,nu,tau} for the 
 truncation resulting from the condition \eqn{y>0}{y>0}. See Rigby and Stasinopoulos (2003) for details.   

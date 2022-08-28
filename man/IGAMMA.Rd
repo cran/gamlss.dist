@@ -31,10 +31,10 @@ rIGAMMA(n, mu = 1, sigma = .5)
   \item{n}{number of observations. If \code{length(n) > 1}, the length is taken to be the number required}
 }
 \details{
-The parameterization of the Inverse Gamma distribution in the function \code{IGAMMA} is
+The parameterization of the Inverse Gamma distribution in the function \code{IGAMMA} is 
 \deqn{f(y|\mu, \sigma) = \frac{\left[\mu\,(\alpha+1)\right]^{\alpha}}{\Gamma(\alpha)} \,y^{-(\alpha+1)}\, \exp{\left[-\frac{\mu\,(\alpha+1)}{y}\right]}}{f(y|mu, sigma) = ([mu (alpha+1)]^alpha)/Gamma(alpha) y^(-(alpha+1)) exp(-(mu (alpha+1))/y)}
-where \eqn{alpha = 1/(sigma^2)}
-for \eqn{y>0}, \eqn{mu>0} and \eqn{sigma>0}.
+where \eqn{\alpha = 1/(\sigma^2)}
+for \eqn{y>0}, \eqn{\mu>0} and \eqn{\sigma>0} see pp. 424-426 of Rigby et al. (2019).
 }
 \value{
 returns a gamlss.family object which can be used to fit an Inverse Gamma distribution in the \code{gamlss()} function.}

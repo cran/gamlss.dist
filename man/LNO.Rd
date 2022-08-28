@@ -78,15 +78,19 @@ rLOGNO2(n, mu = 1, sigma = 1)
 }
 \details{
   The probability density function in \code{LOGNO} is defined as  
-\deqn{f(y|\mu,\sigma)=\frac{1}{y \sqrt{2\pi}\sigma} \exp [-\frac{1}{2 \sigma^2}(log(y)-\mu)^2 ] }{f(y|mu,sigma)=(1/(y*sqrt(2*pi)*sigma))*exp(-0.5*((log(y)-mu)/(sigma))^2)}  
-for \eqn{y>0}, \eqn{\mu=(-\infty,+\infty)}{mu=(-Inf,+Inf)} and \eqn{\sigma>0}. 
+\deqn{f(y|\mu,\sigma)=\frac{1}{y \sqrt{2\pi}\sigma} \exp [-\frac{1}{2 \sigma^2}(\log y-\mu)^2 ] }{f(y|mu,sigma)=(1/(y*sqrt(2*pi)*sigma))*exp(-0.5*((log y-mu)/(sigma))^2)}  
+for \eqn{y>0}, \eqn{-\infty<\mu<\infty} and \eqn{\sigma>0} see pp. 428-429 of Rigby et al. (2019).
 
+
+The probability density function in \code{LOGNO2} is defined as  
+\deqn{f(y|\mu,\sigma)=\frac{1}{y \sqrt{2\pi}\sigma} \exp [-\frac{1}{2 \sigma^2}(\log y-\log\mu)^2 ] }{f(y|mu,sigma)=(1/(y*sqrt(2*pi)*sigma))*exp(-0.5*((log(y)-mu)/(sigma))^2)}  
+for \eqn{y>0}, \eqn{-\infty<\mu<\infty} and \eqn{\sigma>0} see pp. 429-430 of Rigby et al. (2019).
 
 The probability density function in \code{LNO} is defined as  
-\deqn{f(y|\mu,\sigma,\nu)=\frac{1}{\sqrt{2\pi}\sigma}y^{\nu-1} \exp [-\frac{1}{2 \sigma^2}(z-\mu)^2 ] }{f(y|mu,sigma,nu)=(1/(sqrt(2*pi)*sigma))*(y^(nu-1))*exp(-((z-mu)/(2sigma))^2)}
+\deqn{f(y|\mu,\sigma,\nu)=\frac{y^{\nu-1}}{\sqrt{2\pi}\sigma} \exp [-\frac{1}{2 \sigma^2}(z-\mu)^2 ] }{f(y|mu,sigma,nu)=(1/(sqrt(2*pi)*sigma))*(y^(nu-1))*exp(-((z-mu)/(2sigma))^2)}
 
 where if \eqn{\nu \neq 0}{\nu!=0} \eqn{z =(y^{\nu}-1)/\nu}{z=(y^nu-1)/nu}  else \eqn{z=\log(y)} and \eqn{z \sim N(0,\sigma^2)}, 
-for \eqn{y>0}, \eqn{\mu>0}, \eqn{\sigma>0} and \eqn{\nu=(-\infty,+\infty)}{\nu=(-Inf,+Inf)}. 
+for \eqn{y>0}, \eqn{\mu>0}, \eqn{\sigma>0} and \eqn{\nu=(-\infty,+\infty)}{\nu=(-Inf,+Inf)}. This is not a proper distribution see for example p. 447 of Rigby et al. (2019).
 
 }
 \value{

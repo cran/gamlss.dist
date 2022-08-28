@@ -64,6 +64,9 @@ rZINBF(n, mu = 1, sigma = 1, nu = 2, tau = 0.1)
 \details{
  The definition for Negative Binomial Family distribution , \code{NBF}, is similar to the Negative Binomial type I. The probability function of the \code{NBF} can be obtained by replacing \eqn{\sigma} with  \eqn{\sigma \mu^{\nu-2}} where \eqn{\nu} is a power parameter.
 The distribution has mean \eqn{\mu} and variance \eqn{\mu+\sigma \mu^{\nu}.} 
+For more details see pp 507-508 of Rigby \emph{et al.} (2019).   
+
+The zero inflated negative binomial family \code{ZINBF} is defined as an inflated at zero \code{NBF}.
 }
 \value{
   returns a \code{gamlss.family} object which can be used to fit a Negative Binomial Family distribution in the \code{gamlss()} function. 

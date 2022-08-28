@@ -75,11 +75,14 @@ rZIBNB(n, mu = 1, sigma = 1, nu = 1, tau = 0.1, max.value = 10000)
 \details{
   The probability function of the \code{BNB} is 
   
-   \deqn{P(Y=y|\mu,\sigma, \nu) = \frac{\Gamma(y+\nu^{-1}) \mbox{\hspace{0.2cm}} B(y+\mu \sigma^{-1} \nu,\sigma^{-1}+\nu^{-1}+1)}
-{\Gamma(y+1) \mbox{\hspace{0.2cm}} \Gamma(\nu^{-1}) \mbox{\hspace{0.2cm}} B(\mu \sigma^{-1} \nu,\sigma^{-1}+1)}}{f(y|\mu,\sigma, \nu)=(\Gamma(y+1/\nu)\Beta(y+(\mu\nu)/\sigma, 1/\sigma+1/\nu +1 )/(\Gamma(y+1) \Gamma(1/\nu) \Beta((\mu\nu)/\sigma, 1/\sigma+1) )}
- for \eqn{y=0,1,2,3,...}, \eqn{\mu>0}, \eqn{\sigma>0} and \eqn{\nu>0}. 
-  
+   \deqn{P(Y=y|\mu,\sigma, \nu) = \frac{\Gamma(y+\nu^{-1})  B(y+\mu \sigma^{-1} \nu,\sigma^{-1}+\nu^{-1}+1)}
+{\Gamma(y+1)  \Gamma(\nu^{-1})  B(\mu \sigma^{-1} \nu,\sigma^{-1}+1)}}{f(y|\mu,\sigma, \nu)=(\Gamma(y+1/\nu)\Beta(y+(\mu\nu)/\sigma, 1/\sigma+1/\nu +1 )/(\Gamma(y+1) \Gamma(1/\nu) \Beta((\mu\nu)/\sigma, 1/\sigma+1) )}
+ for \eqn{y=0,1,2,3,...}, \eqn{\mu>0}, \eqn{\sigma>0} and \eqn{\nu>0}, see pp 502-503 of Rigby \emph{et al.} (2019).    
+
 The distribution has mean \eqn{\mu}.
+
+
+The  definition of the zero adjusted beta negative  binomial distribution, \code{ZABNB} and  the the zero inflated beta negative  binomial  distribution, \code{ZIBNB}, are given in p. 517 and pp. 519 of  of Rigby \emph{et al.} (2019), respectively.
 }
 \value{
 returns a \code{gamlss.family} object which can be used to fit a Poisson distribution in the \code{gamlss()} function.  

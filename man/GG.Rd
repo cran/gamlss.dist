@@ -49,10 +49,10 @@ rGG(n, mu=1, sigma=0.5, nu=1)
 }
 \details{
    The specific parameterization of the generalized gamma distribution used in GG is 
-\deqn{f(y|\mu,\sigma,\nu)= \frac{\theta^\theta z^\theta \nu e^(-\theta z)}{(\Gamma(\theta)y)}}{f(y|mu,sigma,nu)=theta^theta*z^theta*nu*e^(-theta*z)/(Gamma(theta)*y)}
+\deqn{f(y|\mu,\sigma,\nu)= \frac{\theta^\theta z^\theta |\nu| e^(-\theta z)}{(\Gamma(\theta)y)}}{f(y|mu,sigma,nu)=theta^theta*z^theta*nu*e^(-theta*z)/(Gamma(theta)*y)}
 where \eqn{z =(y/\mu)^\nu}{z =(y/mu)^nu}, 
 \eqn{\theta = 1/(\sigma^2|\nu|^2)}{theta = 1/(sigma^2*abs(nu)^2)}
-for y>0, \eqn{\mu>0}{mu>0}, \eqn{\sigma>0}{sigma>0} and \eqn{-\infty<\nu<+\infty}{-Inf>nu>Inf}. Note that for 
+for y>0, \eqn{\mu>0}{mu>0}, \eqn{\sigma>0}{sigma>0} and \eqn{-\infty<\nu<+\infty}{-Inf>nu>Inf} see pp. 443-444 of Rigby et al. (2019). Note that for 
 \eqn{\nu=0}{nu=0} the distribution is log normal.
 
 }

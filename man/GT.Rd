@@ -54,7 +54,7 @@ where  \eqn{ -\infty < y < \infty }{0<y<0}, \eqn{z=(y-\mu)/\sigma}{z=(y-mu)/sigm
 \eqn{\mu=(-\infty,+\infty)}{mu=(-Inf,+Inf)},
 \eqn{\sigma>0}{sigma>0},
 \eqn{\nu>0}{nu>0} and
-\eqn{\tau>0}{tau>0}. 
+\eqn{\tau>0}{tau>0}, see pp. 387-388 of Rigby et al. (2019). 
 
 
 }

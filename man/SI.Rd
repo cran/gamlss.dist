@@ -46,13 +46,13 @@ tofyS(y, mu, sigma, nu, what = 1)
 }
 \details{
 The probability function of the Sichel distribution is given by
-\deqn{f(y|\mu,\sigma,\nu)= \frac{\mu^y K_{y+\nu}(\alpha)}{(\alpha \sigma)^{y+\nu} y! K_\nu(\frac{1}{\sigma})}}{f(y|mu,sigma,nu)=mu^y Ky+n(alpha)/(alpha sigma)^(y+v) y! Knu(1/sigma)} 
+\deqn{f(y|\mu,\sigma,\nu)= \frac{\mu^y K_{y+\nu}(\alpha)}{y!  (\alpha \sigma)^{y+\nu} K_\nu(\frac{1}{\sigma})}}{f(y|mu,sigma,nu)=mu^y Ky+n(alpha)/(alpha sigma)^(y+v) y! Knu(1/sigma)} 
 where  \eqn{\alpha^2=\frac{1}{\sigma^2}+\frac{2\mu}{\sigma}}{alpha^2=1/sigma^2 +2*mu/sigma}, for \eqn{y=0,1,2,...,\infty}{y=0,1,2,...} 
 where  \eqn{\mu>0}{mu>0} , \eqn{\sigma>0}{\sigma>0} and \eqn{-\infty <
 \nu<\infty}{-Inf<nu<Inf} and \eqn{K_{\lambda}(t)=\frac{1}{2}\int_0^{\infty} x^{\lambda-1} \exp\{-\frac{1}{2}t(x+x^{-1})\}dx} is the 
 modified Bessel function of the third kind.
 Note that the above parameterization is different from Stein, Zucchini and Juritz (1988) who use the above probability function but treat
-  \eqn{\mu}{mu}, \eqn{\alpha}{alpha}  and \eqn{\nu}{nu} as the parameters. Note that \eqn{\sigma=[(\mu^2+\alpha^2)^{\frac{1}{2}} -\mu ]^{-1}}.
+  \eqn{\mu}{mu}, \eqn{\alpha}{alpha}  and \eqn{\nu}{nu} as the parameters. Note that \eqn{\sigma=[(\mu^2+\alpha^2)^{\frac{1}{2}} -\mu ]^{-1}}. See also pp 510-511 of Rigby \emph{et al.} (2019).
  
 }
 \value{

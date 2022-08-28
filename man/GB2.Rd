@@ -61,11 +61,11 @@ rGP(n, mu = 1, sigma = 1)
 \details{   
  The probability density function of the Generalized Beta type 2, (\code{GB2}), is defined as 
   
-\deqn{f(y|\mu,\sigma\,\nu,\tau)= |\sigma| y^{\mbox{\hspace{0.01cm}}\sigma \mbox{\hspace{0.01cm}}v-1 } \{\mu^{\sigma \nu}\mbox{\hspace{0.05cm}}B(\nu,\tau) \mbox{\hspace{0.05cm}} [1+(y/\mu)^\sigma]^{\nu+\tau}\}^{-1}}{f(y|mu,sigma,nu,tau)=abs(sigma)*y^{sigma*nu-1}(mu^(sigma*nu)*Beta(nu,tau)(1+(y/mu)^sigma)^(nu+tau))^-1}
+\deqn{f(y|\mu,\sigma,\nu,\tau)= |\sigma| y^{\hspace{0.01cm}\sigma v-1 } \{\mu^{\sigma \nu} \hspace{0.05cm}B(\nu,\tau) [1+(y/\mu)^\sigma]^{\nu+\tau}\}^{-1}}{f(y|mu,sigma,nu,tau)=abs(sigma)*y^{sigma*nu-1}(mu^(sigma*nu)*Beta(nu,tau)(1+(y/mu)^sigma)^(nu+tau))^-1}
+where  \eqn{ y > 0}{y>0}, \eqn{\mu>0}{mu>0}, \eqn{\sigma >0}{sigma>0}, 
+\eqn{\nu>0}{nu>0} and \eqn{\tau>0}{tau>0} see pp. 452-453 of Rigby et al. (2019).  
 
-where  \eqn{ y > 0}{y>0}, \eqn{\mu>0}{mu>0}, \eqn{-\infty <\sigma <\infty}{-Inf<sigma<Inf}, 
-\eqn{\nu>0}{nu>0} and \eqn{\tau>0}{tau>0}.  
-. 
+Note that by setting \eqn{\sigma=1} we have the Pearson type VI, by setting \eqn{\nu=1} we have the Burr type XII and by setting \eqn{\tau=1} the Burr type III.
 
 
 }

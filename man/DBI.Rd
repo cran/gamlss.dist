@@ -39,10 +39,10 @@ GetBI_C(mu, sigma, bd)
 \details{
  The definition for the Double Poisson distribution first introduced by Efron (1986) is:   
  
- \deqn{p_Y(y|n, \mu,\sigma)= frac{1}{C(n,\mu,\sigma)} \frac{\Gamma(n+1)}{\Gamma(y+1)\Gamma(n-y+1)} \frac{y^y \left(n-y \right)^{n-y}}{n^n}
+ \deqn{p_Y(y|n, \mu,\sigma)= \frac{1}{C(n,\mu,\sigma)} \frac{\Gamma(n+1)}{\Gamma(y+1)\Gamma(n-y+1)} \frac{y^y \left(n-y \right)^{n-y}}{n^n}
  \frac{n^{n/\sigma} \mu^{y/\sigma} \left( 1-\mu\right)^{(n-y)/\sigma}}
 {y^{y/\sigma} \left( n-y\right)^{(n-y)/\sigma}}}{f(y| n, \mu,\sigma)=[1/C(n,\mu,\sigma)] [\Gamma(n+1)/\Gamma(y+1)\Gamma(n-y+1)] [y^y (n-y)^{n-y}/n^n][n^{n/\sigma} \mu^{y/\sigma} ( 1-\mu)^{(n-y)/\sigma}/ y^{y/\sigma} ( n-y)^{(n-y)/\sigma}]} 
-for \eqn{y=0,1,2,\ldots,\infty}{y=0,1,2, ...,Inf}, \eqn{\mu>0} and \eqn{\sigma>0} where \eqn{C}{C} is the constant of proportinality which is calculated numerically using the function \code{GetBI_C()}.  
+for \eqn{y=0,1,2,\ldots,\infty}{y=0,1,2, ...,Inf}, \eqn{\mu>0} and \eqn{\sigma>0} where \eqn{C}{C} is the constant of proportinality which is calculated numerically using the function \code{GetBI_C()}, see pp. 524-525   of Rigby \emph{et al}. (2019).   
 
 }
 \value{

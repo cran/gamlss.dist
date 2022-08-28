@@ -35,7 +35,7 @@ rBI(n, bd = 1, mu = 0.5)
 \details{
   Definition file for binomial distribution. 
  \deqn{f(y|\mu)=\frac{\Gamma(n+1)}{\Gamma(y+1) \Gamma{(n-y+1)}} \mu^y (1-\mu)^{(n-y)}}{f(y|mu)=(Gamma(n+1)*Gamma(y+1)/Gamma(n-y+1))* mu^y *(1-mu)^(n-y)} 
- for \eqn{y=0,1,2,...,n} and \eqn{0<\mu< 1}. 
+ for \eqn{y=0,1,2,...,n} and \eqn{0<\mu< 1} see pp. 521-522   of Rigby \emph{et al}. (2019). 
 }
 \value{
   returns a \code{gamlss.family} object which can be used to fit a binomial distribution in the \code{gamlss()} function.   

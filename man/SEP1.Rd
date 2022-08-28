@@ -20,7 +20,7 @@
 \alias{qSEP4}
 \alias{rSEP4}
 
-\title{The Skew Power exponential type 1-4  distribution for fitting a GAMLSS}
+\title{The Skew exponential  power type 1-4  distribution for fitting a GAMLSS}
 \description{
 These functions define the Skew Power exponential type 1 to 4  distributions. All of them are four 
 parameter distributions and can be used to fit a GAMLSS model.   
@@ -88,16 +88,37 @@ rSEP4(n, mu = 0, sigma = 1, nu = 2, tau = 2)
 
 
 
- The probability density function of the Skew Power exponential distribution type 2, (\code{SEP2}), is defined as 
+ The probability density function of the Skew Power exponential distribution type 1, (\code{SEP1}), is defined as 
+
+\deqn{f_Y(y|\mu,\sigma\,\nu,\tau)=\frac{2}{\sigma} f_{Z_1}(z) F_{Z_1}(\nu z)}
   
-\deqn{f_Y(y|\mu,\sigma\,\nu,\tau)=\frac{\nu}{\sigma (1+\nu^2)2^{1/\tau} \Gamma(1+1/\tau)}\left\{\exp\left(- \frac{1}{2} \left|\frac{\nu (y-\mu)}{\sigma} \right|^\tau \right) I(y<\mu)+\exp\left(- \frac{1}{2} \left|\frac{(y-\mu)}{\sigma \nu} \right|^\tau \right) I(y \geq \mu)\right\}}{f(y|mu,sigma,nu,tau)=nu/(sigma*(1+nu^2)*2^(1/tau) Gamma(1+1/tau))*(exp(-.5*abs(nu(y-mu)/sigma))^tau*I(y<mu)+exp(-.5*abs((y-mu)/sigma*nu))^tau*I(y>=mu))}
+%\deqn{f_Y(y|\mu,\sigma\,\nu,\tau)=\frac{\nu}{\sigma (1+\nu^2)2^{1/\tau} \Gamma(1+1/\tau)}\left\{\exp\left(- \frac{1}{2} \left|\frac{\nu (y-\mu)}{\sigma} \right|^\tau \right) I(y<\mu)+\exp\left(- \frac{1}{2} \left|\frac{(y-\mu)}{\sigma \nu} \right|^\tau \right) I(y \geq \mu)\right\}}{f(y|mu,sigma,nu,tau)=nu/(sigma*(1+nu^2)*2^(1/tau) Gamma(1+1/tau))*(exp(-.5*abs(nu(y-mu)/sigma))^tau*I(y<mu)+exp(-.5*abs((y-mu)/sigma*nu))^tau*I(y>=mu))}
 
 for \eqn{ -\infty < y < \infty }{0<y<0},
-\eqn{\mu=(-\infty,+\infty)}{mu=(-Inf,+Inf)},
+\eqn{-\infty<\mu <\infty},
 \eqn{\sigma>0}{sigma>0},
-\eqn{\nu>0)}{nu>0)} and
-\eqn{\tau>0}{tau>0}.
+\eqn{-\infty<\nu <\infty}, and
+\eqn{\tau>0}{tau>0} where \eqn{z=(y-\mu)/\sigma}, and \eqn{Z_1 \sim \texttt{PE2}(0, \tau^{1/\tau }, \tau) }, see pp 401-402 of Rigby et al. (2019).
+
+The probability density function of the Skew Power exponential distribution type 2, (\code{SEP2}), is defined as 
+
+\deqn{f_Y(y|\mu,\sigma\,\nu,\tau)=\frac{2}{\sigma} f_{Z_1}(z) \Phi_{Z_1}(\omega)}
+
+for \eqn{ -\infty < y < \infty }{0<y<0},
+\eqn{-\infty<\mu <\infty},
+\eqn{\sigma>0}{sigma>0},
+\eqn{-\infty<\nu <\infty}, and
+\eqn{\tau>0}{tau>0} where \eqn{z=(y-\mu)/\sigma}, and \eqn{\omega= \texttt{sign}(z) |z|^{\tau/2} \nu \sqrt{2/\tau}}, and \eqn{Z_1 \sim \texttt{PE2}(0, \tau^{1/\tau }, \tau) }, see pp 402-404 of Rigby et al. (2019).
+
+For \code{SEP3} and \code{SEP3} see pp 404-406 and pp 407-408 of Rigby et al. (2019), respectively.
+
+
 }
+
+
+  
+
+
 \value{
 \code{SEP2()}  returns a \code{gamlss.family} object which can be used to fit the SEP2 distribution in the \code{gamlss()} function. 
 \code{dSEP2()} gives the density, \code{pSEP2()} gives the distribution

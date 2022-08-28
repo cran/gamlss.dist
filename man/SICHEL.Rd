@@ -84,8 +84,8 @@ rZISICHEL(n, mu = 1, sigma = 1, nu = -0.5, tau = 0.1,
   \item{y}{the y variable,  the \code{tofySICHEL()} should not be used on its own.}
 }
 \details{
-The probability function of the Sichel distribution is given by
-\deqn{f(y|\mu,\sigma,\nu)= \frac{\mu^y K_{y+\nu}(\alpha)}{y!(\alpha \sigma)^{y+\nu} K_\nu(\frac{1}{\sigma})}}{f(y|\mu,\sigma,\nu)=[\mu^y K_{y+n}(\alpha)] / [y! (\alpha \sigma)^(y+\nu)  K_\nu(1/\sigma)]} 
+The probability function of the Sichel distribution \code{SICHEL} is given by
+\deqn{f(y|\mu,\sigma,\nu)= \frac{(\mu/b)^y K_{y+\nu}(\alpha)}{y!(\alpha \sigma)^{y+\nu} K_\nu(\frac{1}{\sigma})}}{f(y|\mu,\sigma,\nu)=[\mu^y K_{y+n}(\alpha)] / [y! (\alpha \sigma)^(y+\nu)  K_\nu(1/\sigma)]} 
 
 for \eqn{y=0,1,2,...,\infty}{y=0,1,2,...},   \eqn{\mu>0}{mu>0} , \eqn{\sigma>0}{\sigma>0} and \eqn{-\infty <\nu<\infty}{-Inf<\nu<Inf} where 
 
@@ -93,11 +93,14 @@ for \eqn{y=0,1,2,...,\infty}{y=0,1,2,...},   \eqn{\mu>0}{mu>0} , \eqn{\sigma>0}{
  
 \deqn{c=K_{\nu+1}(1/\sigma) / K_{\nu}(1/\sigma)}{c=K_{\nu+1} (1/\sigma)/K_{\nu}(1/\sigma)}
 and \eqn{K_{\lambda}(t)}{K_{lambda}(t)} 
-is the modified Bessel function of the third kind.
+is the modified Bessel function of the third kind see pp 508-510 of Rigby \emph{et al.} (2019).
 Note that the above parametrization is different from Stein, Zucchini and Juritz (1988) who use the above probability function 
 but treat
 \eqn{\mu}{mu}, \eqn{\alpha}{alpha}  and \eqn{\nu}{nu} as the parameters. 
- 
+
+
+The  definition of the zero adjusted Sichel distribution, \code{ZASICHEL} and  the the zero inflated Sichel  distribution, \code{ZISICHEL}, are given in pp. 517-518 and pp. 519-520 of  of Rigby \emph{et al.} (2019), respectively.
+
 }
 \value{
   Returns a \code{gamlss.family} object which can be used to fit a Sichel distribution in the \code{gamlss()} function. 

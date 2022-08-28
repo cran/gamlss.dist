@@ -42,7 +42,7 @@ rNO(n, mu = 0, sigma = 1)
   The parametrization of the normal distribution given in the function \code{NO()} is 
  \deqn{f(y|\mu,\sigma)=\frac{1}{\sqrt{2 \pi }\sigma}\exp \left[-\frac{1}{2}(\frac{y-\mu}{\sigma})^2\right]}{f(y|mu,sigma)=(1/(sqrt(2*pi)*sigma))* exp(-0.5*((y-mu)/sigma)^2)} 
  
- for \eqn{y=(-\infty,\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,+\infty)}{\mu=(-Inf,+Inf)} and \eqn{\sigma>0}. 
+ for \eqn{y=(-\infty,\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,+\infty)}{\mu=(-Inf,+Inf)} and \eqn{\sigma>0} see pp. 369-370 of Rigby et al. (2019). 
 }
 \value{
   returns a \code{gamlss.family} object which can be used to fit a normal distribution in the \code{gamlss()} function. 

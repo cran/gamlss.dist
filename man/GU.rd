@@ -42,7 +42,7 @@ rGU(n, mu = 0, sigma = 1)
  \deqn{f(y|\mu,\sigma)=\frac{1}{\sigma} \hspace{1mm}
 \exp\left\{\left(\frac{y-\mu}{\sigma}\right)-\exp\left(\frac{y-\mu}{\sigma}\right)\right\}}{f(y|mu,sigma)=
 (1/sigma)*exp(((y-mu)/sigma)-exp((y-mu)/sigma))}
-for \eqn{y=(-\infty,\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,+\infty)}{\mu=(-Inf,+Inf)} and \eqn{\sigma>0}.
+for \eqn{y=(-\infty,\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,+\infty)}{\mu=(-Inf,+Inf)} and \eqn{\sigma>0}, see pp. 366-367 of Rigby et al. (2019).
 }
 
 \value{

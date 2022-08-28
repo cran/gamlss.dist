@@ -48,13 +48,12 @@ rGB1(n, mu = 0.5, sigma = 0.4, nu = 1, tau = 1)
 \details{   
  The probability density function of the Generalized Beta type 1, (\code{GB1}), is defined as 
   
-\deqn{f(y|\mu,\sigma\,\nu,\tau)= \frac{\tau \nu^\beta y^{\tau\alpha-1} (1-y^\tau)^{\beta-1}}{B(\alpha,\beta)[\nu+(1-\nu) y^\tau]^{\alpha+\beta}}}{f(y|mu,sigma,nu,tau)=(tau*nu^beta*y^(tau*alpha-1)(1-y^tau))^(beta-1)/(Beta(alpha,beta)*(nu+(1-nu)*y^tau))^(alpha*beta))}
+\deqn{f(y|\mu,\sigma\,\nu,\tau)= \frac{\tau \nu^\beta y^{\tau \alpha-1} \left( 1-y^\tau\right)^{\beta-1}}{B(\alpha,\beta)[\nu+(1-\nu) y^\tau]^{\alpha+\beta}}}{f(y|mu,sigma,nu,tau)=(tau*nu^beta*y^(tau*alpha-1)(1-y^tau))^(beta-1)/(Beta(alpha,beta)*(nu+(1-nu)*y^tau))^(alpha*beta))}
 
-where  \eqn{ 0 < y < 1 }{0<y<1}, \eqn{\alpha = \mu(1-\sigma^2)/\sigma^2}{alpha=mu*(1-sigma^2)/sigma^2}
+where  \eqn{ 0 < y < 1 }{0<y<1}, \eqn{0<\mu<1}, \eqn{0<\sigma<1}, \eqn{\nu>0}, \eqn{\tau>0} and where   \eqn{\alpha = \mu(1-\sigma^2)/\sigma^2}{alpha=mu*(1-sigma^2)/sigma^2}
 and \eqn{\beta=(1-\mu)(1-\sigma^2)/\sigma^2}{(1-mu)*(1-sigma^2)/sigma^2}, and 
 \eqn{\alpha>0}{alpha>0}, \eqn{\beta>0}{beta>0}. Note the \eqn{\mu=\alpha /(\alpha+\beta)}{alpha/(alpha+beta)},
-\eqn{\sigma = (\alpha+\beta+1)^{-1/2}}{sigma=(alpha+beta+1)^(-1/2)}. 
-. 
+\eqn{\sigma = (\alpha+\beta+1)^{-1/2}}{sigma=(alpha+beta+1)^(-1/2)} see pp. 464-465 of Rigby et al. (2019).
 
 
 }

@@ -44,7 +44,7 @@ rGPO(n, mu = 1, sigma = 1,  max.value = 10000)
 The probability function of the Generalised Poisson distribution is given by
 \deqn{P(Y=y|\mu,\sigma)= \left(\frac{\mu}{1+\sigma \mu}\right)^y  \frac{\left(1+\sigma y \right)^{y-1}}{y!} \exp \left[\frac{- \mu \left( 1+\sigma y\right)}{1+\sigma \mu} \right] }{f(y|mu,sigma)= (\mu/ (1+\sigma+\mu))^y  (1+\sigma y)^(y-1)/y! exp(-\mu (1+\sigma y)/(1+\sigma+\mu)) } 
 for \eqn{y=0,1,2,...,\infty}{y=0,1,2,...} 
-where  \eqn{\mu>0}{mu>0} and \eqn{\sigma>0}{\sigma>0}.
+where  \eqn{\mu>0}{mu>0} and \eqn{\sigma>0}{\sigma>0} see pp. 481-483 of Rigby \emph{et al}. (2019).
 } 
   
 \value{

@@ -79,6 +79,8 @@ qZAGA <- function (p, mu = 1, sigma = 1, nu = 0.1, lower.tail = TRUE,
   if (any(mu <= 0)) stop(paste("mu must be positive", "\n", ""))
   if (any(sigma <= 0)) stop(paste("sigma must be positive", "\n", ""))
   if (any(nu < 0) | any(nu > 1)) stop(paste("nu must be between 0 and 1", "\n", ""))
+  ly <- max(length(p), length(mu), length(sigma), length(nu))
+   p <- rep(p, length = ly)
   if (log.p == TRUE) p <- exp(p)
      else p <- p
   if (lower.tail == TRUE) 

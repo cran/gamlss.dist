@@ -40,7 +40,7 @@ rGA(n, mu = 1, sigma = 1)
 \details{
   The specific parameterization of the gamma distribution used in \code{GA} is 
  \deqn{f(y|\mu,\sigma)=\frac{y^{(1/\sigma^2-1)}\exp[-y/(\sigma^2 \mu)]}{(\sigma^2 \mu)^{(1/\sigma^2)} \Gamma(1/\sigma^2)}}{f(y|mu,sigma)=(y^((1/sigma^2)-1)*exp[-y/((sigma^2)*mu)])/((sigma^2*mu)^(1/sigma^2) Gamma(1/sigma^2)) }
- for \eqn{y>0}, \eqn{\mu>0} and \eqn{\sigma>0}.
+ for \eqn{y>0}, \eqn{\mu>0} and \eqn{\sigma>0}, see pp. 423-424 of Rigby et al. (2019).
 }
 \value{
   \code{GA()} returns a \code{gamlss.family} object which can be used to fit a gamma distribution in the \code{gamlss()} function.

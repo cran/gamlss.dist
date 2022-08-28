@@ -35,8 +35,11 @@ rLOGITNO(n, mu = 0.5, sigma = 1)
 }
 \details{
   The probability density function in \code{LOGITNO} is defined as  
-\deqn{f(y|\mu,\sigma)=\frac{1}{y (1-y) \sqrt{2\pi}\sigma} \exp [-\frac{1}{2 \sigma^2}(log(y/(1-y))-log(\mu/(1-\mu))^2 ] }{f(y|mu,sigma)=(1/(y*(1-y)*sqrt(2*pi)*sigma))*exp(-0.5*((log(y/(1-y))-log(mu/(1-mu))/(sigma))^2)}  
-for \eqn{0<y>1}, \eqn{\mu=(0, 1}{mu=(0,1)} and \eqn{\sigma>0}.
+\deqn{f(y|\mu,\sigma)= \frac{1}{\sqrt{2\pi\sigma^2} y (1-y)}  \exp \left(
+-\frac{1}{2 \sigma^2}
+\left[ \log(y/(1-y)-\log(\mu/(1-\mu)\right]^2 \right) }
+ 
+for \eqn{0<y<1}, \eqn{0<\mu< 1} and \eqn{\sigma>0} see p 463 of Rigby et al. (2019).
 }
 \value{
 \code{LOGITNO()} returns a \code{gamlss.family} object which can be used to fit a logit-normal distribution in the \code{gamlss()} function.

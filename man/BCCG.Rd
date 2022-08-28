@@ -18,7 +18,7 @@ The function \code{BCCG}  defines the Box-Cox Cole and Green distribution (Box-C
 for a \code{gamlss.family} object to be used in GAMLSS fitting using the function \code{gamlss()}. 
 The functions \code{dBCCG}, \code{pBCCG}, \code{qBCCG} and \code{rBCCG} define the density, distribution function, quantile function and random generation for the specific parameterization of the Box-Cox Cole and Green distribution.  
 [The function \code{BCCGuntr()} is the original version of the function suitable only for the untruncated Box-Cox Cole and Green distribution 
-See Cole and Green (1992) and Rigby and Stasinopoulos (2003a,2003b) for details.
+See Cole and Green (1992) and Rigby and Stasinopoulos (2003a, 2003b) for details.
 The function \code{BCCGo} is identical to \code{BCCG} but with log link for mu.
 
 }
@@ -59,8 +59,8 @@ where if \eqn{\nu \neq 0}{\nu!=0} then \eqn{z=[(y/\mu)^{\nu}-1]/(\nu \sigma)}{z=
 \eqn{z=\log(y/\mu)/\sigma}{z=log(y/mu)/sigma}, 
 for \eqn{y>0}, \eqn{\mu>0}, \eqn{\sigma>0} and \eqn{\nu=(-\infty,+\infty)}{\nu=(-Inf,+Inf)}. 
 
-The Box-Cox Cole anf Green distribution,  \code{BCCG}, adjusts the above density \eqn{f(y|\mu,\sigma,\nu)}{f(y|mu,sigma,nu} for the 
-truncation resulting from the condition \eqn{y>0}{y>0}. See Rigby and Stasinopoulos (2003a,2003b) for details.   
+The Box-Cox Cole and Green distribution,  \code{BCCG}, adjusts the above density \eqn{f(y|\mu,\sigma,\nu)}{f(y|mu,sigma,nu} for the 
+truncation resulting from the condition \eqn{y>0}{y>0}. See Rigby and Stasinopoulos (2003a, 2003b) or pp. 439-441 of Rigby et al. (2019) for details.   
 }
 \value{
 \code{BCCG()} returns a \code{gamlss.family} object which can be used to fit a Cole and Green distribution in the \code{gamlss()} function.

@@ -114,16 +114,43 @@ meanBEINF1(obj)
   \item{\dots}{ other graphical parameters for plotting}
 }
 \details{
-   The beta inflated distribution is given as 
- \deqn{f(y)=p_0}{f(y)=p0} if (y=0)
- \deqn{f(y)=p_1}{f(y)=p1} if (y=1)
- \deqn{f(y|\alpha,\beta)=\frac{1}{B(\alpha, \beta)} y^{\alpha-1}(1-y)^{\beta-1}}{f(y|a,b)=(1/(Beta(a,b))) y^(a-1)(1-y)^(b-1)} 
-otherwise 
+   The  beta inflated distribution is defined  as 
+ \deqn{f(y)=p_0 \quad \textit{if} \quad y=0 }{f(y)=p0}
+ \deqn{f(y)=p_1 \quad \textit{if} \quad y=1}{f(y)=p1} 
+ \deqn{f(y|\alpha,\beta)=\frac{1}{B(\alpha, \beta)} y^{\alpha-1}(1-y)^{\beta-1} \quad \textit{otherwise}}{f(y|a,b)=(1/(Beta(a,b))) y^(a-1)(1-y)^(b-1) } 
 
-for \eqn{y=(0,1)}{y=(0,1)}, \eqn{\alpha>0} and \eqn{\beta>0}. The parametrization in the function \code{BEINF()} is 
- \eqn{\mu=\frac{\alpha}{\alpha+\beta}}{mu=a/(a+b)} and  \eqn{\sigma=\frac{1}{\alpha+\beta+1}}{sigma=1/(a+b+1)}
- for \eqn{\mu=(0,1)}{mu=(0,1)} and \eqn{\sigma=(0,1)}{sigma=(0,1)} and  \eqn{\nu=\frac{p_0}{p_2}}{nu=p0/p2},
-  \eqn{\tau=\frac{p_1}{p_2}}{tau=p1/p2} where  \eqn{p_2=1-p_0-p_1}{p2=1-p0-p1}. 
+for \eqn{0 \le y \le 1}, \eqn{\alpha>0}, \eqn{\beta>0}, \eqn{0<p_0<1}, \eqn{0<p_1<1} and \eqn{0<p_0+p_1<1}. 
+
+The GAMLSS function \code{BEINF()} re-parametrize the parameters as
+ \deqn{\mu=\frac{\alpha}{\alpha+\beta}}{mu=a/(a+b)}
+ \deqn{\sigma=\frac{1}{\alpha+\beta+1}}{sigma=1/(a+b+1)}  
+ \deqn{\nu=\frac{p_0}{p_2}}{nu=p0/p2}
+ \deqn{\tau=\frac{p_1}{p_2}}{tau=p1/p2} where  \eqn{p_2=1-p_0-p_1}{p2=1-p0-p1} so \eqn{0<\mu<1}{mu=(0,1)}, \eqn{0<\sigma<1}{sigma=(0,1)}, \eqn{\nu>0} and \eqn{\tau>0}  see pp. 466-467  of Rigby et al. (2019). 
+
+The  beta inflated at zero distribution is defined  as 
+ \deqn{f(y)=p_0 \quad \textit{if} \quad y=0 }{f(y)=p0}
+ \deqn{f(y|\alpha,\beta)=\frac{1}{B(\alpha, \beta)} y^{\alpha-1}(1-y)^{\beta-1} \quad \textit{otherwise}}{f(y|a,b)=(1/(Beta(a,b))) y^(a-1)(1-y)^(b-1) }  
+for \eqn{0 \le y < 1}, \eqn{\alpha>0}, \eqn{\beta>0} and  \eqn{0<p_0<1}.  
+
+
+The GAMLSS function \code{BEINF0()} re-parametrize the parameters as
+ \deqn{\mu=\frac{\alpha}{\alpha+\beta}}{mu=a/(a+b)}
+ \deqn{\sigma=\frac{1}{\alpha+\beta+1}}{sigma=1/(a+b+1)}  
+ \deqn{\nu=\frac{p_0}{1-P_0}}{nu=p0/p2}
+so \eqn{0<\mu<1}{mu=(0,1)}, \eqn{0<\sigma<1}{sigma=(0,1)} and  \eqn{\nu>0} see pp. 467-468  of Rigby et al. (2019). 
+
+The  beta inflated at 1 distribution is defined  as 
+ \deqn{f(y|\alpha,\beta)=\frac{1}{B(\alpha, \beta)} y^{\alpha-1}(1-y)^{\beta-1} \quad \textit{if} \quad 0<y<1} 
+ \deqn{f(y)=p_1 \quad \quad \textit{if} \: \quad y=1}{f(y)=p1} 
+for \eqn{0 < y \le 1}, \eqn{\alpha>0}, \eqn{\beta>0} and  \eqn{0<p_1<1}.  
+
+
+
+The GAMLSS function \code{BEINF1()} re-parametrize the parameters as
+ \deqn{\mu=\frac{\alpha}{\alpha+\beta}}{mu=a/(a+b)}
+ \deqn{\sigma=\frac{1}{\alpha+\beta+1}}{sigma=1/(a+b+1)}  
+ \deqn{\nu=\frac{p_1}{1-P_1}}
+so \eqn{0<\mu<1}{mu=(0,1)}, \eqn{0<\sigma<1}{sigma=(0,1)} and  \eqn{\nu>0} see pp. 468-469  of Rigby et al. (2019).  
  
 }
 \value{

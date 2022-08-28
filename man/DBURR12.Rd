@@ -54,7 +54,7 @@ vector of \code{nu}
 The probability function of the discrete Burr XII  distribution is given by
 \deqn{f(y|\mu,\sigma,\nu)= (1+(y/\mu)^\sigma)^\nu - (1+((y+1)/\mu)^\sigma)^\nu}{ f(y|\mu,\sigma,\nu)= (1+(y/\mu)^\sigma)^\nu - (1+((y+1)/\mu)^\sigma)^\nu } 
 
-for \eqn{y=0,1,2,...,\infty}{y=0,1,2,...},   \eqn{\mu>0}{mu>0} , \eqn{\sigma>0}{\sigma>0} and \eqn{\mu>0}{nu>0}. 
+for \eqn{y=0,1,2,...,\infty}{y=0,1,2,...},   \eqn{\mu>0}{mu>0} , \eqn{\sigma>0}{\sigma>0} and \eqn{\mu>0}{nu>0}  see pp 504-505 of Rigby \emph{et al.} (2019).     
 
 Note that the above parametrization is different from Para and Jan  (2016).
 }

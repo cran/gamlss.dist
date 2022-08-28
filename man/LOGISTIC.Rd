@@ -35,8 +35,8 @@ rLO(n, mu = 0, sigma = 1)
 }
 \details{
   Definition file for Logistic distribution. 
- \deqn{f(y|\mu,\sigma)=\frac{1}{\sigma} e^{-\frac{y-\mu}{\sigma}} [1+e^{-\frac{y-\mu}{\sigma}}]^{-2}}{f(y|mu,sigma)=(1/sigma)*exp((y-mu)/sigma)*((1+exp(-(y-mu)/sigma))^(-2))} 
- for \eqn{y=(-\infty,\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,\infty)}{\mu=(-Inf,+Inf)} and \eqn{\sigma>0}. 
+ \deqn{f(y|\mu,\sigma)=\frac{1}{\sigma} e^{-\left(\frac{y-\mu}{\sigma}\right)} [1+e^{-\left(\frac{y-\mu}{\sigma}\right)}]^{-2}}{f(y|mu,sigma)=(1/sigma)*exp((y-mu)/sigma)*((1+exp(-(y-mu)/sigma))^(-2))} 
+ for \eqn{y=(-\infty,\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,\infty)}{\mu=(-Inf,+Inf)} and \eqn{\sigma>0}, see page 368 of Rigby et al. (2019). 
 }
 \value{
   \code{LO()} returns a \code{gamlss.family} object which can be used to fit a logistic distribution in the \code{gamlss()} function.

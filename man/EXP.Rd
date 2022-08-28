@@ -34,8 +34,8 @@ rEXP(n, mu = 1)
 
 \details{
   The specific parameterization of the exponential distribution used in EXP is
-\deqn{f(y|\mu)=\frac{1}{\mu} \exp\left\{-\frac{y}{\mu}\right\}}{f(y|mu)=1/mu*exp(-y/mu)},
-for y>0, \eqn{\mu>0}{mu>0}.
+\deqn{f(y|\mu)=\frac{1}{\mu} \exp\left\{-\frac{y}{\mu}\right\}}{f(y|mu)=1/mu*exp(-y/mu)}
+for y>0, \eqn{\mu>0}{mu>0} see pp. 422-23 of Rigby et al. (2019).
 }
 
 \value{

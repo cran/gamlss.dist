@@ -45,9 +45,9 @@ rGIG(n, mu=1, sigma=1, nu=1, ...)
 }
 \details{
    The specific parameterization of the generalized inverse gaussian distribution used in GIG is 
-\eqn{f(y|\mu,\sigma,\nu)=(\frac{c}{\mu})^\nu(\frac{y^(\nu-1)}{2 K(\frac{1}{\sigma},\nu)})(\exp((\frac{-1}{2\sigma})(\frac{cy}{\mu}+\frac{\mu}{cy})))}{f(y|mu,sigma,nu)=((c/mu)^nu)*(y^(nu-1))/(2*besselK(1/sigma,nu))*exp(-1/(2*sigma)*(c*y/mu+mu/(c*y)))}
-where \eqn{c = \frac{K(\frac{1}{\sigma},\nu+1)}{K(\frac{1}{\sigma},\nu)}}{c = besselK(1/sigma,nu+1)/besselK(1/sigma,nu)}, 
-for y>0, \eqn{\mu>0}{mu>0}, \eqn{\sigma>0}{sigma>0} and \eqn{-\infty<\nu<+\infty}{-Inf>nu>Inf}. 
+\deqn{f(y|\mu,\sigma,\nu)= (\frac{b}{\mu})^\nu \left[ \frac{y^{\nu-1}}{2 K_{\nu}(\sigma^{-2}) }\right] \exp \left[-\frac{1}{2\sigma^2} \left(\frac{b y }{\mu}+\frac{\mu}{ b y} \right)\right]}
+where \eqn{b = \frac{K_{\nu+1}(\frac{1}{\sigma^2})}{K_{\nu}(\frac{1}{\sigma^{-2}})}}{c = besselK(1/sigma,nu+1)/besselK(1/sigma,nu)}, 
+for y>0, \eqn{\mu>0}{mu>0}, \eqn{\sigma>0}{sigma>0} and \eqn{-\infty<\nu<+\infty}{-Inf>nu>Inf} see pp 445-446 of Rigby et al. (2019). 
 }
 \value{
   GIG() returns a gamlss.family object which can be used to fit a generalized inverse gaussian distribution in 

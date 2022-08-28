@@ -50,10 +50,19 @@ rTF2(n, mu = 0, sigma = 1, nu = 10)
           taken to be the number required}
 }
 \details{
-  Definition file for t family distribution. 
-\deqn{f(y|\mu,\sigma, \nu)=\frac{\Gamma((\nu+1)/2)}{\sigma \Gamma(1/2) \Gamma(\nu/2) \nu^{0.5}} \left[1+\frac{(y-\mu)^2}{\nu \sigma^2}\right]^{-(\nu+1)/2}}{f(y|mu,sigma,nu)=((Gamma((nu+1)/2)/(sigma*Gamma(1/2)*Gamma(nu/2))*nu^0.5 )*(1+(y-mu)^2/(nu*sigma^2))^(-(nu+1)/2)} 
- \eqn{y=(-\infty,+\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,+\infty)}{\mu=(-Inf,+Inf)}, \eqn{\sigma>0} and \eqn{\nu>0}. 
-Note that \eqn{z=(y-\mu)/\sigma}{z=(y-mu)/sigma} has a standard t distribution with degrees of freedom \eqn{\nu}{nu}.
+  Definition file for t family distribution \code{TF()}:
+  
+\deqn{f(y|\mu,\sigma, \nu)=\frac{1}{\sigma B(1/2,\nu/2)) \nu^{0.5}} \left[1+\frac{(y-\mu)^2}{\nu \sigma^2}\right]^{-(\nu+1)/2}}{f(y|mu,sigma,nu)=((Gamma((nu+1)/2)/(sigma*Gamma(1/2)*Gamma(nu/2))*nu^0.5 )*(1+(y-mu)^2/(nu*sigma^2))^(-(nu+1)/2)} 
+
+for  \eqn{-\infty<y<+\infty}{y=(-Inf,+Inf)}, \eqn{-\infty<\mu<+\infty}{\mu=(-Inf,+Inf)}, \eqn{\sigma>0} and \eqn{\nu>0}  see pp. 382-383 of Rigby et al. (2019). 
+Note that \eqn{z=(y-\mu)/\sigma}{z=(y-mu)/sigma} has a standard t distribution with degrees of freedom \eqn{\nu}{nu} see pp. 382-383 of Rigby et al. (2019).
+
+ Definition file for t family distribution \code{TF2()}:
+ 
+\deqn{f(y|\mu,\sigma, \nu)=\frac{1}{\sigma B(1/2, \nu/2)  (\nu-2)^{0.5}} \left[1+\frac{(y-\mu)^2}{(\nu-2) \sigma^2}\right]^{-(\nu+1)/2}}{f(y|mu,sigma,nu)=((Gamma((nu+1)/2)/(sigma*Gamma(1/2)*Gamma(nu/2))*nu^0.5 )*(1+(y-mu)^2/(nu*sigma^2))^(-(nu+1)/2)} 
+for  \eqn{-\infty<y<+\infty}{y=(-Inf,+Inf)}, \eqn{-\infty<\mu<+\infty}{\mu=(-Inf,+Inf)}, \eqn{\sigma>0} and \eqn{\nu>2}  see pp. 382-383 of Rigby et al. (2019). 
+Note that \eqn{z=(y-\mu)/\sigma}{z=(y-mu)/sigma} has a standard t distribution with degrees of freedom \eqn{\nu}{nu} see pp. 383-384 of Rigby et al. (2019).
+
 }
 \value{
  \code{TF()} returns a \code{gamlss.family} object which can be used to fit a t distribution in the \code{gamlss()} function.

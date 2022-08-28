@@ -37,7 +37,9 @@ rZAP(n, mu = 5, sigma = 0.1)
           otherwise, P[X > x]}  
 }
 \details{
-For the definition of the distribution see   Rigby and Stasinopoulos (2010) below.
+Details about  the zero adjusted Poison, \code{ZAP} can be found  pp 494-496 of Rigby \emph{et al.} (2019).
+
+
 }
 \value{
 The function \code{ZAP} returns a \code{gamlss.family} object which can be used to fit a zero inflated poisson distribution in the \code{gamlss()} function.  

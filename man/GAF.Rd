@@ -43,7 +43,8 @@ rGAF(n, mu = 1, sigma = 1, nu = 2)
  The parametrization of the gamma family given in the function \code{GAF()} is: 
  
  \deqn{f(y|\mu,\sigma_1)=\frac{y^{(1/\sigma_1^2-1)}\exp[-y/(\sigma_1^2 \mu)]}{(\sigma_1^2 \mu)^{(1/\sigma^2)} \Gamma(1/\sigma^2)}}{f(y|\mu,\sigma_1)=(y^((1/\sigma_1^2)-1)*exp[-y/((\sigma_1^2)*\mu)])/((\sigma_1^2*\mu)^(1/\sigma_1^2) Gamma(1/\sigma_1^2)) }
-for \eqn{y>0}, \eqn{\mu>0} where \eqn{\sigma_1=\sigma \mu^(\nu/1-1) }.
+for \eqn{y>0}, \eqn{\mu>0} where \eqn{\sigma_1=\sigma \mu^{(\nu/2)-1} }
+\eqn{\sigma>0} and \eqn{-\infty <\nu< \infty} see pp. 442-443 of Rigby et al. (2019).
 
 
 }

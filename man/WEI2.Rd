@@ -42,7 +42,7 @@ rWEI2(n, mu = 1, sigma = 1)
  The parameterization of the function \code{WEI2} is given by
  \deqn{f(y|\mu,\sigma)= \sigma\mu y^{\sigma-1}e^{-\mu
 y^{\sigma}}}{f(y|mu,sigma)= sigma*mu*y^(sigma-1)exp(-mu*y^sigma)}
- for \eqn{y>0}, \eqn{\mu>0} and \eqn{\sigma>0}.
+ for \eqn{y>0}, \eqn{\mu>0} and \eqn{\sigma>0}, see pp. 436-437 of Rigby et al. (2019).
 The GAMLSS functions \code{dWEI2}, \code{pWEI2}, \code{qWEI2}, and \code{rWEI2} can be used to provide the pdf, the cdf, the quantiles and
 random generated numbers for the Weibull distribution with argument \code{mu}, and \code{sigma}.
 [See the GAMLSS function \code{WEI} for a different parameterization of the Weibull.] 

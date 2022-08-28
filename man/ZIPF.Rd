@@ -52,9 +52,12 @@ rZAZIPF(n, mu = 0.5, sigma = 0.1, max.value = 10000)
 \details{
  The probability density for the zipf distribution, \code{ZIPF}, is: 
  \deqn{f(y|\mu)=\frac{y^{-(\mu+1)}}{\zeta(\mu+1)}}{f(y|mu)= y^{-(\mu+1)}/\zeta(\mu+1)} 
- for \eqn{y=1,2,\ldots,\infty}{y=1,2, ...,Inf}, \eqn{\mu>0} and where \eqn{\zeta()} is the (Reimann) zeta function.
+ for \eqn{y=1,2,\ldots,\infty}{y=1,2, ...,Inf}, \eqn{\mu>0} and where 
+ \eqn{\zeta() = \sum_i^n i^{-b}} is the (Reimann) zeta function.
  
-The distribution has mean \eqn{\zeta(\mu)/\zeta(\mu+1)} and variance \eqn{{\zeta(\mu+1)\zeta(\mu-1)-[\zeta(\mu)]^2 }/ [\zeta(\mu+1)]^2.} 
+The distribution has mean \eqn{\zeta(\mu)/\zeta(\mu+1)} and variance \eqn{{\zeta(\mu+1)\zeta(\mu-1)-[\zeta(\mu)]^2 }/ [\zeta(\mu+1)]^2}, see  pp 479-480 of Rigby et al. (2019) 
+
+For more details about the zero-adjusted Zipf distributions, \code{ZAZIPF}, see see pp 496-498 of Rigby \emph{et al.} (2019).    
 }  
   
 \value{

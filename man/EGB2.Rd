@@ -44,14 +44,13 @@ rEGB2(n, mu = 0, sigma = 1, nu = 1, tau = 0.5)
           taken to be the number required}      
 }
 \details{   
- The probability density function of the Generalized Beta type 2, (\code{GB2}), is defined as 
+ The probability density function of the Generalized Beta type 2, (\code{GB2}), is defined as: 
   
-\deqn{f(y|\mu,\sigma\,\nu,\tau)= e^{\mbox{\hspace{0.01cm}}\nu \mbox{\hspace{0.01cm}}z } \{|\sigma|\mbox{\hspace{0.05cm}} B(\nu,\tau) \mbox{\hspace{0.05cm}} [1+e^z]^{\nu+\tau}\}^{-1} }{f(y|mu,sigma,nu,tau)=exp{nu*z}(abs(sigma)*Beta(nu.tau)*(1+exp(z))^(nu+tau) )^(-1)}
-
+\deqn{f(y|\mu,\sigma\,\nu,\tau) = e^{\nu z }\left[|\sigma| B(\nu,\tau) \left(1+ e^z\right)^{\nu+\tau} \right]^{-1}}
 
 for \eqn{-\infty<y<\infty}{-Inf<y<Inf}, where \eqn{z=(y-\mu)/\sigma}{z=(y-mu)/sigma} and 
 \eqn{-\infty<\mu<\infty}{-Inf<mu<Inf}, \eqn{-\infty<\sigma<\infty}{-Inf<sigma<Inf}, 
-\eqn{\nu>0}{nu>0} and \eqn{\tau>0}{tau>0},  McDonald and Xu (1995).
+\eqn{\nu>0}{nu>0} and \eqn{\tau>0}{tau>0},  McDonald and Xu (1995), see also pp. 385-386 of Rigby et al. (2019).
 }
 \value{
 \code{EGB2()}  returns a \code{gamlss.family} object which can be used to fit the EGB2 distribution in the 

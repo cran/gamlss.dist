@@ -49,6 +49,8 @@ The distribution takes its names because it is normal up to
 \code{nu*tau-1} degrees of freedom after \code{tau}. Maximum
 likelihood estimator of the third and forth parameter can be
 obtained, using the GAMLSS functions, \code{find.hyper} or \code{prof.dev}.
+
+For more details about the \code{NET} distribution please refer to pp. 393-396 of of Rigby et al. (2019).
 }
 \value{
  \code{NET()}  returns a \code{gamlss.family} object which can be used to fit a Box Cox Power Exponential distribution in the \code{gamlss()} function. 

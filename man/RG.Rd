@@ -39,8 +39,8 @@ rRG(n, mu = 0, sigma = 1)
 \details{
  The specific parameterization of the reverse Gumbel  distribution used in \code{RG} is
  \deqn{f(y|\mu,\sigma)= \frac{1}{\sigma} \hspace{1mm}
-\exp\left\{-\left(\frac{y-\mu}{\sigma}\right)-\exp\left[-\frac{(y-\mu)}{\sigma}\right]\right\}}{f(y|mu,sigma)=(1/sigma)*exp(-((y-mu)/sigma)-exp(-((y-mu)/sigma)))  }
-for \eqn{y=(-\infty,\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,+\infty)}{\mu=(-Inf,+Inf)} and \eqn{\sigma>0}.
+\exp\left\{-\left(\frac{y-\mu}{\sigma}\right)-\exp\left[-\left(\frac{y-\mu)}{\sigma}\right)\right]\right\}}{f(y|mu,sigma)=(1/sigma)*exp(-((y-mu)/sigma)-exp(-((y-mu)/sigma)))  }
+for \eqn{y=(-\infty,\infty)}{y=(-Inf,+Inf)}, \eqn{\mu=(-\infty,+\infty)}{\mu=(-Inf,+Inf)} and \eqn{\sigma>0} see pp. 370-371 of Rigby et al. (2019).
 }
 
 \value{

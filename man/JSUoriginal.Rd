@@ -41,14 +41,14 @@ rJSUo(n, mu = 0, sigma = 1, nu = 0, tau = 1)
   
 \details{
 
-  The probability density function of the orininal Jonhson's SU distribution, (\code{JSU}), is defined as 
+  The probability density function of the orininal Jonhson's SU distribution, (\code{JSUo}), is defined as 
   
-\deqn{f(y|n,\mu,\sigma\,\nu,\tau)=\frac{\tau}{\sigma}\frac{1}{(z^{2}+1)^{\frac{1}{2}}}\frac{1}{\sqrt{2\pi}}\hspace{1mm} \exp{\left[ -\frac{1}{2} r^2 \right]}}{f(y|mu,sigma,nu,tau)=tau/(sigma)*(1/(z^2+1)^.5)*(1/2*Pi)^(.5)exp(-.5r^2)}
+\deqn{f(y|\mu,\sigma\,\nu,\tau)=\frac{\tau}{\sigma (z^{2}+1)^{\frac{1}{2}} \sqrt{2\pi}}\hspace{1mm} \exp{\left[ -\frac{1}{2} r^2 \right]}}{f(y|mu,sigma,nu,tau)=tau/(sigma)*(1/(z^2+1)^.5)*(1/2*Pi)^(.5)exp(-.5r^2)}
 
 for \eqn{ -\infty < y < \infty }{0<y<0}, \eqn{\mu=(-\infty,+\infty)}{mu=(-Inf,+Inf)}, 
 \eqn{\sigma>0}{sigma>0}, \eqn{\nu=(-\infty,+\infty)}{nu=(-Inf,+Inf)} and \eqn{\tau>0}{tau>0}. 
 where \eqn{z = \frac{(y-\mu)}{\sigma}}{z=(y-mu)/sigma},
-\eqn{r = \nu + \tau sinh^{-1}(z)}{nu + tau* asinh(z)}.
+\eqn{r = \nu + \tau \sinh^{-1}(z)}{nu + tau* asinh(z)}, see pp. 389-390 of Rigby et al. (2019).
 
 
   
