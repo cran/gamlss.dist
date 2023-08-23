@@ -47,11 +47,12 @@ LOGNO2 <-function (mu.link ="log", sigma.link="log")
 #---------------------------------------------
 dLOGNO2<-function(x, mu=1, sigma=1, log=FALSE)
  { 
-         if ( any(mu <= 0))    stop(paste("mu must be positive", "\n", ""))
+     if ( any(mu <= 0))    stop(paste("mu must be positive", "\n", ""))
 		 if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
            z <- log(x)
     loglik <- dnorm(z, mean=log(mu), sd=sigma, log=TRUE)-z
     if(log==FALSE) fy  <- exp(loglik) else fy <- loglik 
+    fy <-ifelse(x <= 0, 0, fy)
     fy
   }
 #---------------------------------------------
@@ -61,6 +62,7 @@ pLOGNO2 <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
     qz <- log(q)
     cdf <- pnorm(qz, mean=log(mu), sd=sigma, lower.tail = lower.tail, log.p = log.p)
+    cdf <-ifelse(q <= 0, 0, cdf)
     cdf
    }
 #---------------------------------------------

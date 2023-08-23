@@ -120,7 +120,7 @@ dDBURR12 <- function(x, mu = 5, sigma = 2, nu = 2, log = FALSE)
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(nu <= 0))  stop(paste("nu must be greater than 0 ", "\n", "")) 
-  if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+ # if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
      ly <- max(length(x),length(mu),length(sigma),length(nu)) 
       x <- rep(x, length = ly)      
   sigma <- rep(sigma, length = ly)
@@ -128,7 +128,9 @@ dDBURR12 <- function(x, mu = 5, sigma = 2, nu = 2, log = FALSE)
      nu <- rep(nu, length = ly) 
      Sur <- function(x) (1+(x/mu)^sigma)^(-nu)
   prob <- Sur(x)-Sur(x+1) #(1+(x/mu)^sigma)^(-nu)-(1+((x+1)/mu)^sigma)^(-nu)
-  return(if(log) log(prob) else prob)
+  prob <- if(log ) log(prob) else prob
+  prob <- ifelse(x < 0, 0, prob) 
+  return(prob)
 }
 
 
@@ -137,7 +139,7 @@ pDBURR12 <- function(q, mu = 5, sigma = 2, nu = 2,  lower.tail = TRUE, log.p = F
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(nu <= 0))  stop(paste("nu must be greater than 0 ", "\n", "")) 
-  if (any(q < 0) )  stop(paste("x must be >=0", "\n", ""))  
+ # if (any(q < 0) )  stop(paste("x must be >=0", "\n", ""))  
    ly <- max(length(q),length(mu),length(sigma),length(nu)) 
     q <- rep(q, length = ly)      
 sigma <- rep(sigma, length = ly)
@@ -148,6 +150,7 @@ sigma <- rep(sigma, length = ly)
 # cdf1 <- 1- Sur(q+1) 
  if(lower.tail==TRUE) cdf <- cdf else cdf=1-cdf
  if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf) 
+ cdf <- ifelse(q < 0, 0, cdf)   
  cdf
 }
 

@@ -50,18 +50,22 @@ ZAIG <- function (mu.link ="log", sigma.link="log", nu.link ="logit")
 dZAIG<-function(x, mu=1, sigma=1, nu=.1, log=FALSE)
  {        if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
- log.lik <- ifelse(x==0, log(nu), log(1-nu)+(-0.5*log(2*pi)-log(sigma)-(3/2)*log(x)-((x-mu)^2)/(2*sigma^2*(mu^2)*x)))
+ #         if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+      xx <- ifelse(x < 0, 0.001, x)
+ log.lik <- ifelse(xx==0, log(nu), log(1-nu)+(-0.5*log(2*pi)-log(sigma)-(3/2)*log(xx)-((xx-mu)^2)/(2*sigma^2*(mu^2)*xx)))
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
+      fy <- ifelse(x < 0, 0, fy)
       fy 
   }
 #----------------------------------------------------------------------------------------
 pZAIG <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
-  {       if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
+  {      
+          if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(q < 0))  stop(paste("y must be positive", "\n", ""))  
-    cdf1 <- pnorm(((q/mu)-1)/(sigma*sqrt(q))) 
-    cdf2 <- exp(2/(mu*sigma^2))*pnorm((-((q/mu)+1))/(sigma*sqrt(q)))
+#          if (any(q < 0))  stop(paste("y must be positive", "\n", "")) 
+      qq <- ifelse(q < 0, 0.001, q)       
+    cdf1 <- pnorm(((qq/mu)-1)/(sigma*sqrt(qq))) 
+    cdf2 <- exp(2/(mu*sigma^2))*pnorm((-((qq/mu)+1))/(sigma*sqrt(qq)))
      cdf <- cdf1+ cdf2
      ## the problem with this approximation is that it is not working with 
      ## small sigmas and produce NA's. So here it is a solution
@@ -71,12 +75,13 @@ pZAIG <- function(q, mu=1, sigma=1, nu=0.1, lower.tail = TRUE, log.p = FALSE)
        for (i in index)
           {
         cdf[i] <- integrate(function(x) 
-                 dIG(x, mu = mu[i], sigma = sigma[i], log=FALSE), 0.001, q[i] )$value
+                 dIG(x, mu = mu[i], sigma = sigma[i], log=FALSE), 0.001, qq[i] )$value
           }    
       }
      cdf <- ifelse((q==0), nu, nu+(1-nu)*cdf)    
     if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf 
     if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 
+    cdf <- ifelse(q < 0, 0, cdf) 
     cdf
    }
 #---------------------------------------------------------------------------------------- 

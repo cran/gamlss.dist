@@ -155,7 +155,7 @@ dBNB<-function(x, mu=1, sigma=1, nu=1, log=FALSE)
    if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
    if (any(nu <= 0) )  stop(paste("nu must be greater than 0 ", "\n", "")) 
-   if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+  # if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
     ly <- max(length(x),length(mu),length(sigma),length(nu)) 
      x <- rep(x, length = ly)      
  sigma <- rep(sigma, length = ly)
@@ -165,7 +165,8 @@ dBNB<-function(x, mu=1, sigma=1, nu=1, log=FALSE)
     n <- (mu*nu)/sigma
     k <- 1/nu
   logL <- lbeta(x+n, m+k)-lbeta(n,m)-lgamma(x+1)-lgamma(k)+lgamma(x+k)
-   lik <- if (log) logL else exp(logL)
+  lik <- if (log) logL else exp(logL)
+  lik <- ifelse(x < 0, 0, lik)  
   lik
   }
 #----------------------------------------------------------------------------------------     
@@ -175,7 +176,7 @@ pBNB <- function(q, mu = 1, sigma = 1, nu = 1, lower.tail = TRUE, log.p = FALSE)
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(nu <= 0) )  stop(paste("nu must be greater than 0 ", "\n", "")) 
-  if (any(q < 0) )  stop(paste("q must be >=0", "\n", ""))
+ # if (any(q < 0) )  stop(paste("q must be >=0", "\n", ""))
      ly <- max(length(q),length(mu),length(sigma),length(nu)) 
       q <- rep(q, length = ly)      
   sigma <- rep(sigma, length = ly)
@@ -185,7 +186,8 @@ pBNB <- function(q, mu = 1, sigma = 1, nu = 1, lower.tail = TRUE, log.p = FALSE)
    Vcdf <- Vectorize(fn)
     cdf <- Vcdf(q=q, mu=mu, sigma=sigma, nu=nu)
     cdf <- if(lower.tail==TRUE) cdf else 1-cdf
-    cdf <- if(log.p==FALSE) cdf else log(cdf)                                                                    
+    cdf <- if(log.p==FALSE) cdf else log(cdf)    
+    cdf <- ifelse(q < 0, 0, cdf) 
     cdf
 }
 #----------------------------------------------------------------------------------------

@@ -4,10 +4,11 @@
 dGEOMo<-function (x, mu = .5, log = FALSE)
 {
     if (any(mu < 0) | any(mu > 1))  stop(paste("mu must be between 0 and 1", "\n", "")) 
-    if (any(x < 0)) stop(paste("x must be >=0", "\n", ""))
+   # if (any(x < 0)) stop(paste("x must be >=0", "\n", ""))
         lx <- max(length(x), length(mu))
         mu <- rep(mu, length = lx)
         fy <- dgeom(x = x, prob = mu, log = log)
+        fy <- ifelse(x < 0, 0, fy) 
         fy #logfx
 }
 #--------------------------------------------------------------------
@@ -15,11 +16,12 @@ dGEOMo<-function (x, mu = .5, log = FALSE)
 pGEOMo<-function (q, mu = .5, lower.tail = TRUE, log.p = FALSE)
 {
     if (any(mu < 0) | any(mu > 1))  stop(paste("mu must be between 0 and 1", "\n", "")) 
-    if (any(q < 0)) stop(paste("q must be >=0", "\n", ""))
+    #if (any(q < 0)) stop(paste("q must be >=0", "\n", ""))
      ly <- max(length(q), length(mu))
       q <- rep(q, length = ly)
      mu <- rep(mu, length = ly)
     cdf <-  pgeom(q, prob=mu, lower.tail = lower.tail, log.p =log.p)
+    cdf <- ifelse(q < 0, 0, cdf) 
     cdf
 }
 #-------------------------------------------------------------------

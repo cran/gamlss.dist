@@ -54,10 +54,12 @@ dSIMPLEX <- function (x, mu=0.5, sigma=1, log = FALSE)
 {
    if (any(mu <= 0) || any(mu >= 1) )  stop(paste("mu must be between 0 and 1", "\n", ""))
    if (any(sigma <= 0) )  stop(paste("sigma must be positive", "\n", "")) 
-   if (any(x <= 0) || any( x >= 1))  stop(paste(" must be between 0 and 1", "\n", ""))
-    logpdf <- -((x - mu)/(mu * (1 - mu)))^2/(2 * x * (1 - x) * sigma^2) - 
-              (log(2 * pi * sigma^2) + 3 * (log(x) + log(1 - x)))/2
+#   if (any(x <= 0) || any( x >= 1))  stop(paste(" must be between 0 and 1", "\n", ""))
+       xx <- ifelse( x<= 0 | x>=1, 0.5 ,  x) 
+   logpdf <- -((xx - mu)/(mu * (1 - mu)))^2/(2 * xx * (1 - xx) * sigma^2) - 
+              (log(2 * pi * sigma^2) + 3 * (log(xx) + log(1 - xx)))/2
    if (!log) logpdf <- exp(logpdf)
+     logpdf <- ifelse( x<= 0 | x>=1, 0, logpdf)
      logpdf
 }
 #----------------------------------------------------------------------------------------
@@ -82,7 +84,7 @@ dSIMPLEX <- function (x, mu=0.5, sigma=1, log = FALSE)
 # }
 pSIMPLEX <- function (q, mu=0.5, sigma=1, lower.tail = TRUE, log.p = FALSE) 
 {
-  if (any(q <= 0) || any(q >= 1)) stop(paste("q must be between 0 and 1", "\n", ""))
+ # if (any(q <= 0) || any(q >= 1)) stop(paste("q must be between 0 and 1", "\n", ""))
   if (any(mu <= 0) || any(mu >= 1))   stop(paste("mu must be between 0 and 1", "\n", ""))
   if (any(sigma <= 0) )    stop(paste("sigma must be between positive", "\n", ""))    
      lp <- pmax.int(length(q), length(mu), length(sigma))                                                                  
@@ -90,16 +92,18 @@ pSIMPLEX <- function (q, mu=0.5, sigma=1, lower.tail = TRUE, log.p = FALSE)
   sigma <- rep(sigma, length = lp)
      mu <- rep(mu, length = lp)
    zero <- rep(0, length = lp)
+    qq <- ifelse( q<= 0 | q>=1, 0.5 ,  q)
     pdf <- function(x, mu,sigma) 1/sqrt(2 * pi * sigma^2 * (x * (1 - x))^3) * exp(-1/2/sigma^2 * 
                       (x - mu)^2/(x * (1 - x) * mu^2 * (1 - mu)^2))
     cdfun <- function(upper, mu, sigma) 
-    {int <- integrate(pdf, lower=0, upper=upper, mu, sigma)
+     {int <- integrate(pdf, lower=0, upper=upper, mu, sigma)
       int$value 
       }
     Vcdf <- Vectorize(cdfun)
-    cdf <- Vcdf(upper=q, mu=mu, sigma=sigma)
+     cdf <- Vcdf(upper=qq, mu=mu, sigma=sigma)
   if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf 
   if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 
+  cdf <- ifelse( q<= 0 | q>=1, 0, cdf)   
   cdf    
 }
 

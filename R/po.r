@@ -30,8 +30,9 @@ PO <- function (mu.link = "log")
 dPO<-function(x, mu = 1, log = FALSE)
  { 
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
-          if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+       #   if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
           fy <- dpois(x = x, lambda = mu, log = log)
+          fy <-ifelse(x < 0, 0, fy)
           fy
   }
   
@@ -39,8 +40,9 @@ dPO<-function(x, mu = 1, log = FALSE)
 pPO <- function(q, mu = 1, lower.tail = TRUE, log.p = FALSE)
   {     
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
-          if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))  
+       #   if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))  
           cdf <- ppois(q, lambda = mu, lower.tail = lower.tail, log.p = log.p)
+          cdf <-ifelse(q < 0, 0, cdf) 
           cdf
    }
 #----------------------------------------------------------------------------------------

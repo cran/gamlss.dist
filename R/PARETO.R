@@ -39,24 +39,26 @@ PARETO <- function (mu.link = "log")
 dPARETO<- function(x, mu = 1, log = FALSE)
 {
   if (any(mu <= 0 ) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
-  if (any(x <= 1) )  stop(paste("x must be >1", "\n", ""))
+  #if (any(x <= 1) )  stop(paste("x must be >1", "\n", ""))
      ly <- max(length(x),length(mu)) 
       x <- rep(x, length = ly)      
      mu <- rep(mu, length = ly)   
    logL <- log(mu) -(mu+1) * log(x) #
     lik <- if (log) logL else exp(logL)
+    lik <- ifelse(x <= 1, 0, lik)
   as.numeric(lik)
 }
 #----------------------------------------------------------------------------------------
 pPARETO <- function(q, mu = 1, lower.tail = TRUE, log.p = FALSE)
 {
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
-  if (any(q <= 1) )  stop(paste("q must be >1", "\n", ""))
+ # if (any(q <= 1) )  stop(paste("q must be >1", "\n", ""))
   cdf <- 1-q^(-mu)
   if (lower.tail == TRUE) cdf <- cdf  
   else cdf <- 1 - cdf
   if (log.p == FALSE) cdf <- cdf
   else cdf < - log(cdf)
+  cdf <-  ifelse(q <= 1, 0, cdf)
   cdf
   }
 #----------------------------------------------------------------------------------------

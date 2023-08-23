@@ -22,7 +22,7 @@ Family.d <-function(family = "NO", type = c("log", "logit"), ...)
 fun <- if (type=="log")  
        function(x, log = FALSE, ...)
         {
-        if (any(x < 0)) stop(paste("x must be positive", "\n", ""))
+      #  if (any(x < 0)) stop(paste("x must be positive", "\n", ""))
         dfun <- pdf(log(x),log = TRUE,...)-log(x)
         dfun <- if (log == TRUE) dfun else exp(dfun)
         dfun
@@ -30,8 +30,8 @@ fun <- if (type=="log")
      else if (type=="logit")
       function(x, log = FALSE, ...)
        {
-        if (any(x < 0) | any(x > 1)) 
-        stop(paste("x must be between 0 and 1", "\n", "")) 
+      #  if (any(x < 0) | any(x > 1)) 
+      #  stop(paste("x must be between 0 and 1", "\n", "")) 
         dfun <-  pdf(log(x/(1-x)), log=TRUE, ...)-log(x)-log(1-x)
         dfun <- if (log == TRUE) dfun else exp(dfun)
         dfun
@@ -54,15 +54,15 @@ Family.p <-function(family = "NO", type = c("log", "logit"), ...)
 fun <- if (type=="log")  
        function(q, ...)
         {
-        if (any(q < 0)) stop(paste("q must be positive", "\n", ""))
+      #  if (any(q < 0)) stop(paste("q must be positive", "\n", ""))
         pfun <- cdf(log(q),...)
         pfun
        }
      else if (type=="logit")
       function(q,  ...)
        {
-        if (any(q < 0) | any(q > 1)) 
-        stop(paste("q must be between 0 and 1", "\n", "")) 
+      #  if (any(q < 0) | any(q > 1)) 
+     #   stop(paste("q must be between 0 and 1", "\n", "")) 
         pfun <- cdf(log(q/(1-q)),...)
         pfun
        } 

@@ -57,7 +57,7 @@ dZAP<-function(x, mu = 5, sigma = 0.1, log = FALSE)
  { 
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0", "\n", ""))           
           if (any(sigma <= 0) | any(sigma >= 1) )  stop(paste("sigma must be between 0 and 1", "\n", "")) 
-          if (any(x < 0) )  stop(paste("x must be 0 or greater than 0", "\n", ""))
+    #      if (any(x < 0) )  stop(paste("x must be 0 or greater than 0", "\n", ""))
              ly <- max(length(x),length(mu),length(sigma)) 
               x <- rep(x, length = ly)      
           sigma <- rep(sigma, length = ly)
@@ -65,6 +65,7 @@ dZAP<-function(x, mu = 5, sigma = 0.1, log = FALSE)
           logfy <- rep(0, ly)
           logfy <- ifelse((x==0), log(sigma), log(1-sigma) + dPO(x,mu,log=T) - log(1-dPO(0,mu)) )          
           if(log == FALSE) fy <- exp(logfy) else fy <- logfy
+          fy <-ifelse(x < 0, 0, fy) 
           fy
   }
 #------------------------------------------------------------------------------------------
@@ -72,7 +73,7 @@ pZAP <- function(q, mu = 5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
   {     
          if (any(mu <= 0) )  stop(paste("mu must be greater than 0", "\n", ""))           
          if (any(sigma <= 0) | any(sigma >= 1) )  stop(paste("sigma must be between 0 and 1", "\n", "")) 
-         if (any(q < 0) )  stop(paste("y must be 0 or greater than 0", "\n", ""))  
+     #    if (any(q < 0) )  stop(paste("y must be 0 or greater than 0", "\n", ""))  
            ly <- max(length(q),length(mu),length(sigma)) 
             q <- rep(q, length = ly)      
         sigma <- rep(sigma, length = ly)
@@ -83,7 +84,8 @@ pZAP <- function(q, mu = 5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
          cdf3 <- sigma+((1-sigma)*(cdf1-cdf2)/(1-cdf2))
           cdf <- ifelse((q==0),sigma,  cdf3)
          if(lower.tail == TRUE) cdf <- cdf else cdf <-1-cdf
-         if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf)    
+         if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf) 
+         cdf <-ifelse(q < 0, 0, cdf)   
          cdf
    }
 #-----------------------------------------------------------------------------------------

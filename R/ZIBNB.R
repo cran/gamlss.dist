@@ -165,7 +165,7 @@ dZIBNB<-function(x, mu=1, sigma=1, nu=1, tau=0.1, log=FALSE)
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(tau <= 0)|any(tau >= 1))  stop(paste("tau must be between 0 and 1 ", "\n", ""))
-  if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+#  if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
   ly <- max(length(x),length(mu),length(sigma),length(nu),length(tau)) 
   x <- rep(x, length = ly)      
   sigma <- rep(sigma, length = ly)
@@ -175,6 +175,7 @@ dZIBNB<-function(x, mu=1, sigma=1, nu=1, tau=0.1, log=FALSE)
   logfy <- rep(0, length(x))
   logfy <- ifelse((x==0), log(tau+(1-tau)*exp(fy)), (log(1-tau) + fy ))          
   if(log == FALSE) fy2 <- exp(logfy) else fy2 <- logfy
+  fy2 <- ifelse(x < 0, 0, fy2) 
   fy2  
 }
 #----------------------------------------------------------------------------------------     
@@ -186,7 +187,7 @@ pZIBNB <- function(q, mu=1, sigma=1, nu=1, tau=0.1, lower.tail = TRUE, log.p = F
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(tau <= 0)|any(tau >= 1)) #In this parametrization  nu = alpha
     stop(paste("tau must be between 0 and 1 ", "\n", ""))
-  if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))
+#  if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))
   ly <- max(length(q),length(mu),length(sigma),length(nu),length(tau)) 
   q <- rep(q, length = ly)       
   sigma <- rep(sigma, length = ly)
@@ -195,7 +196,8 @@ pZIBNB <- function(q, mu=1, sigma=1, nu=1, tau=0.1, lower.tail = TRUE, log.p = F
   cdf <- pBNB(q, mu = mu, sigma=sigma, nu=nu)
   cdf <- tau + (1-tau)*cdf
   if(lower.tail == TRUE) cdf <- cdf else cdf <-1-cdf
-  if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf)    
+  if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf) 
+  cdf <- ifelse(q < 0, 0, cdf) 
   cdf
 }
 #----------------------------------------------------------------------------------------

@@ -61,7 +61,7 @@ dBB <- function(x, mu = 0.5, sigma = 1, bd = 10, log = FALSE)
     if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", ""))
     if (any(sigma < 1e-10)) warning(" values of sigma in BB less that 1e-10 are set to 1e-10" )
         sigma <- ifelse((sigma < 1e-10),1e-10,sigma)
-    if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+  #  if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
     if (any(bd < x))  stop(paste("x  must be <=  than the binomial denominator", bd, "\n"))
           ly <- max(length(x),length(mu),length(sigma),length(bd)) 
            x <- rep(x, length = ly)      
@@ -77,6 +77,7 @@ dBB <- function(x, mu = 0.5, sigma = 1, bd = 10, log = FALSE)
         else logfy2 <- if (sigma<0.0001)  dBI(x, mu = mu, bd=bd, log = TRUE) 
                    else logfy
           fy <- if(log == FALSE) exp(logfy2) else logfy2
+          fy <- ifelse(x < 0, 0, fy) 
           fy
   }
 #------------------------------------------------------------------------------------------
@@ -84,7 +85,7 @@ pBB <- function(q, mu = 0.5, sigma = 1, bd = 10, lower.tail = TRUE, log.p = FALS
   {     
     if (any(mu <= 0) | any(mu >= 1))   stop(paste("mu must be between 0 and 1 ", "\n", "")) 
     if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-    if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))
+ #   if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))
     if (any(bd < q))  stop(paste("y  must be <=  than the binomial denominator", bd, "\n"))    
         ly <- max(length(q),length(mu),length(sigma),length(bd)) 
          q <- rep(q, length = ly)      
@@ -117,6 +118,7 @@ pBB <- function(q, mu = 0.5, sigma = 1, bd = 10, lower.tail = TRUE, log.p = FALS
                                           pBI(q, mu = mu, bd=bd, lower.tail=lower.tail, log.p = log.p) )
       else cdf2 <- if (sigma<0.0001) pBI(q, mu = mu, bd=bd, lower.tail=lower.tail, log.p = log.p)
                    else cdf
+      cdf2 <- ifelse(q < 0, 0, cdf2) 
       cdf2
   }
 #------------------------------------------------------------------------------------------

@@ -38,9 +38,10 @@ IG <-function (mu.link = "log", sigma.link = "log")
 dIG<-function(x, mu = 1, sigma = 1, log=FALSE)
  {        if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+       #   if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
  log.lik <- (-0.5*log(2*pi)-log(sigma)-(3/2)*log(x)-((x-mu)^2)/(2*sigma^2*(mu^2)*x) )
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
+      fy <-ifelse(x <= 0, 0, fy)
       fy 
   }
 #----------------------------------------------------------------------------------------  
@@ -48,7 +49,7 @@ pIG <- function(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
   {    #  browser() 
     if (any(mu < 0))  stop(paste("mu must be positive", "\n", "")) 
     if (any(sigma < 0))  stop(paste("sigma must be positive", "\n", "")) 
-    if (any(q < 0))  stop(paste("y must be positive", "\n", ""))  
+#    if (any(q < 0))  stop(paste("y must be positive", "\n", ""))  
       lq <- length(q)                                                                    
    sigma <- rep(sigma, length = lq)
       mu <- rep(mu, length = lq)           
@@ -57,6 +58,7 @@ pIG <- function(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
      cdf <- cdf1+ exp(lcdf2)
     if(lower.tail==TRUE) cdf  <- cdf else  cdf <- 1-cdf 
     if(log.p==FALSE) cdf  <- cdf else  cdf <- log(cdf) 
+    cdf <-ifelse(q <= 0, 0, cdf) 
     cdf
    }
 #----------------------------------------------------------------------------------------  

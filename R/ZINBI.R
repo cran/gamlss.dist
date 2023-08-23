@@ -99,7 +99,7 @@ dZINBI<-function(x, mu = 1, sigma = 1, nu = 0.3, log = FALSE)
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(nu <= 0)|any(nu >= 1))  stop(paste("nu must be between 0 and 1 ", "\n", ""))
-  if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+ # if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
   ly <- max(length(x),length(mu),length(sigma),length(nu)) 
   x <- rep(x, length = ly)      
   sigma <- rep(sigma, length = ly)
@@ -109,6 +109,7 @@ dZINBI<-function(x, mu = 1, sigma = 1, nu = 0.3, log = FALSE)
   logfy <- rep(0, length(x))
   logfy <- ifelse((x==0), log(nu+(1-nu)*exp(fy)), (log(1-nu) + fy ))          
   if(log == FALSE) fy2 <- exp(logfy) else fy2 <- logfy
+  fy2 <- ifelse(x < 0, 0, fy2) 
   fy2
 }
 #------------------------------------------------------------------------------------------
@@ -118,7 +119,7 @@ pZINBI <- function(q, mu = 1, sigma = 1, nu = 0.3, lower.tail = TRUE, log.p = FA
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
   if (any(nu <= 0)|any(nu >= 1))  #In this parametrization  nu = alpha
     stop(paste("nu must be between 0 and 1 ", "\n", ""))
-  if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))
+#if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))
   ly <- max(length(q),length(mu),length(sigma),length(nu)) 
   q <- rep(q, length = ly)      
   sigma <- rep(sigma, length = ly)
@@ -127,7 +128,8 @@ pZINBI <- function(q, mu = 1, sigma = 1, nu = 0.3, lower.tail = TRUE, log.p = FA
   cdf <- pNBI(q, mu = mu, sigma=sigma)
   cdf <- nu + (1-nu)*cdf
   if(lower.tail == TRUE) cdf <- cdf else cdf <-1-cdf
-  if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf)    
+  if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf) 
+  cdf <- ifelse(q < 0, 0, cdf) 
   cdf
 }
 #------------------------------------------------------------------------------------------

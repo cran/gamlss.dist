@@ -56,11 +56,12 @@ dNBI<-function(x, mu = 1, sigma = 1, log = FALSE)
  { 
         if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
         if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-        if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+      #  if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
         if (length(sigma)>1) fy <- ifelse(sigma>0.0001, dnbinom(x, size=1/sigma, mu = mu, log = log), 
                                           dPO(x, mu = mu, log = log) )
         else fy <- if (sigma<0.0001) dPO(x, mu = mu, log = log) 
                    else dnbinom(x, size=1/sigma, mu = mu, log = log)
+        fy <-ifelse(x < 0, 0, fy) 
         fy
   }
 #------------------------------------------------------------------------------------------
@@ -68,11 +69,12 @@ pNBI <- function(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
   {     
         if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
         if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-        if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))
+    #    if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))
         if (length(sigma)>1) cdf <- ifelse(sigma>0.0001, pnbinom(q, size=1/sigma, mu=mu, lower.tail=lower.tail,log.p=log.p), 
                                           ppois(q, lambda = mu, lower.tail = lower.tail, log.p = log.p) )
         else cdf <- if (sigma<0.0001) ppois(q, lambda = mu, lower.tail = lower.tail, log.p = log.p)
                    else pnbinom(q, size=1/sigma, mu=mu, lower.tail=lower.tail,log.p=log.p)
+        cdf <-ifelse(q < 0, 0, cdf) 
         cdf
    }
 #------------------------------------------------------------------------------------------

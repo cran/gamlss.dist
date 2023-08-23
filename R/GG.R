@@ -100,7 +100,7 @@ dGG <- function(x, mu=1, sigma=0.5, nu=1,  log = FALSE)
  {
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(x < 0))  stop(paste("x must be positive", "\n", "")) 
+      #    if (any(x < 0))  stop(paste("x must be positive", "\n", "")) 
                z <- (x/mu)^nu 
            theta <- 1/(sigma^2*nu^2) 
          # loglik <- theta*log(theta)+theta*log(z)-theta*z-lgamma(theta)+log(abs(nu))-log(x)
@@ -109,6 +109,7 @@ dGG <- function(x, mu=1, sigma=0.5, nu=1,  log = FALSE)
           else  if (abs(nu)>1e-06) loglik <-  dGA(z, mu=1, sigma=sigma*abs(nu), log=TRUE)+ log(abs(nu)*z/x) 
                  else loglik <- -log(x)-.5*log(2*pi)-log(sigma)-(1/(2*sigma^2))*(log(x)-log(mu))^2
           if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 
+           ft <- ifelse(x <= 0, 0, ft)
           ft
   }    
 #--------------------------------------------------------------  
@@ -116,7 +117,7 @@ pGG <- function(q, mu=1, sigma=0.5, nu=1,  lower.tail = TRUE, log.p = FALSE)
  {  
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(q < 0))  stop(paste("q must be positive", "\n", ""))  
+    #      if (any(q < 0))  stop(paste("q must be positive", "\n", ""))  
             z <- (q/mu)^nu
          if(length(nu)>1)  cdf <- ifelse(abs(nu)>1e-06,
                            pGA(z, mu=1, sigma=sigma*abs(nu), lower.tail = (nu<0)-lower.tail, log.p = log.p), # MS  (nu<0)- is added 8-6-17

@@ -115,6 +115,7 @@ dGAF<-function(x, mu=1, sigma=1, nu=2, log=FALSE)
              sigma1 <- sigma*(mu^(nu/2-1))
     log.lik <- (1/sigma1^2)*log(x/(mu1*sigma1^2))-x/(mu1*sigma1^2)-log(x)-lgamma(1/sigma1^2)
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
+      fy <- ifelse(x <= 0, 0, fy)
       fy 
   }
 #---------------------------------------------------------------------------------------- 

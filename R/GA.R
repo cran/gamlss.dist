@@ -41,17 +41,18 @@ dGA<-function(x, mu=1, sigma=1, log=FALSE)
  { 
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
+    #      if (any(x < 0))  stop(paste("x must be positive", "\n", ""))  
  log.lik <- (1/sigma^2)*log(x/(mu*sigma^2))-x/(mu*sigma^2)-log(x)-lgamma(1/sigma^2)
      if(log==FALSE) fy  <- exp(log.lik) else fy <- log.lik
-      fy 
+       fy <-ifelse(x <= 0, 0, fy)
+       fy 
   }
 #----------------------------------------------------------------------------------------
 pGA <- function(q, mu=1, sigma=1, lower.tail = TRUE, log.p = FALSE)
   {     
           if (any(mu <= 0))  stop(paste("mu must be positive", "\n", "")) 
           if (any(sigma <= 0))  stop(paste("sigma must be positive", "\n", "")) 
-          if (any(q < 0))  stop(paste("y must be positive", "\n", ""))  
+      #    if (any(q < 0))  stop(paste("y must be positive", "\n", ""))  
     cdf <- pgamma(q,shape=1/sigma^2,scale=mu*sigma^2, lower.tail = lower.tail, log.p = log.p)
     cdf
    }

@@ -138,6 +138,7 @@ dGB2 <- function(x, mu = 1, sigma = 1, nu = 1, tau = .5, log = FALSE)
        loglik <- nu*log(z)+log(abs(sigma))-log(x)-lgamma(nu)-lgamma(tau)+
        lgamma(nu+tau)-(nu+tau)*log(1+z)
        if(log==FALSE) ft  <- exp(loglik) else ft <- loglik 
+       ft <- ifelse(x <= 0, 0, ft)
        ft
   }    
 #-----------------------------------------------------------------  

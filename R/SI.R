@@ -172,18 +172,20 @@ dSI<-function(x, mu=0.5, sigma=0.02, nu=-0.5, log=FALSE)
   { 
    if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
    if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-   if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+ #  if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
     ly <- max(length(x),length(mu),length(sigma),length(nu)) 
-     x <- rep(x, length = ly)        
+     x <- rep(x, length = ly)  
+    xx <- ifelse(x < 0, 0, x)
  sigma <- rep(sigma, length = ly)
     mu <- rep(mu, length = ly)   
     nu <- rep(nu, length = ly) 
  alpha <- sqrt(1+2*sigma*mu)/sigma
   lbes <-  log(besselK(alpha,nu+1))-log(besselK((alpha),nu))
-sumlty <- as.double(.C("tofySI2", as.double(x), as.double(mu), as.double(sigma), as.double(nu), 
+sumlty <- as.double(.C("tofySI2", as.double(xx), as.double(mu), as.double(sigma), as.double(nu), 
                        as.double(lbes), ans=double(ly),  as.integer(ly),as.integer(max(x)+1), PACKAGE="gamlss.dist")$ans)
 logfy <- -lgamma(x+1)-nu*log(sigma*alpha)+sumlty+log(besselK(alpha,nu))-log(besselK((1/sigma),nu))
   if(log==FALSE) fy <- exp(logfy) else fy <- logfy
+  fy <- ifelse(x < 0, 0, fy) 
   fy
   }
 #----------------------------------------------------------------------------------------  
@@ -227,15 +229,17 @@ pSI <- function(q, mu=0.5, sigma=0.02, nu=-0.5, lower.tail = TRUE, log.p = FALSE
   #-----------------------------------------------
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
           if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-          if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))  
+      #    if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))  
           ly <- max(length(q),length(mu),length(sigma),length(nu)) 
-           q <- rep(q,length = ly)         
+           q <- rep(q,length = ly)  
+          qq <- ifelse(q < 0, 0, q)
        sigma <- rep(sigma, length = ly)
           mu <- rep(mu, length = ly)   
           nu <- rep(nu, length = ly)   
-         cdf <- tocdfS(y=q, mu=mu, sigma=sigma, nu=nu, bsum=TRUE)
+         cdf <- tocdfS(y=qq, mu=mu, sigma=sigma, nu=nu, bsum=TRUE)
           if(lower.tail==TRUE) cdf <- cdf else cdf=1-cdf
-          if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf)                                                                    
+          if(log.p==FALSE) cdf <- cdf else cdf <- log(cdf)
+          cdf <-ifelse(q < 0, 0, cdf) 
           cdf
    }
 #----------------------------------------------------------------------------------------

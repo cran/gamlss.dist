@@ -94,12 +94,13 @@ dPIG2<-function(x, mu = 0.5, sigma = 0.02 , log = FALSE)
  { 
           if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
           if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-          if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
+   #       if (any(x < 0) )  stop(paste("x must be >=0", "\n", ""))  
           ly <- length(x)                                                                    
       nsigma <- rep(sigma, length = ly)
          nmu <- rep(mu, length = ly)
        alpha <- 1/(((nmu*nmu+nsigma*nsigma)^0.5)-nmu)
           fy <- dPIG(x,nmu,alpha,log=log)
+          fy <-ifelse(x < 0, 0, fy) 
           fy
   }
 ##-----------------------------------------------------------------------------------------  
@@ -107,12 +108,13 @@ pPIG2 <- function(q, mu=0.5, sigma=0.02, lower.tail = TRUE, log.p = FALSE)
   {     
   if (any(mu <= 0) )  stop(paste("mu must be greater than 0 ", "\n", "")) 
   if (any(sigma <= 0) )  stop(paste("sigma must be greater than 0 ", "\n", "")) 
-  if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))  
+ # if (any(q < 0) )  stop(paste("y must be >=0", "\n", ""))  
       lq <- length(q)                                                                    
   nsigma <- rep(sigma, length = lq)
      nmu <- rep(mu, length = lq)   
    alpha <- 1/(((nmu*nmu+nsigma*nsigma)^0.5)-nmu)
      cdf <- pPIG(q,nmu,alpha,lower.tail=lower.tail,log.p=log.p)
+     cdf <- ifelse(q < 0, 0, cdf) 
      cdf
    }
 ##-----------------------------------------------------------------------------------------

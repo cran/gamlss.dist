@@ -9,8 +9,7 @@ dWARING<-function (x, mu=2, sigma=2, log = FALSE)
         stop(paste("mu must be > 0", "\n", ""))
     if (any(sigma < 0))
     	stop(paste("sigma must be > 0", "\n", ""))
-    if (any(x < 0))
-        stop(paste("x must be >=0", "\n", ""))
+  #  if (any(x < 0)) stop(paste("x must be >=0", "\n", ""))
      ly <- max(length(x),length(mu),length(sigma)) 
       x <- rep(x, length = ly)      
   sigma <- rep(sigma, length = ly)
@@ -20,6 +19,7 @@ dWARING<-function (x, mu=2, sigma=2, log = FALSE)
      #fx <- lbeta(n+x, b+1)-lbeta(n,b)
      fx <- lbeta(x+(mu/sigma), (1/sigma)+2)-lbeta(mu/sigma,(1/sigma+1))
      fx <- if(log) fx else exp(fx) 
+     fx <-ifelse(x < 0, 0, fx) 
      fx
 }
 
@@ -29,7 +29,7 @@ pWARING<-function (q,  mu=2, sigma=2,  lower.tail = TRUE, log.p = FALSE)
 {
     if (any(mu < 0)) stop(paste("mu must be > 0", "\n", ""))
     if (any(sigma < 0)) stop(paste("sigma must be > 0", "\n", ""))
-    if (any(q < 0)) stop(paste("q must be >=0", "\n", ""))
+  #  if (any(q < 0)) stop(paste("q must be >=0", "\n", ""))
      ly <- max(length(q), length(mu), length(sigma))
       q <- rep(q, length = ly)
       p <- rep(0, length = ly)
@@ -47,6 +47,7 @@ pWARING<-function (q,  mu=2, sigma=2,  lower.tail = TRUE, log.p = FALSE)
     if (lower.tail == TRUE) 
         cdf <- cdf
     else cdf = 1 - cdf
+    cdf <-ifelse(q < 0, 0, cdf)
     if (log.p==TRUE) cdf <- log(cdf)
     cdf
 }

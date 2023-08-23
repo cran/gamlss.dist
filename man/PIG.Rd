@@ -93,7 +93,7 @@ where  \eqn{\alpha^2=\frac{1}{\sigma^2}+\frac{2\mu}{\sigma}}, for  \eqn{y=0,1,2,
 K_{\lambda}(t)=\frac{1}{2}\int_0^{\infty} x^{\lambda-1} \exp\{-\frac{1}{2}t(x+x^{-1})\}dx} is the modified Bessel function of the third kind, see also pp. 487-489 of Rigby \emph{et al}. (2019).
 [Note that the above parameterization was used by Dean, Lawless and Willmot(1989). It is also a special case of the Sichel distribution \code{SI()} when  \eqn{\nu=-\frac{1}{2}}.]
 
-The probability function of the Poisson-inverse Gaussian distribution \code{PIG2}, is given by
+The probability function of the Poisson-inverse Gaussian distribution \code{PIG2}, see Heller, Couturier and Heritier (2018), is given by
  
 \deqn{f(y|\mu,\sigma)=\left( \frac{2 \sigma}{\pi}^{\frac{1}{2}}\right) 
 \frac{\mu^y e^{\frac{1}{\sigma}} K_{y-\frac{1}{2}}(\sigma)}{(\alpha \sigma)^y y!}}{f(y|mu,sigma)=(2*alpha/pi)^.5  mu^y e^(1/sigma) K(alpha)/(alpha*sigma)^y y!} 
@@ -130,7 +130,7 @@ Chapman and Hall/CRC. \doi{10.1201/b21973}
 
 	
  }
-\author{Mikis Stasinopoulos, Bob Rigby and Marco Enea}
+\author{Dominique-Laurent Couturier, Mikis Stasinopoulos, Bob Rigby and Marco Enea}
 
 
 \seealso{ \code{\link{gamlss.family}},  \code{\link{NBI}}, \code{\link{NBII}}, 
